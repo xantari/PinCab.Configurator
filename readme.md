@@ -12,6 +12,7 @@ This tool allows you to layout your screens and validate your screen configurati
 7. Dumps entire screen display details to JSON
 
 # Screenshots
+
 2 Screen Setup
 ![2 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_2Screens.png "2 Screen Setup")
 

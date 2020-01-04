@@ -27,6 +27,7 @@ This tool allows you to layout your screens and validate your screen configurati
 4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
 5. PinCab Screen configuration data (Read/Write)
 6. UltraDMD Registry Key read/write/validation
+7. Add ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen or both their backglass and DMD on same screen (2 screen setup))
 
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!

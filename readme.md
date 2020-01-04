@@ -30,6 +30,16 @@ This tool allows you to layout your screens and validate your screen configurati
 7. Add ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen or both their backglass and DMD on same screen (2 screen setup))
 8. Put overlay window on a seperate thread
 9. Put in some exception logging
+10. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
+11. Add settings page to point to the following:
+a. FFMPEG
+b. Front End settings file (Pinball X / Pinball Y / Pinup Popper)
+12. P-PROC location settings
+13. VPinMame registry location settings (for those not using DMDExt). 
+a. Option to set Default
+b. Option to update all previously run ROM's
+14. PinUp location settings read/write/validation
+
 
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!

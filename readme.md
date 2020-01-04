@@ -15,11 +15,12 @@ This tool allows you to layout your screens and validate your screen configurati
 ![Screenshot 1](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot1.png "Screenshot 1")
 
 # TODO
-1. Pinball X Ini Reading/Writing
-2. Future DMD (Future Pinball) Reading/Writing
-3. B2S ScreenRes.txt reading/writing
-4. DMDDevice.ini (DMDExt / VPinMame) reading/writing
+1. Pinball X Ini read/write/validation
+2. Future DMD (Future Pinball) read/write/validation
+3. B2S ScreenRes.txt read/write/validation
+4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
 5. PinCab Screen configuration data (Read/Write)
+6. UltraDMD Registry Key read/write/validation
 
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!

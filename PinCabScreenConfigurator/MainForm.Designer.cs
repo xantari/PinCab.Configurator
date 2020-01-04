@@ -34,11 +34,19 @@
             this.btnSaveDisplayLabel = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateFFMpegCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshDisplayDepictionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateMonitorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputFutureDMDiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setUltraDMDRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setPinballXiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputDMDDeviceiniDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpDisplayInfoToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTextInfo = new System.Windows.Forms.Panel();
             this.txtData = new System.Windows.Forms.TextBox();
@@ -48,18 +56,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.outputScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.outputFutureDMDiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setUltraDMDRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setPinballXiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.outputDMDDeviceiniDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtVisibleWindowXOffset = new System.Windows.Forms.TextBox();
             this.txtVisibleWindowYOffset = new System.Windows.Forms.TextBox();
             this.txtVisibleWindowWidth = new System.Windows.Forms.TextBox();
             this.txtVisibleWindowHeight = new System.Windows.Forms.TextBox();
-            this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpDisplayInfoToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlTextInfo.SuspendLayout();
             this.SuspendLayout();
@@ -109,7 +109,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1122, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(719, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -123,10 +123,22 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // saveConfigurationToolStripMenuItem
+            // 
+            this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveConfigurationToolStripMenuItem.Text = "Save Configuration";
+            // 
+            // loadConfigurationToolStripMenuItem
+            // 
+            this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -167,6 +179,48 @@
             this.validateMonitorConfigurationToolStripMenuItem.Text = "Validate Monitor Configuration";
             this.validateMonitorConfigurationToolStripMenuItem.Click += new System.EventHandler(this.validateMonitorConfigurationToolStripMenuItem_Click);
             // 
+            // outputScreenrestxtToolStripMenuItem
+            // 
+            this.outputScreenrestxtToolStripMenuItem.Name = "outputScreenrestxtToolStripMenuItem";
+            this.outputScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.outputScreenrestxtToolStripMenuItem.Text = "Output Screenres.txt (B2S settings)";
+            this.outputScreenrestxtToolStripMenuItem.Click += new System.EventHandler(this.outputScreenrestxtToolStripMenuItem_Click);
+            // 
+            // outputFutureDMDiniToolStripMenuItem
+            // 
+            this.outputFutureDMDiniToolStripMenuItem.Name = "outputFutureDMDiniToolStripMenuItem";
+            this.outputFutureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.outputFutureDMDiniToolStripMenuItem.Text = "Output FutureDMD.ini";
+            this.outputFutureDMDiniToolStripMenuItem.Click += new System.EventHandler(this.outputFutureDMDiniToolStripMenuItem_Click);
+            // 
+            // setUltraDMDRegistryKeyToolStripMenuItem
+            // 
+            this.setUltraDMDRegistryKeyToolStripMenuItem.Name = "setUltraDMDRegistryKeyToolStripMenuItem";
+            this.setUltraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.setUltraDMDRegistryKeyToolStripMenuItem.Text = "Set UltraDMD Registry Key";
+            this.setUltraDMDRegistryKeyToolStripMenuItem.Click += new System.EventHandler(this.setUltraDMDRegistryKeyToolStripMenuItem_Click);
+            // 
+            // setPinballXiniToolStripMenuItem
+            // 
+            this.setPinballXiniToolStripMenuItem.Name = "setPinballXiniToolStripMenuItem";
+            this.setPinballXiniToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.setPinballXiniToolStripMenuItem.Text = "Set PinballX.ini";
+            this.setPinballXiniToolStripMenuItem.Click += new System.EventHandler(this.setPinballXiniToolStripMenuItem_Click);
+            // 
+            // outputDMDDeviceiniDMDExtToolStripMenuItem
+            // 
+            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Name = "outputDMDDeviceiniDMDExtToolStripMenuItem";
+            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Text = "Output DMDDevice.ini (DMDExt / VPinMAME)";
+            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Click += new System.EventHandler(this.outputDMDDeviceiniDMDExtToolStripMenuItem_Click);
+            // 
+            // dumpDisplayInfoToFileToolStripMenuItem
+            // 
+            this.dumpDisplayInfoToFileToolStripMenuItem.Name = "dumpDisplayInfoToFileToolStripMenuItem";
+            this.dumpDisplayInfoToFileToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
+            this.dumpDisplayInfoToFileToolStripMenuItem.Text = "Dump Display Info to File";
+            this.dumpDisplayInfoToFileToolStripMenuItem.Click += new System.EventHandler(this.dumpDisplayInfoToFileToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -180,7 +234,7 @@
             this.pnlTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlTextInfo.Location = new System.Drawing.Point(0, 423);
             this.pnlTextInfo.Name = "pnlTextInfo";
-            this.pnlTextInfo.Size = new System.Drawing.Size(1122, 159);
+            this.pnlTextInfo.Size = new System.Drawing.Size(719, 159);
             this.pnlTextInfo.TabIndex = 6;
             // 
             // txtData
@@ -189,7 +243,7 @@
             this.txtData.Location = new System.Drawing.Point(0, 0);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(1122, 159);
+            this.txtData.Size = new System.Drawing.Size(719, 159);
             this.txtData.TabIndex = 0;
             // 
             // panelMonitorDrawing
@@ -197,7 +251,7 @@
             this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 175);
             this.panelMonitorDrawing.Name = "panelMonitorDrawing";
-            this.panelMonitorDrawing.Size = new System.Drawing.Size(1122, 248);
+            this.panelMonitorDrawing.Size = new System.Drawing.Size(719, 248);
             this.panelMonitorDrawing.TabIndex = 7;
             this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
             // 
@@ -251,41 +305,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Visible Window Height";
             // 
-            // outputScreenrestxtToolStripMenuItem
-            // 
-            this.outputScreenrestxtToolStripMenuItem.Name = "outputScreenrestxtToolStripMenuItem";
-            this.outputScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.outputScreenrestxtToolStripMenuItem.Text = "Output Screenres.txt (B2S settings)";
-            this.outputScreenrestxtToolStripMenuItem.Click += new System.EventHandler(this.outputScreenrestxtToolStripMenuItem_Click);
-            // 
-            // outputFutureDMDiniToolStripMenuItem
-            // 
-            this.outputFutureDMDiniToolStripMenuItem.Name = "outputFutureDMDiniToolStripMenuItem";
-            this.outputFutureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.outputFutureDMDiniToolStripMenuItem.Text = "Output FutureDMD.ini";
-            this.outputFutureDMDiniToolStripMenuItem.Click += new System.EventHandler(this.outputFutureDMDiniToolStripMenuItem_Click);
-            // 
-            // setUltraDMDRegistryKeyToolStripMenuItem
-            // 
-            this.setUltraDMDRegistryKeyToolStripMenuItem.Name = "setUltraDMDRegistryKeyToolStripMenuItem";
-            this.setUltraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.setUltraDMDRegistryKeyToolStripMenuItem.Text = "Set UltraDMD Registry Key";
-            this.setUltraDMDRegistryKeyToolStripMenuItem.Click += new System.EventHandler(this.setUltraDMDRegistryKeyToolStripMenuItem_Click);
-            // 
-            // setPinballXiniToolStripMenuItem
-            // 
-            this.setPinballXiniToolStripMenuItem.Name = "setPinballXiniToolStripMenuItem";
-            this.setPinballXiniToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.setPinballXiniToolStripMenuItem.Text = "Set PinballX.ini";
-            this.setPinballXiniToolStripMenuItem.Click += new System.EventHandler(this.setPinballXiniToolStripMenuItem_Click);
-            // 
-            // outputDMDDeviceiniDMDExtToolStripMenuItem
-            // 
-            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Name = "outputDMDDeviceiniDMDExtToolStripMenuItem";
-            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Text = "Output DMDDevice.ini (DMDExt / VPinMAME)";
-            this.outputDMDDeviceiniDMDExtToolStripMenuItem.Click += new System.EventHandler(this.outputDMDDeviceiniDMDExtToolStripMenuItem_Click);
-            // 
             // txtVisibleWindowXOffset
             // 
             this.txtVisibleWindowXOffset.Location = new System.Drawing.Point(139, 121);
@@ -314,30 +333,11 @@
             this.txtVisibleWindowHeight.Size = new System.Drawing.Size(100, 20);
             this.txtVisibleWindowHeight.TabIndex = 16;
             // 
-            // saveConfigurationToolStripMenuItem
-            // 
-            this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveConfigurationToolStripMenuItem.Text = "Save Configuration";
-            // 
-            // loadConfigurationToolStripMenuItem
-            // 
-            this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
-            // 
-            // dumpDisplayInfoToFileToolStripMenuItem
-            // 
-            this.dumpDisplayInfoToFileToolStripMenuItem.Name = "dumpDisplayInfoToFileToolStripMenuItem";
-            this.dumpDisplayInfoToFileToolStripMenuItem.Size = new System.Drawing.Size(318, 22);
-            this.dumpDisplayInfoToFileToolStripMenuItem.Text = "Dump Display Info to File";
-            this.dumpDisplayInfoToFileToolStripMenuItem.Click += new System.EventHandler(this.dumpDisplayInfoToFileToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1122, 582);
+            this.ClientSize = new System.Drawing.Size(719, 582);
             this.Controls.Add(this.txtVisibleWindowHeight);
             this.Controls.Add(this.txtVisibleWindowWidth);
             this.Controls.Add(this.txtVisibleWindowYOffset);

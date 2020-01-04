@@ -12,7 +12,11 @@ This tool allows you to layout your screens and validate your screen configurati
 7. Dumps entire screen display details to JSON
 
 # Screenshots
-![Screenshot 1](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot1.png "Screenshot 1")
+2 Screen Setup
+![2 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_2Screens.png "2 Screen Setup")
+
+3 Screen Setup
+![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3Screens.png "3 Screen Setup")
 
 # TODO
 1. Pinball X Ini read/write/validation

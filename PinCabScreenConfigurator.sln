@@ -14,7 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pincab.ScreenUtil", "Pincab
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{29A19EC9-A59A-4EA4-B6A1-596A2D0E0846}"
 	ProjectSection(SolutionItems) = preProject
-		Screenshots\Screenshot1.png = Screenshots\Screenshot1.png
+		Screenshots\Screenshot_2Screens.png = Screenshots\Screenshot_2Screens.png
+		Screenshots\Screenshot_3Screens.png = Screenshots\Screenshot_3Screens.png
 	EndProjectSection
 EndProject
 Global

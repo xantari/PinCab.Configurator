@@ -263,7 +263,9 @@
             "DMD",
             "Backglass",
             "Topper",
-            "Apron"});
+            "Apron",
+            "Backglass & DMD",
+            "Topper & DMD"});
             this.cmbDisplayLabel.Location = new System.Drawing.Point(91, 93);
             this.cmbDisplayLabel.Name = "cmbDisplayLabel";
             this.cmbDisplayLabel.Size = new System.Drawing.Size(244, 21);

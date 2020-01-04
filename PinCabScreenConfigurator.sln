@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pincab.ScreenUtil", "Pincab.ScreenUtil\Pincab.ScreenUtil.csproj", "{C7093723-A805-4C85-AAED-05D6F626BA09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots", "{29A19EC9-A59A-4EA4-B6A1-596A2D0E0846}"
+	ProjectSection(SolutionItems) = preProject
+		Screenshots\Screenshot1.png = Screenshots\Screenshot1.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +34,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{29A19EC9-A59A-4EA4-B6A1-596A2D0E0846} = {E3C3D453-72DB-4D75-AC90-479F2575B882}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {731482B9-C20E-4F10-81E6-6071F9DAF079}

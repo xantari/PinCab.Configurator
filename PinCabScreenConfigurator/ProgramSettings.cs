@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace PinCabScreenConfigurator
 {
     [Serializable]
-    public class Settings
+    public class ProgramSettings
     {
-        public Settings()
+        public ProgramSettings()
         {
             DisplaySettings = new List<DisplaySettings>();
         }
@@ -31,7 +31,7 @@ namespace PinCabScreenConfigurator
             return applicationFolder;
         }
 
-        public Settings LoadSettings(string fileAndPathToSettingFile = "")
+        public ProgramSettings LoadSettings(string fileAndPathToSettingFile = "")
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
@@ -39,7 +39,7 @@ namespace PinCabScreenConfigurator
             else
                 settingsFileNameAndPath = fileAndPathToSettingFile;
             string json = File.ReadAllText(settingsFileNameAndPath);
-            return JsonConvert.DeserializeObject<Settings>(json);
+            return JsonConvert.DeserializeObject<ProgramSettings>(json);
         }
 
         public void SaveSettings(string fileAndPathToSettingFile = "")

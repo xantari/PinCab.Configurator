@@ -54,7 +54,7 @@ namespace PinCabScreenConfigurator
 
         private void UpdateDisplayDetailsFromSettingsFile()
         {
-            Settings settings = new Settings();
+            ProgramSettings settings = new ProgramSettings();
             settings = settings.LoadSettings();
             foreach(var display in settings?.DisplaySettings)
             {
@@ -469,7 +469,7 @@ namespace PinCabScreenConfigurator
 
         private void SaveSettings()
         {
-            Settings setting = new Settings();
+            ProgramSettings setting = new ProgramSettings();
 
             setting.DisplaySettings = new List<DisplaySettings>();
             foreach (var display in _displayDetails)
@@ -492,12 +492,13 @@ namespace PinCabScreenConfigurator
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SettingsForm form = new SettingsForm();
+            form.Show();
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings setting = new Settings();
+            ProgramSettings setting = new ProgramSettings();
             setting.SaveSettings();
         }
 

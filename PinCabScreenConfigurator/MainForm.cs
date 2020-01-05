@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,16 @@ using WindowsDisplayAPI;
 
 namespace PinCabScreenConfigurator
 {
+    /// <summary>
+    /// The main program form.
+    /// This program relies on the WindowsDisplayApi nuget instead of Screens.AllScreens built in .NET Framework object as it gives much more details about
+    /// screen layout. Additionally we can use it to dynamically display on the fly updated screen layouts, where as the Screens.AllScreens is only loaded ONCE when you start
+    /// the application. At some point in the future I will put in a timer here that periodically repaints the screen layouts as they are being moved in windows so you can see the same
+    /// screen layout you see in Windows on the fly.
+    /// </summary>
+    /// <remarks>
+    /// 1/4/2020 - Initial creation
+    /// </remarks>
     //https://stackoverflow.com/questions/5020559/screen-allscreen-is-not-giving-the-correct-monitor-count
     public partial class MainForm : Form
     {
@@ -30,11 +41,27 @@ namespace PinCabScreenConfigurator
         {
             InitializeComponent();
             LoadDisplayDetails();
+
+            //Load Default file settings data and update the Display Details
+            UpdateDisplayDetailsFromSettingsFile();
+
             LoadScreenBoundsDisplayForms();
             DisplayDisplayDetails();
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
+        }
+
+        private void UpdateDisplayDetailsFromSettingsFile()
+        {
+            Settings settings = new Settings();
+            settings = settings.LoadSettings();
+            foreach(var display in settings?.DisplaySettings)
+            {
+                var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
+                loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
+                loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+            }
         }
 
         private void LoadScreenBoundsDisplayForms()
@@ -215,11 +242,23 @@ namespace PinCabScreenConfigurator
             return isValid;
         }
 
+        private void ClearFormFields()
+        {
+            cmbDisplayLabel.Text = string.Empty;
+            cmbRegionColor.Text = string.Empty;
+            cmbRegionLabel.Text = string.Empty;
+            txtVisibleWindowHeight.Text = string.Empty;
+            txtVisibleWindowWidth.Text = string.Empty;
+            txtVisibleWindowXOffset.Text = string.Empty;
+            txtVisibleWindowYOffset.Text = string.Empty;
+        }
+
         private void listBoxDisplays_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearFormFields();
             this.Refresh();
             var display = listBoxDisplays.SelectedItem as DisplayDetail;
-            foreach(var hideForm in ScreenBoundDisplayForms)
+            foreach (var hideForm in ScreenBoundDisplayForms)
             {
                 hideForm.Value?.Hide();
             }
@@ -333,12 +372,7 @@ namespace PinCabScreenConfigurator
                 {
                     //Get the path of specified file
                     filePath = fileDialog.FileName;
-                    //using (TextWriter writer = new StreamWriter(filePath))
-                    //{
-                    //    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_displayDetails.GetType());
-                    //    x.Serialize(writer, _displayDetails);
-                    //    writer.Close();
-                    //}
+
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                     serializer.NullValueHandling = NullValueHandling.Ignore;
@@ -430,6 +464,49 @@ namespace PinCabScreenConfigurator
             else
             {
                 MessageBox.Show("Please select a display");
+            }
+        }
+
+        private void SaveSettings()
+        {
+            Settings setting = new Settings();
+
+            setting.DisplaySettings = new List<DisplaySettings>();
+            foreach (var display in _displayDetails)
+            {
+                setting.DisplaySettings.Add(new DisplaySettings()
+                {
+                    DisplayLabel = display.DisplayLabel,
+                    DisplayName = display.Display.DisplayName,
+                    RegionRectangles = display.RegionRectangles
+                });
+            }
+
+            setting.SaveSettings();
+        }
+
+        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Settings setting = new Settings();
+            setting.SaveSettings();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
+            if (response == DialogResult.Yes)
+            {
+                SaveSettings();
             }
         }
     }

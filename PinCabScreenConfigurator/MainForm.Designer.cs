@@ -67,6 +67,7 @@
             this.lblRegions = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbRegionColor = new System.Windows.Forms.ComboBox();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlTextInfo.SuspendLayout();
             this.SuspendLayout();
@@ -123,6 +124,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
             this.saveConfigurationToolStripMenuItem,
             this.loadConfigurationToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -133,14 +135,16 @@
             // saveConfigurationToolStripMenuItem
             // 
             this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveConfigurationToolStripMenuItem.Text = "Save Configuration";
+            this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
             // 
             // loadConfigurationToolStripMenuItem
             // 
             this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
+            this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -250,6 +254,7 @@
             this.txtData.Location = new System.Drawing.Point(0, 0);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
+            this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtData.Size = new System.Drawing.Size(756, 159);
             this.txtData.TabIndex = 0;
             // 
@@ -425,6 +430,13 @@
             this.cmbRegionColor.Size = new System.Drawing.Size(100, 21);
             this.cmbRegionColor.TabIndex = 23;
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,6 +469,7 @@
             this.MinimumSize = new System.Drawing.Size(772, 623);
             this.Name = "MainForm";
             this.Text = "Pincab Screen Configurator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlTextInfo.ResumeLayout(false);
@@ -507,6 +520,7 @@
         private System.Windows.Forms.Label lblRegions;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cmbRegionColor;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

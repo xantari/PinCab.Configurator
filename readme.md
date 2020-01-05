@@ -20,6 +20,8 @@ replicate to all the other areas automatically.
 
 # Instructions
 
+If you want to backup the display settings the key file is DisplaySettings.json in the application folder. This file is automatically created when you first setup your display configuration.
+
 # Screenshots
 
 #### 2 Screen Setup  
@@ -51,6 +53,7 @@ replicate to all the other areas automatically.
 15. Set Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios))
 16. Additiona Validation:   
 	a. Ensure Primary Monitor is Monitor 1, and is labeled the Playfield screen
+17. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 
 
 # Thank you!

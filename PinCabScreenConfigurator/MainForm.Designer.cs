@@ -60,6 +60,13 @@
             this.txtVisibleWindowYOffset = new System.Windows.Forms.TextBox();
             this.txtVisibleWindowWidth = new System.Windows.Forms.TextBox();
             this.txtVisibleWindowHeight = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbRegionLabel = new System.Windows.Forms.ComboBox();
+            this.btnAddRegionToDisplay = new System.Windows.Forms.Button();
+            this.listBoxDisplayRegions = new System.Windows.Forms.ListBox();
+            this.lblRegions = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbRegionColor = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.pnlTextInfo.SuspendLayout();
             this.SuspendLayout();
@@ -78,14 +85,14 @@
             this.listBoxDisplays.FormattingEnabled = true;
             this.listBoxDisplays.Location = new System.Drawing.Point(92, 27);
             this.listBoxDisplays.Name = "listBoxDisplays";
-            this.listBoxDisplays.Size = new System.Drawing.Size(1018, 56);
+            this.listBoxDisplays.Size = new System.Drawing.Size(652, 56);
             this.listBoxDisplays.TabIndex = 1;
             this.listBoxDisplays.SelectedIndexChanged += new System.EventHandler(this.listBoxDisplays_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 96);
+            this.label2.Location = new System.Drawing.Point(12, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 2;
@@ -93,13 +100,13 @@
             // 
             // btnSaveDisplayLabel
             // 
-            this.btnSaveDisplayLabel.Location = new System.Drawing.Point(494, 146);
+            this.btnSaveDisplayLabel.Location = new System.Drawing.Point(100, 181);
             this.btnSaveDisplayLabel.Name = "btnSaveDisplayLabel";
-            this.btnSaveDisplayLabel.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveDisplayLabel.Size = new System.Drawing.Size(116, 23);
             this.btnSaveDisplayLabel.TabIndex = 4;
-            this.btnSaveDisplayLabel.Text = "Save";
+            this.btnSaveDisplayLabel.Text = "Save Display Config";
             this.btnSaveDisplayLabel.UseVisualStyleBackColor = true;
-            this.btnSaveDisplayLabel.Click += new System.EventHandler(this.btnSaveDisplayLabel_Click);
+            this.btnSaveDisplayLabel.Click += new System.EventHandler(this.btnSaveDisplayConfig_Click);
             // 
             // menuStrip1
             // 
@@ -109,7 +116,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(719, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(756, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -232,9 +239,9 @@
             // 
             this.pnlTextInfo.Controls.Add(this.txtData);
             this.pnlTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTextInfo.Location = new System.Drawing.Point(0, 423);
+            this.pnlTextInfo.Location = new System.Drawing.Point(0, 425);
             this.pnlTextInfo.Name = "pnlTextInfo";
-            this.pnlTextInfo.Size = new System.Drawing.Size(719, 159);
+            this.pnlTextInfo.Size = new System.Drawing.Size(756, 159);
             this.pnlTextInfo.TabIndex = 6;
             // 
             // txtData
@@ -243,20 +250,22 @@
             this.txtData.Location = new System.Drawing.Point(0, 0);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(719, 159);
+            this.txtData.Size = new System.Drawing.Size(756, 159);
             this.txtData.TabIndex = 0;
             // 
             // panelMonitorDrawing
             // 
+            this.panelMonitorDrawing.AutoScroll = true;
             this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 175);
+            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 208);
             this.panelMonitorDrawing.Name = "panelMonitorDrawing";
-            this.panelMonitorDrawing.Size = new System.Drawing.Size(719, 248);
+            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 217);
             this.panelMonitorDrawing.TabIndex = 7;
             this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
             // 
             // cmbDisplayLabel
             // 
+            this.cmbDisplayLabel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDisplayLabel.FormattingEnabled = true;
             this.cmbDisplayLabel.Items.AddRange(new object[] {
             "Playfield",
@@ -266,7 +275,8 @@
             "Apron",
             "Backglass & DMD",
             "Topper & DMD"});
-            this.cmbDisplayLabel.Location = new System.Drawing.Point(91, 93);
+            this.cmbDisplayLabel.Location = new System.Drawing.Point(91, 88);
+            this.cmbDisplayLabel.MaxDropDownItems = 10;
             this.cmbDisplayLabel.Name = "cmbDisplayLabel";
             this.cmbDisplayLabel.Size = new System.Drawing.Size(244, 21);
             this.cmbDisplayLabel.TabIndex = 8;
@@ -274,72 +284,159 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 127);
+            this.label3.Location = new System.Drawing.Point(12, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 13);
+            this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Visible Window X Offset";
+            this.label3.Text = "Region X Offset";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 146);
+            this.label4.Location = new System.Drawing.Point(12, 137);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 13);
+            this.label4.Size = new System.Drawing.Size(82, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Visible Window Y Offset";
+            this.label4.Text = "Region Y Offset";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(269, 127);
+            this.label5.Location = new System.Drawing.Point(251, 115);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 13);
+            this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Visible Window Width";
+            this.label5.Text = "Region Width";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(269, 146);
+            this.label6.Location = new System.Drawing.Point(251, 137);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 13);
+            this.label6.Size = new System.Drawing.Size(75, 13);
             this.label6.TabIndex = 12;
-            this.label6.Text = "Visible Window Height";
+            this.label6.Text = "Region Height";
             // 
             // txtVisibleWindowXOffset
             // 
-            this.txtVisibleWindowXOffset.Location = new System.Drawing.Point(139, 121);
+            this.txtVisibleWindowXOffset.Location = new System.Drawing.Point(100, 112);
             this.txtVisibleWindowXOffset.Name = "txtVisibleWindowXOffset";
             this.txtVisibleWindowXOffset.Size = new System.Drawing.Size(100, 20);
             this.txtVisibleWindowXOffset.TabIndex = 13;
             // 
             // txtVisibleWindowYOffset
             // 
-            this.txtVisibleWindowYOffset.Location = new System.Drawing.Point(138, 143);
+            this.txtVisibleWindowYOffset.Location = new System.Drawing.Point(100, 134);
             this.txtVisibleWindowYOffset.Name = "txtVisibleWindowYOffset";
             this.txtVisibleWindowYOffset.Size = new System.Drawing.Size(100, 20);
             this.txtVisibleWindowYOffset.TabIndex = 14;
             // 
             // txtVisibleWindowWidth
             // 
-            this.txtVisibleWindowWidth.Location = new System.Drawing.Point(385, 124);
+            this.txtVisibleWindowWidth.Location = new System.Drawing.Point(329, 112);
             this.txtVisibleWindowWidth.Name = "txtVisibleWindowWidth";
             this.txtVisibleWindowWidth.Size = new System.Drawing.Size(100, 20);
             this.txtVisibleWindowWidth.TabIndex = 15;
             // 
             // txtVisibleWindowHeight
             // 
-            this.txtVisibleWindowHeight.Location = new System.Drawing.Point(388, 146);
+            this.txtVisibleWindowHeight.Location = new System.Drawing.Point(329, 134);
             this.txtVisibleWindowHeight.Name = "txtVisibleWindowHeight";
             this.txtVisibleWindowHeight.Size = new System.Drawing.Size(100, 20);
             this.txtVisibleWindowHeight.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(21, 157);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Region Label:";
+            // 
+            // cmbRegionLabel
+            // 
+            this.cmbRegionLabel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRegionLabel.FormattingEnabled = true;
+            this.cmbRegionLabel.Items.AddRange(new object[] {
+            "Playfield",
+            "DMD",
+            "Backglass",
+            "Topper",
+            "Apron"});
+            this.cmbRegionLabel.Location = new System.Drawing.Point(100, 154);
+            this.cmbRegionLabel.MaxDropDownItems = 10;
+            this.cmbRegionLabel.Name = "cmbRegionLabel";
+            this.cmbRegionLabel.Size = new System.Drawing.Size(100, 21);
+            this.cmbRegionLabel.TabIndex = 18;
+            // 
+            // btnAddRegionToDisplay
+            // 
+            this.btnAddRegionToDisplay.Location = new System.Drawing.Point(283, 181);
+            this.btnAddRegionToDisplay.Name = "btnAddRegionToDisplay";
+            this.btnAddRegionToDisplay.Size = new System.Drawing.Size(146, 23);
+            this.btnAddRegionToDisplay.TabIndex = 19;
+            this.btnAddRegionToDisplay.Text = "Add Region To Display";
+            this.btnAddRegionToDisplay.UseVisualStyleBackColor = true;
+            this.btnAddRegionToDisplay.Click += new System.EventHandler(this.btnAddRegionToDisplay_Click);
+            // 
+            // listBoxDisplayRegions
+            // 
+            this.listBoxDisplayRegions.FormattingEnabled = true;
+            this.listBoxDisplayRegions.Location = new System.Drawing.Point(447, 112);
+            this.listBoxDisplayRegions.Name = "listBoxDisplayRegions";
+            this.listBoxDisplayRegions.Size = new System.Drawing.Size(225, 69);
+            this.listBoxDisplayRegions.TabIndex = 20;
+            this.listBoxDisplayRegions.SelectedIndexChanged += new System.EventHandler(this.listBoxDisplayRegions_SelectedIndexChanged);
+            this.listBoxDisplayRegions.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxDisplayRegions_KeyUp);
+            // 
+            // lblRegions
+            // 
+            this.lblRegions.AutoSize = true;
+            this.lblRegions.Location = new System.Drawing.Point(444, 91);
+            this.lblRegions.Name = "lblRegions";
+            this.lblRegions.Size = new System.Drawing.Size(179, 13);
+            this.lblRegions.TabIndex = 21;
+            this.lblRegions.Text = "Display Regions (DEL key removes):";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(248, 162);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Region Color";
+            // 
+            // cmbRegionColor
+            // 
+            this.cmbRegionColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRegionColor.FormattingEnabled = true;
+            this.cmbRegionColor.Items.AddRange(new object[] {
+            "Green",
+            "Blue",
+            "Yellow",
+            "Pink",
+            "White",
+            "Black"});
+            this.cmbRegionColor.Location = new System.Drawing.Point(329, 159);
+            this.cmbRegionColor.MaxDropDownItems = 10;
+            this.cmbRegionColor.Name = "cmbRegionColor";
+            this.cmbRegionColor.Size = new System.Drawing.Size(100, 21);
+            this.cmbRegionColor.TabIndex = 23;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 582);
+            this.ClientSize = new System.Drawing.Size(756, 584);
+            this.Controls.Add(this.cmbRegionColor);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblRegions);
+            this.Controls.Add(this.listBoxDisplayRegions);
+            this.Controls.Add(this.btnAddRegionToDisplay);
+            this.Controls.Add(this.cmbRegionLabel);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtVisibleWindowHeight);
             this.Controls.Add(this.txtVisibleWindowWidth);
             this.Controls.Add(this.txtVisibleWindowYOffset);
@@ -357,9 +454,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(772, 623);
             this.Name = "MainForm";
             this.Text = "Pincab Screen Configurator";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Main_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlTextInfo.ResumeLayout(false);
@@ -403,6 +500,13 @@
         private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpDisplayInfoToFileToolStripMenuItem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbRegionLabel;
+        private System.Windows.Forms.Button btnAddRegionToDisplay;
+        private System.Windows.Forms.ListBox listBoxDisplayRegions;
+        private System.Windows.Forms.Label lblRegions;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbRegionColor;
     }
 }
 

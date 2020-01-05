@@ -51,11 +51,25 @@ namespace PinCabScreenConfigurator
 
             //Draw the visible screen area for this screen (meaning it isn't going to display full screen, instead it will be bound by a box)
             //This is typically for LCD DMD folks, who are using a large screen, but only showing a portion of the screen in the backbox
-            if (_displayDetail.OffsetX != 0 || _displayDetail.OffsetY !=0 || _displayDetail.VisibleDisplayHeight != 0 || _displayDetail.VisibleDisplayWidth != 0)
+            foreach(var region in _displayDetail.RegionRectangles)
             {
-                var pen2 = new Pen(Color.Green, 10);
-                var rectangle2 = new Rectangle(_displayDetail.OffsetX, _displayDetail.OffsetY, _displayDetail.VisibleDisplayWidth, _displayDetail.VisibleDisplayHeight);
-                e.Graphics.DrawRectangle(pen2, rectangle2);
+                if (region.RegionOffsetX != 0 || region.RegionOffsetY != 0 || region.RegionDisplayHeight != 0 || region.RegionDisplayWidth != 0)
+                {
+                    var pen2 = new Pen(region.RegionColor, 10);
+                    var rectangle2 = new Rectangle(region.RegionOffsetX, region.RegionOffsetY, region.RegionDisplayWidth, region.RegionDisplayHeight);
+                    e.Graphics.DrawRectangle(pen2, rectangle2);
+
+                    //Display the region label inside the lower left corner of the region
+                    if (!string.IsNullOrEmpty(region.RegionLabel))
+                    {
+                        Font drawFont = new Font("Arial", 20, FontStyle.Bold);
+                        SolidBrush drawBrush = new SolidBrush(region.RegionColor);
+                        int lowerLeftCornerY = (region.RegionOffsetY + region.RegionDisplayHeight) - 40;
+                        if (lowerLeftCornerY < 0)
+                            lowerLeftCornerY = 0;
+                        e.Graphics.DrawString(region.RegionLabel, drawFont, drawBrush, region.RegionOffsetX + 10, lowerLeftCornerY);
+                    }
+                }
             }
         }
 

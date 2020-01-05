@@ -12,7 +12,9 @@ namespace Pincab.ScreenUtil
     [Serializable]
     public class DisplayDetail
     {
-        public DisplayDetail() { }
+        public DisplayDetail() {
+            RegionRectangles = new List<RegionRectangle>();
+        }
         /// <summary>
         /// Classic built in .NET Display info (very minimal info)
         /// </summary>
@@ -28,13 +30,8 @@ namespace Pincab.ScreenUtil
         public EDID EdidInfo { get; set; }
 
         public string DisplayLabel { get; set; }
-
-        //The below values are the visible portion of the screen. This is defined in the front end (PinballX) ini depending on your screen.
-        //TODO: Load from PinballX INI
-        public int OffsetY { get; set; }
-        public int OffsetX { get; set; }
-        public int VisibleDisplayWidth { get; set; }
-        public int VisibleDisplayHeight { get; set; }
+        
+        public List<RegionRectangle> RegionRectangles { get; set; }
 
         public override string ToString()
         {

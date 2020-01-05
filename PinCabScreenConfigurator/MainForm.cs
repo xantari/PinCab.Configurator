@@ -4,12 +4,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Pincab.ScreenUtil;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +20,61 @@ using WindowsDisplayAPI;
 
 namespace PinCabScreenConfigurator
 {
+    /// <summary>
+    /// The main program form.
+    /// This program relies on the WindowsDisplayApi nuget instead of Screens.AllScreens built in .NET Framework object as it gives much more details about
+    /// screen layout. Additionally we can use it to dynamically display on the fly updated screen layouts, where as the Screens.AllScreens is only loaded ONCE when you start
+    /// the application. At some point in the future I will put in a timer here that periodically repaints the screen layouts as they are being moved in windows so you can see the same
+    /// screen layout you see in Windows on the fly.
+    /// </summary>
+    /// <remarks>
+    /// 1/4/2020 - Initial creation
+    /// </remarks>
     //https://stackoverflow.com/questions/5020559/screen-allscreen-is-not-giving-the-correct-monitor-count
     public partial class MainForm : Form
     {
         private List<DisplayDetail> _displayDetails { get; set; } = new List<DisplayDetail>();
 
+        public ConcurrentDictionary<string, ScreenBoundsDisplayForm> ScreenBoundDisplayForms { get; set; } = new ConcurrentDictionary<string, ScreenBoundsDisplayForm>();
+
         public MainForm()
         {
             InitializeComponent();
             LoadDisplayDetails();
+
+            //Load Default file settings data and update the Display Details
+            UpdateDisplayDetailsFromSettingsFile();
+
+            LoadScreenBoundsDisplayForms();
             DisplayDisplayDetails();
-            var displays = new ScreenDetails().GetDisplays();
+            //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
+        }
+
+        private void UpdateDisplayDetailsFromSettingsFile()
+        {
+            ProgramSettings settings = new ProgramSettings();
+            settings = settings.LoadSettings();
+            foreach(var display in settings?.DisplaySettings)
+            {
+                var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
+                loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
+                loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+            }
+        }
+
+        private void LoadScreenBoundsDisplayForms()
+        {
+            ScreenBoundDisplayForms.Clear();
+            foreach (var display in _displayDetails)
+            {
+                var newForm = new ScreenBoundsDisplayForm(display, this);
+                newForm.Owner = this;
+                newForm.Hide();
+                ScreenBoundDisplayForms.TryAdd(display.Display.DisplayName, newForm);
+            }
+
         }
 
         private void LoadDisplayDetails()
@@ -96,43 +140,6 @@ namespace PinCabScreenConfigurator
             this.Close();
         }
 
-        private void btnSaveDisplayLabel_Click(object sender, EventArgs e)
-        {
-            int currentSelectedIndex = listBoxDisplays.SelectedIndex;
-            if (listBoxDisplays.SelectedIndex >= 0)
-            {
-                var listItem = listBoxDisplays.SelectedItem as DisplayDetail;
-                listItem.DisplayLabel = cmbDisplayLabel.Text;
-                int intVal = 0;
-                var parsed = Int32.TryParse(txtVisibleWindowWidth.Text, out intVal);
-                if (parsed)
-                    listItem.VisibleDisplayWidth = intVal;
-                else
-                    listItem.VisibleDisplayWidth = 0;
-                parsed = Int32.TryParse(txtVisibleWindowHeight.Text, out intVal);
-                if (parsed)
-                    listItem.VisibleDisplayHeight = intVal;
-                else
-                    listItem.VisibleDisplayHeight = 0;
-                parsed = Int32.TryParse(txtVisibleWindowXOffset.Text, out intVal);
-                if (parsed)
-                    listItem.OffsetX = intVal;
-                else
-                    listItem.OffsetX = 0;
-                parsed = Int32.TryParse(txtVisibleWindowYOffset.Text, out intVal);
-                if (parsed)
-                    listItem.OffsetY = intVal;
-                else
-                    listItem.OffsetY = 0;
-                DisplayDisplayDetails();
-                listBoxDisplays.SelectedIndex = currentSelectedIndex;
-            }
-            else
-            {
-                MessageBox.Show("Please select a monitor");
-            }
-        }
-
         private void generateFFMpegCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool isValid = ValidateMonitorConfiguration(false);
@@ -147,40 +154,60 @@ namespace PinCabScreenConfigurator
             foreach (var display in _displayDetails)
             {
                 string frameRate = "30";
-                string offsetX;
-                if (display.OffsetX != 0) //They have configured a custom resolution to capture, meaning not full screen
-                    offsetX = (display.Display.CurrentSetting.Position.X + display.OffsetX).ToString();
-                else
-                    offsetX = display.Display.CurrentSetting.Position.X.ToString();
+                string offsetX, offsetY, videoHeight, videoWidth;
+                offsetX = offsetY = videoHeight = videoWidth = string.Empty;
 
-                string offsetY;
-                if (display.OffsetY != 0) //They have configured a custom resolution to capture, meaning not full screen
-                    offsetY = (display.Display.CurrentSetting.Position.Y + display.OffsetY).ToString();
-                else
-                    offsetY = display.Display.CurrentSetting.Position.Y.ToString();
+                if (display.RegionRectangles.Count() > 0)
+                {
+                    foreach (var region in display.RegionRectangles)
+                    {
+                        if (region.RegionOffsetX != 0) //They have configured a custom resolution to capture, meaning not full screen
+                            offsetX = (display.Display.CurrentSetting.Position.X + region.RegionOffsetX).ToString();
+                        else
+                            offsetX = display.Display.CurrentSetting.Position.X.ToString();
 
-                string videoHeight;
-                if (display.VisibleDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
-                    videoHeight = display.VisibleDisplayHeight.ToString();
-                else
-                    videoHeight = display.Display.CurrentSetting.Resolution.Height.ToString();
+                        if (region.RegionOffsetY != 0) //They have configured a custom resolution to capture, meaning not full screen
+                            offsetY = (display.Display.CurrentSetting.Position.Y + region.RegionOffsetY).ToString();
+                        else
+                            offsetY = display.Display.CurrentSetting.Position.Y.ToString();
 
-                string videoWidth;
-                if (display.VisibleDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
-                    videoWidth = display.VisibleDisplayWidth.ToString();
-                else
-                    videoWidth = display.Display.CurrentSetting.Resolution.Width.ToString();
-                string videoResolution = $"{videoWidth}x{videoHeight}";
-                string timeToSaveVideo = "00:00:30"; //30 seconds
-                string pathToSaveVideo = "C:\\" + display.ToString().RemoveInvalidFilenameChars().Replace(".", "") + ".mp4";
+                        if (region.RegionDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
+                            videoHeight = region.RegionDisplayHeight.ToString();
+                        else
+                            videoHeight = display.Display.CurrentSetting.Resolution.Height.ToString();
 
-                txtData.Text += display + " FFMpeg Command: \r\n";
-                txtData.Text += FFmpegCommandTemplate.Replace("{framerate}", frameRate)
-                            .Replace("{offsetX}", offsetX)
-                            .Replace("{offsetY}", offsetY)
-                            .Replace("{videoresolution}", videoResolution)
-                            .Replace("{timeToSaveVideo}", timeToSaveVideo)
-                            .Replace("{pathToSaveFile}", pathToSaveVideo) + "\r\n\r\n";
+                        if (region.RegionDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
+                            videoWidth = region.RegionDisplayWidth.ToString();
+                        else
+                            videoWidth = display.Display.CurrentSetting.Resolution.Width.ToString();
+
+                        string videoResolution = $"{videoWidth}x{videoHeight}";
+                        string timeToSaveVideo = "00:00:30"; //30 seconds
+                        string pathToSaveVideo = "C:\\" + (display.ToString() + " - " + region.RegionLabel).RemoveInvalidFilenameChars().Replace(".", "") + ".mp4";
+
+                        txtData.Text += display + " - " + region.RegionLabel + " FFMpeg Command: \r\n";
+                        txtData.Text += FFmpegCommandTemplate.Replace("{framerate}", frameRate)
+                                    .Replace("{offsetX}", offsetX)
+                                    .Replace("{offsetY}", offsetY)
+                                    .Replace("{videoresolution}", videoResolution)
+                                    .Replace("{timeToSaveVideo}", timeToSaveVideo)
+                                    .Replace("{pathToSaveFile}", pathToSaveVideo) + "\r\n\r\n";
+                    }
+                }
+                else //Capture the single display info with region offsets
+                {
+                    string videoResolution = $"{videoWidth}x{videoHeight}";
+                    string timeToSaveVideo = "00:00:30"; //30 seconds
+                    string pathToSaveVideo = "C:\\" + display.ToString().RemoveInvalidFilenameChars().Replace(".", "") + ".mp4";
+
+                    txtData.Text += display + " FFMpeg Command: \r\n";
+                    txtData.Text += FFmpegCommandTemplate.Replace("{framerate}", frameRate)
+                                .Replace("{offsetX}", offsetX)
+                                .Replace("{offsetY}", offsetY)
+                                .Replace("{videoresolution}", videoResolution)
+                                .Replace("{timeToSaveVideo}", timeToSaveVideo)
+                                .Replace("{pathToSaveFile}", pathToSaveVideo) + "\r\n\r\n";
+                }
             }
         }
 
@@ -215,9 +242,28 @@ namespace PinCabScreenConfigurator
             return isValid;
         }
 
+        private void ClearFormFields()
+        {
+            cmbDisplayLabel.Text = string.Empty;
+            cmbRegionColor.Text = string.Empty;
+            cmbRegionLabel.Text = string.Empty;
+            txtVisibleWindowHeight.Text = string.Empty;
+            txtVisibleWindowWidth.Text = string.Empty;
+            txtVisibleWindowXOffset.Text = string.Empty;
+            txtVisibleWindowYOffset.Text = string.Empty;
+        }
+
         private void listBoxDisplays_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ClearFormFields();
             this.Refresh();
+            var display = listBoxDisplays.SelectedItem as DisplayDetail;
+            foreach (var hideForm in ScreenBoundDisplayForms)
+            {
+                hideForm.Value?.Hide();
+            }
+            var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == display.Display.DisplayName);
+            form.Value?.Show();
             PopulateFormDisplayDetails();
         }
 
@@ -227,41 +273,14 @@ namespace PinCabScreenConfigurator
             {
                 var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
                 cmbDisplayLabel.Text = displayDetail.DisplayLabel;
-                txtVisibleWindowHeight.Text = displayDetail.VisibleDisplayHeight.ToString();
-                txtVisibleWindowWidth.Text = displayDetail.VisibleDisplayWidth.ToString();
-                txtVisibleWindowXOffset.Text = displayDetail.OffsetX.ToString();
-                txtVisibleWindowYOffset.Text = displayDetail.OffsetY.ToString();
-            }
-        }
-
-        private void Main_Paint(object sender, PaintEventArgs e)
-        {
-            if (listBoxDisplays.SelectedItem != null)
-            {
-                if (this.OwnedForms.Count() > 0)
+                listBoxDisplayRegions.Items.Clear();
+                foreach (var region in displayDetail.RegionRectangles)
                 {
-                    for (int i = 0; i < this.OwnedForms.Count(); i++)
-                    {
-                        this.OwnedForms[i].Close();
-                    }
+                    listBoxDisplayRegions.Items.Add(region);
                 }
-                var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
-                var newForm = new ScreenBoundsDisplayForm(displayDetail, this);
-                newForm.Owner = this;
-                newForm.Show();
-
-                //Force it back over there, keeps gettign reset for some reason
-
-                //e.Graphics.DrawRectangle(pen, rectangle);
-                //IntPtr desktop = GetDC(IntPtr.Zero);
-                //using (Graphics g = Graphics.FromHdc(desktop))
-                //{
-                //    g.
-                //    g.DrawRectangle(pen, rectangle);
-                //}
-                //ReleaseDC(IntPtr.Zero, desktop);
+                if (displayDetail.RegionRectangles.Count() > 0)
+                    listBoxDisplayRegions.SelectedIndex = 0;
             }
-
         }
 
         private void panelMonitorDrawing_Paint(object sender, PaintEventArgs e)
@@ -287,14 +306,17 @@ namespace PinCabScreenConfigurator
 
                 //Draw the visible screen area for this screen (meaning it isn't going to display full screen, instead it will be bound by a box)
                 //This is typically for LCD DMD folks, who are using a large screen, but only showing a portion of the screen in the backbox
-                if (display.OffsetX != 0 || display.OffsetY != 0 || display.VisibleDisplayHeight != 0 || display.VisibleDisplayWidth != 0)
+                foreach (var region in display.RegionRectangles)
                 {
-                    var pen2 = new Pen(Color.Green, 2);
-                    //We offset the rectangle here based off of what screen we are now on (this takes into account the "virtual desktop space" in windows) when
-                    //you arrange your monitors in display settings
-                    var rectangle2 = new Rectangle(screenRectangleX + (display.OffsetX / 10), screenRectangleY + (display.OffsetY / 10),
-                        (display.VisibleDisplayWidth / 10), (display.VisibleDisplayHeight / 10));
-                    e.Graphics.DrawRectangle(pen2, rectangle2);
+                    if (region.RegionOffsetX != 0 || region.RegionOffsetY != 0 || region.RegionDisplayHeight != 0 || region.RegionDisplayWidth != 0)
+                    {
+                        var pen2 = new Pen(region.RegionColor, 2);
+                        //We offset the rectangle here based off of what screen we are now on (this takes into account the "virtual desktop space" in windows) when
+                        //you arrange your monitors in display settings
+                        var rectangle2 = new Rectangle(screenRectangleX + (region.RegionOffsetX / 10), screenRectangleY + (region.RegionOffsetY / 10),
+                            (region.RegionDisplayWidth / 10), (region.RegionDisplayHeight / 10));
+                        e.Graphics.DrawRectangle(pen2, rectangle2);
+                    }
                 }
             }
         }
@@ -346,19 +368,13 @@ namespace PinCabScreenConfigurator
                 fileDialog.FileName = Environment.MachineName + "_DisplayDetails.json";
                 fileDialog.RestoreDirectory = true;
 
-
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
                     filePath = fileDialog.FileName;
-                    //using (TextWriter writer = new StreamWriter(filePath))
-                    //{
-                    //    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_displayDetails.GetType());
-                    //    x.Serialize(writer, _displayDetails);
-                    //    writer.Close();
-                    //}
+
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Converters.Add(new JavaScriptDateTimeConverter());
+                    serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                     serializer.NullValueHandling = NullValueHandling.Ignore;
                     serializer.Formatting = Formatting.Indented;
                     serializer.Error += Serializer_Error; //Ignore errors
@@ -374,6 +390,125 @@ namespace PinCabScreenConfigurator
         private void Serializer_Error(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs e)
         {
             e.ErrorContext.Handled = true;
+        }
+
+        private void btnAddRegionToDisplay_Click(object sender, EventArgs e)
+        {
+            if (cmbRegionLabel.SelectedItem == null)
+            {
+                MessageBox.Show("You must give this region a label");
+                return;
+            }
+            if (cmbRegionColor.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a color");
+                return;
+            }
+            var region = new RegionRectangle();
+            int intVal = 0;
+            bool result = Int32.TryParse(txtVisibleWindowHeight.Text, out intVal);
+            region.RegionDisplayHeight = intVal;
+            result = Int32.TryParse(txtVisibleWindowWidth.Text, out intVal);
+            region.RegionDisplayWidth = intVal;
+            result = Int32.TryParse(txtVisibleWindowXOffset.Text, out intVal);
+            region.RegionOffsetX = intVal;
+            result = Int32.TryParse(txtVisibleWindowYOffset.Text, out intVal);
+            region.RegionOffsetY = intVal;
+            region.RegionLabel = cmbRegionLabel.Text;
+            region.RegionColor = Color.FromName(cmbRegionColor.Text);
+            listBoxDisplayRegions.Items.Add(region);
+        }
+
+        private void listBoxDisplayRegions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxDisplayRegions.SelectedItem != null)
+            {
+                var regionRectangle = listBoxDisplayRegions.SelectedItem as RegionRectangle;
+                txtVisibleWindowHeight.Text = regionRectangle.RegionDisplayHeight.ToString();
+                txtVisibleWindowWidth.Text = regionRectangle.RegionDisplayWidth.ToString();
+                txtVisibleWindowXOffset.Text = regionRectangle.RegionOffsetX.ToString();
+                txtVisibleWindowYOffset.Text = regionRectangle.RegionOffsetY.ToString();
+                cmbRegionLabel.Text = regionRectangle.RegionLabel;
+                cmbRegionColor.Text = regionRectangle.RegionColor.Name;
+            }
+        }
+
+        private void listBoxDisplayRegions_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                var display = listBoxDisplays.SelectedItem as DisplayDetail;
+                var region = listBoxDisplayRegions.SelectedItem as RegionRectangle;
+                display.RegionRectangles.Remove(region);
+                listBoxDisplayRegions.Items.RemoveAt(listBoxDisplayRegions.SelectedIndex);
+            }
+        }
+
+        private void btnSaveDisplayConfig_Click(object sender, EventArgs e)
+        {
+            int currentSelectedIndex = listBoxDisplays.SelectedIndex;
+            if (listBoxDisplays.SelectedIndex >= 0)
+            {
+                var listItem = listBoxDisplays.SelectedItem as DisplayDetail;
+                listItem.DisplayLabel = cmbDisplayLabel.Text;
+                listItem.RegionRectangles.Clear();
+                foreach (var regionListItem in listBoxDisplayRegions.Items)
+                {
+                    var region = regionListItem as RegionRectangle;
+                    listItem.RegionRectangles.Add(region);
+                }
+
+                DisplayDisplayDetails();
+                listBoxDisplays.SelectedIndex = currentSelectedIndex;
+            }
+            else
+            {
+                MessageBox.Show("Please select a display");
+            }
+        }
+
+        private void SaveSettings()
+        {
+            ProgramSettings setting = new ProgramSettings();
+
+            setting.DisplaySettings = new List<DisplaySettings>();
+            foreach (var display in _displayDetails)
+            {
+                setting.DisplaySettings.Add(new DisplaySettings()
+                {
+                    DisplayLabel = display.DisplayLabel,
+                    DisplayName = display.Display.DisplayName,
+                    RegionRectangles = display.RegionRectangles
+                });
+            }
+
+            setting.SaveSettings();
+        }
+
+        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsForm form = new SettingsForm();
+            form.Show();
+        }
+
+        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProgramSettings setting = new ProgramSettings();
+            setting.SaveSettings();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
+            if (response == DialogResult.Yes)
+            {
+                SaveSettings();
+            }
         }
     }
 }

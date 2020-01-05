@@ -4,9 +4,9 @@ This tool allows you to layout your screens and validate your screen configurati
 The motivation behind this program was to solve these issues with Virtual Pinball cabinet setups:
 
 1. It's difficult to set all the various program settings related to Virtual Pinball as there are so many addon programs involved that each need their own screen coordinates.
-2. Provide a FFMPEG command line to help Pinball X creator QC their video capture code
-3. Changing Video Cards or Displays causes you to have to re-setup the new coordinates in many different areas. Instead the idea is to define it in one place and have those settings
+2. Changing Video Cards or Displays causes you to have to re-setup the new coordinates in many different areas. Instead the idea is to define it in one place and have those settings
 replicate to all the other areas automatically.
+3. Provide a FFMPEG command line examples on how to record screens and specific regions of screens
 
 # Features
 

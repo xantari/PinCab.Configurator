@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PinCabScreenConfigurator
+namespace Pincab.ScreenUtil
 {
     public static class DisplayDetailsExtensions
     {

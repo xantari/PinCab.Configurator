@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Pincab.ScreenUtil
 {
-    public static class DisplayExtensions
+    public static class EdidExtensions
     {
         public static string GetDisplayEdidManufacturerAndSerial(this EDID edidInfo)
         {

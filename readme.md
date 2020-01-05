@@ -51,7 +51,7 @@ If you want to backup the display settings the key file is DisplaySettings.json 
 	b. Option to update all previously run ROM's   
 14. PinUp location settings read/write/validation
 15. Set Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios))
-16. Additiona Validation:   
+16. Additional Validation:   
 	a. Ensure Primary Monitor is Monitor 1, and is labeled the Playfield screen
 17. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 

@@ -16,6 +16,8 @@ namespace PinCabScreenConfigurator
         public ProgramSettings()
         {
             DisplaySettings = new List<DisplaySettings>();
+            RecordTimeSeconds = 30;
+            RecordFramerate = 30;
         }
 
         public string FFMpegFullPath { get; set; }
@@ -23,30 +25,32 @@ namespace PinCabScreenConfigurator
         public int RecordFramerate { get; set; }
         public string RecordingTempFolderPath { get; set; }
 
-        public List<DisplaySettings> DisplaySettings { get; set; }
+        public string PinupPopperSqlLiteDbPath { get; set; }
+        public string PinballYSettingsPath { get; set; }
+        public string PinballXIniPath { get; set; }
 
-        private string GetApplicationFolder()
-        {
-            string applicationFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            return applicationFolder;
-        }
+        public List<DisplaySettings> DisplaySettings { get; set; }
 
         public ProgramSettings LoadSettings(string fileAndPathToSettingFile = "")
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
-                settingsFileNameAndPath = GetApplicationFolder() + "\\DisplaySettings.json";
+                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\DisplaySettings.json";
             else
                 settingsFileNameAndPath = fileAndPathToSettingFile;
-            string json = File.ReadAllText(settingsFileNameAndPath);
-            return JsonConvert.DeserializeObject<ProgramSettings>(json);
+            if (File.Exists(settingsFileNameAndPath))
+            {
+                string json = File.ReadAllText(settingsFileNameAndPath);
+                return JsonConvert.DeserializeObject<ProgramSettings>(json);
+            }
+            return null;
         }
 
         public void SaveSettings(string fileAndPathToSettingFile = "")
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
-                settingsFileNameAndPath = GetApplicationFolder() + "\\DisplaySettings.json";
+                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\DisplaySettings.json";
             else
                 settingsFileNameAndPath = fileAndPathToSettingFile;
 

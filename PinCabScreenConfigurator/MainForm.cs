@@ -362,7 +362,6 @@ namespace PinCabScreenConfigurator
             string filePath = string.Empty;
             using (SaveFileDialog fileDialog = new SaveFileDialog())
             {
-                fileDialog.InitialDirectory = "c:\\";
                 fileDialog.Filter = "JSON Files|*.json|All files (*.*)|*.*";
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = Environment.MachineName + "_DisplayDetails.json";

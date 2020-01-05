@@ -49,11 +49,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationHelpers.cs" />
     <Compile Include="DisplayDetail.cs" />
-    <Compile Include="DisplayExtensions.cs" />
+    <Compile Include="DisplayDetailsExtensions.cs" />
+    <Compile Include="EdidExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionRectangle.cs" />
     <Compile Include="ScreenDetails.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

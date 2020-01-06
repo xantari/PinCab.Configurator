@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Pincab.ScreenUtil;
+using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -37,6 +38,9 @@ namespace PinCabScreenConfigurator
 
         public ConcurrentDictionary<string, ScreenBoundsDisplayForm> ScreenBoundDisplayForms { get; set; } = new ConcurrentDictionary<string, ScreenBoundsDisplayForm>();
 
+        private bool InProcessOfChangingRegions = false;
+        private bool InProcessOfClearingFormFields = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -56,11 +60,14 @@ namespace PinCabScreenConfigurator
         {
             ProgramSettings settings = new ProgramSettings();
             settings = settings.LoadSettings();
-            foreach(var display in settings?.DisplaySettings)
+            if (settings != null)
             {
-                var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
-                loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
-                loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+                foreach (var display in settings?.DisplaySettings)
+                {
+                    var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
+                    loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
+                    loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+                }
             }
         }
 
@@ -211,11 +218,6 @@ namespace PinCabScreenConfigurator
             }
         }
 
-        private void validateMonitorConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            bool isValid = ValidateMonitorConfiguration();
-        }
-
         private bool ValidateMonitorConfiguration(bool writeLog = true)
         {
             bool isValid = true;
@@ -228,6 +230,19 @@ namespace PinCabScreenConfigurator
                         txtData.Text += "Invalid monitor configuration detected due to negative position values. Virtual Pinball programs require all monitors to have positive position values. Monitor: " + display.ToString() + " " + display.Display.CurrentSetting.Position.ToString() + "\r\n";
                     isValid = false;
                 }
+            }
+            if (!_displayDetails.Any(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains("playfield")))
+            {
+                if (writeLog)
+                    txtData.Text += "No Playfield Monitor selected yet. Please select a playfield monitor and give it a label of Playfield.\r\n";
+                isValid = false;
+            }
+            var playfieldDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains("playfield"));
+            if (playfieldDisplay != null && !playfieldDisplay.Display.IsGDIPrimary)
+            {
+                if (writeLog)
+                    txtData.Text += "Your playfield display must be monitor 1 and marked as the primary monitor.\r\n";
+                isValid = false;
             }
             if (!isValid)
             {
@@ -244,13 +259,15 @@ namespace PinCabScreenConfigurator
 
         private void ClearFormFields()
         {
+            InProcessOfClearingFormFields = true;
             cmbDisplayLabel.Text = string.Empty;
             cmbRegionColor.Text = string.Empty;
             cmbRegionLabel.Text = string.Empty;
-            txtVisibleWindowHeight.Text = string.Empty;
-            txtVisibleWindowWidth.Text = string.Empty;
-            txtVisibleWindowXOffset.Text = string.Empty;
-            txtVisibleWindowYOffset.Text = string.Empty;
+            numericUpDownRegionHeight.Value = 0;
+            numericUpDownRegionWidth.Value = 0;
+            numericUpDownRegionXOffset.Value = 0;
+            numericUpDownRegionYOffset.Value = 0;
+            InProcessOfClearingFormFields = false;
         }
 
         private void listBoxDisplays_SelectedIndexChanged(object sender, EventArgs e)
@@ -326,38 +343,152 @@ namespace PinCabScreenConfigurator
             panelMonitorDrawing.Refresh();
         }
 
-        private void outputScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
-        private void outputFutureDMDiniToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
-        private void setUltraDMDRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
-        private void setPinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
-        private void outputDMDDeviceiniDMDExtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not implemented yet");
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutBoxForm();
             about.Show();
         }
 
-        private void dumpDisplayInfoToFileToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void Serializer_Error(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs e)
+        {
+            e.ErrorContext.Handled = true;
+        }
+
+        private void btnAddRegionToDisplay_Click(object sender, EventArgs e)
+        {
+            if (cmbRegionLabel.SelectedItem == null)
+            {
+                MessageBox.Show("You must give this region a label");
+                return;
+            }
+            if (cmbRegionColor.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a color");
+                return;
+            }
+            var region = new RegionRectangle();
+            region.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
+            region.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
+            region.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
+            region.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value); 
+            region.RegionLabel = cmbRegionLabel.Text;
+            region.RegionColor = Color.FromName(cmbRegionColor.Text);
+            listBoxDisplayRegions.Items.Add(region);
+        }
+
+        private void listBoxDisplayRegions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxDisplayRegions.SelectedItem != null)
+            {
+                var regionRectangle = listBoxDisplayRegions.SelectedItem as RegionRectangle;
+
+                InProcessOfChangingRegions = true;
+
+                numericUpDownRegionHeight.Value = regionRectangle.RegionDisplayHeight;
+                numericUpDownRegionWidth.Value = regionRectangle.RegionDisplayWidth;
+                numericUpDownRegionXOffset.Value = regionRectangle.RegionOffsetX;
+                numericUpDownRegionYOffset.Value = regionRectangle.RegionOffsetY;
+                cmbRegionLabel.Text = regionRectangle.RegionLabel;
+                cmbRegionColor.Text = regionRectangle.RegionColor.Name;
+                InProcessOfChangingRegions = false;
+            }
+        }
+
+        private void listBoxDisplayRegions_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                var display = listBoxDisplays.SelectedItem as DisplayDetail;
+                var region = listBoxDisplayRegions.SelectedItem as RegionRectangle;
+                display.RegionRectangles.Remove(region);
+                listBoxDisplayRegions.Items.RemoveAt(listBoxDisplayRegions.SelectedIndex);
+            }
+        }
+
+        private void btnSaveDisplayConfig_Click(object sender, EventArgs e)
+        {
+            SaveDisplayConfig();
+        }
+
+        private void SaveDisplayConfig()
+        {
+            int currentSelectedIndex = listBoxDisplays.SelectedIndex;
+            //int currentSelectedRegion = listBoxDisplayRegions.SelectedIndex;
+            if (listBoxDisplays.SelectedIndex >= 0)
+            {
+                var listItem = listBoxDisplays.SelectedItem as DisplayDetail;
+                listItem.DisplayLabel = cmbDisplayLabel.Text;
+                listItem.RegionRectangles.Clear();
+                foreach (var regionListItem in listBoxDisplayRegions.Items)
+                {
+                    var region = regionListItem as RegionRectangle;
+                    listItem.RegionRectangles.Add(region);
+                }
+
+                DisplayDisplayDetails();
+                listBoxDisplays.SelectedIndex = currentSelectedIndex;
+                //listBoxDisplayRegions.SelectedIndex = currentSelectedRegion;
+            }
+            else
+            {
+                MessageBox.Show("Please select a display");
+            }
+        }
+
+        private void SaveSettings()
+        {
+            ProgramSettings setting = new ProgramSettings();
+
+            setting.DisplaySettings = new List<DisplaySettings>();
+            foreach (var display in _displayDetails)
+            {
+                setting.DisplaySettings.Add(new DisplaySettings()
+                {
+                    DisplayLabel = display.DisplayLabel,
+                    DisplayName = display.Display.DisplayName,
+                    RegionRectangles = display.RegionRectangles
+                });
+            }
+
+            Log.Information("Saved Settings. {@settings}", setting);
+            setting.SaveSettings();
+        }
+
+        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsForm form = new SettingsForm();
+            form.Show();
+        }
+
+        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProgramSettings setting = new ProgramSettings();
+            setting.SaveSettings();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
+            if (response == DialogResult.Yes)
+            {
+                SaveSettings();
+            }
+            Log.Information("Application Ending... Good Bye!");
+            Log.CloseAndFlush();
+        }
+
+        private void monitorConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool isValid = ValidateMonitorConfiguration();
+        }
+
+        private void dumpDisplayInfoToFileToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             string filePath = string.Empty;
             using (SaveFileDialog fileDialog = new SaveFileDialog())
@@ -386,127 +517,88 @@ namespace PinCabScreenConfigurator
             }
         }
 
-        private void Serializer_Error(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs e)
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            e.ErrorContext.Handled = true;
+            //TODO: Launch the help page (index.html)
         }
 
-        private void btnAddRegionToDisplay_Click(object sender, EventArgs e)
+        private void dumpHighLevelDisplayInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cmbRegionLabel.SelectedItem == null)
-            {
-                MessageBox.Show("You must give this region a label");
-                return;
-            }
-            if (cmbRegionColor.SelectedItem == null)
-            {
-                MessageBox.Show("Please select a color");
-                return;
-            }
-            var region = new RegionRectangle();
-            int intVal = 0;
-            bool result = Int32.TryParse(txtVisibleWindowHeight.Text, out intVal);
-            region.RegionDisplayHeight = intVal;
-            result = Int32.TryParse(txtVisibleWindowWidth.Text, out intVal);
-            region.RegionDisplayWidth = intVal;
-            result = Int32.TryParse(txtVisibleWindowXOffset.Text, out intVal);
-            region.RegionOffsetX = intVal;
-            result = Int32.TryParse(txtVisibleWindowYOffset.Text, out intVal);
-            region.RegionOffsetY = intVal;
-            region.RegionLabel = cmbRegionLabel.Text;
-            region.RegionColor = Color.FromName(cmbRegionColor.Text);
-            listBoxDisplayRegions.Items.Add(region);
+
         }
 
-        private void listBoxDisplayRegions_SelectedIndexChanged(object sender, EventArgs e)
+        private void RefreshDisplayOnRegionUpdate()
         {
-            if (listBoxDisplayRegions.SelectedItem != null)
+            var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+            if (displayDetail != null && listBoxDisplayRegions.SelectedIndex >= 0)
             {
-                var regionRectangle = listBoxDisplayRegions.SelectedItem as RegionRectangle;
-                txtVisibleWindowHeight.Text = regionRectangle.RegionDisplayHeight.ToString();
-                txtVisibleWindowWidth.Text = regionRectangle.RegionDisplayWidth.ToString();
-                txtVisibleWindowXOffset.Text = regionRectangle.RegionOffsetX.ToString();
-                txtVisibleWindowYOffset.Text = regionRectangle.RegionOffsetY.ToString();
-                cmbRegionLabel.Text = regionRectangle.RegionLabel;
-                cmbRegionColor.Text = regionRectangle.RegionColor.Name;
-            }
-        }
-
-        private void listBoxDisplayRegions_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                var display = listBoxDisplays.SelectedItem as DisplayDetail;
-                var region = listBoxDisplayRegions.SelectedItem as RegionRectangle;
-                display.RegionRectangles.Remove(region);
-                listBoxDisplayRegions.Items.RemoveAt(listBoxDisplayRegions.SelectedIndex);
-            }
-        }
-
-        private void btnSaveDisplayConfig_Click(object sender, EventArgs e)
-        {
-            int currentSelectedIndex = listBoxDisplays.SelectedIndex;
-            if (listBoxDisplays.SelectedIndex >= 0)
-            {
-                var listItem = listBoxDisplays.SelectedItem as DisplayDetail;
-                listItem.DisplayLabel = cmbDisplayLabel.Text;
-                listItem.RegionRectangles.Clear();
-                foreach (var regionListItem in listBoxDisplayRegions.Items)
+                var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == displayDetail.Display.DisplayName);
+                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+                if (regionRectangleEditing != null)
                 {
-                    var region = regionListItem as RegionRectangle;
-                    listItem.RegionRectangles.Add(region);
+                    regionRectangleEditing.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
+                    regionRectangleEditing.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
+                    regionRectangleEditing.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
+                    regionRectangleEditing.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
                 }
-
-                DisplayDisplayDetails();
-                listBoxDisplays.SelectedIndex = currentSelectedIndex;
-            }
-            else
-            {
-                MessageBox.Show("Please select a display");
-            }
-        }
-
-        private void SaveSettings()
-        {
-            ProgramSettings setting = new ProgramSettings();
-
-            setting.DisplaySettings = new List<DisplaySettings>();
-            foreach (var display in _displayDetails)
-            {
-                setting.DisplaySettings.Add(new DisplaySettings()
+                int currentSelectedIndex = listBoxDisplayRegions.SelectedIndex;
+                listBoxDisplayRegions.Items.Clear();
+                foreach (var region in displayDetail.RegionRectangles)
                 {
-                    DisplayLabel = display.DisplayLabel,
-                    DisplayName = display.Display.DisplayName,
-                    RegionRectangles = display.RegionRectangles
-                });
+                    listBoxDisplayRegions.Items.Add(region);
+                }
+                listBoxDisplayRegions.SelectedIndex = currentSelectedIndex;
+
+                form.Value?.Refresh();
+                panelMonitorDrawing.Refresh();
             }
-
-            setting.SaveSettings();
         }
 
-        private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void numericUpDownRegionXOffset_ValueChanged(object sender, EventArgs e)
         {
-            SaveSettings();
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SettingsForm form = new SettingsForm();
-            form.Show();
-        }
-
-        private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProgramSettings setting = new ProgramSettings();
-            setting.SaveSettings();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
-            if (response == DialogResult.Yes)
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
-                SaveSettings();
+                RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void numericUpDownRegionYOffset_ValueChanged(object sender, EventArgs e)
+        {
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
+            {
+                RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void numericUpDownRegionWidth_ValueChanged(object sender, EventArgs e)
+        {
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
+            {
+                RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void numericUpDownRegionHeight_ValueChanged(object sender, EventArgs e)
+        {
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
+            {
+                RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void cmbRegionLabel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
+            {
+                RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void cmbRegionColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
+            {
+                RefreshDisplayOnRegionUpdate();
             }
         }
     }

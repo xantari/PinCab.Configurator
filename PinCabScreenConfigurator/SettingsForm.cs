@@ -38,6 +38,11 @@ namespace PinCabScreenConfigurator
                 txtPinballXIniFilePath.Text = settings.PinballXIniPath;
                 txtPinballYLocation.Text = settings.PinballYSettingsPath;
                 txtPinupPopperDbLocation.Text = settings.PinupPopperSqlLiteDbPath;
+                txtB2SScreenresFilePath.Text = settings.B2SScreenResPath;
+                txtPinupPlayerFilePath.Text = settings.PinupPlayerPath;
+                txtFutureDMDFilePath.Text = settings.FutureDMDIniPath;
+                txtDMDDeviceIniFilePath.Text = settings.DMDDeviceIniPath;
+                txtPRocUserSettings.Text = settings.PRocUserSettingsPath;
             }
         }
 
@@ -54,6 +59,11 @@ namespace PinCabScreenConfigurator
             settings.PinupPopperSqlLiteDbPath = txtPinupPopperDbLocation.Text;
             settings.PinballXIniPath = txtPinballXIniFilePath.Text;
             settings.PinballYSettingsPath = txtPinballYLocation.Text;
+            settings.B2SScreenResPath = txtB2SScreenresFilePath.Text;
+            settings.PinupPlayerPath = txtPinupPlayerFilePath.Text;
+            settings.FutureDMDIniPath = txtFutureDMDFilePath.Text;
+            settings.DMDDeviceIniPath = txtDMDDeviceIniFilePath.Text;
+            settings.PRocUserSettingsPath = txtPRocUserSettings.Text;
 
             settings.SaveSettings();
             this.Close();
@@ -133,6 +143,77 @@ namespace PinCabScreenConfigurator
 
                 txtPinupPopperDbLocation.Text = fileDialog.FileName;
             }
+        }
+
+        private void btnB2SScreenresFilePath_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "txt Files|*.txt|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "Screenres.txt";
+                fileDialog.RestoreDirectory = true;
+                fileDialog.ShowDialog();
+
+                txtB2SScreenresFilePath.Text = fileDialog.FileName;
+            }
+        }
+
+        private void btnPinupPlayerFilePath_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fileDialog = new FolderBrowserDialog())
+            {
+                fileDialog.ShowDialog();
+
+                txtPinupPlayerFilePath.Text = fileDialog.SelectedPath;
+            }
+        }
+
+        private void btnFutureDMDFilePath_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "INI Files|*.ini|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "FutureDMD.ini";
+                fileDialog.RestoreDirectory = true;
+                fileDialog.ShowDialog();
+
+                txtFutureDMDFilePath.Text = fileDialog.FileName;
+            }
+        }
+
+        private void btnDMDDeviceIniFilePath_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "INI Files|*.ini|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "*.ini";
+                fileDialog.RestoreDirectory = true;
+                fileDialog.ShowDialog();
+
+                txtDMDDeviceIniFilePath.Text = fileDialog.FileName;
+            }
+        }
+
+        private void btnPRocUserSettingsFilePath_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "YAML Files|*.yaml|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "user_settings.yaml";
+                fileDialog.RestoreDirectory = true;
+                fileDialog.ShowDialog();
+
+                txtPRocUserSettings.Text = fileDialog.FileName;
+            }
+        }
+
+        private void SettingsForm_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            //TODO: Launch the help page for the tab they are on
         }
     }
 }

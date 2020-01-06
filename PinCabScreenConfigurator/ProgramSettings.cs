@@ -28,6 +28,11 @@ namespace PinCabScreenConfigurator
         public string PinupPopperSqlLiteDbPath { get; set; }
         public string PinballYSettingsPath { get; set; }
         public string PinballXIniPath { get; set; }
+        public string B2SScreenResPath { get; set; }
+        public string PinupPlayerPath { get; set; }
+        public string FutureDMDIniPath { get; set; }
+        public string DMDDeviceIniPath { get; set; }
+        public string PRocUserSettingsPath { get; set; }
 
         public List<DisplaySettings> DisplaySettings { get; set; }
 

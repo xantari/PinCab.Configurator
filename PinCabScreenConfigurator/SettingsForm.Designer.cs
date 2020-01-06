@@ -31,7 +31,26 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tbSettings = new System.Windows.Forms.TabControl();
             this.tabPagePinballProgramSettings = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnDMDDeviceIniFilePath = new System.Windows.Forms.Button();
+            this.txtDMDDeviceIniFilePath = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnFutureDMDFilePath = new System.Windows.Forms.Button();
+            this.txtFutureDMDFilePath = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnPinupPlayerFilePath = new System.Windows.Forms.Button();
+            this.txtPinupPlayerFilePath = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnB2SScreenresFilePath = new System.Windows.Forms.Button();
+            this.txtB2SScreenresFilePath = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabPageFrontEnd = new System.Windows.Forms.TabPage();
+            this.btnPinupPopperFilePath = new System.Windows.Forms.Button();
+            this.txtPinupPopperDbLocation = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnPinballYFilePath = new System.Windows.Forms.Button();
             this.txtPinballYLocation = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,25 +71,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnPinupPopperFilePath = new System.Windows.Forms.Button();
-            this.txtPinupPopperDbLocation = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.btnPRocUserSettingsFilePath = new System.Windows.Forms.Button();
+            this.txtPRocUserSettings = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lblVPinMameFound = new System.Windows.Forms.Label();
+            this.lblSteamPinballFX3Found = new System.Windows.Forms.Label();
+            this.lblSteamPinballFX2Found = new System.Windows.Forms.Label();
+            this.lblUltraDMDFound = new System.Windows.Forms.Label();
             this.tbSettings.SuspendLayout();
             this.tabPagePinballProgramSettings.SuspendLayout();
             this.tabPageFrontEnd.SuspendLayout();
@@ -94,21 +101,28 @@
             // 
             // tabPagePinballProgramSettings
             // 
+            this.tabPagePinballProgramSettings.Controls.Add(this.lblUltraDMDFound);
+            this.tabPagePinballProgramSettings.Controls.Add(this.lblSteamPinballFX2Found);
+            this.tabPagePinballProgramSettings.Controls.Add(this.lblSteamPinballFX3Found);
+            this.tabPagePinballProgramSettings.Controls.Add(this.lblVPinMameFound);
+            this.tabPagePinballProgramSettings.Controls.Add(this.btnPRocUserSettingsFilePath);
+            this.tabPagePinballProgramSettings.Controls.Add(this.txtPRocUserSettings);
+            this.tabPagePinballProgramSettings.Controls.Add(this.label16);
             this.tabPagePinballProgramSettings.Controls.Add(this.label15);
             this.tabPagePinballProgramSettings.Controls.Add(this.label14);
-            this.tabPagePinballProgramSettings.Controls.Add(this.button4);
-            this.tabPagePinballProgramSettings.Controls.Add(this.textBox4);
+            this.tabPagePinballProgramSettings.Controls.Add(this.btnDMDDeviceIniFilePath);
+            this.tabPagePinballProgramSettings.Controls.Add(this.txtDMDDeviceIniFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.label13);
             this.tabPagePinballProgramSettings.Controls.Add(this.label12);
             this.tabPagePinballProgramSettings.Controls.Add(this.label11);
-            this.tabPagePinballProgramSettings.Controls.Add(this.button3);
-            this.tabPagePinballProgramSettings.Controls.Add(this.textBox3);
+            this.tabPagePinballProgramSettings.Controls.Add(this.btnFutureDMDFilePath);
+            this.tabPagePinballProgramSettings.Controls.Add(this.txtFutureDMDFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.label10);
-            this.tabPagePinballProgramSettings.Controls.Add(this.button2);
-            this.tabPagePinballProgramSettings.Controls.Add(this.textBox2);
+            this.tabPagePinballProgramSettings.Controls.Add(this.btnPinupPlayerFilePath);
+            this.tabPagePinballProgramSettings.Controls.Add(this.txtPinupPlayerFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.label9);
-            this.tabPagePinballProgramSettings.Controls.Add(this.button1);
-            this.tabPagePinballProgramSettings.Controls.Add(this.textBox1);
+            this.tabPagePinballProgramSettings.Controls.Add(this.btnB2SScreenresFilePath);
+            this.tabPagePinballProgramSettings.Controls.Add(this.txtB2SScreenresFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.label8);
             this.tabPagePinballProgramSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPagePinballProgramSettings.Name = "tabPagePinballProgramSettings";
@@ -116,6 +130,158 @@
             this.tabPagePinballProgramSettings.TabIndex = 2;
             this.tabPagePinballProgramSettings.Text = "Pinball Program Settings";
             this.tabPagePinballProgramSettings.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 155);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(143, 13);
+            this.label15.TabIndex = 36;
+            this.label15.Text = "Steam Pinball FX3 Detected:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 177);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(143, 13);
+            this.label14.TabIndex = 35;
+            this.label14.Text = "Steam Pinball FX2 Detected:";
+            // 
+            // btnDMDDeviceIniFilePath
+            // 
+            this.btnDMDDeviceIniFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDMDDeviceIniFilePath.BackgroundImage")));
+            this.btnDMDDeviceIniFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDMDDeviceIniFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDMDDeviceIniFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDMDDeviceIniFilePath.Location = new System.Drawing.Point(563, 92);
+            this.btnDMDDeviceIniFilePath.Name = "btnDMDDeviceIniFilePath";
+            this.btnDMDDeviceIniFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnDMDDeviceIniFilePath.TabIndex = 34;
+            this.btnDMDDeviceIniFilePath.UseVisualStyleBackColor = true;
+            this.btnDMDDeviceIniFilePath.Click += new System.EventHandler(this.btnDMDDeviceIniFilePath_Click);
+            // 
+            // txtDMDDeviceIniFilePath
+            // 
+            this.txtDMDDeviceIniFilePath.Location = new System.Drawing.Point(156, 93);
+            this.txtDMDDeviceIniFilePath.Name = "txtDMDDeviceIniFilePath";
+            this.txtDMDDeviceIniFilePath.Size = new System.Drawing.Size(401, 20);
+            this.txtDMDDeviceIniFilePath.TabIndex = 33;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(8, 97);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(126, 13);
+            this.label13.TabIndex = 32;
+            this.label13.Text = "DMDDevice.ini Location:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 223);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(147, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "VPinMame Found In Registry:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 199);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(145, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Ultra DMD Found in Registry:";
+            // 
+            // btnFutureDMDFilePath
+            // 
+            this.btnFutureDMDFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFutureDMDFilePath.BackgroundImage")));
+            this.btnFutureDMDFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFutureDMDFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFutureDMDFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFutureDMDFilePath.Location = new System.Drawing.Point(563, 66);
+            this.btnFutureDMDFilePath.Name = "btnFutureDMDFilePath";
+            this.btnFutureDMDFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnFutureDMDFilePath.TabIndex = 29;
+            this.btnFutureDMDFilePath.UseVisualStyleBackColor = true;
+            this.btnFutureDMDFilePath.Click += new System.EventHandler(this.btnFutureDMDFilePath_Click);
+            // 
+            // txtFutureDMDFilePath
+            // 
+            this.txtFutureDMDFilePath.Location = new System.Drawing.Point(156, 67);
+            this.txtFutureDMDFilePath.Name = "txtFutureDMDFilePath";
+            this.txtFutureDMDFilePath.Size = new System.Drawing.Size(401, 20);
+            this.txtFutureDMDFilePath.TabIndex = 28;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 71);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(126, 13);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Future DMD Ini Location:";
+            // 
+            // btnPinupPlayerFilePath
+            // 
+            this.btnPinupPlayerFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPinupPlayerFilePath.BackgroundImage")));
+            this.btnPinupPlayerFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinupPlayerFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinupPlayerFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinupPlayerFilePath.Location = new System.Drawing.Point(563, 37);
+            this.btnPinupPlayerFilePath.Name = "btnPinupPlayerFilePath";
+            this.btnPinupPlayerFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinupPlayerFilePath.TabIndex = 26;
+            this.btnPinupPlayerFilePath.UseVisualStyleBackColor = true;
+            this.btnPinupPlayerFilePath.Click += new System.EventHandler(this.btnPinupPlayerFilePath_Click);
+            // 
+            // txtPinupPlayerFilePath
+            // 
+            this.txtPinupPlayerFilePath.Location = new System.Drawing.Point(156, 38);
+            this.txtPinupPlayerFilePath.Name = "txtPinupPlayerFilePath";
+            this.txtPinupPlayerFilePath.Size = new System.Drawing.Size(401, 20);
+            this.txtPinupPlayerFilePath.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 42);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(113, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Pinup Player Location:";
+            // 
+            // btnB2SScreenresFilePath
+            // 
+            this.btnB2SScreenresFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnB2SScreenresFilePath.BackgroundImage")));
+            this.btnB2SScreenresFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnB2SScreenresFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnB2SScreenresFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnB2SScreenresFilePath.Location = new System.Drawing.Point(563, 9);
+            this.btnB2SScreenresFilePath.Name = "btnB2SScreenresFilePath";
+            this.btnB2SScreenresFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnB2SScreenresFilePath.TabIndex = 23;
+            this.btnB2SScreenresFilePath.UseVisualStyleBackColor = true;
+            this.btnB2SScreenresFilePath.Click += new System.EventHandler(this.btnB2SScreenresFilePath_Click);
+            // 
+            // txtB2SScreenresFilePath
+            // 
+            this.txtB2SScreenresFilePath.Location = new System.Drawing.Point(156, 10);
+            this.txtB2SScreenresFilePath.Name = "txtB2SScreenresFilePath";
+            this.txtB2SScreenresFilePath.Size = new System.Drawing.Size(401, 20);
+            this.txtB2SScreenresFilePath.TabIndex = 22;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(142, 13);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "B2S Screenrest.txt Location:";
             // 
             // tabPageFrontEnd
             // 
@@ -135,6 +301,35 @@
             this.tabPageFrontEnd.TabIndex = 0;
             this.tabPageFrontEnd.Text = "Front End";
             this.tabPageFrontEnd.UseVisualStyleBackColor = true;
+            // 
+            // btnPinupPopperFilePath
+            // 
+            this.btnPinupPopperFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPinupPopperFilePath.BackgroundImage")));
+            this.btnPinupPopperFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinupPopperFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinupPopperFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinupPopperFilePath.Location = new System.Drawing.Point(566, 60);
+            this.btnPinupPopperFilePath.Name = "btnPinupPopperFilePath";
+            this.btnPinupPopperFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinupPopperFilePath.TabIndex = 26;
+            this.btnPinupPopperFilePath.UseVisualStyleBackColor = true;
+            this.btnPinupPopperFilePath.Click += new System.EventHandler(this.btnPinupPopperFilePath_Click);
+            // 
+            // txtPinupPopperDbLocation
+            // 
+            this.txtPinupPopperDbLocation.Location = new System.Drawing.Point(212, 61);
+            this.txtPinupPopperDbLocation.Name = "txtPinupPopperDbLocation";
+            this.txtPinupPopperDbLocation.Size = new System.Drawing.Size(348, 20);
+            this.txtPinupPopperDbLocation.TabIndex = 25;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(11, 65);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(201, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Pinup Popper PupDatabase.db Location:";
             // 
             // btnPinballYFilePath
             // 
@@ -374,182 +569,70 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnPinupPopperFilePath
+            // btnPRocUserSettingsFilePath
             // 
-            this.btnPinupPopperFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPinupPopperFilePath.BackgroundImage")));
-            this.btnPinupPopperFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPinupPopperFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPinupPopperFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPinupPopperFilePath.Location = new System.Drawing.Point(566, 60);
-            this.btnPinupPopperFilePath.Name = "btnPinupPopperFilePath";
-            this.btnPinupPopperFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPinupPopperFilePath.TabIndex = 26;
-            this.btnPinupPopperFilePath.UseVisualStyleBackColor = true;
-            this.btnPinupPopperFilePath.Click += new System.EventHandler(this.btnPinupPopperFilePath_Click);
+            this.btnPRocUserSettingsFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPRocUserSettingsFilePath.BackgroundImage")));
+            this.btnPRocUserSettingsFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPRocUserSettingsFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPRocUserSettingsFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPRocUserSettingsFilePath.Location = new System.Drawing.Point(563, 118);
+            this.btnPRocUserSettingsFilePath.Name = "btnPRocUserSettingsFilePath";
+            this.btnPRocUserSettingsFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPRocUserSettingsFilePath.TabIndex = 39;
+            this.btnPRocUserSettingsFilePath.UseVisualStyleBackColor = true;
+            this.btnPRocUserSettingsFilePath.Click += new System.EventHandler(this.btnPRocUserSettingsFilePath_Click);
             // 
-            // txtPinupPopperDbLocation
+            // txtPRocUserSettings
             // 
-            this.txtPinupPopperDbLocation.Location = new System.Drawing.Point(212, 61);
-            this.txtPinupPopperDbLocation.Name = "txtPinupPopperDbLocation";
-            this.txtPinupPopperDbLocation.Size = new System.Drawing.Size(348, 20);
-            this.txtPinupPopperDbLocation.TabIndex = 25;
+            this.txtPRocUserSettings.Location = new System.Drawing.Point(156, 119);
+            this.txtPRocUserSettings.Name = "txtPRocUserSettings";
+            this.txtPRocUserSettings.Size = new System.Drawing.Size(401, 20);
+            this.txtPRocUserSettings.TabIndex = 38;
             // 
-            // label7
+            // label16
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 65);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(201, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Pinup Popper PupDatabase.db Location:";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 123);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 13);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "P-ROC Usersettings.yaml:";
             // 
-            // button1
+            // lblVPinMameFound
             // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(563, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(38, 23);
-            this.button1.TabIndex = 23;
-            this.button1.UseVisualStyleBackColor = true;
+            this.lblVPinMameFound.AutoSize = true;
+            this.lblVPinMameFound.Location = new System.Drawing.Point(156, 223);
+            this.lblVPinMameFound.Name = "lblVPinMameFound";
+            this.lblVPinMameFound.Size = new System.Drawing.Size(44, 13);
+            this.lblVPinMameFound.TabIndex = 40;
+            this.lblVPinMameFound.Text = "Yes/No";
             // 
-            // textBox1
+            // lblSteamPinballFX3Found
             // 
-            this.textBox1.Location = new System.Drawing.Point(156, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(401, 20);
-            this.textBox1.TabIndex = 22;
+            this.lblSteamPinballFX3Found.AutoSize = true;
+            this.lblSteamPinballFX3Found.Location = new System.Drawing.Point(157, 155);
+            this.lblSteamPinballFX3Found.Name = "lblSteamPinballFX3Found";
+            this.lblSteamPinballFX3Found.Size = new System.Drawing.Size(44, 13);
+            this.lblSteamPinballFX3Found.TabIndex = 41;
+            this.lblSteamPinballFX3Found.Text = "Yes/No";
             // 
-            // label8
+            // lblSteamPinballFX2Found
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(142, 13);
-            this.label8.TabIndex = 21;
-            this.label8.Text = "B2S Screenrest.txt Location:";
+            this.lblSteamPinballFX2Found.AutoSize = true;
+            this.lblSteamPinballFX2Found.Location = new System.Drawing.Point(156, 177);
+            this.lblSteamPinballFX2Found.Name = "lblSteamPinballFX2Found";
+            this.lblSteamPinballFX2Found.Size = new System.Drawing.Size(44, 13);
+            this.lblSteamPinballFX2Found.TabIndex = 42;
+            this.lblSteamPinballFX2Found.Text = "Yes/No";
             // 
-            // button2
+            // lblUltraDMDFound
             // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.SystemColors.Control;
-            this.button2.Location = new System.Drawing.Point(563, 37);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 23);
-            this.button2.TabIndex = 26;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(156, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(401, 20);
-            this.textBox2.TabIndex = 25;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 42);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(113, 13);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Pinup Player Location:";
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.SystemColors.Control;
-            this.button3.Location = new System.Drawing.Point(563, 66);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(38, 23);
-            this.button3.TabIndex = 29;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(156, 67);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(401, 20);
-            this.textBox3.TabIndex = 28;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 71);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(126, 13);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "Future DMD Ini Location:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 177);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(145, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Ultra DMD Found in Registry:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 205);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(147, 13);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "VPinMame Found In Registry:";
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.ForeColor = System.Drawing.SystemColors.Control;
-            this.button4.Location = new System.Drawing.Point(563, 92);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(38, 23);
-            this.button4.TabIndex = 34;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(156, 93);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(401, 20);
-            this.textBox4.TabIndex = 33;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 97);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(126, 13);
-            this.label13.TabIndex = 32;
-            this.label13.Text = "DMDDevice.ini Location:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 150);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(110, 13);
-            this.label14.TabIndex = 35;
-            this.label14.Text = "Pinball FX2 Detected:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(19, 128);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(110, 13);
-            this.label15.TabIndex = 36;
-            this.label15.Text = "Pinball FX3 Detected:";
+            this.lblUltraDMDFound.AutoSize = true;
+            this.lblUltraDMDFound.Location = new System.Drawing.Point(157, 199);
+            this.lblUltraDMDFound.Name = "lblUltraDMDFound";
+            this.lblUltraDMDFound.Size = new System.Drawing.Size(44, 13);
+            this.lblUltraDMDFound.TabIndex = 43;
+            this.lblUltraDMDFound.Text = "Yes/No";
             // 
             // SettingsForm
             // 
@@ -563,6 +646,7 @@
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "Settings";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.SettingsForm_HelpButtonClicked);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tbSettings.ResumeLayout(false);
@@ -608,19 +692,26 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnFutureDMDFilePath;
+        private System.Windows.Forms.TextBox txtFutureDMDFilePath;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btnPinupPlayerFilePath;
+        private System.Windows.Forms.TextBox txtPinupPlayerFilePath;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnB2SScreenresFilePath;
+        private System.Windows.Forms.TextBox txtB2SScreenresFilePath;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Button btnDMDDeviceIniFilePath;
+        private System.Windows.Forms.TextBox txtDMDDeviceIniFilePath;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnPRocUserSettingsFilePath;
+        private System.Windows.Forms.TextBox txtPRocUserSettings;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblUltraDMDFound;
+        private System.Windows.Forms.Label lblSteamPinballFX2Found;
+        private System.Windows.Forms.Label lblSteamPinballFX3Found;
+        private System.Windows.Forms.Label lblVPinMameFound;
     }
 }

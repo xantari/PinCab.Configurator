@@ -23,7 +23,7 @@ namespace Pincab.ScreenUtil
 
         public override string ToString()
         {
-            return RegionLabel + " - " + RegionDisplayWidth.ToString() + "x" + RegionDisplayHeight.ToString();
+            return RegionLabel + " - " + RegionDisplayWidth.ToString() + "x" + RegionDisplayHeight.ToString() + " - " + RegionColor.Name;
         }
     }
 }

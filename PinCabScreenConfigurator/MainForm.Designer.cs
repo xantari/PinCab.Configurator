@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxDisplays = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -69,8 +70,6 @@
             this.pinballYSettingstxtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pinupPlayerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pinupPopperPupDatabasedbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamPinballFX2ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamPinballFX3ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pROCSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpDisplayInfoToFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,7 +92,9 @@
             this.numericUpDownRegionYOffset = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionWidth = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionHeight = new System.Windows.Forms.NumericUpDown();
-            this.pnlTextInfo = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
             this.txtData = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
@@ -101,7 +102,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).BeginInit();
-            this.pnlTextInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -168,28 +172,28 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // saveConfigurationToolStripMenuItem
             // 
             this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.saveConfigurationToolStripMenuItem.Text = "Save Configuration";
             this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
             // 
             // loadConfigurationToolStripMenuItem
             // 
             this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
             this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -339,8 +343,6 @@
             this.pinballYSettingstxtToolStripMenuItem1,
             this.pinupPlayerToolStripMenuItem1,
             this.pinupPopperPupDatabasedbToolStripMenuItem,
-            this.steamPinballFX2ToolStripMenuItem1,
-            this.steamPinballFX3ToolStripMenuItem1,
             this.pROCSettingsToolStripMenuItem1});
             this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
             this.validateToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
@@ -418,18 +420,6 @@
             this.pinupPopperPupDatabasedbToolStripMenuItem.Name = "pinupPopperPupDatabasedbToolStripMenuItem";
             this.pinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.pinupPopperPupDatabasedbToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
-            // 
-            // steamPinballFX2ToolStripMenuItem1
-            // 
-            this.steamPinballFX2ToolStripMenuItem1.Name = "steamPinballFX2ToolStripMenuItem1";
-            this.steamPinballFX2ToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
-            this.steamPinballFX2ToolStripMenuItem1.Text = "Steam Pinball FX2";
-            // 
-            // steamPinballFX3ToolStripMenuItem1
-            // 
-            this.steamPinballFX3ToolStripMenuItem1.Name = "steamPinballFX3ToolStripMenuItem1";
-            this.steamPinballFX3ToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
-            this.steamPinballFX3ToolStripMenuItem1.Text = "Steam Pinball FX3";
             // 
             // pROCSettingsToolStripMenuItem1
             // 
@@ -602,7 +592,7 @@
             "Yellow",
             "Pink",
             "White",
-            "Black"});
+            "Orange"});
             this.cmbRegionColor.Location = new System.Drawing.Point(329, 159);
             this.cmbRegionColor.MaxDropDownItems = 10;
             this.cmbRegionColor.Name = "cmbRegionColor";
@@ -662,23 +652,45 @@
             this.numericUpDownRegionHeight.TabIndex = 27;
             this.numericUpDownRegionHeight.ValueChanged += new System.EventHandler(this.numericUpDownRegionHeight_ValueChanged);
             // 
-            // pnlTextInfo
+            // backgroundWorker1
             // 
-            this.pnlTextInfo.Controls.Add(this.txtData);
-            this.pnlTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTextInfo.Location = new System.Drawing.Point(0, 425);
-            this.pnlTextInfo.Name = "pnlTextInfo";
-            this.pnlTextInfo.Size = new System.Drawing.Size(756, 159);
-            this.pnlTextInfo.TabIndex = 6;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(0, 210);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.panelMonitorDrawing);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtData);
+            this.splitContainer1.Size = new System.Drawing.Size(756, 374);
+            this.splitContainer1.SplitterDistance = 187;
+            this.splitContainer1.TabIndex = 28;
             // 
             // panelMonitorDrawing
             // 
-            this.panelMonitorDrawing.AutoScroll = true;
-            this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 208);
+            this.panelMonitorDrawing.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panelMonitorDrawing.BackColor = System.Drawing.Color.Black;
+            this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 0);
             this.panelMonitorDrawing.Name = "panelMonitorDrawing";
-            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 217);
-            this.panelMonitorDrawing.TabIndex = 7;
+            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 187);
+            this.panelMonitorDrawing.TabIndex = 8;
             this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
             // 
             // txtData
@@ -688,14 +700,15 @@
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
             this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtData.Size = new System.Drawing.Size(756, 159);
-            this.txtData.TabIndex = 0;
+            this.txtData.Size = new System.Drawing.Size(756, 183);
+            this.txtData.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 584);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.numericUpDownRegionHeight);
             this.Controls.Add(this.numericUpDownRegionWidth);
             this.Controls.Add(this.numericUpDownRegionYOffset);
@@ -712,8 +725,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbDisplayLabel);
-            this.Controls.Add(this.panelMonitorDrawing);
-            this.Controls.Add(this.pnlTextInfo);
             this.Controls.Add(this.btnSaveDisplayLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxDisplays);
@@ -723,6 +734,7 @@
             this.MinimumSize = new System.Drawing.Size(772, 623);
             this.Name = "MainForm";
             this.Text = "Pincab Screen Configurator";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -730,8 +742,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).EndInit();
-            this.pnlTextInfo.ResumeLayout(false);
-            this.pnlTextInfo.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,17 +811,17 @@
         private System.Windows.Forms.ToolStripMenuItem pinballYSettingstxtToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pinupPlayerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pinupPopperPupDatabasedbToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem steamPinballFX2ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem steamPinballFX3ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem pROCSettingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionXOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionYOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionWidth;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionHeight;
-        private System.Windows.Forms.Panel pnlTextInfo;
-        private System.Windows.Forms.TextBox txtData;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelMonitorDrawing;
+        private System.Windows.Forms.TextBox txtData;
     }
 }
 

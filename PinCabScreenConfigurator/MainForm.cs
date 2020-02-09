@@ -54,6 +54,7 @@ namespace PinCabScreenConfigurator
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
+            timer1.Start();
         }
 
         private void UpdateDisplayDetailsFromSettingsFile()
@@ -302,24 +303,32 @@ namespace PinCabScreenConfigurator
 
         private void panelMonitorDrawing_Paint(object sender, PaintEventArgs e)
         {
+            DrawMonitorDrawing();
+        }
+
+        private void DrawMonitorDrawing()
+        {
             //e.Graphics.Clear(this.BackColor);
+            var graphics = panelMonitorDrawing.CreateGraphics();
+            graphics.Clear(Color.Black);
             foreach (var display in _displayDetails)
             {
                 var pen = new Pen(Color.Red, 2);
-                int screenRectangleX = display.Display.GetScreen().Bounds.X / 10;
-                int screenRectangleY = display.Display.GetScreen().Bounds.Y / 10;
+                int screenRectangleX = (display.Display.GetScreen().Bounds.X / 10) + 5;
+                int screenRectangleY = (display.Display.GetScreen().Bounds.Y / 10) + 5;
                 int screenWidth = display.Display.GetScreen().Bounds.Width / 10;
                 int screenHeight = display.Display.GetScreen().Bounds.Height / 10;
                 //0,0 because it's in the context of the form that is already moved to the proper screen
                 var rectangle = new Rectangle(screenRectangleX, screenRectangleY, screenWidth, screenHeight);
                 //var rectangle = new Rectangle(2200, 0, 500, 500);
-                e.Graphics.DrawRectangle(pen, rectangle);
+                graphics.DrawRectangle(pen, rectangle);
 
                 Font drawFont = new Font("Arial", 10, FontStyle.Bold);
                 SolidBrush drawBrush = new SolidBrush(Color.Red);
                 string resolution = display.Display.CurrentSetting.Resolution.Width.ToString() + "x" + display.Display.CurrentSetting.Resolution.Height.ToString();
                 string offset = "X=" + display.Display.CurrentSetting.Position.X.ToString() + ", Y=" + display.Display.CurrentSetting.Position.Y.ToString();
-                e.Graphics.DrawString(display.DisplayLabel + "\r\n" + resolution + "\r\n" + offset, drawFont, drawBrush, (display.Display.GetScreen().Bounds.X / 10) + 2, (display.Display.GetScreen().Bounds.Y) + 2); //2 is the rectangle line width, so move it inside of that
+                graphics.DrawString(display.DisplayLabel + "\r\n" + resolution + "\r\n" + offset, drawFont, drawBrush, 
+                    (display.Display.GetScreen().Bounds.X / 10) + 7, (display.Display.GetScreen().Bounds.Y) + 7); //2 is the rectangle line width, so move it inside of that
 
                 //Draw the visible screen area for this screen (meaning it isn't going to display full screen, instead it will be bound by a box)
                 //This is typically for LCD DMD folks, who are using a large screen, but only showing a portion of the screen in the backbox
@@ -332,7 +341,7 @@ namespace PinCabScreenConfigurator
                         //you arrange your monitors in display settings
                         var rectangle2 = new Rectangle(screenRectangleX + (region.RegionOffsetX / 10), screenRectangleY + (region.RegionOffsetY / 10),
                             (region.RegionDisplayWidth / 10), (region.RegionDisplayHeight / 10));
-                        e.Graphics.DrawRectangle(pen2, rectangle2);
+                        graphics.DrawRectangle(pen2, rectangle2);
                     }
                 }
             }
@@ -340,7 +349,7 @@ namespace PinCabScreenConfigurator
 
         private void refreshDisplayDepictionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            panelMonitorDrawing.Refresh();
+            DrawMonitorDrawing();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -566,7 +575,8 @@ namespace PinCabScreenConfigurator
                 listBoxDisplayRegions.SelectedIndex = currentSelectedIndex;
 
                 form.Value?.Refresh();
-                panelMonitorDrawing.Refresh();
+                DrawMonitorDrawing();
+                //panelMonitorDrawing.Refresh();
             }
         }
 
@@ -616,6 +626,26 @@ namespace PinCabScreenConfigurator
             {
                 RefreshDisplayOnRegionUpdate();
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //DrawMonitorDrawing();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //backgroundWorker1.RunWorkerAsync();
+            //timer1.Stop();
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
         }
     }
 }

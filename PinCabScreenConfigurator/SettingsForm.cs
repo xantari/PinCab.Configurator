@@ -1,4 +1,5 @@
 ﻿using Pincab.ScreenUtil;
+using Pincab.ScreenUtil.Utils;
 using PinCabScreenConfigurator.Properties;
 using System;
 using System.Collections.Generic;

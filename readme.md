@@ -16,6 +16,8 @@ replicate to all the other areas automatically.
 4. Validates screen configuration is compatible   
 	a. No screens with negative coordinates  
 	b. Playfield is screen 1 and set as primary
+	c. DMD Size calculations are 4:1 ratio (just a warning)
+	d. Ensure all monitors set to 100% Scaling (no DPI scaling)
 5. Generates FFMPeg commands to capture the screens and output them to a .MP4 file
 6. Predefined labels for Playfield, DMD, Backglass, Topper, and Apron displays
 7. Dumps entire screen display details / EDID information to JSON
@@ -59,13 +61,10 @@ Logging information is in the Log.txt file in the application root folder.
 	a. Option to set Default  
 	b. Option to update all previously run ROM's   
 14. PinUp Popper / Player location settings read/write/validation
-15. Set Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios))
 17. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 19. Create help HTML pages and hookup to the program
-20. Add Validation:  
-	a. DMD Size calculations are 4:1 ratio
-	b. Ensure all monitors set to 100% Scaling (no DPI scaling)
 21. Ensure all the features of the ScreenRes editor exist in program
+22. Add all SetDMD functions to program
 
 
 # Thank you!
@@ -78,3 +77,8 @@ Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [
 	2. Menu reorganization. 
 	3. Completed initial version of all settings we need.
 	4. Global Exception logging
+
+# Help Needed
+
+1. Unable to figure out how to read/write/validation Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios)).
+Settings data appears to be encrypted. Unsure how to read/write to it.

@@ -228,7 +228,14 @@ namespace PinCabScreenConfigurator
                 if (display.Display.CurrentSetting.Position.X < 0 || display.Display.CurrentSetting.Position.Y < 0)
                 {
                     if (writeLog)
-                        txtData.Text += "Invalid monitor configuration detected due to negative position values. Virtual Pinball programs require all monitors to have positive position values. Monitor: " + display.ToString() + " " + display.Display.CurrentSetting.Position.ToString() + "\r\n";
+                        txtData.Text += $"Invalid monitor configuration detected due to negative position values. Virtual Pinball programs require all monitors to have positive position values. Monitor: {display.ToString()} {display.Display.CurrentSetting.Position.ToString()}\r\n";
+                    isValid = false;
+                }
+                var scalingFactor = display.GetScalingFactor();
+                if (scalingFactor != 1.0f)
+                {
+                    if (writeLog)
+                        txtData.Text += $"Scaling factor not set to 100%. Change your DPI settings to be 100%. Current Scaling: {(scalingFactor * 100)}%. Monitor: {display.ToString()} {display.Display.CurrentSetting.Position.ToString()}\r\n";
                     isValid = false;
                 }
             }
@@ -245,6 +252,35 @@ namespace PinCabScreenConfigurator
                     txtData.Text += "Your playfield display must be monitor 1 and marked as the primary monitor.\r\n";
                 isValid = false;
             }
+            //Check if DMD is recommended 4:1 ratio
+            var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
+            var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
+            if (regionDmdRectangle == null)
+            {
+                if (writeLog)
+                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
+                isValid = false;
+            }
+            else
+            {
+                if (regionDmdRectangle.RegionDisplayHeight == 0 || regionDmdRectangle.RegionDisplayWidth == 0)
+                {
+                    if (writeLog)
+                        txtData.Text += "DMD Region incomplete. Width or Height is specified as 0.\r\n";
+                    isValid = false;
+                }
+                else
+                {
+                    if ((regionDmdRectangle.RegionDisplayHeight / Convert.ToDecimal(regionDmdRectangle.RegionDisplayWidth)) != 0.4M) //Not a 4:1 ratio
+                    {
+                        if (writeLog)
+                            txtData.Text += "WARNING: DMD Region is not recommended 4:1 ratio.\r\n";
+                       // isValid = true;
+                    }
+                }
+            }
+
+
             if (!isValid)
             {
                 if (writeLog)
@@ -327,7 +363,7 @@ namespace PinCabScreenConfigurator
                 SolidBrush drawBrush = new SolidBrush(Color.Red);
                 string resolution = display.Display.CurrentSetting.Resolution.Width.ToString() + "x" + display.Display.CurrentSetting.Resolution.Height.ToString();
                 string offset = "X=" + display.Display.CurrentSetting.Position.X.ToString() + ", Y=" + display.Display.CurrentSetting.Position.Y.ToString();
-                graphics.DrawString(display.DisplayLabel + "\r\n" + resolution + "\r\n" + offset, drawFont, drawBrush, 
+                graphics.DrawString(display.DisplayLabel + "\r\n" + resolution + "\r\n" + offset, drawFont, drawBrush,
                     (display.Display.GetScreen().Bounds.X / 10) + 7, (display.Display.GetScreen().Bounds.Y) + 7); //2 is the rectangle line width, so move it inside of that
 
                 //Draw the visible screen area for this screen (meaning it isn't going to display full screen, instead it will be bound by a box)
@@ -626,26 +662,6 @@ namespace PinCabScreenConfigurator
             {
                 RefreshDisplayOnRegionUpdate();
             }
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            //DrawMonitorDrawing();
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //timer1.Start();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //backgroundWorker1.RunWorkerAsync();
-            //timer1.Stop();
-        }
-
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
         }
     }
 }

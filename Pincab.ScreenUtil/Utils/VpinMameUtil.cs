@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pincab.ScreenUtil
+namespace Pincab.ScreenUtil.Utils
 {
     public class VpinMameUtil
     {

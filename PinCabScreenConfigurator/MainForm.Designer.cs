@@ -92,7 +92,7 @@
             this.numericUpDownRegionYOffset = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionWidth = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionHeight = new System.Windows.Forms.NumericUpDown();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerRefreshDispaly = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
@@ -351,80 +351,80 @@
             // allSettingsToolStripMenuItem
             // 
             this.allSettingsToolStripMenuItem.Name = "allSettingsToolStripMenuItem";
-            this.allSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.allSettingsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.allSettingsToolStripMenuItem.Text = "All Settings";
             // 
             // monitorConfigurationToolStripMenuItem
             // 
             this.monitorConfigurationToolStripMenuItem.Name = "monitorConfigurationToolStripMenuItem";
-            this.monitorConfigurationToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.monitorConfigurationToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.monitorConfigurationToolStripMenuItem.Text = "Monitor Configuration";
             this.monitorConfigurationToolStripMenuItem.Click += new System.EventHandler(this.monitorConfigurationToolStripMenuItem_Click);
             // 
             // pinballXiniToolStripMenuItem1
             // 
             this.pinballXiniToolStripMenuItem1.Name = "pinballXiniToolStripMenuItem1";
-            this.pinballXiniToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.pinballXiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.pinballXiniToolStripMenuItem1.Text = "PinballX.ini";
             // 
             // b2SScreenrestxtToolStripMenuItem
             // 
             this.b2SScreenrestxtToolStripMenuItem.Name = "b2SScreenrestxtToolStripMenuItem";
-            this.b2SScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.b2SScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.b2SScreenrestxtToolStripMenuItem.Text = "B2S Settings (Screenres.txt)";
             // 
             // futureDMDiniToolStripMenuItem
             // 
             this.futureDMDiniToolStripMenuItem.Name = "futureDMDiniToolStripMenuItem";
-            this.futureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.futureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.futureDMDiniToolStripMenuItem.Text = "FutureDMD.ini";
             // 
             // ultraDMDRegistryKeyToolStripMenuItem1
             // 
             this.ultraDMDRegistryKeyToolStripMenuItem1.Name = "ultraDMDRegistryKeyToolStripMenuItem1";
-            this.ultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.ultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.ultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD Registry Key";
             // 
             // dMDDeviceiniToolStripMenuItem1
             // 
             this.dMDDeviceiniToolStripMenuItem1.Name = "dMDDeviceiniToolStripMenuItem1";
-            this.dMDDeviceiniToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.dMDDeviceiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.dMDDeviceiniToolStripMenuItem1.Text = "DMDDevice.ini";
             // 
             // toolStripMenuItemValidateVPinMameDefaultRegistryKey
             // 
             this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Name = "toolStripMenuItemValidateVPinMameDefaultRegistryKey";
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Size = new System.Drawing.Size(297, 22);
+            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Size = new System.Drawing.Size(256, 22);
             this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Text = "VPinMame Default Registry Key";
             // 
             // ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys
             // 
             this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Name = "ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys";
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Size = new System.Drawing.Size(297, 22);
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Text = "VPinMame Update All ROMs Registry Keys";
+            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Size = new System.Drawing.Size(256, 22);
+            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Text = "VPinMame All ROMs Registry Keys";
             // 
             // pinballYSettingstxtToolStripMenuItem1
             // 
             this.pinballYSettingstxtToolStripMenuItem1.Name = "pinballYSettingstxtToolStripMenuItem1";
-            this.pinballYSettingstxtToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.pinballYSettingstxtToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.pinballYSettingstxtToolStripMenuItem1.Text = "PinballY Settings.txt";
             // 
             // pinupPlayerToolStripMenuItem1
             // 
             this.pinupPlayerToolStripMenuItem1.Name = "pinupPlayerToolStripMenuItem1";
-            this.pinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.pinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.pinupPlayerToolStripMenuItem1.Text = "Pinup Player";
             // 
             // pinupPopperPupDatabasedbToolStripMenuItem
             // 
             this.pinupPopperPupDatabasedbToolStripMenuItem.Name = "pinupPopperPupDatabasedbToolStripMenuItem";
-            this.pinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.pinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.pinupPopperPupDatabasedbToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
             // pROCSettingsToolStripMenuItem1
             // 
             this.pROCSettingsToolStripMenuItem1.Name = "pROCSettingsToolStripMenuItem1";
-            this.pROCSettingsToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.pROCSettingsToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.pROCSettingsToolStripMenuItem1.Text = "P-ROC Settings";
             // 
             // debugToolStripMenuItem
@@ -652,15 +652,9 @@
             this.numericUpDownRegionHeight.TabIndex = 27;
             this.numericUpDownRegionHeight.ValueChanged += new System.EventHandler(this.numericUpDownRegionHeight_ValueChanged);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
             // timer1
             // 
             this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // splitContainer1
             // 
@@ -734,7 +728,6 @@
             this.MinimumSize = new System.Drawing.Size(772, 623);
             this.Name = "MainForm";
             this.Text = "Pincab Screen Configurator";
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -817,7 +810,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRegionYOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionWidth;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionHeight;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerRefreshDispaly;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelMonitorDrawing;

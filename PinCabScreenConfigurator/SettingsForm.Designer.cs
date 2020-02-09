@@ -31,8 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tbSettings = new System.Windows.Forms.TabControl();
             this.tabPagePinballProgramSettings = new System.Windows.Forms.TabPage();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblUltraDMDFound = new System.Windows.Forms.Label();
+            this.lblVPinMameFound = new System.Windows.Forms.Label();
+            this.btnPRocUserSettingsFilePath = new System.Windows.Forms.Button();
+            this.txtPRocUserSettings = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.btnDMDDeviceIniFilePath = new System.Windows.Forms.Button();
             this.txtDMDDeviceIniFilePath = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -71,13 +74,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnPRocUserSettingsFilePath = new System.Windows.Forms.Button();
-            this.txtPRocUserSettings = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblVPinMameFound = new System.Windows.Forms.Label();
-            this.lblSteamPinballFX3Found = new System.Windows.Forms.Label();
-            this.lblSteamPinballFX2Found = new System.Windows.Forms.Label();
-            this.lblUltraDMDFound = new System.Windows.Forms.Label();
             this.tbSettings.SuspendLayout();
             this.tabPagePinballProgramSettings.SuspendLayout();
             this.tabPageFrontEnd.SuspendLayout();
@@ -102,14 +98,10 @@
             // tabPagePinballProgramSettings
             // 
             this.tabPagePinballProgramSettings.Controls.Add(this.lblUltraDMDFound);
-            this.tabPagePinballProgramSettings.Controls.Add(this.lblSteamPinballFX2Found);
-            this.tabPagePinballProgramSettings.Controls.Add(this.lblSteamPinballFX3Found);
             this.tabPagePinballProgramSettings.Controls.Add(this.lblVPinMameFound);
             this.tabPagePinballProgramSettings.Controls.Add(this.btnPRocUserSettingsFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.txtPRocUserSettings);
             this.tabPagePinballProgramSettings.Controls.Add(this.label16);
-            this.tabPagePinballProgramSettings.Controls.Add(this.label15);
-            this.tabPagePinballProgramSettings.Controls.Add(this.label14);
             this.tabPagePinballProgramSettings.Controls.Add(this.btnDMDDeviceIniFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.txtDMDDeviceIniFilePath);
             this.tabPagePinballProgramSettings.Controls.Add(this.label13);
@@ -131,23 +123,52 @@
             this.tabPagePinballProgramSettings.Text = "Pinball Program Settings";
             this.tabPagePinballProgramSettings.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // lblUltraDMDFound
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 155);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(143, 13);
-            this.label15.TabIndex = 36;
-            this.label15.Text = "Steam Pinball FX3 Detected:";
+            this.lblUltraDMDFound.AutoSize = true;
+            this.lblUltraDMDFound.Location = new System.Drawing.Point(154, 152);
+            this.lblUltraDMDFound.Name = "lblUltraDMDFound";
+            this.lblUltraDMDFound.Size = new System.Drawing.Size(44, 13);
+            this.lblUltraDMDFound.TabIndex = 43;
+            this.lblUltraDMDFound.Text = "Yes/No";
             // 
-            // label14
+            // lblVPinMameFound
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 177);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(143, 13);
-            this.label14.TabIndex = 35;
-            this.label14.Text = "Steam Pinball FX2 Detected:";
+            this.lblVPinMameFound.AutoSize = true;
+            this.lblVPinMameFound.Location = new System.Drawing.Point(153, 176);
+            this.lblVPinMameFound.Name = "lblVPinMameFound";
+            this.lblVPinMameFound.Size = new System.Drawing.Size(44, 13);
+            this.lblVPinMameFound.TabIndex = 40;
+            this.lblVPinMameFound.Text = "Yes/No";
+            // 
+            // btnPRocUserSettingsFilePath
+            // 
+            this.btnPRocUserSettingsFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPRocUserSettingsFilePath.BackgroundImage")));
+            this.btnPRocUserSettingsFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPRocUserSettingsFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPRocUserSettingsFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPRocUserSettingsFilePath.Location = new System.Drawing.Point(563, 118);
+            this.btnPRocUserSettingsFilePath.Name = "btnPRocUserSettingsFilePath";
+            this.btnPRocUserSettingsFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPRocUserSettingsFilePath.TabIndex = 39;
+            this.btnPRocUserSettingsFilePath.UseVisualStyleBackColor = true;
+            this.btnPRocUserSettingsFilePath.Click += new System.EventHandler(this.btnPRocUserSettingsFilePath_Click);
+            // 
+            // txtPRocUserSettings
+            // 
+            this.txtPRocUserSettings.Location = new System.Drawing.Point(156, 119);
+            this.txtPRocUserSettings.Name = "txtPRocUserSettings";
+            this.txtPRocUserSettings.Size = new System.Drawing.Size(401, 20);
+            this.txtPRocUserSettings.TabIndex = 38;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(8, 123);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 13);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "P-ROC Usersettings.yaml:";
             // 
             // btnDMDDeviceIniFilePath
             // 
@@ -181,7 +202,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 223);
+            this.label12.Location = new System.Drawing.Point(5, 176);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(147, 13);
             this.label12.TabIndex = 31;
@@ -190,7 +211,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 199);
+            this.label11.Location = new System.Drawing.Point(5, 152);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(145, 13);
             this.label11.TabIndex = 30;
@@ -406,7 +427,7 @@
             this.tabPageFFMpeg.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageFFMpeg.Size = new System.Drawing.Size(674, 523);
             this.tabPageFFMpeg.TabIndex = 1;
-            this.tabPageFFMpeg.Text = "FFMPeg";
+            this.tabPageFFMpeg.Text = "FFMPEG";
             this.tabPageFFMpeg.UseVisualStyleBackColor = true;
             // 
             // numericFramerate
@@ -569,71 +590,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnPRocUserSettingsFilePath
-            // 
-            this.btnPRocUserSettingsFilePath.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPRocUserSettingsFilePath.BackgroundImage")));
-            this.btnPRocUserSettingsFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPRocUserSettingsFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPRocUserSettingsFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPRocUserSettingsFilePath.Location = new System.Drawing.Point(563, 118);
-            this.btnPRocUserSettingsFilePath.Name = "btnPRocUserSettingsFilePath";
-            this.btnPRocUserSettingsFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPRocUserSettingsFilePath.TabIndex = 39;
-            this.btnPRocUserSettingsFilePath.UseVisualStyleBackColor = true;
-            this.btnPRocUserSettingsFilePath.Click += new System.EventHandler(this.btnPRocUserSettingsFilePath_Click);
-            // 
-            // txtPRocUserSettings
-            // 
-            this.txtPRocUserSettings.Location = new System.Drawing.Point(156, 119);
-            this.txtPRocUserSettings.Name = "txtPRocUserSettings";
-            this.txtPRocUserSettings.Size = new System.Drawing.Size(401, 20);
-            this.txtPRocUserSettings.TabIndex = 38;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 123);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(128, 13);
-            this.label16.TabIndex = 37;
-            this.label16.Text = "P-ROC Usersettings.yaml:";
-            // 
-            // lblVPinMameFound
-            // 
-            this.lblVPinMameFound.AutoSize = true;
-            this.lblVPinMameFound.Location = new System.Drawing.Point(156, 223);
-            this.lblVPinMameFound.Name = "lblVPinMameFound";
-            this.lblVPinMameFound.Size = new System.Drawing.Size(44, 13);
-            this.lblVPinMameFound.TabIndex = 40;
-            this.lblVPinMameFound.Text = "Yes/No";
-            // 
-            // lblSteamPinballFX3Found
-            // 
-            this.lblSteamPinballFX3Found.AutoSize = true;
-            this.lblSteamPinballFX3Found.Location = new System.Drawing.Point(157, 155);
-            this.lblSteamPinballFX3Found.Name = "lblSteamPinballFX3Found";
-            this.lblSteamPinballFX3Found.Size = new System.Drawing.Size(44, 13);
-            this.lblSteamPinballFX3Found.TabIndex = 41;
-            this.lblSteamPinballFX3Found.Text = "Yes/No";
-            // 
-            // lblSteamPinballFX2Found
-            // 
-            this.lblSteamPinballFX2Found.AutoSize = true;
-            this.lblSteamPinballFX2Found.Location = new System.Drawing.Point(156, 177);
-            this.lblSteamPinballFX2Found.Name = "lblSteamPinballFX2Found";
-            this.lblSteamPinballFX2Found.Size = new System.Drawing.Size(44, 13);
-            this.lblSteamPinballFX2Found.TabIndex = 42;
-            this.lblSteamPinballFX2Found.Text = "Yes/No";
-            // 
-            // lblUltraDMDFound
-            // 
-            this.lblUltraDMDFound.AutoSize = true;
-            this.lblUltraDMDFound.Location = new System.Drawing.Point(157, 199);
-            this.lblUltraDMDFound.Name = "lblUltraDMDFound";
-            this.lblUltraDMDFound.Size = new System.Drawing.Size(44, 13);
-            this.lblUltraDMDFound.TabIndex = 43;
-            this.lblUltraDMDFound.Text = "Yes/No";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -704,14 +660,10 @@
         private System.Windows.Forms.Button btnDMDDeviceIniFilePath;
         private System.Windows.Forms.TextBox txtDMDDeviceIniFilePath;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnPRocUserSettingsFilePath;
         private System.Windows.Forms.TextBox txtPRocUserSettings;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblUltraDMDFound;
-        private System.Windows.Forms.Label lblSteamPinballFX2Found;
-        private System.Windows.Forms.Label lblSteamPinballFX3Found;
         private System.Windows.Forms.Label lblVPinMameFound;
     }
 }

@@ -1,4 +1,5 @@
-﻿using PinCabScreenConfigurator.Properties;
+﻿using Pincab.ScreenUtil;
+using PinCabScreenConfigurator.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,15 @@ namespace PinCabScreenConfigurator
     /// </summary>
     public partial class SettingsForm : Form
     {
+        private VpinMameUtil vpinMame { get; set; }
+        private UltraDmdUtil ultraDmd { get; set; }
         public SettingsForm()
         {
             InitializeComponent();
+
+            vpinMame = new VpinMameUtil();
+            ultraDmd = new UltraDmdUtil();
+
             //this.toolTip1.SetToolTip(this.btnFFMPegHelp, "Location of the ffmpeg.exe file if you wish to use the screen recording feature of this program.");
             //this.toolTip1.SetToolTip(this.btnRecordTimeSecondsHelp, "Number of seconds to record the video. 5 Second increments up to 200 seconds. Minimum 5 seconds.");
         }
@@ -43,6 +50,9 @@ namespace PinCabScreenConfigurator
                 txtFutureDMDFilePath.Text = settings.FutureDMDIniPath;
                 txtDMDDeviceIniFilePath.Text = settings.DMDDeviceIniPath;
                 txtPRocUserSettings.Text = settings.PRocUserSettingsPath;
+
+                lblVPinMameFound.Text = vpinMame.KeyExists().ToString();
+                lblUltraDMDFound.Text = ultraDmd.KeyExists().ToString();
             }
         }
 
@@ -111,9 +121,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "settings.txt";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtPinballYLocation.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtPinballYLocation.Text = fileDialog.FileName;
             }
         }
 
@@ -125,9 +136,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "pinballx.ini";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtPinballXIniFilePath.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtPinballXIniFilePath.Text = fileDialog.FileName;
             }
         }
 
@@ -139,9 +151,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "PUPDatabase.db";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtPinupPopperDbLocation.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtPinupPopperDbLocation.Text = fileDialog.FileName;
             }
         }
 
@@ -153,9 +166,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "Screenres.txt";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtB2SScreenresFilePath.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtB2SScreenresFilePath.Text = fileDialog.FileName;
             }
         }
 
@@ -177,9 +191,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "FutureDMD.ini";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtFutureDMDFilePath.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtFutureDMDFilePath.Text = fileDialog.FileName;
             }
         }
 
@@ -191,9 +206,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "*.ini";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtDMDDeviceIniFilePath.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtDMDDeviceIniFilePath.Text = fileDialog.FileName;
             }
         }
 
@@ -205,9 +221,10 @@ namespace PinCabScreenConfigurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "user_settings.yaml";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog();
 
-                txtPRocUserSettings.Text = fileDialog.FileName;
+                if (result == DialogResult.OK)
+                    txtPRocUserSettings.Text = fileDialog.FileName;
             }
         }
 

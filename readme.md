@@ -26,6 +26,8 @@ replicate to all the other areas automatically.
 9. Add ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen such as TerryRed's PinCab configuration)
 10. Exception handling / Logging
 11. Realtime updating of region Size and Offset changes
+12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
+13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X offsets)
 
 
 # Instructions
@@ -51,19 +53,19 @@ Logging information is in the Log.txt file in the application root folder.
 2. Future DMD (Future Pinball) read/write/validation
 3. B2S ScreenRes.txt read/write/validation
 4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
-5. PinCab Screen configuration data (Read/Write)
 6. UltraDMD Registry Key read/write/validation
 10. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
 13. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  
 	b. Option to update all previously run ROM's   
-14. PinUp location settings read/write/validation
+14. PinUp Popper / Player location settings read/write/validation
 15. Set Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios))
 17. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
-18. Implement high level debug information that shows monitors connected, their orientation with full virtual space calculations (takes into account the X offsets)
 19. Create help HTML pages and hookup to the program
 20. Add Validation:  
 	a. DMD Size calculations are 4:1 ratio
+	b. Ensure all monitors set to 100% Scaling (no DPI scaling)
+21. Ensure all the features of the ScreenRes editor exist in program
 
 
 # Thank you!

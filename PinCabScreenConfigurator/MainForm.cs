@@ -371,7 +371,7 @@ namespace PinCabScreenConfigurator
             region.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
             region.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
             region.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
-            region.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value); 
+            region.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
             region.RegionLabel = cmbRegionLabel.Text;
             region.RegionColor = Color.FromName(cmbRegionColor.Text);
             listBoxDisplayRegions.Items.Add(region);
@@ -524,7 +524,23 @@ namespace PinCabScreenConfigurator
 
         private void dumpHighLevelDisplayInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            foreach (var display in _displayDetails)
+            {
+                txtData.Text += display.ToString() + ":\r\n";
+                txtData.Text += $"  Resolution: {display.Display.CurrentSetting.Resolution.Width}x{display.Display.CurrentSetting.Resolution.Height}\r\n";
+                txtData.Text += $"  Virtual Resolution Offsets: X:{display.Display.CurrentSetting.Position.X} Y:{display.Display.CurrentSetting.Position.Y}\r\n";
+                txtData.Text += $"  Virtual Resolution:{display.VirtualResolutionWidth()} Y:{display.VirtualResolutionHeight()}\r\n";
 
+                if (display.RegionRectangles.Count() > 0)
+                    txtData.Text += "  Region Rectangles Defined:\r\n";
+                foreach (var region in display.RegionRectangles)
+                {
+                    txtData.Text += "    " + region.ToString() + ":\r\n";
+                    txtData.Text += $"      Region Virtual Offsets (Upper left hand corner of rectangle) X: {display.VirtualResolutionOffsetX(region)} Y: {display.VirtualResolutionOffsetY(region)}\r\n";
+                    txtData.Text += $"      Region Virtual Resolution: {region.RegionDisplayWidth}x{region.RegionDisplayHeight}\r\n";
+                    txtData.Text += $"      Region Virtual Offets (Lower right hand corner of rectangle) X: {display.VirtualResolutionOffsetXLowerRightCorner(region)} Y: {display.VirtualResolutionOffsetYLowerRightCorner(region)}\r\n";
+                }
+            }
         }
 
         private void RefreshDisplayOnRegionUpdate()

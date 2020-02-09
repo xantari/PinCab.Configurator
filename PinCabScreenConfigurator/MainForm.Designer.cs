@@ -77,9 +77,6 @@
             this.dumpHighLevelDisplayInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlTextInfo = new System.Windows.Forms.Panel();
-            this.txtData = new System.Windows.Forms.TextBox();
-            this.panelMonitorDrawing = new System.Windows.Forms.Panel();
             this.cmbDisplayLabel = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -96,12 +93,15 @@
             this.numericUpDownRegionYOffset = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionWidth = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownRegionHeight = new System.Windows.Forms.NumericUpDown();
+            this.pnlTextInfo = new System.Windows.Forms.Panel();
+            this.panelMonitorDrawing = new System.Windows.Forms.Panel();
+            this.txtData = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
-            this.pnlTextInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).BeginInit();
+            this.pnlTextInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -168,28 +168,28 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // saveConfigurationToolStripMenuItem
             // 
             this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveConfigurationToolStripMenuItem.Text = "Save Configuration";
             this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
             // 
             // loadConfigurationToolStripMenuItem
             // 
             this.loadConfigurationToolStripMenuItem.Name = "loadConfigurationToolStripMenuItem";
-            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.loadConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadConfigurationToolStripMenuItem.Text = "Load Configuration";
             this.loadConfigurationToolStripMenuItem.Click += new System.EventHandler(this.loadConfigurationToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -474,35 +474,6 @@
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // pnlTextInfo
-            // 
-            this.pnlTextInfo.Controls.Add(this.txtData);
-            this.pnlTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlTextInfo.Location = new System.Drawing.Point(0, 425);
-            this.pnlTextInfo.Name = "pnlTextInfo";
-            this.pnlTextInfo.Size = new System.Drawing.Size(756, 159);
-            this.pnlTextInfo.TabIndex = 6;
-            // 
-            // txtData
-            // 
-            this.txtData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtData.Location = new System.Drawing.Point(0, 0);
-            this.txtData.Multiline = true;
-            this.txtData.Name = "txtData";
-            this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtData.Size = new System.Drawing.Size(756, 159);
-            this.txtData.TabIndex = 0;
-            // 
-            // panelMonitorDrawing
-            // 
-            this.panelMonitorDrawing.AutoScroll = true;
-            this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 208);
-            this.panelMonitorDrawing.Name = "panelMonitorDrawing";
-            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 217);
-            this.panelMonitorDrawing.TabIndex = 7;
-            this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
-            // 
             // cmbDisplayLabel
             // 
             this.cmbDisplayLabel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -691,6 +662,35 @@
             this.numericUpDownRegionHeight.TabIndex = 27;
             this.numericUpDownRegionHeight.ValueChanged += new System.EventHandler(this.numericUpDownRegionHeight_ValueChanged);
             // 
+            // pnlTextInfo
+            // 
+            this.pnlTextInfo.Controls.Add(this.txtData);
+            this.pnlTextInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlTextInfo.Location = new System.Drawing.Point(0, 425);
+            this.pnlTextInfo.Name = "pnlTextInfo";
+            this.pnlTextInfo.Size = new System.Drawing.Size(756, 159);
+            this.pnlTextInfo.TabIndex = 6;
+            // 
+            // panelMonitorDrawing
+            // 
+            this.panelMonitorDrawing.AutoScroll = true;
+            this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 208);
+            this.panelMonitorDrawing.Name = "panelMonitorDrawing";
+            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 217);
+            this.panelMonitorDrawing.TabIndex = 7;
+            this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
+            // 
+            // txtData
+            // 
+            this.txtData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtData.Location = new System.Drawing.Point(0, 0);
+            this.txtData.Multiline = true;
+            this.txtData.Name = "txtData";
+            this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtData.Size = new System.Drawing.Size(756, 159);
+            this.txtData.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,12 +726,12 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.pnlTextInfo.ResumeLayout(false);
-            this.pnlTextInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).EndInit();
+            this.pnlTextInfo.ResumeLayout(false);
+            this.pnlTextInfo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -750,9 +750,6 @@
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateFFMpegCommandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshDisplayDepictionToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlTextInfo;
-        private System.Windows.Forms.TextBox txtData;
-        private System.Windows.Forms.Panel panelMonitorDrawing;
         private System.Windows.Forms.ComboBox cmbDisplayLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -807,6 +804,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRegionYOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionWidth;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionHeight;
+        private System.Windows.Forms.Panel pnlTextInfo;
+        private System.Windows.Forms.TextBox txtData;
+        private System.Windows.Forms.Panel panelMonitorDrawing;
     }
 }
 

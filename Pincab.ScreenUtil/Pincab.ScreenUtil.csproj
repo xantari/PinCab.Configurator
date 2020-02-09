@@ -57,6 +57,8 @@
     <Compile Include="RegionRectangle.cs" />
     <Compile Include="ScreenDetails.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="UltraDmdUtil.cs" />
+    <Compile Include="VpinMameUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -59,6 +59,9 @@
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\ValidationMessage.cs" />
+    <Compile Include="Models\ValidationResult.cs" />
     <Compile Include="Utils\PinballXUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\RegionRectangle.cs" />

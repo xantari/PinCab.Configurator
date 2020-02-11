@@ -45,14 +45,19 @@ namespace Pincab.ScreenUtil
             return temp;
         }
 
+        public int GetMonitorNumber()
+        {
+            var monitorNumber = Display.DisplayName.Replace("\\\\.\\DISPLAY", "");
+            return Convert.ToInt32(monitorNumber);
+        }
+
+        // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
         public enum DeviceCap
         {
             VERTRES = 10,
-            DESKTOPVERTRES = 117,
-
-            // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
+            DESKTOPVERTRES = 117
         }
 
         public float GetScalingFactor() //https://stackoverflow.com/questions/5977445/how-to-get-windows-display-settings

@@ -3,6 +3,8 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Pincab.ScreenUtil;
+using Pincab.ScreenUtil.Models;
+using Pincab.ScreenUtil.Utils;
 using Serilog;
 using System;
 using System.Collections.Concurrent;
@@ -41,6 +43,8 @@ namespace PinCabScreenConfigurator
         private bool InProcessOfChangingRegions = false;
         private bool InProcessOfClearingFormFields = false;
 
+        private ProgramSettings _settings;
+
         public MainForm()
         {
             InitializeComponent();
@@ -54,20 +58,20 @@ namespace PinCabScreenConfigurator
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
-            timer1.Start();
         }
 
         private void UpdateDisplayDetailsFromSettingsFile()
         {
             ProgramSettings settings = new ProgramSettings();
-            settings = settings.LoadSettings();
-            if (settings != null)
+            _settings = settings.LoadSettings();
+            if (_settings != null)
             {
-                foreach (var display in settings?.DisplaySettings)
+                foreach (var display in _settings?.DisplaySettings)
                 {
                     var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
                     loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
                     loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+
                 }
             }
         }
@@ -275,7 +279,7 @@ namespace PinCabScreenConfigurator
                     {
                         if (writeLog)
                             txtData.Text += "WARNING: DMD Region is not recommended 4:1 ratio.\r\n";
-                       // isValid = true;
+                        // isValid = true;
                     }
                 }
             }
@@ -483,12 +487,10 @@ namespace PinCabScreenConfigurator
 
         private void SaveSettings()
         {
-            ProgramSettings setting = new ProgramSettings();
-
-            setting.DisplaySettings = new List<DisplaySettings>();
+            _settings.DisplaySettings = new List<DisplaySettings>();
             foreach (var display in _displayDetails)
             {
-                setting.DisplaySettings.Add(new DisplaySettings()
+                _settings.DisplaySettings.Add(new DisplaySettings()
                 {
                     DisplayLabel = display.DisplayLabel,
                     DisplayName = display.Display.DisplayName,
@@ -496,8 +498,8 @@ namespace PinCabScreenConfigurator
                 });
             }
 
-            Log.Information("Saved Settings. {@settings}", setting);
-            setting.SaveSettings();
+            Log.Information("Saved Settings. {@settings}", _settings);
+            _settings.SaveSettings();
         }
 
         private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -508,13 +510,17 @@ namespace PinCabScreenConfigurator
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsForm form = new SettingsForm();
-            form.Show();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _settings = (new ProgramSettings()).LoadSettings();
+            }
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProgramSettings setting = new ProgramSettings();
-            setting.SaveSettings();
+            _settings = setting.LoadSettings();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -661,6 +667,57 @@ namespace PinCabScreenConfigurator
             if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
                 RefreshDisplayOnRegionUpdate();
+            }
+        }
+
+        private void LogValidationResult(ValidationResult result)
+        {
+            if (result?.Messages.Count() > 0)
+            {
+                foreach(var message in result.Messages)
+                {
+                    Log.Error("Validation Error: {msg}", message.Message);
+                    txtData.Text += message.Message + "\r\n";
+                }
+            }
+        }
+
+        private void writePinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
+            {
+                var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
+                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
+                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
+                if (regionDmdRectangle == null)
+                {
+                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
+                }
+                else
+                {
+                    _pinballXUtil.SetDmdRegionRectangle(regionDmdRectangle);
+                    _pinballXUtil.SetMonitorNumber(dmdDisplay.GetMonitorNumber());
+                    _pinballXUtil.SaveSettings();
+                }
+            }
+        }
+
+        private void validatePinballXiniToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
+            {
+                var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
+                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
+                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
+                if (regionDmdRectangle == null)
+                {
+                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
+                }
+                else
+                {
+                    var result = _pinballXUtil.Validate(regionDmdRectangle, dmdDisplay.GetMonitorNumber());
+                    LogValidationResult(result);
+                }
             }
         }
     }

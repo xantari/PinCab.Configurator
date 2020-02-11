@@ -43,34 +43,34 @@
             this.generateFFMpegCommandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshDisplayDepictionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writeConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinballXiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.b2sSettingsScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.futureDMDiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ultraDMDRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dMDDeviceiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vPinMameDefaultRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinballYSettingstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinupPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinupPopperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamPinballFX2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamPinballFX3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pRocSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeAllSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writePinballXiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeFutureDMDiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeUltraDMDRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writeDmdDeviceiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writepinballYSettingstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writepinupPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writepinupPopperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writesteamPinballFX2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writesteamPinballFX3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.writepRocSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.allSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateallSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monitorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinballXiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.b2SScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.futureDMDiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ultraDMDRegistryKeyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dMDDeviceiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinballYSettingstxtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinupPlayerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.pinupPopperPupDatabasedbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pROCSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatePinballXiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateb2SScreenrestxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatefutureDMDiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateultraDMDRegistryKeyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateDmdDeviceiniToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatepinballYSettingstxtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatepinupPlayerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatepinupPopperPupDatabasedbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatepROCSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpDisplayInfoToFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpHighLevelDisplayInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -226,133 +226,134 @@
             // writeConfigurationToolStripMenuItem
             // 
             this.writeConfigurationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allSettingsToolStripMenuItem1,
-            this.pinballXiniToolStripMenuItem,
-            this.b2sSettingsScreenrestxtToolStripMenuItem,
-            this.futureDMDiniToolStripMenuItem1,
-            this.ultraDMDRegistryKeyToolStripMenuItem,
-            this.dMDDeviceiniToolStripMenuItem,
-            this.vPinMameDefaultRegistryKeyToolStripMenuItem,
-            this.vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem,
-            this.pinballYSettingstxtToolStripMenuItem,
-            this.pinupPlayerToolStripMenuItem,
-            this.pinupPopperToolStripMenuItem,
-            this.steamPinballFX2ToolStripMenuItem,
-            this.steamPinballFX3ToolStripMenuItem,
-            this.pRocSettingsToolStripMenuItem});
+            this.writeAllSettingsToolStripMenuItem,
+            this.writePinballXiniToolStripMenuItem,
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem,
+            this.writeFutureDMDiniToolStripMenuItem1,
+            this.writeUltraDMDRegistryKeyToolStripMenuItem,
+            this.writeDmdDeviceiniToolStripMenuItem,
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem,
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem,
+            this.writepinballYSettingstxtToolStripMenuItem,
+            this.writepinupPlayerToolStripMenuItem,
+            this.writepinupPopperToolStripMenuItem,
+            this.writesteamPinballFX2ToolStripMenuItem,
+            this.writesteamPinballFX3ToolStripMenuItem,
+            this.writepRocSettingsToolStripMenuItem});
             this.writeConfigurationToolStripMenuItem.Name = "writeConfigurationToolStripMenuItem";
             this.writeConfigurationToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.writeConfigurationToolStripMenuItem.Text = "Write";
             // 
-            // allSettingsToolStripMenuItem1
+            // writeAllSettingsToolStripMenuItem
             // 
-            this.allSettingsToolStripMenuItem1.Name = "allSettingsToolStripMenuItem1";
-            this.allSettingsToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
-            this.allSettingsToolStripMenuItem1.Text = "All Settings";
+            this.writeAllSettingsToolStripMenuItem.Name = "writeAllSettingsToolStripMenuItem";
+            this.writeAllSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writeAllSettingsToolStripMenuItem.Text = "All Settings";
             // 
-            // pinballXiniToolStripMenuItem
+            // writePinballXiniToolStripMenuItem
             // 
-            this.pinballXiniToolStripMenuItem.Name = "pinballXiniToolStripMenuItem";
-            this.pinballXiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pinballXiniToolStripMenuItem.Text = "PinballX.ini";
+            this.writePinballXiniToolStripMenuItem.Name = "writePinballXiniToolStripMenuItem";
+            this.writePinballXiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writePinballXiniToolStripMenuItem.Text = "PinballX.ini";
+            this.writePinballXiniToolStripMenuItem.Click += new System.EventHandler(this.writePinballXiniToolStripMenuItem_Click);
             // 
-            // b2sSettingsScreenrestxtToolStripMenuItem
+            // writeB2sSettingsScreenrestxtToolStripMenuItem
             // 
-            this.b2sSettingsScreenrestxtToolStripMenuItem.Name = "b2sSettingsScreenrestxtToolStripMenuItem";
-            this.b2sSettingsScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.b2sSettingsScreenrestxtToolStripMenuItem.Text = "B2s Settings (Screenres.txt)";
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem.Name = "writeB2sSettingsScreenrestxtToolStripMenuItem";
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem.Text = "B2s Settings (Screenres.txt)";
             // 
-            // futureDMDiniToolStripMenuItem1
+            // writeFutureDMDiniToolStripMenuItem1
             // 
-            this.futureDMDiniToolStripMenuItem1.Name = "futureDMDiniToolStripMenuItem1";
-            this.futureDMDiniToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
-            this.futureDMDiniToolStripMenuItem1.Text = "FutureDMD.ini";
+            this.writeFutureDMDiniToolStripMenuItem1.Name = "writeFutureDMDiniToolStripMenuItem1";
+            this.writeFutureDMDiniToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
+            this.writeFutureDMDiniToolStripMenuItem1.Text = "FutureDMD.ini";
             // 
-            // ultraDMDRegistryKeyToolStripMenuItem
+            // writeUltraDMDRegistryKeyToolStripMenuItem
             // 
-            this.ultraDMDRegistryKeyToolStripMenuItem.Name = "ultraDMDRegistryKeyToolStripMenuItem";
-            this.ultraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.ultraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD Registry Key";
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Name = "writeUltraDMDRegistryKeyToolStripMenuItem";
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD Registry Key";
             // 
-            // dMDDeviceiniToolStripMenuItem
+            // writeDmdDeviceiniToolStripMenuItem
             // 
-            this.dMDDeviceiniToolStripMenuItem.Name = "dMDDeviceiniToolStripMenuItem";
-            this.dMDDeviceiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.dMDDeviceiniToolStripMenuItem.Text = "DMDDevice.ini";
+            this.writeDmdDeviceiniToolStripMenuItem.Name = "writeDmdDeviceiniToolStripMenuItem";
+            this.writeDmdDeviceiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writeDmdDeviceiniToolStripMenuItem.Text = "DMDDevice.ini";
             // 
-            // vPinMameDefaultRegistryKeyToolStripMenuItem
+            // writevPinMameDefaultRegistryKeyToolStripMenuItem
             // 
-            this.vPinMameDefaultRegistryKeyToolStripMenuItem.Name = "vPinMameDefaultRegistryKeyToolStripMenuItem";
-            this.vPinMameDefaultRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.vPinMameDefaultRegistryKeyToolStripMenuItem.Text = "VPinMame Default Registry Key";
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Name = "writevPinMameDefaultRegistryKeyToolStripMenuItem";
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Text = "VPinMame Default Registry Key";
             // 
-            // vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem
+            // writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem
             // 
-            this.vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Name = "vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem";
-            this.vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Text = "VPinMame Update All ROMs Registry Keys";
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Name = "writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem";
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Text = "VPinMame Update All ROMs Registry Keys";
             // 
-            // pinballYSettingstxtToolStripMenuItem
+            // writepinballYSettingstxtToolStripMenuItem
             // 
-            this.pinballYSettingstxtToolStripMenuItem.Name = "pinballYSettingstxtToolStripMenuItem";
-            this.pinballYSettingstxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pinballYSettingstxtToolStripMenuItem.Text = "PinballY Settings.txt";
+            this.writepinballYSettingstxtToolStripMenuItem.Name = "writepinballYSettingstxtToolStripMenuItem";
+            this.writepinballYSettingstxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writepinballYSettingstxtToolStripMenuItem.Text = "PinballY Settings.txt";
             // 
-            // pinupPlayerToolStripMenuItem
+            // writepinupPlayerToolStripMenuItem
             // 
-            this.pinupPlayerToolStripMenuItem.Name = "pinupPlayerToolStripMenuItem";
-            this.pinupPlayerToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pinupPlayerToolStripMenuItem.Text = "Pinup Player";
+            this.writepinupPlayerToolStripMenuItem.Name = "writepinupPlayerToolStripMenuItem";
+            this.writepinupPlayerToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writepinupPlayerToolStripMenuItem.Text = "Pinup Player";
             // 
-            // pinupPopperToolStripMenuItem
+            // writepinupPopperToolStripMenuItem
             // 
-            this.pinupPopperToolStripMenuItem.Name = "pinupPopperToolStripMenuItem";
-            this.pinupPopperToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pinupPopperToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
+            this.writepinupPopperToolStripMenuItem.Name = "writepinupPopperToolStripMenuItem";
+            this.writepinupPopperToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writepinupPopperToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
-            // steamPinballFX2ToolStripMenuItem
+            // writesteamPinballFX2ToolStripMenuItem
             // 
-            this.steamPinballFX2ToolStripMenuItem.Name = "steamPinballFX2ToolStripMenuItem";
-            this.steamPinballFX2ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.steamPinballFX2ToolStripMenuItem.Text = "Steam Pinball FX2";
+            this.writesteamPinballFX2ToolStripMenuItem.Name = "writesteamPinballFX2ToolStripMenuItem";
+            this.writesteamPinballFX2ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writesteamPinballFX2ToolStripMenuItem.Text = "Steam Pinball FX2";
             // 
-            // steamPinballFX3ToolStripMenuItem
+            // writesteamPinballFX3ToolStripMenuItem
             // 
-            this.steamPinballFX3ToolStripMenuItem.Name = "steamPinballFX3ToolStripMenuItem";
-            this.steamPinballFX3ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.steamPinballFX3ToolStripMenuItem.Text = "Steam Pinball FX3";
+            this.writesteamPinballFX3ToolStripMenuItem.Name = "writesteamPinballFX3ToolStripMenuItem";
+            this.writesteamPinballFX3ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writesteamPinballFX3ToolStripMenuItem.Text = "Steam Pinball FX3";
             // 
-            // pRocSettingsToolStripMenuItem
+            // writepRocSettingsToolStripMenuItem
             // 
-            this.pRocSettingsToolStripMenuItem.Name = "pRocSettingsToolStripMenuItem";
-            this.pRocSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pRocSettingsToolStripMenuItem.Text = "P-ROC Settings";
+            this.writepRocSettingsToolStripMenuItem.Name = "writepRocSettingsToolStripMenuItem";
+            this.writepRocSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.writepRocSettingsToolStripMenuItem.Text = "P-ROC Settings";
             // 
             // validateToolStripMenuItem
             // 
             this.validateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allSettingsToolStripMenuItem,
+            this.validateallSettingsToolStripMenuItem,
             this.monitorConfigurationToolStripMenuItem,
-            this.pinballXiniToolStripMenuItem1,
-            this.b2SScreenrestxtToolStripMenuItem,
-            this.futureDMDiniToolStripMenuItem,
-            this.ultraDMDRegistryKeyToolStripMenuItem1,
-            this.dMDDeviceiniToolStripMenuItem1,
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey,
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys,
-            this.pinballYSettingstxtToolStripMenuItem1,
-            this.pinupPlayerToolStripMenuItem1,
-            this.pinupPopperPupDatabasedbToolStripMenuItem,
-            this.pROCSettingsToolStripMenuItem1});
+            this.validatePinballXiniToolStripMenuItem1,
+            this.validateb2SScreenrestxtToolStripMenuItem,
+            this.validatefutureDMDiniToolStripMenuItem,
+            this.validateultraDMDRegistryKeyToolStripMenuItem1,
+            this.validateDmdDeviceiniToolStripMenuItem1,
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey,
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys,
+            this.validatepinballYSettingstxtToolStripMenuItem1,
+            this.validatepinupPlayerToolStripMenuItem1,
+            this.validatepinupPopperPupDatabasedbToolStripMenuItem,
+            this.validatepROCSettingsToolStripMenuItem1});
             this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
             this.validateToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.validateToolStripMenuItem.Text = "Validate";
             // 
-            // allSettingsToolStripMenuItem
+            // validateallSettingsToolStripMenuItem
             // 
-            this.allSettingsToolStripMenuItem.Name = "allSettingsToolStripMenuItem";
-            this.allSettingsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.allSettingsToolStripMenuItem.Text = "All Settings";
+            this.validateallSettingsToolStripMenuItem.Name = "validateallSettingsToolStripMenuItem";
+            this.validateallSettingsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.validateallSettingsToolStripMenuItem.Text = "All Settings";
             // 
             // monitorConfigurationToolStripMenuItem
             // 
@@ -361,71 +362,72 @@
             this.monitorConfigurationToolStripMenuItem.Text = "Monitor Configuration";
             this.monitorConfigurationToolStripMenuItem.Click += new System.EventHandler(this.monitorConfigurationToolStripMenuItem_Click);
             // 
-            // pinballXiniToolStripMenuItem1
+            // validatePinballXiniToolStripMenuItem1
             // 
-            this.pinballXiniToolStripMenuItem1.Name = "pinballXiniToolStripMenuItem1";
-            this.pinballXiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.pinballXiniToolStripMenuItem1.Text = "PinballX.ini";
+            this.validatePinballXiniToolStripMenuItem1.Name = "validatePinballXiniToolStripMenuItem1";
+            this.validatePinballXiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validatePinballXiniToolStripMenuItem1.Text = "PinballX.ini";
+            this.validatePinballXiniToolStripMenuItem1.Click += new System.EventHandler(this.validatePinballXiniToolStripMenuItem1_Click);
             // 
-            // b2SScreenrestxtToolStripMenuItem
+            // validateb2SScreenrestxtToolStripMenuItem
             // 
-            this.b2SScreenrestxtToolStripMenuItem.Name = "b2SScreenrestxtToolStripMenuItem";
-            this.b2SScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.b2SScreenrestxtToolStripMenuItem.Text = "B2S Settings (Screenres.txt)";
+            this.validateb2SScreenrestxtToolStripMenuItem.Name = "validateb2SScreenrestxtToolStripMenuItem";
+            this.validateb2SScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.validateb2SScreenrestxtToolStripMenuItem.Text = "B2S Settings (Screenres.txt)";
             // 
-            // futureDMDiniToolStripMenuItem
+            // validatefutureDMDiniToolStripMenuItem
             // 
-            this.futureDMDiniToolStripMenuItem.Name = "futureDMDiniToolStripMenuItem";
-            this.futureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.futureDMDiniToolStripMenuItem.Text = "FutureDMD.ini";
+            this.validatefutureDMDiniToolStripMenuItem.Name = "validatefutureDMDiniToolStripMenuItem";
+            this.validatefutureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.validatefutureDMDiniToolStripMenuItem.Text = "FutureDMD.ini";
             // 
-            // ultraDMDRegistryKeyToolStripMenuItem1
+            // validateultraDMDRegistryKeyToolStripMenuItem1
             // 
-            this.ultraDMDRegistryKeyToolStripMenuItem1.Name = "ultraDMDRegistryKeyToolStripMenuItem1";
-            this.ultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.ultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD Registry Key";
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Name = "validateultraDMDRegistryKeyToolStripMenuItem1";
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD Registry Key";
             // 
-            // dMDDeviceiniToolStripMenuItem1
+            // validateDmdDeviceiniToolStripMenuItem1
             // 
-            this.dMDDeviceiniToolStripMenuItem1.Name = "dMDDeviceiniToolStripMenuItem1";
-            this.dMDDeviceiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.dMDDeviceiniToolStripMenuItem1.Text = "DMDDevice.ini";
+            this.validateDmdDeviceiniToolStripMenuItem1.Name = "validateDmdDeviceiniToolStripMenuItem1";
+            this.validateDmdDeviceiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validateDmdDeviceiniToolStripMenuItem1.Text = "DMDDevice.ini";
             // 
-            // toolStripMenuItemValidateVPinMameDefaultRegistryKey
+            // validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey
             // 
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Name = "toolStripMenuItemValidateVPinMameDefaultRegistryKey";
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Size = new System.Drawing.Size(256, 22);
-            this.toolStripMenuItemValidateVPinMameDefaultRegistryKey.Text = "VPinMame Default Registry Key";
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Name = "validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey";
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Size = new System.Drawing.Size(256, 22);
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Text = "VPinMame Default Registry Key";
             // 
-            // ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys
+            // validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys
             // 
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Name = "ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys";
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Size = new System.Drawing.Size(256, 22);
-            this.ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Text = "VPinMame All ROMs Registry Keys";
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Name = "validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys";
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Size = new System.Drawing.Size(256, 22);
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Text = "VPinMame All ROMs Registry Keys";
             // 
-            // pinballYSettingstxtToolStripMenuItem1
+            // validatepinballYSettingstxtToolStripMenuItem1
             // 
-            this.pinballYSettingstxtToolStripMenuItem1.Name = "pinballYSettingstxtToolStripMenuItem1";
-            this.pinballYSettingstxtToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.pinballYSettingstxtToolStripMenuItem1.Text = "PinballY Settings.txt";
+            this.validatepinballYSettingstxtToolStripMenuItem1.Name = "validatepinballYSettingstxtToolStripMenuItem1";
+            this.validatepinballYSettingstxtToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validatepinballYSettingstxtToolStripMenuItem1.Text = "PinballY Settings.txt";
             // 
-            // pinupPlayerToolStripMenuItem1
+            // validatepinupPlayerToolStripMenuItem1
             // 
-            this.pinupPlayerToolStripMenuItem1.Name = "pinupPlayerToolStripMenuItem1";
-            this.pinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.pinupPlayerToolStripMenuItem1.Text = "Pinup Player";
+            this.validatepinupPlayerToolStripMenuItem1.Name = "validatepinupPlayerToolStripMenuItem1";
+            this.validatepinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validatepinupPlayerToolStripMenuItem1.Text = "Pinup Player";
             // 
-            // pinupPopperPupDatabasedbToolStripMenuItem
+            // validatepinupPopperPupDatabasedbToolStripMenuItem
             // 
-            this.pinupPopperPupDatabasedbToolStripMenuItem.Name = "pinupPopperPupDatabasedbToolStripMenuItem";
-            this.pinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.pinupPopperPupDatabasedbToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
+            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Name = "validatepinupPopperPupDatabasedbToolStripMenuItem";
+            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
-            // pROCSettingsToolStripMenuItem1
+            // validatepROCSettingsToolStripMenuItem1
             // 
-            this.pROCSettingsToolStripMenuItem1.Name = "pROCSettingsToolStripMenuItem1";
-            this.pROCSettingsToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.pROCSettingsToolStripMenuItem1.Text = "P-ROC Settings";
+            this.validatepROCSettingsToolStripMenuItem1.Name = "validatepROCSettingsToolStripMenuItem1";
+            this.validatepROCSettingsToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
+            this.validatepROCSettingsToolStripMenuItem1.Text = "P-ROC Settings";
             // 
             // debugToolStripMenuItem
             // 
@@ -775,36 +777,36 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writeConfigurationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem validateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem b2SScreenrestxtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem futureDMDiniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validateallSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validateb2SScreenrestxtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validatefutureDMDiniToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem monitorConfigurationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem allSettingsToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem b2sSettingsScreenrestxtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem futureDMDiniToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem ultraDMDRegistryKeyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dMDDeviceiniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vPinMameDefaultRegistryKeyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vPinMameUpdateAllROMsRegistryKeyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemValidateVPinMameDefaultRegistryKey;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemValidateVPinMameAllRomsRegistryKeys;
+        private System.Windows.Forms.ToolStripMenuItem writeAllSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeB2sSettingsScreenrestxtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeFutureDMDiniToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem writeUltraDMDRegistryKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writeDmdDeviceiniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writevPinMameDefaultRegistryKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey;
+        private System.Windows.Forms.ToolStripMenuItem validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpDisplayInfoToFileToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem pinballYSettingstxtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pinupPlayerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pinupPopperToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pinballXiniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem steamPinballFX2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem steamPinballFX3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writepinballYSettingstxtToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writepinupPlayerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writepinupPopperToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writePinballXiniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writesteamPinballFX2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem writesteamPinballFX3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpHighLevelDisplayInformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pRocSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pinballXiniToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem ultraDMDRegistryKeyToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem dMDDeviceiniToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem pinballYSettingstxtToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem pinupPlayerToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem pinupPopperPupDatabasedbToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pROCSettingsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem writepRocSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validatePinballXiniToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem validateultraDMDRegistryKeyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem validateDmdDeviceiniToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem validatepinballYSettingstxtToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem validatepinupPlayerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem validatepinupPopperPupDatabasedbToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem validatepROCSettingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionXOffset;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionYOffset;

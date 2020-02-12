@@ -5,6 +5,7 @@ using Newtonsoft.Json.Converters;
 using Pincab.ScreenUtil;
 using Pincab.ScreenUtil.Models;
 using Pincab.ScreenUtil.Utils;
+using PinCabScreenConfigurator.Utils;
 using Serilog;
 using System;
 using System.Collections.Concurrent;
@@ -95,7 +96,7 @@ namespace PinCabScreenConfigurator
             foreach (var display in Display.GetDisplays())
             {
                 var screen = Screen.AllScreens.FirstOrDefault(p => p.DeviceName == display.DisplayName);
-                var edidInfo = GetDisplayEdidData(display.DevicePath);
+                var edidInfo = display.DevicePath.GetDisplayEdidData();
                 _displayDetails.Add(new DisplayDetail() { Display = display, EdidInfo = edidInfo });
             }
         }
@@ -107,44 +108,6 @@ namespace PinCabScreenConfigurator
             {
                 listBoxDisplays.Items.Add(display);
             }
-        }
-
-        private EDID GetDisplayEdidData(string devicePath)
-        {
-            var displayPath = devicePath.Split('#');
-
-            if (!(displayPath.GetUpperBound(0) >= 2)) //Make sure we have all the display data to find the EDID info, if not leave it out. Really old monitors might not have this info
-                return null;
-
-            //Open the Display Reg-Key
-            RegistryKey Display = Registry.LocalMachine;
-            bool bFailed = false;
-            try
-            {
-                Display = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Enum\DISPLAY\" + displayPath[1] + "\\" + displayPath[2]);
-            }
-            catch
-            {
-                bFailed = true;
-            }
-
-            if (!bFailed & (Display != null))
-            {
-                var sSubkeys = Display.GetSubKeyNames();
-                if (sSubkeys.Contains("Device Parameters"))
-                {
-                    RegistryKey DevParam = Display.OpenSubKey("Device Parameters");
-
-                    //Get the EDID code
-                    byte[] bObj = DevParam.GetValue("EDID", null) as byte[];
-                    if (bObj != null)
-                    {
-                        return new EDID(bObj);
-                    }
-                    return null;
-                }
-            }
-            return null;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -160,67 +123,9 @@ namespace PinCabScreenConfigurator
                 txtData.Text += "Please correct your screen configuration first. Cannot output FFMPeg commands at this time.\r\n";
                 return;
             }
-            //TimeToSaveVideo = 00:00:30
-            //video resolution = 1880x500
-            string FFmpegCommandTemplate = @"FFMPEG.exe -f gdigrab -framerate {framerate} -offset_x {offsetX} -offset_y {offsetY} -video_size {videoresolution} -t {timeToSaveVideo} -i desktop -c:v h264_nvenc -an -qp 21 -pix_fmt yuv420p -movflags +faststart {pathToSaveFile}";
-            foreach (var display in _displayDetails)
-            {
-                string frameRate = "30";
-                string offsetX, offsetY, videoHeight, videoWidth;
-                offsetX = offsetY = videoHeight = videoWidth = string.Empty;
 
-                if (display.RegionRectangles.Count() > 0)
-                {
-                    foreach (var region in display.RegionRectangles)
-                    {
-                        if (region.RegionOffsetX != 0) //They have configured a custom resolution to capture, meaning not full screen
-                            offsetX = (display.Display.CurrentSetting.Position.X + region.RegionOffsetX).ToString();
-                        else
-                            offsetX = display.Display.CurrentSetting.Position.X.ToString();
-
-                        if (region.RegionOffsetY != 0) //They have configured a custom resolution to capture, meaning not full screen
-                            offsetY = (display.Display.CurrentSetting.Position.Y + region.RegionOffsetY).ToString();
-                        else
-                            offsetY = display.Display.CurrentSetting.Position.Y.ToString();
-
-                        if (region.RegionDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
-                            videoHeight = region.RegionDisplayHeight.ToString();
-                        else
-                            videoHeight = display.Display.CurrentSetting.Resolution.Height.ToString();
-
-                        if (region.RegionDisplayHeight != 0) //They have configured a custom resolution to capture, meaning not full screen
-                            videoWidth = region.RegionDisplayWidth.ToString();
-                        else
-                            videoWidth = display.Display.CurrentSetting.Resolution.Width.ToString();
-
-                        string videoResolution = $"{videoWidth}x{videoHeight}";
-                        string timeToSaveVideo = "00:00:30"; //30 seconds
-                        string pathToSaveVideo = "C:\\" + (display.ToString() + " - " + region.RegionLabel).RemoveInvalidFilenameChars().Replace(".", "") + ".mp4";
-
-                        txtData.Text += display + " - " + region.RegionLabel + " FFMpeg Command: \r\n";
-                        txtData.Text += FFmpegCommandTemplate.Replace("{framerate}", frameRate)
-                                    .Replace("{offsetX}", offsetX)
-                                    .Replace("{offsetY}", offsetY)
-                                    .Replace("{videoresolution}", videoResolution)
-                                    .Replace("{timeToSaveVideo}", timeToSaveVideo)
-                                    .Replace("{pathToSaveFile}", pathToSaveVideo) + "\r\n\r\n";
-                    }
-                }
-                else //Capture the single display info with region offsets
-                {
-                    string videoResolution = $"{videoWidth}x{videoHeight}";
-                    string timeToSaveVideo = "00:00:30"; //30 seconds
-                    string pathToSaveVideo = "C:\\" + display.ToString().RemoveInvalidFilenameChars().Replace(".", "") + ".mp4";
-
-                    txtData.Text += display + " FFMpeg Command: \r\n";
-                    txtData.Text += FFmpegCommandTemplate.Replace("{framerate}", frameRate)
-                                .Replace("{offsetX}", offsetX)
-                                .Replace("{offsetY}", offsetY)
-                                .Replace("{videoresolution}", videoResolution)
-                                .Replace("{timeToSaveVideo}", timeToSaveVideo)
-                                .Replace("{pathToSaveFile}", pathToSaveVideo) + "\r\n\r\n";
-                }
-            }
+            var commands = _displayDetails.GetFfMpegCommandsForAllMonitors(30, new TimeSpan(0, 0, 30));
+            txtData.Text += " FFMpeg Command: \r\n" + string.Join("\r\n\r\n", commands.ToArray());
         }
 
         private bool ValidateMonitorConfiguration(bool writeLog = true)
@@ -343,10 +248,10 @@ namespace PinCabScreenConfigurator
 
         private void panelMonitorDrawing_Paint(object sender, PaintEventArgs e)
         {
-            DrawMonitorDrawing();
+            DrawMonitorDepiction();
         }
 
-        private void DrawMonitorDrawing()
+        private void DrawMonitorDepiction()
         {
             //e.Graphics.Clear(this.BackColor);
             var graphics = panelMonitorDrawing.CreateGraphics();
@@ -389,7 +294,7 @@ namespace PinCabScreenConfigurator
 
         private void refreshDisplayDepictionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DrawMonitorDrawing();
+            DrawMonitorDepiction();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -617,7 +522,7 @@ namespace PinCabScreenConfigurator
                 listBoxDisplayRegions.SelectedIndex = currentSelectedIndex;
 
                 form.Value?.Refresh();
-                DrawMonitorDrawing();
+                DrawMonitorDepiction();
                 //panelMonitorDrawing.Refresh();
             }
         }
@@ -670,55 +575,16 @@ namespace PinCabScreenConfigurator
             }
         }
 
-        private void LogValidationResult(ValidationResult result)
-        {
-            if (result?.Messages.Count() > 0)
-            {
-                foreach(var message in result.Messages)
-                {
-                    Log.Error("Validation Error: {msg}", message.Message);
-                    txtData.Text += message.Message + "\r\n";
-                }
-            }
-        }
-
         private void writePinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
-            {
-                var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
-                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
-                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
-                if (regionDmdRectangle == null)
-                {
-                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
-                }
-                else
-                {
-                    _pinballXUtil.SetDmdRegionRectangle(regionDmdRectangle);
-                    _pinballXUtil.SetMonitorNumber(dmdDisplay.GetMonitorNumber());
-                    _pinballXUtil.SaveSettings();
-                }
-            }
+            ValidationHelper helper = new ValidationHelper(_settings, _displayDetails, txtData);
+            helper.WritePinballXSettings();
         }
 
         private void validatePinballXiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
-            {
-                var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
-                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
-                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
-                if (regionDmdRectangle == null)
-                {
-                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
-                }
-                else
-                {
-                    var result = _pinballXUtil.Validate(regionDmdRectangle, dmdDisplay.GetMonitorNumber());
-                    LogValidationResult(result);
-                }
-            }
+            ValidationHelper helper = new ValidationHelper(_settings, _displayDetails, txtData);
+            helper.ValidatePinballX();
         }
     }
 }

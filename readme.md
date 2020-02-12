@@ -30,7 +30,7 @@ replicate to all the other areas automatically.
 11. Realtime updating of region Size and Offset changes
 12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
 13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X offsets)
-
+14. Pinball X Ini read/write/validation
 
 # Instructions
 
@@ -51,7 +51,6 @@ Logging information is in the Log.txt file in the application root folder.
 ![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
 
 # TODO
-1. Pinball X Ini read/write/validation
 2. Future DMD (Future Pinball) read/write/validation
 3. B2S ScreenRes.txt read/write/validation
 4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
@@ -65,6 +64,8 @@ Logging information is in the Log.txt file in the application root folder.
 19. Create help HTML pages and hookup to the program
 21. Ensure all the features of the ScreenRes editor exist in program
 22. Add all SetDMD functions to program
+23. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
+for things like Wheels / Backglass / Playfield / Launch Audio / etc.
 
 
 # Thank you!

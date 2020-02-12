@@ -90,6 +90,7 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ValidationHelper.cs" />
     <EmbeddedResource Include="AboutBoxForm.resx">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </EmbeddedResource>

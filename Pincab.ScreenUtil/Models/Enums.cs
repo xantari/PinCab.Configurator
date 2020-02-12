@@ -8,6 +8,7 @@ namespace Pincab.ScreenUtil.Models
 {
     public enum MessageLevel
     {
+        Information,
         Warning,
         Error
     }

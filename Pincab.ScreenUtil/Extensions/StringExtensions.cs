@@ -22,14 +22,15 @@ namespace Pincab.ScreenUtil
         /// <returns></returns>
         public static string RemoveBlankLines(this string text, string delimiter)
         {
-            string[] lines = text.Split('\n');
+            string[] delim = new string[] { delimiter };
+            string[] lines = text.Split(delim, StringSplitOptions.RemoveEmptyEntries);
             int i;
             StringBuilder sb = new StringBuilder();
             for (i = 0; i < lines.Length; i++)
             {
                 if (!string.IsNullOrWhiteSpace(lines[i]))
                 {
-                    sb.Append(lines[i]);
+                    sb.Append(lines[i] + delimiter);
                 }
             }
             return sb.ToString();

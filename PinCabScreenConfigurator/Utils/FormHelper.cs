@@ -11,13 +11,14 @@ using System.Windows.Forms;
 
 namespace PinCabScreenConfigurator.Utils
 {
-    public class ValidationHelper
+    public class FormHelper
     {
         private ProgramSettings _settings;
         private List<DisplayDetail> _displayDetails;
         private TextBox _txtData;
 
-        public ValidationHelper(ProgramSettings settings, List<DisplayDetail> displayDetails, TextBox txtData) {
+        public FormHelper(ProgramSettings settings, List<DisplayDetail> displayDetails, TextBox txtData)
+        {
             _settings = settings;
             _displayDetails = displayDetails;
             _txtData = txtData;
@@ -28,17 +29,9 @@ namespace PinCabScreenConfigurator.Utils
             if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
             {
                 var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
-                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
-                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
-                if (regionDmdRectangle == null)
-                {
-                    _txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
-                }
-                else
-                {
-                    var result = _pinballXUtil.Validate(regionDmdRectangle, dmdDisplay.GetMonitorNumber());
-                    LogValidationResult("PinballX", result);
-                }
+
+                var result = _pinballXUtil.Validate(_displayDetails);
+                LogValidationResult("PinballX", result);
             }
         }
 
@@ -49,16 +42,15 @@ namespace PinCabScreenConfigurator.Utils
                 var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
                 var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
                 var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
-                if (regionDmdRectangle == null)
+
+                if (regionDmdRectangle != null)
                 {
-                    _txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
+                    _pinballXUtil.SetRegionRectangle("DMD", regionDmdRectangle);
+                    _pinballXUtil.SetMonitorNumber("DMD", dmdDisplay.GetMonitorNumber() - 1); //PinballX stores monitor #'s starting at 0
                 }
-                else
-                {
-                    _pinballXUtil.SetDmdRegionRectangle(regionDmdRectangle);
-                    _pinballXUtil.SetMonitorNumber(dmdDisplay.GetMonitorNumber());
-                    _pinballXUtil.SaveSettings();
-                }
+                _pinballXUtil.SaveSettings();
+                _txtData.Text += $"PinballX Write command completed.\r\n";
+                Log.Information("PinballX Write command completed.");
             }
         }
 

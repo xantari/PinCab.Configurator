@@ -54,7 +54,7 @@ Logging information is in the Log.txt file in the application root folder.
 2. Future DMD (Future Pinball) read/write/validation
 3. B2S ScreenRes.txt read/write/validation
 4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
-6. UltraDMD Registry Key read/write/validation
+6. UltraDMD / FlexDMD Registry Key read/write/validation
 10. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
 13. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  

@@ -577,13 +577,13 @@ namespace PinCabScreenConfigurator
 
         private void writePinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ValidationHelper helper = new ValidationHelper(_settings, _displayDetails, txtData);
+            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.WritePinballXSettings();
         }
 
         private void validatePinballXiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ValidationHelper helper = new ValidationHelper(_settings, _displayDetails, txtData);
+            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.ValidatePinballX();
         }
     }

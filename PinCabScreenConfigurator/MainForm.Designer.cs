@@ -273,7 +273,7 @@
             // 
             this.writeUltraDMDRegistryKeyToolStripMenuItem.Name = "writeUltraDMDRegistryKeyToolStripMenuItem";
             this.writeUltraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writeUltraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD Registry Key";
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD / FlexDMD Registry Key";
             // 
             // writeDmdDeviceiniToolStripMenuItem
             // 
@@ -385,7 +385,7 @@
             // 
             this.validateultraDMDRegistryKeyToolStripMenuItem1.Name = "validateultraDMDRegistryKeyToolStripMenuItem1";
             this.validateultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.validateultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD Registry Key";
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD / FlexDMD Registry Key";
             // 
             // validateDmdDeviceiniToolStripMenuItem1
             // 

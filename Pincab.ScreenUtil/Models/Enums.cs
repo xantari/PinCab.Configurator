@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pincab.ScreenUtil.Models
+namespace PinCab.ScreenUtil.Models
 {
     public enum MessageLevel
     {

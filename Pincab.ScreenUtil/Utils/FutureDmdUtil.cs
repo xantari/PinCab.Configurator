@@ -10,21 +10,23 @@ using System.Threading.Tasks;
 
 namespace PinCab.ScreenUtil.Utils
 {
-    public class PinballXUtil
+    /// <summary>
+    /// FutureDMD Util
+    /// FutureDMD stores it's X/Y positions as virtual desktop positions
+    /// </summary>
+    public class FutureDmdUtil
     {
         private string _iniFilePath { get; set; }
         private IniData _data { get; set; }
         private FileIniDataParser _parser { get; set; }
 
-        private const string monitor = "monitor";
-        private const string height = "height";
-        private const string width = "width";
-        private const string x = "x";
-        private const string y = "y";
+        private const string monitor = "PosScreen"; //0 based screen #
+        private const string height = "SizeH";
+        private const string width = "SizeW";
+        private const string x = "PosX";
+        private const string y = "PosY";
 
-        public const string Display = "Display"; //Actually the playfield setting
-
-        public PinballXUtil(string iniFilePath)
+        public FutureDmdUtil(string iniFilePath)
         {
             _iniFilePath = iniFilePath;
             _parser = new FileIniDataParser();
@@ -47,11 +49,10 @@ namespace PinCab.ScreenUtil.Utils
                     _parser.WriteData(sw, _data);
                 }
                 var text = Encoding.UTF8.GetString(ms.ToArray());
-                //Post fixup (PinballX doesn't like spaces between "="'s signs
+                //Post fixup (FutureDMD doesn't like spaces between "="'s signs
                 text = text.Replace(" = ", "=").RemoveBlankLines("\r\n");
                 File.WriteAllText(_iniFilePath, text, Encoding.Unicode);
             }
-            //_parser.WriteFile(_iniFilePath, _data, Encoding.Unicode);
         }
 
         public int GetMonitorNumber(string section)
@@ -62,7 +63,7 @@ namespace PinCab.ScreenUtil.Utils
 
         public void SetMonitorNumber(string section, int monitorNumber)
         {
-            var val = _data[section].FirstOrDefault(p => p.KeyName.ToLower() == monitor.ToLower());
+            var val = _data[section].FirstOrDefault(p => p.KeyName.ToLower() == monitor);
             val.Value = monitorNumber.ToString();
         }
 
@@ -93,7 +94,7 @@ namespace PinCab.ScreenUtil.Utils
             if (regionRectangle != null)
             {
                 SetRegionRectangle(section, regionRectangle);
-                SetMonitorNumber(section, display.GetMonitorNumber() - 1); //PinballX stores monitor #'s starting at 0
+                SetMonitorNumber(section, display.GetMonitorNumber() - 1); //Future stores monitor #'s starting at 0
             }
         }
 
@@ -101,52 +102,11 @@ namespace PinCab.ScreenUtil.Utils
         {
             var result = new ValidationResult();
 
-            //Validate Playfield monitor number
-            var playFieldResult = ValidatePlayfield(displayDetails);
-            if (playFieldResult.IsValid == false)
+            //Validate DMD Position
+            var dmdRegion = ValidateRegion(Consts.DMD, displayDetails);
+            if (dmdRegion.IsValid == false)
                 result.IsValid = false;
-            result.Messages.AddRange(playFieldResult.Messages);
-
-            //Validate Backglass
-            var backglassResult = ValidateRegion(Consts.Backglass, displayDetails);
-            if (backglassResult.IsValid == false)
-                result.IsValid = false;
-            result.Messages.AddRange(backglassResult.Messages);
-
-            //Validate DMD
-            var dmdResult = ValidateRegion(Consts.DMD, displayDetails);
-            if (dmdResult.IsValid == false)
-                result.IsValid = false;
-            result.Messages.AddRange(dmdResult.Messages);
-
-            //Validate Topper
-            var topperResult = ValidateRegion(Consts.Topper, displayDetails);
-            if (topperResult.IsValid == false)
-                result.IsValid = false;
-            result.Messages.AddRange(topperResult.Messages);
-
-            //Validate Apron
-            var apronResult = ValidateRegion(Consts.Apron, displayDetails);
-            if (apronResult.IsValid == false)
-                result.IsValid = false;
-            result.Messages.AddRange(apronResult.Messages);
-
-            return result;
-        }
-
-        public ValidationResult ValidatePlayfield(List<DisplayDetail> displayDetails)
-        {
-            var result = new ValidationResult();
-            var playfieldDisplay = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Playfield));
-            var playfieldMonitorNumber = playfieldDisplay.GetMonitorNumber() - 1;
-            if (playfieldMonitorNumber != GetMonitorNumber(Display)) //Pinball X calls the playfield "Display" in the .ini file
-            {
-                result.IsValid = false;
-                result.Messages.Add(new ValidationMessage
-                    ($"Pinball X Playfield Monitor Number does not match. Expected: {GetMonitorNumber(Display)} Actual: {playfieldMonitorNumber}", MessageLevel.Error));
-            }
-
-            result.Messages.Add(new ValidationMessage($"Pinball X: Playfield Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
+            result.Messages.AddRange(dmdRegion.Messages);
 
             return result;
         }
@@ -154,7 +114,7 @@ namespace PinCab.ScreenUtil.Utils
         public ValidationResult ValidateRegion(string displayName, List<DisplayDetail> displayDetails)
         {
             var result = new ValidationResult();
-            var pinballXCurrentRegion = GetRegionRectangle(displayName);
+            var futureDmdRegionFromIni = GetRegionRectangle("default");
 
             var display = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(displayName));
             var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(displayName));
@@ -162,48 +122,50 @@ namespace PinCab.ScreenUtil.Utils
 
             if (regionRectangle != null)
             {
-                if (GetMonitorNumber(displayName) != monitorNumber)
+                if (GetMonitorNumber("default") != monitorNumber)
                 {
                     result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"Pinball X {displayName} Monitor Number does not match. Expected: {GetMonitorNumber(displayName)} Actual: {monitorNumber}", MessageLevel.Error));
+                        ($"FutureDMD {displayName} Monitor Number does not match. Expected: {GetMonitorNumber("default")} Actual: {monitorNumber}", MessageLevel.Error));
+                }
+                
+                if (futureDmdRegionFromIni.RegionDisplayHeight != regionRectangle.RegionDisplayHeight)
+                {
+                    result.IsValid = false;
+                    result.Messages.Add(new ValidationMessage
+                        ($"FutureDMD {displayName} Region Display Height does not match. Expected: {regionRectangle.RegionDisplayHeight} Actual: {futureDmdRegionFromIni.RegionDisplayHeight}", MessageLevel.Error));
                 }
 
-                if (pinballXCurrentRegion.RegionDisplayHeight != regionRectangle.RegionDisplayHeight)
+                if (futureDmdRegionFromIni.RegionDisplayWidth != regionRectangle.RegionDisplayWidth)
                 {
                     result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"Pinball X {displayName} Region Display Height does not match. Expected: {regionRectangle.RegionDisplayHeight} Actual: {pinballXCurrentRegion.RegionDisplayHeight}", MessageLevel.Error));
+                        ($"FutureDMD {displayName} Region Display Width does not match. Expected: {regionRectangle.RegionDisplayWidth} Actual: {futureDmdRegionFromIni.RegionDisplayWidth}", MessageLevel.Error));
                 }
 
-                if (pinballXCurrentRegion.RegionDisplayWidth != regionRectangle.RegionDisplayWidth)
+                var regionOffsetX = display.VirtualResolutionOffsetX(regionRectangle);
+                if (futureDmdRegionFromIni.RegionOffsetX != regionOffsetX)
                 {
                     result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"Pinball X {displayName} Region Display Width does not match. Expected: {regionRectangle.RegionDisplayWidth} Actual: {pinballXCurrentRegion.RegionDisplayWidth}", MessageLevel.Error));
+                        ($"FutureDMD {displayName} Region Display X Offset does not match. Expected: {regionOffsetX} Actual: {futureDmdRegionFromIni.RegionOffsetX}", MessageLevel.Error));
                 }
 
-                if (pinballXCurrentRegion.RegionOffsetX != regionRectangle.RegionOffsetX)
+                var regionOffsetY = display.VirtualResolutionOffsetY(regionRectangle);
+                if (futureDmdRegionFromIni.RegionOffsetY != regionOffsetY)
                 {
                     result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"Pinball X {displayName} Region Display X Offset does not match. Expected: {regionRectangle.RegionOffsetX} Actual: {pinballXCurrentRegion.RegionOffsetX}", MessageLevel.Error));
-                }
-
-                if (pinballXCurrentRegion.RegionOffsetY != regionRectangle.RegionOffsetY)
-                {
-                    result.IsValid = false;
-                    result.Messages.Add(new ValidationMessage
-                        ($"Pinball X {displayName} Region Display Y Offset does not match. Expected: {regionRectangle.RegionOffsetY} Actual: {pinballXCurrentRegion.RegionOffsetY}", MessageLevel.Error));
+                        ($"FutureDMD {displayName} Region Display Y Offset does not match. Expected: {regionOffsetY} Actual: {futureDmdRegionFromIni.RegionOffsetY}", MessageLevel.Error));
                 }
             }
             else
             {
                 result.Messages.Add(new ValidationMessage
-                 ($"Pinball X: No {displayName} Region defined. Skipping...", MessageLevel.Information));
+                 ($"FutureDMD: No {displayName} Region defined. Skipping...", MessageLevel.Information));
             }
 
-            result.Messages.Add(new ValidationMessage($"Pinball X: {displayName} Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
+            result.Messages.Add(new ValidationMessage($"FutureDMD: {displayName} Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
 
             return result;
         }

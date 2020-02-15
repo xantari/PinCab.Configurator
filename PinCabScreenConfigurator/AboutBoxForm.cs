@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PinCabScreenConfigurator
+namespace PinCab.Configurator
 {
     partial class AboutBoxForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace PinCabScreenConfigurator
+﻿namespace PinCab.Configurator
 {
     partial class AboutBoxForm
     {

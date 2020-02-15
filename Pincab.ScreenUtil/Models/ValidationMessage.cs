@@ -1,4 +1,4 @@
-﻿namespace Pincab.ScreenUtil.Models
+﻿namespace PinCab.ScreenUtil.Models
 {
     public class ValidationMessage
     {

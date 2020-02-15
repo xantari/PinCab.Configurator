@@ -1,4 +1,4 @@
-﻿namespace PinCabScreenConfigurator
+﻿namespace PinCab.Configurator
 {
     partial class MainForm
     {
@@ -268,6 +268,7 @@
             this.writeFutureDMDiniToolStripMenuItem1.Name = "writeFutureDMDiniToolStripMenuItem1";
             this.writeFutureDMDiniToolStripMenuItem1.Size = new System.Drawing.Size(297, 22);
             this.writeFutureDMDiniToolStripMenuItem1.Text = "FutureDMD.ini";
+            this.writeFutureDMDiniToolStripMenuItem1.Click += new System.EventHandler(this.writeFutureDMDiniToolStripMenuItem1_Click);
             // 
             // writeUltraDMDRegistryKeyToolStripMenuItem
             // 
@@ -380,6 +381,7 @@
             this.validatefutureDMDiniToolStripMenuItem.Name = "validatefutureDMDiniToolStripMenuItem";
             this.validatefutureDMDiniToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.validatefutureDMDiniToolStripMenuItem.Text = "FutureDMD.ini";
+            this.validatefutureDMDiniToolStripMenuItem.Click += new System.EventHandler(this.validatefutureDMDiniToolStripMenuItem_Click);
             // 
             // validateultraDMDRegistryKeyToolStripMenuItem1
             // 
@@ -729,7 +731,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(772, 623);
             this.Name = "MainForm";
-            this.Text = "Pincab Screen Configurator";
+            this.Text = "Pincab Configurator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

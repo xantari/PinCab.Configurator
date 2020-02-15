@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pincab.ScreenUtil
+namespace PinCab.ScreenUtil
 {
     public static class ApplicationHelpers
     {

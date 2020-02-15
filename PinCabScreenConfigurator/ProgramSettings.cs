@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Pincab.ScreenUtil;
+using PinCab.ScreenUtil;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PinCabScreenConfigurator
+namespace PinCab.Configurator
 {
     [Serializable]
     public class ProgramSettings

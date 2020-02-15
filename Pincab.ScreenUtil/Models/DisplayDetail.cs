@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
 
-namespace Pincab.ScreenUtil
+namespace PinCab.ScreenUtil
 {
     [Serializable]
     public class DisplayDetail

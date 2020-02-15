@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pincab.ScreenUtil.Utils
+namespace PinCab.ScreenUtil.Utils
 {
     public class UltraDmdUtil
     {

@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6F487124-0E0F-466A-8EB3-E3A5D2D86EC3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PinCabScreenConfigurator</RootNamespace>
-    <AssemblyName>PinCabScreenConfigurator</AssemblyName>
+    <RootNamespace>PinCab.Configurator</RootNamespace>
+    <AssemblyName>PinCab.Configurator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -105,6 +105,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -125,9 +126,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pincab.ScreenUtil\Pincab.ScreenUtil.csproj">
+    <ProjectReference Include="..\Pincab.ScreenUtil\PinCab.ScreenUtil.csproj">
       <Project>{c7093723-a805-4c85-aaed-05d6f626ba09}</Project>
-      <Name>Pincab.ScreenUtil</Name>
+      <Name>PinCab.ScreenUtil</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

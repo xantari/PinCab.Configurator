@@ -1,4 +1,4 @@
-# PinCab Screen Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/pincabscreenconfigurator)
+# PinCab Screen Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCab.Configurator)
 This tool allows you to layout your screens and validate your screen configuration in all virtual pinball related programs.
 
 The motivation behind this program was to solve these issues with Virtual Pinball cabinet setups:
@@ -42,13 +42,13 @@ Logging information is in the Log.txt file in the application root folder.
 
 #### 2 Screen Setup  
 
-![2 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_2Screens.png "2 Screen Setup")
+![2 Screen Setup](https://github.com/xantari/PinCab.Configurator/raw/master/Screenshots/Screenshot_2Screens.png "2 Screen Setup")
 
 #### 3 Screen Setup (DMD Monitor only shows DMD) - Example of my PinCab with a 1080P 15.6" DMD Screen with only a DMD cutout.
-![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3Screens.png "3 Screen Setup")
+![3 Screen Setup](https://github.com/xantari/PinCab.Configurator/raw/master/Screenshots/Screenshot_3Screens.png "3 Screen Setup")
 
 #### 3 Screen Setup (TerryRed Setup (DMD and Topper on same screen))
-![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
+![3 Screen Setup](https://github.com/xantari/PinCab.Configurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
 
 # TODO
 2. Future DMD (Future Pinball) read/write/validation

@@ -7,8 +7,8 @@
     <ProjectGuid>{C7093723-A805-4C85-AAED-05D6F626BA09}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pincab.ScreenUtil</RootNamespace>
-    <AssemblyName>Pincab.ScreenUtil</AssemblyName>
+    <RootNamespace>PinCab.ScreenUtil</RootNamespace>
+    <AssemblyName>PinCab.ScreenUtil</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,12 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationHelpers.cs" />
+    <Compile Include="Consts\Settings.cs" />
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ValidationMessage.cs" />
     <Compile Include="Models\ValidationResult.cs" />
+    <Compile Include="Utils\FutureDmdUtil.cs" />
     <Compile Include="Utils\PinballXUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\RegionRectangle.cs" />

@@ -1,6 +1,6 @@
-﻿using Pincab.ScreenUtil;
-using Pincab.ScreenUtil.Utils;
-using PinCabScreenConfigurator.Properties;
+﻿using PinCab.ScreenUtil;
+using PinCab.ScreenUtil.Utils;
+using PinCab.Configurator.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PinCabScreenConfigurator
+namespace PinCab.Configurator
 {
     /// <summary>
     /// Notes: UltraDMD reg key: Computer\HKEY_CURRENT_USER\Software\UltraDMD

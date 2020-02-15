@@ -1,4 +1,4 @@
-﻿using Pincab.ScreenUtil;
+﻿using PinCab.ScreenUtil;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PinCabScreenConfigurator
+namespace PinCab.Configurator
 {
     public partial class ScreenBoundsDisplayForm : Form
     {

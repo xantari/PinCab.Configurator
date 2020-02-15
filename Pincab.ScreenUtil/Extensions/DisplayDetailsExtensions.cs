@@ -1,11 +1,11 @@
-﻿using Pincab.ScreenUtil;
+﻿using PinCab.ScreenUtil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pincab.ScreenUtil
+namespace PinCab.ScreenUtil
 {
     public static class DisplayDetailsExtensions
     {

@@ -1,28 +1,17 @@
-﻿using EDIDParser;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Pincab.ScreenUtil;
-using Pincab.ScreenUtil.Models;
-using Pincab.ScreenUtil.Utils;
-using PinCabScreenConfigurator.Utils;
+﻿using Newtonsoft.Json;
+using PinCab.ScreenUtil;
+using PinCab.Configurator.Utils;
 using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
 
-namespace PinCabScreenConfigurator
+namespace PinCab.Configurator
 {
     /// <summary>
     /// The main program form.
@@ -148,13 +137,13 @@ namespace PinCabScreenConfigurator
                     isValid = false;
                 }
             }
-            if (!_displayDetails.Any(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains("playfield")))
+            if (!_displayDetails.Any(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower())))
             {
                 if (writeLog)
                     txtData.Text += "No Playfield Monitor selected yet. Please select a playfield monitor and give it a label of Playfield.\r\n";
                 isValid = false;
             }
-            var playfieldDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains("playfield"));
+            var playfieldDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower()));
             if (playfieldDisplay != null && !playfieldDisplay.Display.IsGDIPrimary)
             {
                 if (writeLog)
@@ -162,8 +151,8 @@ namespace PinCabScreenConfigurator
                 isValid = false;
             }
             //Check if DMD is recommended 4:1 ratio
-            var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
-            var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
+            var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.DMD));
+            var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.DMD));
             if (regionDmdRectangle == null)
             {
                 if (writeLog)
@@ -585,6 +574,18 @@ namespace PinCabScreenConfigurator
         {
             FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.ValidatePinballX();
+        }
+
+        private void validatefutureDMDiniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
+            helper.ValidateFutureDmd();
+        }
+
+        private void writeFutureDMDiniToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
+            helper.WriteFutureDMDSettings();
         }
     }
 }

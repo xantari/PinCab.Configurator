@@ -1,6 +1,6 @@
-﻿using Pincab.ScreenUtil;
-using Pincab.ScreenUtil.Models;
-using Pincab.ScreenUtil.Utils;
+﻿using PinCab.ScreenUtil;
+using PinCab.ScreenUtil.Models;
+using PinCab.ScreenUtil.Utils;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PinCabScreenConfigurator.Utils
+namespace PinCab.Configurator.Utils
 {
     public class FormHelper
     {
@@ -33,6 +33,8 @@ namespace PinCabScreenConfigurator.Utils
                 var result = _pinballXUtil.Validate(_displayDetails);
                 LogValidationResult("PinballX", result);
             }
+            else
+                _txtData.Text += "PinballX Ini Path not set yet.";
         }
 
         public void WritePinballXSettings()
@@ -40,18 +42,51 @@ namespace PinCabScreenConfigurator.Utils
             if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
             {
                 var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
-                var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains("DMD"));
-                var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains("DMD"));
 
-                if (regionDmdRectangle != null)
-                {
-                    _pinballXUtil.SetRegionRectangle("DMD", regionDmdRectangle);
-                    _pinballXUtil.SetMonitorNumber("DMD", dmdDisplay.GetMonitorNumber() - 1); //PinballX stores monitor #'s starting at 0
-                }
+                _pinballXUtil.SetDisplayDetails(Consts.DMD, _displayDetails);
+                _pinballXUtil.SetDisplayDetails(Consts.Topper, _displayDetails);
+                _pinballXUtil.SetDisplayDetails(Consts.Apron, _displayDetails);
+                _pinballXUtil.SetDisplayDetails(Consts.Backglass, _displayDetails);
+
+                var display = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Playfield));
+                if (display != null)
+                    _pinballXUtil.SetMonitorNumber(PinballXUtil.Display, display.GetMonitorNumber() - 1);
+
                 _pinballXUtil.SaveSettings();
                 _txtData.Text += $"PinballX Write command completed.\r\n";
                 Log.Information("PinballX Write command completed.");
             }
+            else
+                _txtData.Text += "PinballX Ini Path not set yet.";
+        }
+
+        public void ValidateFutureDmd()
+        {
+            if (!string.IsNullOrEmpty(_settings.FutureDMDIniPath))
+            {
+                var _util = new FutureDmdUtil(_settings.FutureDMDIniPath);
+
+                var result = _util.Validate(_displayDetails);
+                LogValidationResult("FutureDMD", result);
+            }
+            else
+                _txtData.Text += "FutureDMD Ini Path not set yet.";
+        }
+
+        public void WriteFutureDMDSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
+            {
+                var _util = new FutureDmdUtil(_settings.PinballXIniPath);
+
+                _util.SetDisplayDetails(Consts.DMD, _displayDetails);
+
+                _util.SaveSettings();
+                _txtData.Text += $"FutureDMD Write command completed.\r\n";
+                Log.Information("FutureDMD Write command completed.");
+            }
+            else
+                _txtData.Text += "FutureDMD Ini Path not set yet.";
         }
 
         private void LogValidationResult(string command, ValidationResult result)

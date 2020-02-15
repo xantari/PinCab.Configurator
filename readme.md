@@ -1,12 +1,13 @@
-# PinCab Screen Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCab.Configurator)
+# PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCab.Configurator)
 This tool allows you to layout your screens and validate your screen configuration in all virtual pinball related programs.
 
 The motivation behind this program was to solve these issues with Virtual Pinball cabinet setups:
 
-1. It's difficult to set all the various program settings related to Virtual Pinball as there are so many addon programs involved that each need their own screen coordinates.
+1. It's difficult to set all the various program settings related to Virtual Pinball as there are so many addon programs involved that each need their own screen setup.
 2. Changing Video Cards or Displays causes you to have to re-setup the new coordinates in many different areas. Instead the idea is to define it in one place and have those settings
 replicate to all the other areas automatically.
 3. Provide a FFMPEG command line examples on how to record screens and specific regions of screens
+4. Add other useful pincab tools into one program
 
 # Features
 
@@ -75,9 +76,9 @@ Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [
 
 0.1.6 - 1/5/2020:  
 	1. More documentation and settings page updates.  
-	2. Menu reorganization. 
-	3. Completed initial version of all settings we need.
-	4. Global Exception logging
+	2. Menu reorganization.  
+	3. Completed initial version of all settings we need.  
+	4. Global Exception logging  
 
 # Help Needed
 

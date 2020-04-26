@@ -1,6 +1,7 @@
 ﻿using IniParser;
 using IniParser.Model;
 using PinCab.ScreenUtil.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +38,10 @@ namespace PinCab.ScreenUtil.Utils
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\";
             var fileInfo = new FileInfo(_iniFilePath);
             Directory.CreateDirectory(currentFolder);
-            File.Copy(_iniFilePath, currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}");
+            string filePath = $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
+            File.Copy(_iniFilePath, currentFolder + filePath);
+
+            Log.Information("Wrote future dmd backup: {location}", filePath);
 
             //Save the file
             using (var ms = new MemoryStream())

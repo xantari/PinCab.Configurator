@@ -24,6 +24,11 @@ namespace PinCab.Configurator.Utils
             _txtData = txtData;
         }
 
+        public void ClearMessages()
+        {
+            _txtData.Text = string.Empty;
+        }
+
         public void ValidatePinballX()
         {
             if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
@@ -75,9 +80,9 @@ namespace PinCab.Configurator.Utils
 
         public void WriteFutureDMDSettings()
         {
-            if (!string.IsNullOrEmpty(_settings.PinballXIniPath))
+            if (!string.IsNullOrEmpty(_settings.FutureDMDIniPath))
             {
-                var _util = new FutureDmdUtil(_settings.PinballXIniPath);
+                var _util = new FutureDmdUtil(_settings.FutureDMDIniPath);
 
                 _util.SetDisplayDetails(Consts.DMD, _displayDetails);
 
@@ -89,7 +94,7 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += "FutureDMD Ini Path not set yet.";
         }
 
-        private void LogValidationResult(string command, ValidationResult result)
+        public void LogValidationResult(string command, ValidationResult result)
         {
             if (result?.Messages.Count() > 0)
             {

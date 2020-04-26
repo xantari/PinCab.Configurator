@@ -32,6 +32,8 @@ replicate to all the other areas automatically.
 12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
 13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X offsets)
 14. Pinball X Ini read/write/validation
+15. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
+16. Future DMD (Future Pinball) read/write/validation
 
 # Instructions
 
@@ -52,7 +54,6 @@ Logging information is in the Log.txt file in the application root folder.
 ![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
 
 # TODO
-2. Future DMD (Future Pinball) read/write/validation
 3. B2S ScreenRes.txt read/write/validation
 4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
 6. UltraDMD / FlexDMD Registry Key read/write/validation
@@ -61,7 +62,6 @@ Logging information is in the Log.txt file in the application root folder.
 	a. Option to set Default  
 	b. Option to update all previously run ROM's   
 14. PinUp Popper / Player location settings read/write/validation
-17. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 19. Create help HTML pages and hookup to the program
 21. Ensure all the features of the ScreenRes editor exist in program
 22. Add all SetDMD functions to program

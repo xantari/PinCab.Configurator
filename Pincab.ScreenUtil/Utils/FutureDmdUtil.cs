@@ -1,6 +1,7 @@
 ﻿using IniParser;
 using IniParser.Model;
 using PinCab.ScreenUtil.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,7 +40,10 @@ namespace PinCab.ScreenUtil.Utils
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\";
             var fileInfo = new FileInfo(_iniFilePath);
             Directory.CreateDirectory(currentFolder);
-            File.Copy(_iniFilePath, currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}");
+            string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
+            File.Copy(_iniFilePath, filePath);
+
+            Log.Information("Wrote future dmd backup: {location}", filePath);
 
             //Save the file
             using (var ms = new MemoryStream())
@@ -63,7 +67,7 @@ namespace PinCab.ScreenUtil.Utils
 
         public void SetMonitorNumber(string section, int monitorNumber)
         {
-            var val = _data[section].FirstOrDefault(p => p.KeyName.ToLower() == monitor);
+            var val = _data[section].FirstOrDefault(p => p.KeyName.ToLower() == monitor.ToLower());
             val.Value = monitorNumber.ToString();
         }
 
@@ -78,12 +82,13 @@ namespace PinCab.ScreenUtil.Utils
             return regionRectangle;
         }
 
-        public void SetRegionRectangle(string section, RegionRectangle regionRectangle)
+        public void SetRegionRectangle(string section, DisplayDetail display, RegionRectangle regionRectangle)
         {
             _data[section][height] = regionRectangle.RegionDisplayHeight.ToString();
             _data[section][width] = regionRectangle.RegionDisplayWidth.ToString();
-            _data[section][x] = regionRectangle.RegionOffsetX.ToString();
-            _data[section][y] = regionRectangle.RegionOffsetY.ToString();
+            //Future DMD uses virtual desktop space for it's X/Y calculations
+            _data[section][x] = display.VirtualResolutionOffsetX(regionRectangle).ToString();
+            _data[section][y] = display.VirtualResolutionOffsetY(regionRectangle).ToString();
         }
 
         public void SetDisplayDetails(string section, List<DisplayDetail> displayDetails)
@@ -92,9 +97,9 @@ namespace PinCab.ScreenUtil.Utils
             var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(section));
 
             if (regionRectangle != null)
-            {
-                SetRegionRectangle(section, regionRectangle);
-                SetMonitorNumber(section, display.GetMonitorNumber() - 1); //Future stores monitor #'s starting at 0
+            {  //FutureDMD settings store in a single section called [default]
+                SetRegionRectangle("default", display, regionRectangle);
+                SetMonitorNumber("default", display.GetMonitorNumber() - 1); //Future stores monitor #'s starting at 0
             }
         }
 

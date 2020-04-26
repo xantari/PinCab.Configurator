@@ -35,6 +35,9 @@ namespace PinCab.Configurator
 
         private ProgramSettings _settings;
 
+        private FormHelper helper;
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,6 +48,8 @@ namespace PinCab.Configurator
 
             LoadScreenBoundsDisplayForms();
             DisplayDisplayDetails();
+
+            helper = new FormHelper(_settings, _displayDetails, txtData);
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
@@ -106,90 +111,42 @@ namespace PinCab.Configurator
 
         private void generateFFMpegCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool isValid = ValidateMonitorConfiguration(false);
-            if (!isValid)
+
+            var result = _displayDetails.ValidateDisplayConfiguration();
+            if (!result.IsValid)
             {
                 txtData.Text += "Please correct your screen configuration first. Cannot output FFMPeg commands at this time.\r\n";
                 return;
             }
 
-            var commands = _displayDetails.GetFfMpegCommandsForAllMonitors(30, new TimeSpan(0, 0, 30));
+            if (string.IsNullOrEmpty(_settings.FFMpegFullPath))
+            {
+                txtData.Text += "FFMpeg path not defined.\r\n";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_settings.RecordingTempFolderPath))
+            {
+                txtData.Text += "Recording temp folder path not defined.\r\n";
+                return;
+            }
+
+            var commands = _displayDetails.GetFfMpegCommandsForAllMonitors(_settings.RecordFramerate, new TimeSpan(0, 0, _settings.RecordTimeSeconds),
+                _settings.RecordingTempFolderPath, _settings.FFMpegFullPath);
             txtData.Text += " FFMpeg Command: \r\n" + string.Join("\r\n\r\n", commands.ToArray());
         }
 
-        private bool ValidateMonitorConfiguration(bool writeLog = true)
+        private bool ValidateMonitorConfiguration()
         {
-            bool isValid = true;
-            //Ensure no monitors have negative coordinates (always left to right)
-            foreach (var display in _displayDetails)
-            {
-                if (display.Display.CurrentSetting.Position.X < 0 || display.Display.CurrentSetting.Position.Y < 0)
-                {
-                    if (writeLog)
-                        txtData.Text += $"Invalid monitor configuration detected due to negative position values. Virtual Pinball programs require all monitors to have positive position values. Monitor: {display.ToString()} {display.Display.CurrentSetting.Position.ToString()}\r\n";
-                    isValid = false;
-                }
-                var scalingFactor = display.GetScalingFactor();
-                if (scalingFactor != 1.0f)
-                {
-                    if (writeLog)
-                        txtData.Text += $"Scaling factor not set to 100%. Change your DPI settings to be 100%. Current Scaling: {(scalingFactor * 100)}%. Monitor: {display.ToString()} {display.Display.CurrentSetting.Position.ToString()}\r\n";
-                    isValid = false;
-                }
-            }
-            if (!_displayDetails.Any(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower())))
-            {
-                if (writeLog)
-                    txtData.Text += "No Playfield Monitor selected yet. Please select a playfield monitor and give it a label of Playfield.\r\n";
-                isValid = false;
-            }
-            var playfieldDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower()));
-            if (playfieldDisplay != null && !playfieldDisplay.Display.IsGDIPrimary)
-            {
-                if (writeLog)
-                    txtData.Text += "Your playfield display must be monitor 1 and marked as the primary monitor.\r\n";
-                isValid = false;
-            }
-            //Check if DMD is recommended 4:1 ratio
-            var dmdDisplay = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.DMD));
-            var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.DMD));
-            if (regionDmdRectangle == null)
-            {
-                if (writeLog)
-                    txtData.Text += "Unable to locate DMD monitor. Have you specified it yet?\r\n";
-                isValid = false;
-            }
-            else
-            {
-                if (regionDmdRectangle.RegionDisplayHeight == 0 || regionDmdRectangle.RegionDisplayWidth == 0)
-                {
-                    if (writeLog)
-                        txtData.Text += "DMD Region incomplete. Width or Height is specified as 0.\r\n";
-                    isValid = false;
-                }
-                else
-                {
-                    if ((regionDmdRectangle.RegionDisplayHeight / Convert.ToDecimal(regionDmdRectangle.RegionDisplayWidth)) != 0.4M) //Not a 4:1 ratio
-                    {
-                        if (writeLog)
-                            txtData.Text += "WARNING: DMD Region is not recommended 4:1 ratio.\r\n";
-                        // isValid = true;
-                    }
-                }
-            }
+            var result = _displayDetails.ValidateDisplayConfiguration();
 
+            helper.LogValidationResult("ValidateMonitorConfiguration", result);
 
-            if (!isValid)
-            {
-                if (writeLog)
-                    txtData.Text += "Screen configuration is INVALID.\r\n";
-            }
+            if (!result.IsValid)
+                txtData.Text += "Screen configuration is INVALID.\r\n";
             else
-            {
-                if (writeLog)
-                    txtData.Text += "Screen configuration is VALID.\r\n";
-            }
-            return isValid;
+                txtData.Text += "Screen configuration is VALID.\r\n";
+            return result.IsValid;
         }
 
         private void ClearFormFields()
@@ -214,7 +171,7 @@ namespace PinCab.Configurator
             {
                 hideForm.Value?.Hide();
             }
-            var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == display.Display.DisplayName);
+            var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == display?.Display.DisplayName);
             form.Value?.Show();
             PopulateFormDisplayDetails();
         }
@@ -566,25 +523,21 @@ namespace PinCab.Configurator
 
         private void writePinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.WritePinballXSettings();
         }
 
         private void validatePinballXiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.ValidatePinballX();
         }
 
         private void validatefutureDMDiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.ValidateFutureDmd();
         }
 
         private void writeFutureDMDiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FormHelper helper = new FormHelper(_settings, _displayDetails, txtData);
             helper.WriteFutureDMDSettings();
         }
     }

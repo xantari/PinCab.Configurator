@@ -67,7 +67,6 @@
     <Compile Include="Utils\PinballXUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\RegionRectangle.cs" />
-    <Compile Include="Utils\ScreenDetails.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Utils\UltraDmdUtil.cs" />
     <Compile Include="Utils\VpinMameUtil.cs" />

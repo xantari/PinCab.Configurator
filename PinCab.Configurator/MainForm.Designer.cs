@@ -262,6 +262,7 @@
             this.writeB2sSettingsScreenrestxtToolStripMenuItem.Name = "writeB2sSettingsScreenrestxtToolStripMenuItem";
             this.writeB2sSettingsScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writeB2sSettingsScreenrestxtToolStripMenuItem.Text = "B2s Settings (Screenres.txt)";
+            this.writeB2sSettingsScreenrestxtToolStripMenuItem.Click += new System.EventHandler(this.writeB2sSettingsScreenrestxtToolStripMenuItem_Click);
             // 
             // writeFutureDMDiniToolStripMenuItem1
             // 
@@ -375,6 +376,7 @@
             this.validateb2SScreenrestxtToolStripMenuItem.Name = "validateb2SScreenrestxtToolStripMenuItem";
             this.validateb2SScreenrestxtToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.validateb2SScreenrestxtToolStripMenuItem.Text = "B2S Settings (Screenres.txt)";
+            this.validateb2SScreenrestxtToolStripMenuItem.Click += new System.EventHandler(this.validateb2SScreenrestxtToolStripMenuItem_Click);
             // 
             // validatefutureDMDiniToolStripMenuItem
             // 

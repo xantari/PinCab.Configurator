@@ -63,6 +63,7 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ValidationMessage.cs" />
     <Compile Include="Models\ValidationResult.cs" />
+    <Compile Include="Utils\B2sUtil.cs" />
     <Compile Include="Utils\FutureDmdUtil.cs" />
     <Compile Include="Utils\PinballXUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

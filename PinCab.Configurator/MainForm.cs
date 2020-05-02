@@ -540,5 +540,15 @@ namespace PinCab.Configurator
         {
             helper.WriteFutureDMDSettings();
         }
+
+        private void validateb2SScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void writeB2sSettingsScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

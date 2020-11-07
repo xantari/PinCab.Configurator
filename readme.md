@@ -16,16 +16,16 @@ replicate to all the other areas automatically.
 3. Allows labeling screens
 4. Validates screen configuration is compatible   
 	a. No screens with negative coordinates  
-	b. Playfield is screen 1 and set as primary
-	c. DMD Size calculations are 4:1 ratio (just a warning)
-	d. Ensure all monitors set to 100% Scaling (no DPI scaling)
+	b. Playfield is screen 1 and set as primary  
+	c. DMD Size calculations are 4:1 ratio (just a warning)  
+	d. Ensure all monitors set to 100% Scaling (no DPI scaling)  
 5. Generates FFMPeg commands to capture the screens and output them to a .MP4 file
 6. Predefined labels for Playfield, DMD, Backglass, Topper, and Apron displays
 7. Dumps entire screen display details / EDID information to JSON
 8. Add settings page to point to the following:  
    	a. FFMPEG  
-	b. Front End settings file (Pinball X / Pinball Y / Pinup Popper)
-	c. B2S Screenres.txt, P-ROC, DMDDevice.ini, Future DMD INI, Pinup Player
+	b. Front End settings file (Pinball X / Pinball Y / Pinup Popper)  
+	c. B2S Screenres.txt, P-ROC, DMDDevice.ini, Future DMD INI, Pinup Player  
 9. Add ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen such as TerryRed's PinCab configuration)
 10. Exception handling / Logging
 11. Realtime updating of region Size and Offset changes

@@ -34,6 +34,8 @@ replicate to all the other areas automatically.
 14. Pinball X .ini read/write/validation
 15. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 16. Future DMD (Future Pinball) read/write/validation
+17. B2S ScreenRes.txt read/write/validation
+18. All features of the existing ScreenRes editor exist in program (Utilites >> Screen res editor)
 
 # Instructions
 
@@ -54,21 +56,19 @@ Logging information is in the Log.txt file in the application root folder.
 ![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
 
 # TODO
-1. B2S ScreenRes.txt read/write/validation
-2. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
-3. UltraDMD / FlexDMD Registry Key read/write/validation
-4. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
-5. VPinMame registry location settings (for those not using DMDExt).  
+1. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
+2. UltraDMD / FlexDMD Registry Key read/write/validation
+3. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
+4. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  
 	b. Option to update all previously run ROM's   
-6. PinUp Popper / Player location settings read/write/validation
-7. Create help HTML pages and hookup to the program
-8. Ensure all the features of the ScreenRes editor exist in program
-9. Add all SetDMD functions to program
-10. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
+5. PinUp Popper / Player location settings read/write/validation
+6. Create help HTML pages and hookup to the program
+7. Add all SetDMD functions to program
+8. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
 for things like Wheels / Backglass / Playfield / Launch Audio / etc.
-11. P-Roc settings read/write/validation
-12. Manual validation output info for Pinball FX2/FX3
+9. P-Roc settings read/write/validation
+10. Manual validation output info for Pinball FX2/FX3
 
 
 

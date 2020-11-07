@@ -13,7 +13,7 @@ namespace PinCab.ScreenUtil.Models
         Error
     }
 
-    public enum Display
+    public enum DisplayTypes
     {
         Playfield,
         DMD,

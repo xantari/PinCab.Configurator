@@ -95,6 +95,8 @@
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
             this.txtData = new System.Windows.Forms.TextBox();
             this.txtDisplayLabel = new System.Windows.Forms.TextBox();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.b2SScreenresEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -148,6 +150,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.commandsToolStripMenuItem,
+            this.utilitiesToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -682,6 +685,21 @@
             this.txtDisplayLabel.Size = new System.Drawing.Size(338, 20);
             this.txtDisplayLabel.TabIndex = 29;
             // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.b2SScreenresEditorToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // b2SScreenresEditorToolStripMenuItem
+            // 
+            this.b2SScreenresEditorToolStripMenuItem.Name = "b2SScreenresEditorToolStripMenuItem";
+            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.b2SScreenresEditorToolStripMenuItem.Text = "B2S Screenres Editor";
+            this.b2SScreenresEditorToolStripMenuItem.Click += new System.EventHandler(this.b2SScreenresEditorToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -798,6 +816,8 @@
         private System.Windows.Forms.Panel panelMonitorDrawing;
         private System.Windows.Forms.TextBox txtData;
         private System.Windows.Forms.TextBox txtDisplayLabel;
+        private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem b2SScreenresEditorToolStripMenuItem;
     }
 }
 

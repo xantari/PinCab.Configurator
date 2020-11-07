@@ -48,6 +48,51 @@ namespace PinCab.ScreenUtil.Utils
             }
         }
 
+        public B2sIni GetB2sIniModel()
+        {
+            if (_fileContentsArray.Count() >= 12)
+            {
+                var model = new B2sIni()
+                {
+                    PlayfieldWidth = Convert.ToInt32(_fileContentsArray[0]),
+                    PlayfieldHeight = Convert.ToInt32(_fileContentsArray[1]),
+                    BackglassWidth = Convert.ToInt32(_fileContentsArray[2]),
+                    BackglassHeight = Convert.ToInt32(_fileContentsArray[3]),
+                    BackglassDisplayNumber = Convert.ToInt32(_fileContentsArray[4]),
+                    BackglassXOffset = Convert.ToInt32(_fileContentsArray[5]),
+                    BackglassYOffset = Convert.ToInt32(_fileContentsArray[6]),
+                    DMDWidth = Convert.ToInt32(_fileContentsArray[7]),
+                    DMDHeight = Convert.ToInt32(_fileContentsArray[8]),
+                    DMDXOffset = Convert.ToInt32(_fileContentsArray[9]),
+                    DMDYOffset = Convert.ToInt32(_fileContentsArray[10]),
+                    YFlip = Convert.ToInt32(_fileContentsArray[11])
+                };
+                return model;
+            }
+            Log.Information("Unable to find B2sIni file while trying to hydra the B2s Ini model");
+            return null;
+        }
+
+        public void SaveB2sIniModel(B2sIni model)
+        {
+            if (model == null)
+                return;
+
+            _fileContentsArray[0] = model.PlayfieldWidth.ToString();
+            _fileContentsArray[1] = model.PlayfieldHeight.ToString();
+            _fileContentsArray[2] = model.BackglassWidth.ToString();
+            _fileContentsArray[3] = model.BackglassHeight.ToString();
+            _fileContentsArray[4] = model.BackglassDisplayNumber.ToString();
+            _fileContentsArray[5] = model.BackglassXOffset.ToString();
+            _fileContentsArray[6] = model.BackglassYOffset.ToString();
+            _fileContentsArray[7] = model.DMDWidth.ToString();
+            _fileContentsArray[8] = model.DMDHeight.ToString();
+            _fileContentsArray[9] = model.DMDXOffset.ToString();
+            _fileContentsArray[10] = model.DMDYOffset.ToString();
+            _fileContentsArray[11] = model.YFlip.ToString();
+            SaveSettings();
+        }
+
         public void SaveSettings()
         {
             //Copy current file as backup

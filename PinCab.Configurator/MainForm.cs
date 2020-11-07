@@ -615,5 +615,15 @@ namespace PinCab.Configurator
         {
             helper.ClearMessages();
         }
+
+        private void b2SScreenresEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ScreenResEditorForm();
+            var result = form.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+            //    _settings = (new ProgramSettings()).LoadSettings();
+            //}
+        }
     }
 }

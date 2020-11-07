@@ -96,8 +96,8 @@ namespace PinCab.ScreenUtil.Utils
         {
             _fileContentsArray[3] = regionRectangle.RegionDisplayHeight.ToString();
             _fileContentsArray[2] = regionRectangle.RegionDisplayWidth.ToString();
-            _fileContentsArray[5] = display.VirtualResolutionOffsetX(regionRectangle).ToString();
-            _fileContentsArray[6] = display.VirtualResolutionOffsetY(regionRectangle).ToString();
+            _fileContentsArray[5] = regionRectangle.RegionOffsetX.ToString();
+            _fileContentsArray[6] = regionRectangle.RegionOffsetY.ToString();
         }
 
         public RegionRectangle GetDMDRegionRectangle()
@@ -115,8 +115,8 @@ namespace PinCab.ScreenUtil.Utils
         {
             _fileContentsArray[8] = regionRectangle.RegionDisplayHeight.ToString();
             _fileContentsArray[7] = regionRectangle.RegionDisplayWidth.ToString();
-            _fileContentsArray[9] = display.VirtualResolutionOffsetX(regionRectangle).ToString();
-            _fileContentsArray[10] = display.VirtualResolutionOffsetY(regionRectangle).ToString();
+            _fileContentsArray[9] = regionRectangle.RegionOffsetX.ToString();
+            _fileContentsArray[10] = regionRectangle.RegionOffsetY.ToString();
         }
 
         public RegionRectangle GetPlayfieldRegionRectangle()
@@ -142,19 +142,14 @@ namespace PinCab.ScreenUtil.Utils
             if (regionRectangle != null)
             {
                 if (section == Consts.Playfield)
-                {
-
-                }
+                    SetPlayfieldRegionRectangle(display, regionRectangle);
                 if (section == Consts.DMD)
-                {
-
-                }
+                    SetDMDRegionRectangle(display, regionRectangle);
                 if (section == Consts.Backglass)
                 {
-
+                    SetBackglassRegionRectangle(display, regionRectangle);
+                    SetMonitorNumber(display.GetMonitorNumber());
                 }
-                //SetRegionRectangle(section, regionRectangle);
-                //SetMonitorNumber(section, display.GetMonitorNumber() - 1); //PinballX stores monitor #'s starting at 0
             }
         }
 

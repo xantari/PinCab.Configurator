@@ -38,6 +38,7 @@ namespace PinCab.Configurator
         private FormHelper helper;
 
         public static bool ChangesOccurred = false;
+        private int _currentlySelectedDisplayIndex = -1;
 
 
         public MainForm()
@@ -175,6 +176,12 @@ namespace PinCab.Configurator
             {
                 hideForm.Value?.Hide();
             }
+            if (listBoxDisplays.SelectedIndex == _currentlySelectedDisplayIndex) //if they marked the same one, keep the display hidden so they can toggle it on/off
+            {
+                _currentlySelectedDisplayIndex = -1;
+                return;
+            }
+            _currentlySelectedDisplayIndex = listBoxDisplays.SelectedIndex;
             var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == display?.Display.DisplayName);
             form.Value?.Show();
             PopulateFormDisplayDetails();
@@ -601,6 +608,7 @@ namespace PinCab.Configurator
         private void writeB2sSettingsScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
+            helper.WriteB2sSettings();
         }
 
         private void validateallSettingsToolStripMenuItem_Click(object sender, EventArgs e)

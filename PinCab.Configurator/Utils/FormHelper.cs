@@ -107,6 +107,24 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += $"{B2sUtil.ToolName}: Path not set yet.";
         }
 
+        public void WriteB2sSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.B2SScreenResPath))
+            {
+                var util = new B2sUtil(_settings.B2SScreenResPath);
+
+                util.SetDisplayDetails(Consts.DMD, _displayDetails);
+                util.SetDisplayDetails(Consts.Playfield, _displayDetails);
+                util.SetDisplayDetails(Consts.Backglass, _displayDetails);
+
+                util.SaveSettings();
+                _txtData.Text += $"{B2sUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{B2sUtil.ToolName}: Write command completed.");
+            }
+            else
+                _txtData.Text += $"{B2sUtil.ToolName}: Ini Path not set yet.";
+        }
+
         public void LogValidationResult(string command, ValidationResult result)
         {
             if (result?.Messages.Count() > 0)

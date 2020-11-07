@@ -58,6 +58,7 @@
     <Compile Include="ApplicationHelpers.cs" />
     <Compile Include="Consts\Settings.cs" />
     <Compile Include="Extensions\ValidationExtensions.cs" />
+    <Compile Include="Models\B2sIni.cs" />
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />

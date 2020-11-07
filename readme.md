@@ -17,12 +17,12 @@ replicate to all the other areas automatically.
 4. Validates screen configuration is compatible   
 	a. No screens with negative coordinates  
 	b. Playfield is screen 1 and set as primary  
-	c. DMD Size calculations are 4:1 ratio (just a warning)  
+	c. DMD Size calculations are 4:1 ratio (just a warning, some DMD's are not 4:1 like the sega DMD's, and the other strange ones like the TMNT / Dataeast ones)  
 	d. Ensure all monitors set to 100% Scaling (no DPI scaling)  
 5. Generates FFMPeg commands to capture the screens and output them to a .MP4 file
 6. Predefined labels for Playfield, DMD, Backglass, Topper, and Apron displays
 7. Dumps entire screen display details / EDID information to JSON
-8. Add settings page to point to the following:  
+8. Settings page to point to the following:  
    	a. FFMPEG  
 	b. Front End settings file (Pinball X / Pinball Y / Pinup Popper)  
 	c. B2S Screenres.txt, P-ROC, DMDDevice.ini, Future DMD INI, Pinup Player  
@@ -31,7 +31,7 @@ replicate to all the other areas automatically.
 11. Realtime updating of region Size and Offset changes
 12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
 13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X offsets)
-14. Pinball X Ini read/write/validation
+14. Pinball X .ini read/write/validation
 15. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 16. Future DMD (Future Pinball) read/write/validation
 
@@ -54,31 +54,26 @@ Logging information is in the Log.txt file in the application root folder.
 ![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
 
 # TODO
-3. B2S ScreenRes.txt read/write/validation
-4. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
-6. UltraDMD / FlexDMD Registry Key read/write/validation
-10. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
-13. VPinMame registry location settings (for those not using DMDExt).  
+1. B2S ScreenRes.txt read/write/validation
+2. DMDDevice.ini (DMDExt / VPinMame) read/write/validation
+3. UltraDMD / FlexDMD Registry Key read/write/validation
+4. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
+5. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  
 	b. Option to update all previously run ROM's   
-14. PinUp Popper / Player location settings read/write/validation
-19. Create help HTML pages and hookup to the program
-21. Ensure all the features of the ScreenRes editor exist in program
-22. Add all SetDMD functions to program
-23. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
+6. PinUp Popper / Player location settings read/write/validation
+7. Create help HTML pages and hookup to the program
+8. Ensure all the features of the ScreenRes editor exist in program
+9. Add all SetDMD functions to program
+10. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
 for things like Wheels / Backglass / Playfield / Launch Audio / etc.
+11. P-Roc settings read/write/validation
+12. Manual validation output info for Pinball FX2/FX3
+
 
 
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!
-
-# Revision History
-
-0.1.6 - 1/5/2020:  
-	1. More documentation and settings page updates.  
-	2. Menu reorganization.  
-	3. Completed initial version of all settings we need.  
-	4. Global Exception logging  
 
 # Help Needed
 

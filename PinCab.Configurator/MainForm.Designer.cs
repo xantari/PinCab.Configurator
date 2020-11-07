@@ -54,8 +54,6 @@
             this.writepinballYSettingstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepinupPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepinupPopperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.writesteamPinballFX2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.writesteamPinballFX3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepRocSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateallSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +74,6 @@
             this.dumpHighLevelDisplayInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmbDisplayLabel = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -97,6 +94,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
             this.txtData = new System.Windows.Forms.TextBox();
+            this.txtDisplayLabel = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -237,8 +235,6 @@
             this.writepinballYSettingstxtToolStripMenuItem,
             this.writepinupPlayerToolStripMenuItem,
             this.writepinupPopperToolStripMenuItem,
-            this.writesteamPinballFX2ToolStripMenuItem,
-            this.writesteamPinballFX3ToolStripMenuItem,
             this.writepRocSettingsToolStripMenuItem});
             this.writeConfigurationToolStripMenuItem.Name = "writeConfigurationToolStripMenuItem";
             this.writeConfigurationToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
@@ -313,18 +309,6 @@
             this.writepinupPopperToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writepinupPopperToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
-            // writesteamPinballFX2ToolStripMenuItem
-            // 
-            this.writesteamPinballFX2ToolStripMenuItem.Name = "writesteamPinballFX2ToolStripMenuItem";
-            this.writesteamPinballFX2ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writesteamPinballFX2ToolStripMenuItem.Text = "Steam Pinball FX2";
-            // 
-            // writesteamPinballFX3ToolStripMenuItem
-            // 
-            this.writesteamPinballFX3ToolStripMenuItem.Name = "writesteamPinballFX3ToolStripMenuItem";
-            this.writesteamPinballFX3ToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writesteamPinballFX3ToolStripMenuItem.Text = "Steam Pinball FX3";
-            // 
             // writepRocSettingsToolStripMenuItem
             // 
             this.writepRocSettingsToolStripMenuItem.Name = "writepRocSettingsToolStripMenuItem";
@@ -356,6 +340,7 @@
             this.validateallSettingsToolStripMenuItem.Name = "validateallSettingsToolStripMenuItem";
             this.validateallSettingsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.validateallSettingsToolStripMenuItem.Text = "All Settings";
+            this.validateallSettingsToolStripMenuItem.Click += new System.EventHandler(this.validateallSettingsToolStripMenuItem_Click);
             // 
             // monitorConfigurationToolStripMenuItem
             // 
@@ -470,24 +455,6 @@
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // cmbDisplayLabel
-            // 
-            this.cmbDisplayLabel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDisplayLabel.FormattingEnabled = true;
-            this.cmbDisplayLabel.Items.AddRange(new object[] {
-            "Playfield",
-            "DMD",
-            "Backglass",
-            "Topper",
-            "Apron",
-            "Backglass & DMD",
-            "Topper & DMD"});
-            this.cmbDisplayLabel.Location = new System.Drawing.Point(91, 88);
-            this.cmbDisplayLabel.MaxDropDownItems = 10;
-            this.cmbDisplayLabel.Name = "cmbDisplayLabel";
-            this.cmbDisplayLabel.Size = new System.Drawing.Size(244, 21);
-            this.cmbDisplayLabel.TabIndex = 8;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -556,7 +523,7 @@
             this.btnAddRegionToDisplay.Name = "btnAddRegionToDisplay";
             this.btnAddRegionToDisplay.Size = new System.Drawing.Size(146, 23);
             this.btnAddRegionToDisplay.TabIndex = 19;
-            this.btnAddRegionToDisplay.Text = "Add Region To Display";
+            this.btnAddRegionToDisplay.Text = "Add / Update Region";
             this.btnAddRegionToDisplay.UseVisualStyleBackColor = true;
             this.btnAddRegionToDisplay.Click += new System.EventHandler(this.btnAddRegionToDisplay_Click);
             // 
@@ -597,7 +564,12 @@
             "Blue",
             "Yellow",
             "Pink",
-            "White",
+            "Maroon",
+            "BlueViolet",
+            "Purple",
+            "GreenYellow",
+            "Silver",
+            "Ivory",
             "Orange"});
             this.cmbRegionColor.Location = new System.Drawing.Point(329, 159);
             this.cmbRegionColor.MaxDropDownItems = 10;
@@ -703,11 +675,19 @@
             this.txtData.Size = new System.Drawing.Size(756, 183);
             this.txtData.TabIndex = 1;
             // 
+            // txtDisplayLabel
+            // 
+            this.txtDisplayLabel.Location = new System.Drawing.Point(91, 88);
+            this.txtDisplayLabel.Name = "txtDisplayLabel";
+            this.txtDisplayLabel.Size = new System.Drawing.Size(338, 20);
+            this.txtDisplayLabel.TabIndex = 29;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 584);
+            this.Controls.Add(this.txtDisplayLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.numericUpDownRegionHeight);
             this.Controls.Add(this.numericUpDownRegionWidth);
@@ -724,7 +704,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cmbDisplayLabel);
             this.Controls.Add(this.btnSaveDisplayLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listBoxDisplays);
@@ -764,7 +743,6 @@
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateFFMpegCommandsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshDisplayDepictionToolStripMenuItem;
-        private System.Windows.Forms.ComboBox cmbDisplayLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -800,8 +778,6 @@
         private System.Windows.Forms.ToolStripMenuItem writepinupPlayerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writepinupPopperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writePinballXiniToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem writesteamPinballFX2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem writesteamPinballFX3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpHighLevelDisplayInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writepRocSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem validatePinballXiniToolStripMenuItem1;
@@ -821,6 +797,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelMonitorDrawing;
         private System.Windows.Forms.TextBox txtData;
+        private System.Windows.Forms.TextBox txtDisplayLabel;
     }
 }
 

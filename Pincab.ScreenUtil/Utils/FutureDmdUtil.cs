@@ -1,5 +1,6 @@
 ﻿using IniParser;
 using IniParser.Model;
+using PinCab.ScreenUtil.Extensions;
 using PinCab.ScreenUtil.Models;
 using Serilog;
 using System;
@@ -21,6 +22,8 @@ namespace PinCab.ScreenUtil.Utils
         private IniData _data { get; set; }
         private FileIniDataParser _parser { get; set; }
 
+        public const string ToolName = "FutureDMD";
+
         private const string monitor = "PosScreen"; //0 based screen #
         private const string height = "SizeH";
         private const string width = "SizeW";
@@ -37,13 +40,13 @@ namespace PinCab.ScreenUtil.Utils
         public void SaveSettings()
         {
             //Copy current file as backup
-            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\";
+            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\FutureDMD\\";
             var fileInfo = new FileInfo(_iniFilePath);
             Directory.CreateDirectory(currentFolder);
             string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
             File.Copy(_iniFilePath, filePath);
 
-            Log.Information("Wrote future dmd backup: {location}", filePath);
+            Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);
 
             //Save the file
             using (var ms = new MemoryStream())
@@ -93,8 +96,8 @@ namespace PinCab.ScreenUtil.Utils
 
         public void SetDisplayDetails(string section, List<DisplayDetail> displayDetails)
         {
-            var display = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(section));
-            var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(section));
+            var display = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == section.ToLower()));
+            var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.ToLower().Contains(section.ToLower()));
 
             if (regionRectangle != null)
             {  //FutureDMD settings store in a single section called [default]
@@ -121,7 +124,7 @@ namespace PinCab.ScreenUtil.Utils
             var result = new ValidationResult();
             var futureDmdRegionFromIni = GetRegionRectangle("default");
 
-            var display = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(displayName));
+            var display = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == displayName.ToLower()));
             var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(displayName));
             var monitorNumber = display?.GetMonitorNumber() - 1;
 
@@ -129,48 +132,46 @@ namespace PinCab.ScreenUtil.Utils
             {
                 if (GetMonitorNumber("default") != monitorNumber)
                 {
-                    result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"FutureDMD {displayName} Monitor Number does not match. Expected: {GetMonitorNumber("default")} Actual: {monitorNumber}", MessageLevel.Error));
+                        ($"{ToolName}: {displayName} Monitor Number does not match. Expected: {GetMonitorNumber("default")} Actual: {monitorNumber}", MessageLevel.Error));
                 }
                 
                 if (futureDmdRegionFromIni.RegionDisplayHeight != regionRectangle.RegionDisplayHeight)
                 {
-                    result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"FutureDMD {displayName} Region Display Height does not match. Expected: {regionRectangle.RegionDisplayHeight} Actual: {futureDmdRegionFromIni.RegionDisplayHeight}", MessageLevel.Error));
+                        ($"{ToolName}: {displayName} Region Display Height does not match. Expected: {regionRectangle.RegionDisplayHeight} Actual: {futureDmdRegionFromIni.RegionDisplayHeight}", MessageLevel.Error));
                 }
 
                 if (futureDmdRegionFromIni.RegionDisplayWidth != regionRectangle.RegionDisplayWidth)
                 {
-                    result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"FutureDMD {displayName} Region Display Width does not match. Expected: {regionRectangle.RegionDisplayWidth} Actual: {futureDmdRegionFromIni.RegionDisplayWidth}", MessageLevel.Error));
+                        ($"{ToolName}: {displayName} Region Display Width does not match. Expected: {regionRectangle.RegionDisplayWidth} Actual: {futureDmdRegionFromIni.RegionDisplayWidth}", MessageLevel.Error));
                 }
 
                 var regionOffsetX = display.VirtualResolutionOffsetX(regionRectangle);
                 if (futureDmdRegionFromIni.RegionOffsetX != regionOffsetX)
                 {
-                    result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"FutureDMD {displayName} Region Display X Offset does not match. Expected: {regionOffsetX} Actual: {futureDmdRegionFromIni.RegionOffsetX}", MessageLevel.Error));
+                        ($"{ToolName}: {displayName} Region Display X Offset does not match. Expected: {regionOffsetX} Actual: {futureDmdRegionFromIni.RegionOffsetX}", MessageLevel.Error));
                 }
 
                 var regionOffsetY = display.VirtualResolutionOffsetY(regionRectangle);
                 if (futureDmdRegionFromIni.RegionOffsetY != regionOffsetY)
                 {
-                    result.IsValid = false;
                     result.Messages.Add(new ValidationMessage
-                        ($"FutureDMD {displayName} Region Display Y Offset does not match. Expected: {regionOffsetY} Actual: {futureDmdRegionFromIni.RegionOffsetY}", MessageLevel.Error));
+                        ($"{ToolName}: {displayName} Region Display Y Offset does not match. Expected: {regionOffsetY} Actual: {futureDmdRegionFromIni.RegionOffsetY}", MessageLevel.Error));
                 }
             }
             else
             {
                 result.Messages.Add(new ValidationMessage
-                 ($"FutureDMD: No {displayName} Region defined. Skipping...", MessageLevel.Information));
+                 ($"{ToolName}: No {displayName} Region defined. Skipping...", MessageLevel.Information));
             }
 
-            result.Messages.Add(new ValidationMessage($"FutureDMD: {displayName} Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
+            if (result.Messages.HasAnyErrors())
+                result.IsValid = false;
+
+            result.Messages.Add(new ValidationMessage($"{ToolName}: {displayName} Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
 
             return result;
         }

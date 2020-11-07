@@ -1,7 +1,9 @@
 ﻿using IniParser;
 using IniParser.Model;
+using PinCab.ScreenUtil.Extensions;
 using PinCab.ScreenUtil.Models;
 using Serilog;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +35,7 @@ namespace PinCab.ScreenUtil.Utils
     {
         private string _screenResFilePath { get; set; }
         
-        private const string ToolName = "B2S Screenres.txt";
+        public const string ToolName = "B2S Screenres.txt";
 
         private List<string> _fileContentsArray { get; set; } = new List<string>();
 
@@ -49,13 +51,13 @@ namespace PinCab.ScreenUtil.Utils
         public void SaveSettings()
         {
             //Copy current file as backup
-            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\";
+            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\B2S\\";
             var fileInfo = new FileInfo(_screenResFilePath);
             Directory.CreateDirectory(currentFolder);
             string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
             File.Copy(_screenResFilePath, filePath);
 
-            Log.Information("{ToolName} Wrote B2S screenres.txt backup: {location}", ToolName, filePath);
+            Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);
 
             //Save the file
             File.WriteAllText(_screenResFilePath, string.Join("\r\n", _fileContentsArray), Encoding.UTF8);
@@ -132,109 +134,162 @@ namespace PinCab.ScreenUtil.Utils
             _fileContentsArray[0] = regionRectangle.RegionDisplayWidth.ToString();
         }
 
-        public void SetDisplayDetails(List<DisplayDetail> displayDetails)
+        public void SetDisplayDetails(string section, List<DisplayDetail> displayDetails)
         {
-            var playfield = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Playfield));
-            var dmd = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.DMD));
-            var backglass = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Backglass));
+            var display = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == section.ToLower()));
+            var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.ToLower().Contains(section.ToLower()));
 
-            //var regionRectangle = display?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(section));
+            if (regionRectangle != null)
+            {
+                if (section == Consts.Playfield)
+                {
 
-            //if (regionRectangle != null)
-            //{  
-            //    SetRegionRectangle("default", display, regionRectangle);
-            //    SetMonitorNumber("default", display.GetMonitorNumber() - 1); //Future stores monitor #'s starting at 0
-            //}
+                }
+                if (section == Consts.DMD)
+                {
+
+                }
+                if (section == Consts.Backglass)
+                {
+
+                }
+                //SetRegionRectangle(section, regionRectangle);
+                //SetMonitorNumber(section, display.GetMonitorNumber() - 1); //PinballX stores monitor #'s starting at 0
+            }
         }
 
         public ValidationResult Validate(List<DisplayDetail> displayDetails)
         {
             var result = new ValidationResult();
 
-            var playfield = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Playfield));
-            var dmd = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.DMD));
-            var backglass = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Backglass));
+            var playfield = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == Consts.Playfield.ToLower()));
+            var dmd = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == Consts.DMD.ToLower()));
+            var backglass = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == Consts.Backglass.ToLower()));
 
             if (!File.Exists(_screenResFilePath))
             {
                 result.Messages.Add(new ValidationMessage
                     ($"{ToolName}: Unable to find B2S screenres.txt file. Have you defined it's location in settings yet?", MessageLevel.Error));
-                result.IsValid = false;
             }
 
-            if (!result.IsValid) //Don't proceed forward with validations if they haven't defined the minimum necessary items
+            if (playfield == null)
+                result.Messages.Add(new ValidationMessage($"{ToolName}: Playfield not yet defined.", MessageLevel.Error));
+            if (backglass == null)
+                result.Messages.Add(new ValidationMessage($"{ToolName}: Backglass not yet defined.", MessageLevel.Error));
+            if (dmd == null)
+                result.Messages.Add(new ValidationMessage($"{ToolName}: DMD not yet defined.", MessageLevel.Error));
+
+            if (result.Messages.HasAnyErrors()) //Don't proceed forward with validations if they haven't defined the minimum necessary items
+            {
+                result.IsValid = false;
                 return result;
+            }
 
             var dmdRegionFromScreenResTxt = GetDMDRegionRectangle();
             var playfieldRegionFromScreenResTxt = GetPlayfieldRegionRectangle();
             var backglassRegionFromScreenResTxt = GetBackglassRegionRectangle();
 
-            if (playfield == null)
+            if (dmdRegionFromScreenResTxt != null)
             {
-                result.Messages.Add(new ValidationMessage($"{ToolName}: Playfield not yet defined.", MessageLevel.Error));
-                result.IsValid = false;
+                var dmdRectangle = dmd?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.DMD));
+
+                if (dmdRegionFromScreenResTxt.RegionDisplayHeight != dmdRectangle.RegionDisplayHeight)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {dmdRectangle.RegionLabel} Region Display Height does not match. Expected: {dmdRectangle.RegionDisplayHeight} Actual: {dmdRegionFromScreenResTxt.RegionDisplayHeight}", MessageLevel.Error));
+                }
+
+                if (dmdRegionFromScreenResTxt.RegionDisplayWidth != dmdRectangle.RegionDisplayWidth)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {dmdRectangle.RegionLabel} Region Display Width does not match. Expected: {dmdRectangle.RegionDisplayWidth} Actual: {dmdRegionFromScreenResTxt.RegionDisplayWidth}", MessageLevel.Error));
+                }
+
+                //var regionOffsetX = dmd.VirtualResolutionOffsetX(dmdRectangle);
+                if (dmdRegionFromScreenResTxt.RegionOffsetX != dmdRectangle.RegionOffsetX)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {dmdRectangle.RegionLabel} Region Display X Offset does not match. Expected: {dmdRectangle.RegionOffsetX} Actual: {dmdRegionFromScreenResTxt.RegionOffsetX}", MessageLevel.Error));
+                }
+
+                //var regionOffsetY = dmd.VirtualResolutionOffsetY(dmdRectangle);
+                if (dmdRegionFromScreenResTxt.RegionOffsetY != dmdRectangle.RegionOffsetY)
+                {
+                    result.IsValid = false;
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {dmdRectangle.RegionLabel} Region Display Y Offset does not match. Expected: {dmdRectangle.RegionOffsetY} Actual: {dmdRegionFromScreenResTxt.RegionOffsetY}", MessageLevel.Error));
+                }
             }
-            if (backglass == null)
+            else
             {
-                result.Messages.Add(new ValidationMessage($"{ToolName}: Backglass not yet defined.", MessageLevel.Error));
-                result.IsValid = false;
+                result.Messages.Add(new ValidationMessage
+                 ($"{ToolName}: No DMD Region defined. Skipping...", MessageLevel.Information));
             }
-            if (dmd == null)
+
+            if (backglassRegionFromScreenResTxt != null)
             {
-                result.Messages.Add(new ValidationMessage($"{ToolName}: DMD not yet defined.", MessageLevel.Error));
-                result.IsValid = false;
+                var backglassRectangle = backglass?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.Backglass));
+
+                if (backglassRegionFromScreenResTxt.RegionDisplayHeight != backglassRectangle.RegionDisplayHeight)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {backglassRectangle.RegionLabel} Region Display Height does not match. Expected: {backglassRectangle.RegionDisplayHeight} Actual: {backglassRegionFromScreenResTxt.RegionDisplayHeight}", MessageLevel.Error));
+                }
+
+                if (backglassRegionFromScreenResTxt.RegionDisplayWidth != backglassRectangle.RegionDisplayWidth)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {backglassRectangle.RegionLabel} Region Display Width does not match. Expected: {backglassRectangle.RegionDisplayWidth} Actual: {backglassRegionFromScreenResTxt.RegionDisplayWidth}", MessageLevel.Error));
+                }
+
+                //var regionOffsetX = dmd.VirtualResolutionOffsetX(dmdRectangle);
+                if (backglassRegionFromScreenResTxt.RegionOffsetX != backglassRectangle.RegionOffsetX)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {backglassRectangle.RegionLabel} Region Display X Offset does not match. Expected: {backglassRectangle.RegionOffsetX} Actual: {backglassRegionFromScreenResTxt.RegionOffsetX}", MessageLevel.Error));
+                }
+
+                //var regionOffsetY = dmd.VirtualResolutionOffsetY(dmdRectangle);
+                if (backglassRegionFromScreenResTxt.RegionOffsetY != backglassRectangle.RegionOffsetY)
+                {
+                    result.IsValid = false;
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {backglassRectangle.RegionLabel} Region Display Y Offset does not match. Expected: {backglassRectangle.RegionOffsetY} Actual: {backglassRegionFromScreenResTxt.RegionOffsetY}", MessageLevel.Error));
+                }
+            }
+            else
+            {
+                result.Messages.Add(new ValidationMessage
+                 ($"{ToolName}: No Backglass Region defined. Skipping...", MessageLevel.Information));
             }
 
-            if (!result.IsValid) //Don't proceed forward with validations if they haven't defined the minimum necessary items
-                return result;
+            if (playfieldRegionFromScreenResTxt != null)
+            {
+                var playFieldRectangle = playfield?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.Playfield));
 
+                if (playfieldRegionFromScreenResTxt.RegionDisplayHeight != playFieldRectangle.RegionDisplayHeight)
+                {
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {playFieldRectangle.RegionLabel} Region Display Height does not match. Expected: {playFieldRectangle.RegionDisplayHeight} Actual: {playfieldRegionFromScreenResTxt.RegionDisplayHeight}", MessageLevel.Error));
+                }
 
-            //if (regionRectangle != null)
-            //{
-            //    if (GetMonitorNumber("default") != monitorNumber)
-            //    {
-            //        result.IsValid = false;
-            //        result.Messages.Add(new ValidationMessage
-            //            ($"FutureDMD {displayName} Monitor Number does not match. Expected: {GetMonitorNumber("default")} Actual: {monitorNumber}", MessageLevel.Error));
-            //    }
+                if (playfieldRegionFromScreenResTxt.RegionDisplayWidth != playFieldRectangle.RegionDisplayWidth)
+                {
+                    result.IsValid = false;
+                    result.Messages.Add(new ValidationMessage
+                        ($"{ToolName}: {playFieldRectangle.RegionLabel} Region Display Width does not match. Expected: {playFieldRectangle.RegionDisplayWidth} Actual: {playfieldRegionFromScreenResTxt.RegionDisplayWidth}", MessageLevel.Error));
+                }
+            }
+            else
+            {
+                result.Messages.Add(new ValidationMessage
+                 ($"{ToolName}: No Playfield Region defined. Skipping...", MessageLevel.Information));
+            }
 
-            //    if (futureDmdRegionFromIni.RegionDisplayHeight != regionRectangle.RegionDisplayHeight)
-            //    {
-            //        result.IsValid = false;
-            //        result.Messages.Add(new ValidationMessage
-            //            ($"FutureDMD {displayName} Region Display Height does not match. Expected: {regionRectangle.RegionDisplayHeight} Actual: {futureDmdRegionFromIni.RegionDisplayHeight}", MessageLevel.Error));
-            //    }
+            if (result.Messages.HasAnyErrors())
+                result.IsValid = false;
 
-            //    if (futureDmdRegionFromIni.RegionDisplayWidth != regionRectangle.RegionDisplayWidth)
-            //    {
-            //        result.IsValid = false;
-            //        result.Messages.Add(new ValidationMessage
-            //            ($"FutureDMD {displayName} Region Display Width does not match. Expected: {regionRectangle.RegionDisplayWidth} Actual: {futureDmdRegionFromIni.RegionDisplayWidth}", MessageLevel.Error));
-            //    }
-
-            //    var regionOffsetX = display.VirtualResolutionOffsetX(regionRectangle);
-            //    if (futureDmdRegionFromIni.RegionOffsetX != regionOffsetX)
-            //    {
-            //        result.IsValid = false;
-            //        result.Messages.Add(new ValidationMessage
-            //            ($"FutureDMD {displayName} Region Display X Offset does not match. Expected: {regionOffsetX} Actual: {futureDmdRegionFromIni.RegionOffsetX}", MessageLevel.Error));
-            //    }
-
-            //    var regionOffsetY = display.VirtualResolutionOffsetY(regionRectangle);
-            //    if (futureDmdRegionFromIni.RegionOffsetY != regionOffsetY)
-            //    {
-            //        result.IsValid = false;
-            //        result.Messages.Add(new ValidationMessage
-            //            ($"FutureDMD {displayName} Region Display Y Offset does not match. Expected: {regionOffsetY} Actual: {futureDmdRegionFromIni.RegionOffsetY}", MessageLevel.Error));
-            //    }
-            //}
-            //else
-            //{
-            //    result.Messages.Add(new ValidationMessage
-            //     ($"FutureDMD: No {displayName} Region defined. Skipping...", MessageLevel.Information));
-            //}
-
-            //result.Messages.Add(new ValidationMessage($"FutureDMD: {displayName} Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
+            result.Messages.Add(new ValidationMessage($"{ToolName}: Validation done. Issues found: {!result.IsValid}", MessageLevel.Information));
 
             return result;
         }

@@ -12,4 +12,13 @@ namespace PinCab.ScreenUtil.Models
         Warning,
         Error
     }
+
+    public enum Display
+    {
+        Playfield,
+        DMD,
+        Topper,
+        Apron,
+        Backglass
+    }
 }

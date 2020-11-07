@@ -147,19 +147,19 @@ namespace PinCab.ScreenUtil
                     result.IsValid = false;
                 }
             }
-            if (!displayDetails.Any(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower())))
+            if (!displayDetails.Any(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == Consts.Playfield.ToLower())))
             {
-                result.Messages.Add(new ValidationMessage($"No Playfield Monitor selected yet. Please select a playfield monitor and give it a label of Playfield.", MessageLevel.Error));
+                result.Messages.Add(new ValidationMessage($"No Playfield display selected yet. Please select a playfield display and give it a region label of Playfield.", MessageLevel.Error));
                 result.IsValid = false;
             }
-            var playfieldDisplay = displayDetails.FirstOrDefault(p => p.DisplayLabel != null && p.DisplayLabel.ToLower().Contains(Consts.Playfield.ToLower()));
+            var playfieldDisplay = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.ToLower() == Consts.Playfield.ToLower()));
             if (playfieldDisplay != null && !playfieldDisplay.Display.IsGDIPrimary)
             {
                 result.Messages.Add(new ValidationMessage($"Your playfield display must be monitor 1 and marked as the primary monitor.", MessageLevel.Error));
                 result.IsValid = false;
             }
             //Check if DMD is recommended 4:1 ratio
-            var dmdDisplay = displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.DMD));
+            var dmdDisplay = displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel.Contains(Consts.DMD)));
             var regionDmdRectangle = dmdDisplay?.RegionRectangles?.FirstOrDefault(p => p.RegionLabel.Contains(Consts.DMD));
             if (regionDmdRectangle == null)
             {
@@ -175,7 +175,7 @@ namespace PinCab.ScreenUtil
                 }
                 else
                 {
-                    if ((regionDmdRectangle.RegionDisplayHeight / Convert.ToDecimal(regionDmdRectangle.RegionDisplayWidth)) != 0.4M) //Not a 4:1 ratio
+                    if ((regionDmdRectangle.RegionDisplayHeight / Convert.ToDecimal(regionDmdRectangle.RegionDisplayWidth)) != 0.25M) //Not a 4:1 ratio
                     {
                         result.Messages.Add(new ValidationMessage($"WARNING: DMD Region is not recommended 4:1 ratio.", MessageLevel.Warning));
                     }

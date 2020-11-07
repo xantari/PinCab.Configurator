@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,10 @@ namespace PinCab.Configurator
 
         private void F_Paint(object sender, PaintEventArgs e)
         {
+            //e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            //e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            //e.Graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             var pen = new Pen(Color.Red, 20);
             //0,0 because it's in the context of the form that is already moved to the proper screen
             var rectangle = new Rectangle(0, 0, _displayDetail.Display.GetScreen().Bounds.Width, _displayDetail.Display.GetScreen().Bounds.Height);
@@ -44,14 +49,19 @@ namespace PinCab.Configurator
 
             if (!string.IsNullOrEmpty(_displayDetail.DisplayLabel))
             {
+                //GraphicsPath path = new GraphicsPath();
+                
                 Font drawFont = new Font("Arial", 40, FontStyle.Bold);
                 SolidBrush drawBrush = new SolidBrush(Color.Red);
+
+                //path.AddString(_displayDetail.DisplayLabel, FontFamily.GenericSansSerif, (int)FontStyle.Regular, e.Graphics.DpiY * 40 / 72, new Point(10,10), new StringFormat());
+                //e.Graphics.DrawPath(new Pen(Color.Red, 4.9f), path);
                 e.Graphics.DrawString(_displayDetail.DisplayLabel, drawFont, drawBrush, 20, 20); //20 is the rectangle line width, so move it inside of that
             }
 
             //Draw the visible screen area for this screen (meaning it isn't going to display full screen, instead it will be bound by a box)
             //This is typically for LCD DMD folks, who are using a large screen, but only showing a portion of the screen in the backbox
-            foreach(var region in _displayDetail.RegionRectangles)
+            foreach (var region in _displayDetail.RegionRectangles)
             {
                 if (region.RegionOffsetX != 0 || region.RegionOffsetY != 0 || region.RegionDisplayHeight != 0 || region.RegionDisplayWidth != 0)
                 {

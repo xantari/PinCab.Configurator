@@ -9,6 +9,8 @@ namespace PinCab.ScreenUtil.Utils
 {
     public class UltraDmdUtil
     {
+        private const string ToolName = "UltraDMD/FlexDMD";
+
         public UltraDmdUtil() { }
 
         public bool KeyExists()

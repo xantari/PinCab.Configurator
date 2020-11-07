@@ -9,6 +9,7 @@ namespace PinCab.ScreenUtil.Utils
 {
     public class VpinMameUtil
     {
+        private const string ToolName = "VPinMAME";
         public VpinMameUtil() { }
 
         //public static string PinMameRegistryKeyLocation = @"Computer\HKEY_CURRENT_USER\Software\Freeware\Visual PinMame";

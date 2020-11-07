@@ -36,10 +36,10 @@ namespace PinCab.Configurator.Utils
                 var _pinballXUtil = new PinballXUtil(_settings.PinballXIniPath);
 
                 var result = _pinballXUtil.Validate(_displayDetails);
-                LogValidationResult("PinballX", result);
+                LogValidationResult(PinballXUtil.ToolName, result);
             }
             else
-                _txtData.Text += "PinballX Ini Path not set yet.";
+                _txtData.Text += $"{PinballXUtil.ToolName}: Ini Path not set yet.";
         }
 
         public void WritePinballXSettings()
@@ -53,16 +53,16 @@ namespace PinCab.Configurator.Utils
                 _pinballXUtil.SetDisplayDetails(Consts.Apron, _displayDetails);
                 _pinballXUtil.SetDisplayDetails(Consts.Backglass, _displayDetails);
 
-                var display = _displayDetails.FirstOrDefault(p => p.DisplayLabel.Contains(Consts.Playfield));
+                var display = _displayDetails.FirstOrDefault(p => p.RegionRectangles.Any(c => c.RegionLabel == Consts.Playfield));
                 if (display != null)
                     _pinballXUtil.SetMonitorNumber(PinballXUtil.Display, display.GetMonitorNumber() - 1);
 
                 _pinballXUtil.SaveSettings();
-                _txtData.Text += $"PinballX Write command completed.\r\n";
-                Log.Information("PinballX Write command completed.");
+                _txtData.Text += $"{PinballXUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{PinballXUtil.ToolName}: Write command completed.");
             }
             else
-                _txtData.Text += "PinballX Ini Path not set yet.";
+                _txtData.Text += $"{PinballXUtil.ToolName}: Ini Path not set yet.";
         }
 
         public void ValidateFutureDmd()
@@ -72,10 +72,10 @@ namespace PinCab.Configurator.Utils
                 var _util = new FutureDmdUtil(_settings.FutureDMDIniPath);
 
                 var result = _util.Validate(_displayDetails);
-                LogValidationResult("FutureDMD", result);
+                LogValidationResult(FutureDmdUtil.ToolName, result);
             }
             else
-                _txtData.Text += "FutureDMD Ini Path not set yet.";
+                _txtData.Text += $"{FutureDmdUtil.ToolName}: Ini Path not set yet.";
         }
 
         public void WriteFutureDMDSettings()
@@ -87,26 +87,47 @@ namespace PinCab.Configurator.Utils
                 _util.SetDisplayDetails(Consts.DMD, _displayDetails);
 
                 _util.SaveSettings();
-                _txtData.Text += $"FutureDMD Write command completed.\r\n";
-                Log.Information("FutureDMD Write command completed.");
+                _txtData.Text += $"{FutureDmdUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{FutureDmdUtil.ToolName}: Write command completed.");
             }
             else
-                _txtData.Text += "FutureDMD Ini Path not set yet.";
+                _txtData.Text += $"{FutureDmdUtil.ToolName}: Ini Path not set yet.";
+        }
+
+        public void ValidateB2sSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.B2SScreenResPath))
+            {
+                var _util = new B2sUtil(_settings.B2SScreenResPath);
+
+                var result = _util.Validate(_displayDetails);
+                LogValidationResult(B2sUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{B2sUtil.ToolName}: Path not set yet.";
         }
 
         public void LogValidationResult(string command, ValidationResult result)
         {
             if (result?.Messages.Count() > 0)
             {
-                _txtData.Text += $"{command} validation error: \r\n";
+                _txtData.Text += $"{command} validation messages: \r\n";
                 foreach (var message in result.Messages)
                 {
-                    Log.Error("Validation Error: {msg}", message.Message);
+                    if (message.Level == MessageLevel.Error)
+                        Log.Error("{command}: Validation Error: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Warning)
+                        Log.Warning("{command}: Validation Warning: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Information)
+                        Log.Information("{command}: Validation Information: {message}", command, message.Message);
                     _txtData.Text += message.Message + "\r\n";
                 }
             }
+
+            if (result != null && result.IsValid)
+                _txtData.Text += $"{command}: Validated. No issues found.\r\n";
             else
-                _txtData.Text += $"{command} validated. No issues found.\r\n";
+                _txtData.Text += $"{command}: Validated. Issues found.\r\n";
         }
     }
 }

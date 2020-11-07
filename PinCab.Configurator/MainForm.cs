@@ -37,6 +37,8 @@ namespace PinCab.Configurator
 
         private FormHelper helper;
 
+        public static bool ChangesOccurred = false;
+
 
         public MainForm()
         {
@@ -64,9 +66,11 @@ namespace PinCab.Configurator
                 foreach (var display in _settings?.DisplaySettings)
                 {
                     var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
-                    loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
-                    loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
-
+                    if (loadedDisplaySettingToUpdate != null)
+                    {
+                        loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
+                        loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+                    }
                 }
             }
         }
@@ -152,7 +156,7 @@ namespace PinCab.Configurator
         private void ClearFormFields()
         {
             InProcessOfClearingFormFields = true;
-            cmbDisplayLabel.Text = string.Empty;
+            txtDisplayLabel.Text = string.Empty;
             cmbRegionColor.Text = string.Empty;
             cmbRegionLabel.Text = string.Empty;
             numericUpDownRegionHeight.Value = 0;
@@ -181,7 +185,7 @@ namespace PinCab.Configurator
             if (listBoxDisplays.SelectedItem != null)
             {
                 var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
-                cmbDisplayLabel.Text = displayDetail.DisplayLabel;
+                txtDisplayLabel.Text = displayDetail.DisplayLabel;
                 listBoxDisplayRegions.Items.Clear();
                 foreach (var region in displayDetail.RegionRectangles)
                 {
@@ -267,14 +271,45 @@ namespace PinCab.Configurator
                 MessageBox.Show("Please select a color");
                 return;
             }
-            var region = new RegionRectangle();
-            region.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
-            region.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
-            region.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
-            region.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
-            region.RegionLabel = cmbRegionLabel.Text;
-            region.RegionColor = Color.FromName(cmbRegionColor.Text);
-            listBoxDisplayRegions.Items.Add(region);
+
+            //See if this region already exists, if so update it
+            var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+            var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+            if (regionRectangleEditing != null)
+            {
+                regionRectangleEditing.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
+                regionRectangleEditing.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
+                regionRectangleEditing.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
+                regionRectangleEditing.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
+                regionRectangleEditing.RegionLabel = cmbRegionLabel.Text;
+                regionRectangleEditing.RegionColor = Color.FromName(cmbRegionColor.Text);
+            }
+            else
+            {
+                var region = new RegionRectangle();
+                region.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
+                region.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
+                region.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
+                region.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
+                region.RegionLabel = cmbRegionLabel.Text;
+                region.RegionColor = Color.FromName(cmbRegionColor.Text);
+                displayDetail.RegionRectangles.Add(region);
+                listBoxDisplayRegions.Items.Add(region);
+            }
+
+            int currentSelectedIndex = listBoxDisplayRegions.SelectedIndex;
+            listBoxDisplayRegions.Items.Clear();
+            foreach (var region in displayDetail.RegionRectangles)
+            {
+                listBoxDisplayRegions.Items.Add(region);
+            }
+            if (listBoxDisplayRegions.Items.Count > 0)
+                listBoxDisplayRegions.SelectedIndex = currentSelectedIndex;
+            else
+                listBoxDisplayRegions.SelectedIndex = -1;
+
+            MainForm.ChangesOccurred = true;
+            RefreshDisplayOnRegionUpdate();
         }
 
         private void listBoxDisplayRegions_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,12 +348,13 @@ namespace PinCab.Configurator
 
         private void SaveDisplayConfig()
         {
+            MainForm.ChangesOccurred = true;
             int currentSelectedIndex = listBoxDisplays.SelectedIndex;
             //int currentSelectedRegion = listBoxDisplayRegions.SelectedIndex;
             if (listBoxDisplays.SelectedIndex >= 0)
             {
                 var listItem = listBoxDisplays.SelectedItem as DisplayDetail;
-                listItem.DisplayLabel = cmbDisplayLabel.Text;
+                listItem.DisplayLabel = txtDisplayLabel.Text;
                 listItem.RegionRectangles.Clear();
                 foreach (var regionListItem in listBoxDisplayRegions.Items)
                 {
@@ -376,11 +412,15 @@ namespace PinCab.Configurator
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
-            if (response == DialogResult.Yes)
+            if (ChangesOccurred)
             {
-                SaveSettings();
+                var response = MessageBox.Show("Do you want to save your settings?", "Save Settings?", MessageBoxButtons.YesNo);
+                if (response == DialogResult.Yes)
+                {
+                    SaveSettings();
+                }
             }
+
             Log.Information("Application Ending... Good Bye!");
             Log.CloseAndFlush();
         }
@@ -448,28 +488,11 @@ namespace PinCab.Configurator
         private void RefreshDisplayOnRegionUpdate()
         {
             var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
-            if (displayDetail != null && listBoxDisplayRegions.SelectedIndex >= 0)
+            if (displayDetail != null)// && listBoxDisplayRegions.SelectedIndex >= 0)
             {
                 var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == displayDetail.Display.DisplayName);
-                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
-                if (regionRectangleEditing != null)
-                {
-                    regionRectangleEditing.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
-                    regionRectangleEditing.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
-                    regionRectangleEditing.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
-                    regionRectangleEditing.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
-                }
-                int currentSelectedIndex = listBoxDisplayRegions.SelectedIndex;
-                listBoxDisplayRegions.Items.Clear();
-                foreach (var region in displayDetail.RegionRectangles)
-                {
-                    listBoxDisplayRegions.Items.Add(region);
-                }
-                listBoxDisplayRegions.SelectedIndex = currentSelectedIndex;
-
                 form.Value?.Refresh();
                 DrawMonitorDepiction();
-                //panelMonitorDrawing.Refresh();
             }
         }
 
@@ -477,6 +500,12 @@ namespace PinCab.Configurator
         {
             if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
+                var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+                if (regionRectangleEditing != null)
+                {
+                    regionRectangleEditing.RegionOffsetX = Convert.ToInt32(numericUpDownRegionXOffset.Value);
+                }
                 RefreshDisplayOnRegionUpdate();
             }
         }
@@ -485,6 +514,12 @@ namespace PinCab.Configurator
         {
             if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
+                var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+                if (regionRectangleEditing != null)
+                {
+                    regionRectangleEditing.RegionOffsetY = Convert.ToInt32(numericUpDownRegionYOffset.Value);
+                }
                 RefreshDisplayOnRegionUpdate();
             }
         }
@@ -493,6 +528,12 @@ namespace PinCab.Configurator
         {
             if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
+                var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+                if (regionRectangleEditing != null)
+                {
+                    regionRectangleEditing.RegionDisplayWidth = Convert.ToInt32(numericUpDownRegionWidth.Value);
+                }
                 RefreshDisplayOnRegionUpdate();
             }
         }
@@ -501,6 +542,12 @@ namespace PinCab.Configurator
         {
             if (!InProcessOfChangingRegions && !InProcessOfClearingFormFields)
             {
+                var displayDetail = listBoxDisplays.SelectedItem as DisplayDetail;
+                var regionRectangleEditing = displayDetail.RegionRectangles.FirstOrDefault(p => p.RegionLabel == cmbRegionLabel.Text);
+                if (regionRectangleEditing != null)
+                {
+                    regionRectangleEditing.RegionDisplayHeight = Convert.ToInt32(numericUpDownRegionHeight.Value);
+                }
                 RefreshDisplayOnRegionUpdate();
             }
         }
@@ -523,32 +570,42 @@ namespace PinCab.Configurator
 
         private void writePinballXiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
             helper.WritePinballXSettings();
         }
 
         private void validatePinballXiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
             helper.ValidatePinballX();
         }
 
         private void validatefutureDMDiniToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
             helper.ValidateFutureDmd();
         }
 
         private void writeFutureDMDiniToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
             helper.WriteFutureDMDSettings();
         }
 
         private void validateb2SScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            helper.ClearMessages();
+            helper.ValidateB2sSettings();
         }
 
         private void writeB2sSettingsScreenrestxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
+        }
 
+        private void validateallSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
         }
     }
 }

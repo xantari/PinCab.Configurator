@@ -30,7 +30,7 @@ replicate to all the other areas automatically.
 10. Exception handling / Logging
 11. Realtime updating of region Size and Offset changes
 12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
-13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X offsets)
+13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X/Y offsets)
 14. Pinball X .ini read/write/validation
 15. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 16. Future DMD (Future Pinball) read/write/validation
@@ -55,6 +55,9 @@ Logging information is in the Log.txt file in the application root folder.
 
 #### 3 Screen Setup (TerryRed Setup (DMD and Topper on same screen))
 ![3 Screen Setup](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/Screenshot_3ScreensV2.png "3 Screen Setup")
+
+#### B2S Screenres Editor
+![B2S Screenres.txt Editor](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/B2sScreenresEditor.png "B2S Screenres Editor")
 
 # TODO
 1. DMDDevice.ini (DMDExt / VPinMame) read/write/validation

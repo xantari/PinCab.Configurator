@@ -17,7 +17,7 @@ replicate to all the other areas automatically.
 4. Validates screen configuration is compatible   
 	a. No screens with negative coordinates  
 	b. Playfield is screen 1 and set as primary  
-	c. DMD Size calculations are 4:1 ratio (just a warning, some DMD's are not 4:1 like the sega DMD's, and the other strange ones like the TMNT / Dataeast ones)  
+	c. DMD Size calculations are 4:1 ratio (just a warning, some DMD's are not 4:1 like the sega DMD's, and the other unique ones like the TMNT / Dataeast ones)  
 	d. Ensure all monitors set to 100% Scaling (no DPI scaling)  
 5. Generates FFMPeg commands to capture the screens and output them to a .MP4 file
 6. Predefined labels for Playfield, DMD, Backglass, Topper, and Apron displays

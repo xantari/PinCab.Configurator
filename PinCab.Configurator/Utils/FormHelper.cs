@@ -125,6 +125,38 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += $"{B2sUtil.ToolName}: Ini Path not set yet.";
         }
 
+        public void ValidateUltraDmdSettings()
+        {
+            var util = new UltraDmdUtil();
+            if (util.KeyExists())
+            {
+                var result = util.Validate(_displayDetails);
+                LogValidationResult(UltraDmdUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{UltraDmdUtil.ToolName}: Registry key not found. Have you installed UltraDMD?";
+        }
+
+        public void WriteUltraDmdSettings()
+        {
+            var util = new UltraDmdUtil();
+            if (util.KeyExists())
+            {
+                var result = util.SaveSettings(_displayDetails);
+                if (result.IsValid)
+                {
+                    _txtData.Text += $"{UltraDmdUtil.ToolName}: Write command completed.\r\n";
+                    Log.Information($"{UltraDmdUtil.ToolName}: Write command completed.");
+                }
+                else 
+                {
+                    _txtData.Text += result.GetMessagesAsText(true);
+                }
+            }
+            else
+                _txtData.Text += $"{UltraDmdUtil.ToolName}: Registry key not found. Have you installed UltraDMD?";
+        }
+
         public void LogValidationResult(string command, ValidationResult result)
         {
             if (result?.Messages.Count() > 0)

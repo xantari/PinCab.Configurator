@@ -72,6 +72,8 @@
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpDisplayInfoToFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpHighLevelDisplayInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.b2SScreenresEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,8 +97,6 @@
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
             this.txtData = new System.Windows.Forms.TextBox();
             this.txtDisplayLabel = new System.Windows.Forms.TextBox();
-            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.b2SScreenresEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -274,7 +274,8 @@
             // 
             this.writeUltraDMDRegistryKeyToolStripMenuItem.Name = "writeUltraDMDRegistryKeyToolStripMenuItem";
             this.writeUltraDMDRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writeUltraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD / FlexDMD Registry Key";
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Text = "UltraDMD Registry Key";
+            this.writeUltraDMDRegistryKeyToolStripMenuItem.Click += new System.EventHandler(this.writeUltraDMDRegistryKeyToolStripMenuItem_Click);
             // 
             // writeDmdDeviceiniToolStripMenuItem
             // 
@@ -377,7 +378,8 @@
             // 
             this.validateultraDMDRegistryKeyToolStripMenuItem1.Name = "validateultraDMDRegistryKeyToolStripMenuItem1";
             this.validateultraDMDRegistryKeyToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.validateultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD / FlexDMD Registry Key";
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Text = "UltraDMD Registry Key";
+            this.validateultraDMDRegistryKeyToolStripMenuItem1.Click += new System.EventHandler(this.validateultraDMDRegistryKeyToolStripMenuItem1_Click);
             // 
             // validateDmdDeviceiniToolStripMenuItem1
             // 
@@ -443,6 +445,21 @@
             this.dumpHighLevelDisplayInformationToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.dumpHighLevelDisplayInformationToolStripMenuItem.Text = "Dump High Level Display Information";
             this.dumpHighLevelDisplayInformationToolStripMenuItem.Click += new System.EventHandler(this.dumpHighLevelDisplayInformationToolStripMenuItem_Click);
+            // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.b2SScreenresEditorToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // b2SScreenresEditorToolStripMenuItem
+            // 
+            this.b2SScreenresEditorToolStripMenuItem.Name = "b2SScreenresEditorToolStripMenuItem";
+            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.b2SScreenresEditorToolStripMenuItem.Text = "B2S Screenres Editor";
+            this.b2SScreenresEditorToolStripMenuItem.Click += new System.EventHandler(this.b2SScreenresEditorToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -684,21 +701,6 @@
             this.txtDisplayLabel.Name = "txtDisplayLabel";
             this.txtDisplayLabel.Size = new System.Drawing.Size(338, 20);
             this.txtDisplayLabel.TabIndex = 29;
-            // 
-            // utilitiesToolStripMenuItem
-            // 
-            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.b2SScreenresEditorToolStripMenuItem});
-            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
-            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.utilitiesToolStripMenuItem.Text = "Utilities";
-            // 
-            // b2SScreenresEditorToolStripMenuItem
-            // 
-            this.b2SScreenresEditorToolStripMenuItem.Name = "b2SScreenresEditorToolStripMenuItem";
-            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.b2SScreenresEditorToolStripMenuItem.Text = "B2S Screenres Editor";
-            this.b2SScreenresEditorToolStripMenuItem.Click += new System.EventHandler(this.b2SScreenresEditorToolStripMenuItem_Click);
             // 
             // MainForm
             // 

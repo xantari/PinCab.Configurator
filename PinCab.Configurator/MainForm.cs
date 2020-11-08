@@ -614,6 +614,7 @@ namespace PinCab.Configurator
         private void validateallSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
+            //TODO: Fill this in
         }
 
         private void b2SScreenresEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -624,6 +625,18 @@ namespace PinCab.Configurator
             //{
             //    _settings = (new ProgramSettings()).LoadSettings();
             //}
+        }
+
+        private void validateultraDMDRegistryKeyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.ValidateUltraDmdSettings();
+        }
+
+        private void writeUltraDMDRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WriteUltraDmdSettings();
         }
     }
 }

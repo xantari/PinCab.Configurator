@@ -78,5 +78,5 @@ Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [
 
 # Help Needed
 
-1. Unable to figure out how to read/write/validation Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios)).
+1. Unable to figure out how to read/write/validate Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios)).
 Settings data appears to be encrypted. Unsure how to read/write to it.

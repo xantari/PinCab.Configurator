@@ -61,7 +61,7 @@ Logging information is in the Log.txt file in the application root folder.
 2. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
 3. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  
-	b. Option to update all previously run ROM's   
+	b. Option to update all previously run ROM's DMD positions  
 4. PinUp Popper / Player location settings read/write/validation
 5. Create help HTML pages and hookup to the program
 6. Add all SetDMD functions to program

@@ -65,7 +65,7 @@ Logging information is in the Log.txt file in the application root folder.
 4. PinUp Popper / Player location settings read/write/validation
 5. Create help HTML pages and hookup to the program
 6. Add all SetDMD functions to program
-7. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings)
+7. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
 for things like Wheels / Backglass / Playfield / Launch Audio / etc.
 8. P-Roc settings read/write/validation
 9. Manual validation output info for Pinball FX2/FX3

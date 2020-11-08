@@ -69,6 +69,7 @@ Logging information is in the Log.txt file in the application root folder.
 for things like Wheels / Backglass / Playfield / Launch Audio / etc.
 8. P-Roc settings read/write/validation
 9. Manual validation output info for Pinball FX2/FX3
+10.  Pinball Y settings read/write/validation
 
 
 

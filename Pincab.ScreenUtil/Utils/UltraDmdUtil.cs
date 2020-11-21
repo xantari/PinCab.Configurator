@@ -78,7 +78,7 @@ namespace PinCab.ScreenUtil.Utils
             //Copy current file as backup
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\UltraDMD\\";
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"UltraDMD_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}.reg";
+            string filePath = currentFolder + $"UltraDMD_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
 
             //Backup the registry
             var key = GetRegKey();

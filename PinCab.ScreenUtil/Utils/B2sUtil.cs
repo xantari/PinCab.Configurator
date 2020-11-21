@@ -99,7 +99,7 @@ namespace PinCab.ScreenUtil.Utils
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\B2S\\";
             var fileInfo = new FileInfo(_screenResFilePath);
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
+            string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}";
             File.Copy(_screenResFilePath, filePath);
 
             Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);

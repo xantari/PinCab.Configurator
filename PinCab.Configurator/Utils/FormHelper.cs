@@ -4,6 +4,7 @@ using PinCab.ScreenUtil.Utils;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,6 +156,41 @@ namespace PinCab.Configurator.Utils
             }
             else
                 _txtData.Text += $"{UltraDmdUtil.ToolName}: Registry key not found. Have you installed UltraDMD?";
+        }
+
+        public void ValidateDmdDeviceIniSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.DMDDeviceIniPath))
+            {
+                if (!File.Exists(_settings.DMDDeviceIniPath))
+                {
+                    _txtData.Text += $"{DmdDeviceUtil.ToolName}: DMDDevice.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    return;
+                }
+                var util = new DmdDeviceUtil(_settings.DMDDeviceIniPath);
+                var result = util.Validate(_displayDetails);
+                LogValidationResult(DmdDeviceUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{DmdDeviceUtil.ToolName}: DMDDevice.ini path not set. Check settings.";
+        }
+
+        public void WriteDmdDeviceIniSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.DMDDeviceIniPath))
+            {
+                if (!File.Exists(_settings.DMDDeviceIniPath))
+                {
+                    _txtData.Text += $"{DmdDeviceUtil.ToolName}: DMDDevice.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    return;
+                }
+                var util = new DmdDeviceUtil(_settings.DMDDeviceIniPath);
+                util.SaveSettings(_displayDetails);
+                _txtData.Text += $"{DmdDeviceUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{DmdDeviceUtil.ToolName}: Write command completed.");
+            }
+            else
+                _txtData.Text += $"{DmdDeviceUtil.ToolName}: DMDDevice.ini path not set. Check settings.";
         }
 
         public void LogValidationResult(string command, ValidationResult result)

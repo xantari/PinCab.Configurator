@@ -12,8 +12,7 @@ namespace PinCab.ScreenUtil
     {
         public RegionRectangle() { }
 
-        //The below values are the visible portion of the screen. This is defined in the front end (PinballX) ini depending on your screen.
-        //TODO: Load from PinballX INI
+        //The below values are the visible portion of the screen. 
         public int RegionOffsetY { get; set; }
         public int RegionOffsetX { get; set; }
         public int RegionDisplayWidth { get; set; }

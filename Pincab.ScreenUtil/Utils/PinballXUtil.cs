@@ -46,7 +46,7 @@ namespace PinCab.ScreenUtil.Utils
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\PinballX\\";
             var fileInfo = new FileInfo(_iniFilePath);
             Directory.CreateDirectory(currentFolder);
-            string filePath = $"{fileInfo.Name}_{DateTime.Now.ToString("MM-dd-yyyy_hhMMss")}";
+            string filePath = $"{fileInfo.Name}_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}";
             File.Copy(_iniFilePath, currentFolder + filePath);
 
             Log.Information("{ToolName}: Wrote setting backup: {location}", ToolName, filePath);

@@ -638,5 +638,17 @@ namespace PinCab.Configurator
             helper.ClearMessages();
             helper.WriteUltraDmdSettings();
         }
+
+        private void writeDmdDeviceiniToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WriteDmdDeviceIniSettings();
+        }
+
+        private void validateDmdDeviceiniToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.ValidateDmdDeviceIniSettings();
+        }
     }
 }

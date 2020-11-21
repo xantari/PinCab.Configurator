@@ -282,6 +282,7 @@
             this.writeDmdDeviceiniToolStripMenuItem.Name = "writeDmdDeviceiniToolStripMenuItem";
             this.writeDmdDeviceiniToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writeDmdDeviceiniToolStripMenuItem.Text = "DMDDevice.ini";
+            this.writeDmdDeviceiniToolStripMenuItem.Click += new System.EventHandler(this.writeDmdDeviceiniToolStripMenuItem_Click);
             // 
             // writevPinMameDefaultRegistryKeyToolStripMenuItem
             // 
@@ -386,6 +387,7 @@
             this.validateDmdDeviceiniToolStripMenuItem1.Name = "validateDmdDeviceiniToolStripMenuItem1";
             this.validateDmdDeviceiniToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.validateDmdDeviceiniToolStripMenuItem1.Text = "DMDDevice.ini";
+            this.validateDmdDeviceiniToolStripMenuItem1.Click += new System.EventHandler(this.validateDmdDeviceiniToolStripMenuItem1_Click);
             // 
             // validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey
             // 

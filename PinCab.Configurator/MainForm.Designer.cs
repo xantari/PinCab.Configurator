@@ -93,27 +93,33 @@
             this.numericUpDownRegionHeight = new System.Windows.Forms.NumericUpDown();
             this.backgroundWorkerRefreshDispaly = new System.ComponentModel.BackgroundWorker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerDepictionAndLog = new System.Windows.Forms.SplitContainer();
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.txtData = new System.Windows.Forms.TextBox();
             this.txtDisplayLabel = new System.Windows.Forms.TextBox();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
+            this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDepictionAndLog)).BeginInit();
+            this.splitContainerDepictionAndLog.Panel1.SuspendLayout();
+            this.splitContainerDepictionAndLog.Panel2.SuspendLayout();
+            this.splitContainerDepictionAndLog.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panelRegionAndDisplayDetails.SuspendLayout();
+            this.panelDepictionAndLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 27);
+            this.label1.Location = new System.Drawing.Point(8, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 0;
@@ -122,7 +128,7 @@
             // listBoxDisplays
             // 
             this.listBoxDisplays.FormattingEnabled = true;
-            this.listBoxDisplays.Location = new System.Drawing.Point(92, 27);
+            this.listBoxDisplays.Location = new System.Drawing.Point(88, 5);
             this.listBoxDisplays.Name = "listBoxDisplays";
             this.listBoxDisplays.Size = new System.Drawing.Size(652, 56);
             this.listBoxDisplays.TabIndex = 1;
@@ -131,7 +137,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 91);
+            this.label2.Location = new System.Drawing.Point(8, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 2;
@@ -139,7 +145,7 @@
             // 
             // btnSaveDisplayLabel
             // 
-            this.btnSaveDisplayLabel.Location = new System.Drawing.Point(100, 181);
+            this.btnSaveDisplayLabel.Location = new System.Drawing.Point(96, 159);
             this.btnSaveDisplayLabel.Name = "btnSaveDisplayLabel";
             this.btnSaveDisplayLabel.Size = new System.Drawing.Size(116, 23);
             this.btnSaveDisplayLabel.TabIndex = 4;
@@ -486,7 +492,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 115);
+            this.label3.Location = new System.Drawing.Point(8, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 9;
@@ -495,7 +501,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 137);
+            this.label4.Location = new System.Drawing.Point(8, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 13);
             this.label4.TabIndex = 10;
@@ -504,7 +510,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(251, 115);
+            this.label5.Location = new System.Drawing.Point(247, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 11;
@@ -513,7 +519,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(251, 137);
+            this.label6.Location = new System.Drawing.Point(247, 115);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 13);
             this.label6.TabIndex = 12;
@@ -522,7 +528,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 159);
+            this.label7.Location = new System.Drawing.Point(17, 137);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 17;
@@ -538,7 +544,7 @@
             "Backglass",
             "Topper",
             "Apron"});
-            this.cmbRegionLabel.Location = new System.Drawing.Point(100, 156);
+            this.cmbRegionLabel.Location = new System.Drawing.Point(96, 134);
             this.cmbRegionLabel.MaxDropDownItems = 10;
             this.cmbRegionLabel.Name = "cmbRegionLabel";
             this.cmbRegionLabel.Size = new System.Drawing.Size(100, 21);
@@ -547,7 +553,7 @@
             // 
             // btnAddRegionToDisplay
             // 
-            this.btnAddRegionToDisplay.Location = new System.Drawing.Point(283, 181);
+            this.btnAddRegionToDisplay.Location = new System.Drawing.Point(279, 159);
             this.btnAddRegionToDisplay.Name = "btnAddRegionToDisplay";
             this.btnAddRegionToDisplay.Size = new System.Drawing.Size(146, 23);
             this.btnAddRegionToDisplay.TabIndex = 19;
@@ -558,7 +564,7 @@
             // listBoxDisplayRegions
             // 
             this.listBoxDisplayRegions.FormattingEnabled = true;
-            this.listBoxDisplayRegions.Location = new System.Drawing.Point(447, 112);
+            this.listBoxDisplayRegions.Location = new System.Drawing.Point(443, 90);
             this.listBoxDisplayRegions.Name = "listBoxDisplayRegions";
             this.listBoxDisplayRegions.Size = new System.Drawing.Size(225, 69);
             this.listBoxDisplayRegions.TabIndex = 20;
@@ -568,7 +574,7 @@
             // lblRegions
             // 
             this.lblRegions.AutoSize = true;
-            this.lblRegions.Location = new System.Drawing.Point(444, 91);
+            this.lblRegions.Location = new System.Drawing.Point(440, 69);
             this.lblRegions.Name = "lblRegions";
             this.lblRegions.Size = new System.Drawing.Size(179, 13);
             this.lblRegions.TabIndex = 21;
@@ -577,7 +583,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(248, 162);
+            this.label8.Location = new System.Drawing.Point(244, 140);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 13);
             this.label8.TabIndex = 22;
@@ -599,7 +605,7 @@
             "Silver",
             "Ivory",
             "Orange"});
-            this.cmbRegionColor.Location = new System.Drawing.Point(329, 159);
+            this.cmbRegionColor.Location = new System.Drawing.Point(325, 137);
             this.cmbRegionColor.MaxDropDownItems = 10;
             this.cmbRegionColor.Name = "cmbRegionColor";
             this.cmbRegionColor.Size = new System.Drawing.Size(100, 21);
@@ -608,7 +614,7 @@
             // 
             // numericUpDownRegionXOffset
             // 
-            this.numericUpDownRegionXOffset.Location = new System.Drawing.Point(100, 112);
+            this.numericUpDownRegionXOffset.Location = new System.Drawing.Point(96, 90);
             this.numericUpDownRegionXOffset.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -621,7 +627,7 @@
             // 
             // numericUpDownRegionYOffset
             // 
-            this.numericUpDownRegionYOffset.Location = new System.Drawing.Point(100, 134);
+            this.numericUpDownRegionYOffset.Location = new System.Drawing.Point(96, 112);
             this.numericUpDownRegionYOffset.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -634,7 +640,7 @@
             // 
             // numericUpDownRegionWidth
             // 
-            this.numericUpDownRegionWidth.Location = new System.Drawing.Point(329, 112);
+            this.numericUpDownRegionWidth.Location = new System.Drawing.Point(325, 90);
             this.numericUpDownRegionWidth.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -647,7 +653,7 @@
             // 
             // numericUpDownRegionHeight
             // 
-            this.numericUpDownRegionHeight.Location = new System.Drawing.Point(329, 135);
+            this.numericUpDownRegionHeight.Location = new System.Drawing.Point(325, 113);
             this.numericUpDownRegionHeight.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -662,26 +668,23 @@
             // 
             this.timer1.Interval = 500;
             // 
-            // splitContainer1
+            // splitContainerDepictionAndLog
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(0, 210);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerDepictionAndLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerDepictionAndLog.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerDepictionAndLog.Name = "splitContainerDepictionAndLog";
+            this.splitContainerDepictionAndLog.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerDepictionAndLog.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panelMonitorDrawing);
+            this.splitContainerDepictionAndLog.Panel1.Controls.Add(this.panelMonitorDrawing);
             // 
-            // splitContainer1.Panel2
+            // splitContainerDepictionAndLog.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.progressBar);
-            this.splitContainer1.Panel2.Controls.Add(this.txtData);
-            this.splitContainer1.Size = new System.Drawing.Size(756, 374);
-            this.splitContainer1.SplitterDistance = 187;
-            this.splitContainer1.TabIndex = 28;
+            this.splitContainerDepictionAndLog.Panel2.Controls.Add(this.txtData);
+            this.splitContainerDepictionAndLog.Size = new System.Drawing.Size(750, 335);
+            this.splitContainerDepictionAndLog.SplitterDistance = 154;
+            this.splitContainerDepictionAndLog.TabIndex = 28;
             // 
             // panelMonitorDrawing
             // 
@@ -690,17 +693,9 @@
             this.panelMonitorDrawing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMonitorDrawing.Location = new System.Drawing.Point(0, 0);
             this.panelMonitorDrawing.Name = "panelMonitorDrawing";
-            this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 187);
+            this.panelMonitorDrawing.Size = new System.Drawing.Size(750, 154);
             this.panelMonitorDrawing.TabIndex = 8;
             this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
-            // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar.Location = new System.Drawing.Point(0, 160);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(756, 23);
-            this.progressBar.TabIndex = 2;
             // 
             // txtData
             // 
@@ -709,12 +704,12 @@
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
             this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtData.Size = new System.Drawing.Size(756, 183);
+            this.txtData.Size = new System.Drawing.Size(750, 177);
             this.txtData.TabIndex = 1;
             // 
             // txtDisplayLabel
             // 
-            this.txtDisplayLabel.Location = new System.Drawing.Point(91, 88);
+            this.txtDisplayLabel.Location = new System.Drawing.Point(87, 66);
             this.txtDisplayLabel.Name = "txtDisplayLabel";
             this.txtDisplayLabel.Size = new System.Drawing.Size(338, 20);
             this.txtDisplayLabel.TabIndex = 29;
@@ -725,32 +720,73 @@
             this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
             this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar.Location = new System.Drawing.Point(0, 561);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(756, 23);
+            this.progressBar.TabIndex = 30;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panelDepictionAndLog, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panelRegionAndDisplayDetails, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(756, 537);
+            this.tableLayoutPanel1.TabIndex = 31;
+            // 
+            // panelRegionAndDisplayDetails
+            // 
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label1);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.listBoxDisplays);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label2);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.txtDisplayLabel);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.btnSaveDisplayLabel);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.numericUpDownRegionHeight);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label3);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.numericUpDownRegionWidth);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label4);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.numericUpDownRegionYOffset);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label5);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.numericUpDownRegionXOffset);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label6);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.cmbRegionColor);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label7);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.label8);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.cmbRegionLabel);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.lblRegions);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.btnAddRegionToDisplay);
+            this.panelRegionAndDisplayDetails.Controls.Add(this.listBoxDisplayRegions);
+            this.panelRegionAndDisplayDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRegionAndDisplayDetails.Location = new System.Drawing.Point(3, 3);
+            this.panelRegionAndDisplayDetails.Name = "panelRegionAndDisplayDetails";
+            this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
+            this.panelRegionAndDisplayDetails.TabIndex = 32;
+            // 
+            // panelDepictionAndLog
+            // 
+            this.panelDepictionAndLog.Controls.Add(this.splitContainerDepictionAndLog);
+            this.panelDepictionAndLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDepictionAndLog.Location = new System.Drawing.Point(3, 199);
+            this.panelDepictionAndLog.Name = "panelDepictionAndLog";
+            this.panelDepictionAndLog.Size = new System.Drawing.Size(750, 335);
+            this.panelDepictionAndLog.TabIndex = 32;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 584);
-            this.Controls.Add(this.txtDisplayLabel);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.numericUpDownRegionHeight);
-            this.Controls.Add(this.numericUpDownRegionWidth);
-            this.Controls.Add(this.numericUpDownRegionYOffset);
-            this.Controls.Add(this.numericUpDownRegionXOffset);
-            this.Controls.Add(this.cmbRegionColor);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.lblRegions);
-            this.Controls.Add(this.listBoxDisplayRegions);
-            this.Controls.Add(this.btnAddRegionToDisplay);
-            this.Controls.Add(this.cmbRegionLabel);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnSaveDisplayLabel);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.listBoxDisplays);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(772, 623);
@@ -763,11 +799,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionHeight)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainerDepictionAndLog.Panel1.ResumeLayout(false);
+            this.splitContainerDepictionAndLog.Panel2.ResumeLayout(false);
+            this.splitContainerDepictionAndLog.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDepictionAndLog)).EndInit();
+            this.splitContainerDepictionAndLog.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panelRegionAndDisplayDetails.ResumeLayout(false);
+            this.panelRegionAndDisplayDetails.PerformLayout();
+            this.panelDepictionAndLog.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,7 +877,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRegionHeight;
         private System.ComponentModel.BackgroundWorker backgroundWorkerRefreshDispaly;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerDepictionAndLog;
         private System.Windows.Forms.Panel panelMonitorDrawing;
         private System.Windows.Forms.TextBox txtData;
         private System.Windows.Forms.TextBox txtDisplayLabel;
@@ -845,6 +885,9 @@
         private System.Windows.Forms.ToolStripMenuItem b2SScreenresEditorToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panelRegionAndDisplayDetails;
+        private System.Windows.Forms.Panel panelDepictionAndLog;
     }
 }
 

@@ -436,7 +436,8 @@ namespace PinCab.Configurator
 
         private void monitorConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool isValid = ValidateMonitorConfiguration();
+            helper.ClearMessages();
+            ValidateMonitorConfiguration();
         }
 
         private void dumpDisplayInfoToFileToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -684,11 +685,13 @@ namespace PinCab.Configurator
         private void backgroundWorkerProgressBar_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
+            //lblProgressText.Text = e.ProgressPercentage.ToString() + "%";
         }
 
         private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 0;
+            //lblProgressText.Text = string.Empty;
             var result = e.Result as ToolValidationResult;
             helper.LogValidationResult(result.ToolName, result);
         }

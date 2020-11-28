@@ -19,6 +19,7 @@ namespace PinCab.ScreenUtil.Models
         }
 
         public string ToolName { get; set; }
+        public string FunctionExecuted { get; set; }
        
     }
 }

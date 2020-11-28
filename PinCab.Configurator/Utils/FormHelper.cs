@@ -215,7 +215,8 @@ namespace PinCab.Configurator.Utils
             if (util.KeyExists())
             {
                 var result = util.SetPinMameDefault(_displayDetails);
-                LogValidationResult(VpinMameUtil.ToolName, result);
+                if (!result.IsValid)
+                    LogValidationResult(VpinMameUtil.ToolName, result);
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Write command completed.\r\n";
                 Log.Information($"{VpinMameUtil.ToolName}: Write command completed.");
             }
@@ -242,6 +243,7 @@ namespace PinCab.Configurator.Utils
                 var result = util.ValidatePinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
+                toolResult.FunctionExecuted = "PinMameValidateAll";
                 e.Result = toolResult;
             }
             else if (e.Argument.ToString() == "PinMameWriteAll")
@@ -250,6 +252,7 @@ namespace PinCab.Configurator.Utils
                 var result = util.SetPinMamePositionAllROMs(_displayDetails);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
+                toolResult.FunctionExecuted = "PinMameWriteAll";
                 e.Result = toolResult;
             }
         }

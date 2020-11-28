@@ -30,6 +30,8 @@ namespace PinCab.ScreenUtil.Utils
     /// 1280 <-- X position of the DMD area relative to the upper left corner of the backglass screen
     /// 100 <-- Y position of the DMD area relative to the upper left corner of the backglass screen
     /// 0 <-- Y-flip, flips the LED display uppside down. Used in P2K style cabs.
+    /// 
+    /// File must be saved with UTF-8 (no BOM) for it to read properly by B2S.
     /// </summary>
     public class B2sUtil
     {
@@ -105,7 +107,8 @@ namespace PinCab.ScreenUtil.Utils
             Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);
 
             //Save the file
-            File.WriteAllText(_screenResFilePath, string.Join("\r\n", _fileContentsArray), Encoding.UTF8);
+            Encoding utf8WithoutBom = new UTF8Encoding(false);
+            File.WriteAllText(_screenResFilePath, string.Join("\r\n", _fileContentsArray), utf8WithoutBom);
         }
 
         /// <summary>

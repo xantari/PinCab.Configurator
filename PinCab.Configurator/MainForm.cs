@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
+using PinCab.ScreenUtil.Utils;
+using PinCab.ScreenUtil.Models;
 
 namespace PinCab.Configurator
 {
@@ -52,7 +54,7 @@ namespace PinCab.Configurator
             LoadScreenBoundsDisplayForms();
             DisplayDisplayDetails();
 
-            helper = new FormHelper(_settings, _displayDetails, txtData);
+            helper = new FormHelper(_settings, _displayDetails, txtData, backgroundWorkerProgressBar);
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
@@ -649,6 +651,46 @@ namespace PinCab.Configurator
         {
             helper.ClearMessages();
             helper.ValidateDmdDeviceIniSettings();
+        }
+
+        private void validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.ValidateVpinMameDefaultKey();
+        }
+
+        private void writevPinMameDefaultRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WriteVpinMameDefaultKey();
+        }
+        private void validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            var msg = "Beginning pinmame ROM validation. Please wait....";
+            Log.Information(msg);
+            txtData.Text += msg;
+            helper.ValidateVpinMameRomKeys();
+        }
+        private void writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            var msg = "Beginning pinmame ROM DMD region writes. Please wait....";
+            Log.Information(msg);
+            txtData.Text += msg;
+            helper.WriteVpinMameRomKeys();
+        }
+
+        private void backgroundWorkerProgressBar_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            progressBar.Value = 0;
+            var result = e.Result as ToolValidationResult;
+            helper.LogValidationResult(result.ToolName, result);
         }
     }
 }

@@ -35,16 +35,19 @@ namespace PinCab.ScreenUtil.Utils
             if (!KeyExists())
                 return null;
             var regionRectangle = new RegionRectangle();
-            var key = GetRegKey();
-            if (key.GetValue("h") != null)
-                regionRectangle.RegionDisplayHeight = Convert.ToInt32(key.GetValue("h"));
-            if (key.GetValue("w") != null)
-                regionRectangle.RegionDisplayWidth = Convert.ToInt32(key.GetValue("w"));
-            if (key.GetValue("x") != null)
-                regionRectangle.RegionOffsetX = Convert.ToInt32(key.GetValue("x"));
-            if (key.GetValue("y") != null)
-                regionRectangle.RegionOffsetY = Convert.ToInt32(key.GetValue("y"));
-            key.Close();
+            using (var key = GetRegKey())
+            {
+                if (key.GetValue("h") != null)
+                    regionRectangle.RegionDisplayHeight = Convert.ToInt32(key.GetValue("h"));
+                if (key.GetValue("w") != null)
+                    regionRectangle.RegionDisplayWidth = Convert.ToInt32(key.GetValue("w"));
+                if (key.GetValue("x") != null)
+                    regionRectangle.RegionOffsetX = Convert.ToInt32(key.GetValue("x"));
+                if (key.GetValue("y") != null)
+                    regionRectangle.RegionOffsetY = Convert.ToInt32(key.GetValue("y"));
+                key.Close();
+            }
+
             return regionRectangle;
         }
 
@@ -52,24 +55,27 @@ namespace PinCab.ScreenUtil.Utils
         {
             if (!KeyExists())
                 return new ValidationResult() { IsValid = false, Messages = new List<ValidationMessage>() { new ValidationMessage("Registry key does not exist", MessageLevel.Error) } };
-            var key = GetRegKey();
-            try
+            using (var key = GetRegKey())
             {
-                key.SetValue("h", regionRectangle.RegionDisplayHeight);
-                key.SetValue("w", regionRectangle.RegionDisplayWidth);
-                key.SetValue("x", display.VirtualResolutionOffsetX(regionRectangle));
-                key.SetValue("y", display.VirtualResolutionOffsetY(regionRectangle));
+                try
+                {
+                    key.SetValue("h", regionRectangle.RegionDisplayHeight);
+                    key.SetValue("w", regionRectangle.RegionDisplayWidth);
+                    key.SetValue("x", display.VirtualResolutionOffsetX(regionRectangle));
+                    key.SetValue("y", display.VirtualResolutionOffsetY(regionRectangle));
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    var msg = "Unauthorized access to set registry key. Did you run the program as admin?";
+                    Log.Error(ex, msg);
+                    return new ValidationResult() { IsValid = false, Messages = new List<ValidationMessage>() { new ValidationMessage(msg, MessageLevel.Error) } };
+                }
+                finally
+                {
+                    key.Close();
+                }
             }
-            catch (UnauthorizedAccessException ex)
-            {
-                var msg = "Unauthorized access to set registry key. Did you run the program as admin?";
-                Log.Error(ex, msg);
-                return new ValidationResult() { IsValid = false, Messages = new List<ValidationMessage>() { new ValidationMessage(msg, MessageLevel.Error) } };
-            }
-            finally
-            {
-                key.Close();
-            }
+
             return new ValidationResult();
         }
 
@@ -81,9 +87,11 @@ namespace PinCab.ScreenUtil.Utils
             string filePath = currentFolder + $"UltraDMD_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
 
             //Backup the registry
-            var key = GetRegKey();
-            RegistryUtil.ExportViaRegExe(key.Name, filePath);
-            key.Close();
+            using (var key = GetRegKey())
+            {
+                RegistryUtil.ExportViaRegExe(key.Name, filePath);
+                key.Close();
+            }
 
             Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);
 

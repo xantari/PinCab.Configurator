@@ -62,6 +62,7 @@
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
+    <Compile Include="Models\ToolValidationResult.cs" />
     <Compile Include="Utils\DmdDeviceUtil.cs" />
     <Compile Include="Utils\DmdExt\Configuration.cs" />
     <Compile Include="Utils\DmdExt\IConfiguration.cs" />

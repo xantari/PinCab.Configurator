@@ -95,8 +95,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelMonitorDrawing = new System.Windows.Forms.Panel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.txtData = new System.Windows.Forms.TextBox();
             this.txtDisplayLabel = new System.Windows.Forms.TextBox();
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -289,12 +291,14 @@
             this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Name = "writevPinMameDefaultRegistryKeyToolStripMenuItem";
             this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Text = "VPinMame Default Registry Key";
+            this.writevPinMameDefaultRegistryKeyToolStripMenuItem.Click += new System.EventHandler(this.writevPinMameDefaultRegistryKeyToolStripMenuItem_Click);
             // 
             // writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem
             // 
             this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Name = "writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem";
             this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Text = "VPinMame Update All ROMs Registry Keys";
+            this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem.Click += new System.EventHandler(this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem_Click);
             // 
             // writepinballYSettingstxtToolStripMenuItem
             // 
@@ -394,12 +398,14 @@
             this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Name = "validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey";
             this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Size = new System.Drawing.Size(256, 22);
             this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Text = "VPinMame Default Registry Key";
+            this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey.Click += new System.EventHandler(this.validatetoolStripMenuItemValidateVPinMameDefaultRegistryKey_Click);
             // 
             // validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys
             // 
             this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Name = "validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys";
             this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Size = new System.Drawing.Size(256, 22);
             this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Text = "VPinMame All ROMs Registry Keys";
+            this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys.Click += new System.EventHandler(this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys_Click);
             // 
             // validatepinballYSettingstxtToolStripMenuItem1
             // 
@@ -671,6 +677,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.progressBar);
             this.splitContainer1.Panel2.Controls.Add(this.txtData);
             this.splitContainer1.Size = new System.Drawing.Size(756, 374);
             this.splitContainer1.SplitterDistance = 187;
@@ -686,6 +693,14 @@
             this.panelMonitorDrawing.Size = new System.Drawing.Size(756, 187);
             this.panelMonitorDrawing.TabIndex = 8;
             this.panelMonitorDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMonitorDrawing_Paint);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar.Location = new System.Drawing.Point(0, 160);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(756, 23);
+            this.progressBar.TabIndex = 2;
             // 
             // txtData
             // 
@@ -703,6 +718,12 @@
             this.txtDisplayLabel.Name = "txtDisplayLabel";
             this.txtDisplayLabel.Size = new System.Drawing.Size(338, 20);
             this.txtDisplayLabel.TabIndex = 29;
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
+            this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -822,6 +843,8 @@
         private System.Windows.Forms.TextBox txtDisplayLabel;
         private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem b2SScreenresEditorToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

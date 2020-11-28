@@ -58,7 +58,8 @@ namespace PinCab.ScreenUtil.Utils
                 var text = Encoding.UTF8.GetString(ms.ToArray());
                 //Post fixup (FutureDMD doesn't like spaces between "="'s signs
                 text = text.Replace(" = ", "=").RemoveBlankLines("\r\n");
-                File.WriteAllText(_iniFilePath, text, Encoding.Unicode);
+                Encoding encoding = new ASCIIEncoding();
+                File.WriteAllText(_iniFilePath, text, encoding);
             }
         }
 

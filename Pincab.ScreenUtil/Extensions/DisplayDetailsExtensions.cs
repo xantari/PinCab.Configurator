@@ -61,6 +61,12 @@ namespace PinCab.ScreenUtil
             return display.Display.CurrentSetting.Position.Y + region.RegionOffsetY + region.RegionDisplayHeight;
         }
 
+        public static RegionRectangle GetRectangleWithVirtualOffsets(this DisplayDetail display, RegionRectangle region)
+        {
+           return new RegionRectangle(region.RegionDisplayHeight, region.RegionDisplayWidth,
+                    display.VirtualResolutionOffsetX(region), display.VirtualResolutionOffsetY(region));
+        }
+
         public static List<string> GetFfMpegCommandsForAllMonitors(this List<DisplayDetail> displayDetails, int framerate, TimeSpan recordTime,
             string pathToTempFolder, string ffmpegExePath)
         {

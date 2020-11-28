@@ -12,6 +12,24 @@ namespace PinCab.ScreenUtil
     {
         public RegionRectangle() { }
 
+        public RegionRectangle(int height, int width, int offsetX, int offsetY)
+        {
+            RegionDisplayHeight = height;
+            RegionDisplayWidth = width;
+            RegionOffsetX = offsetX;
+            RegionOffsetY = offsetY;
+        }
+
+        public RegionRectangle(int height, int width, int offsetX, int offsetY, string label, Color color)
+        {
+            RegionDisplayHeight = height;
+            RegionDisplayWidth = width;
+            RegionOffsetX = offsetX;
+            RegionOffsetY = offsetY;
+            RegionLabel = label;
+            RegionColor = color;
+        }
+
         //The below values are the visible portion of the screen. 
         public int RegionOffsetY { get; set; }
         public int RegionOffsetX { get; set; }

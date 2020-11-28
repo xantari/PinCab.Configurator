@@ -4,6 +4,7 @@ using PinCab.ScreenUtil.Utils;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,12 +18,15 @@ namespace PinCab.Configurator.Utils
         private ProgramSettings _settings;
         private List<DisplayDetail> _displayDetails;
         private TextBox _txtData;
+        private BackgroundWorker _backgroundWorkerProgressBar;
 
-        public FormHelper(ProgramSettings settings, List<DisplayDetail> displayDetails, TextBox txtData)
+        public FormHelper(ProgramSettings settings, List<DisplayDetail> displayDetails, TextBox txtData, BackgroundWorker backgroundWorkerProgressBar)
         {
             _settings = settings;
             _displayDetails = displayDetails;
             _txtData = txtData;
+            _backgroundWorkerProgressBar = backgroundWorkerProgressBar;
+            _backgroundWorkerProgressBar.DoWork += _backgroundWorkerProgressBar_DoWork;
         }
 
         public void ClearMessages()
@@ -149,7 +153,7 @@ namespace PinCab.Configurator.Utils
                     _txtData.Text += $"{UltraDmdUtil.ToolName}: Write command completed.\r\n";
                     Log.Information($"{UltraDmdUtil.ToolName}: Write command completed.");
                 }
-                else 
+                else
                 {
                     _txtData.Text += result.GetMessagesAsText(true);
                 }
@@ -193,11 +197,81 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += $"{DmdDeviceUtil.ToolName}: DMDDevice.ini path not set. Check settings.";
         }
 
+        public void ValidateVpinMameDefaultKey()
+        {
+            var util = new VpinMameUtil();
+            if (util.KeyExists())
+            {
+                var result = util.ValidatePinMameDefaultKeyPosition(_displayDetails);
+                LogValidationResult(VpinMameUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
+        }
+
+        public void WriteVpinMameDefaultKey()
+        {
+            var util = new VpinMameUtil();
+            if (util.KeyExists())
+            {
+                var result = util.SetPinMameDefault(_displayDetails);
+                LogValidationResult(VpinMameUtil.ToolName, result);
+                _txtData.Text += $"{VpinMameUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{VpinMameUtil.ToolName}: Write command completed.");
+            }
+            else
+                _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
+        }
+
+        public void ValidateVpinMameRomKeys()
+        {
+            var util = new VpinMameUtil();
+            if (util.KeyExists())
+            {
+                _backgroundWorkerProgressBar.RunWorkerAsync("PinMameValidateAll");
+            }
+            else
+                _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
+        }
+
+        private void _backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (e.Argument.ToString() == "PinMameValidateAll")
+            {
+                var util = new VpinMameUtil();
+                var result = util.ValidatePinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
+                var toolResult = new ToolValidationResult(result);
+                toolResult.ToolName = VpinMameUtil.ToolName;
+                e.Result = toolResult;
+            }
+            else if (e.Argument.ToString() == "PinMameWriteAll")
+            {
+                var util = new VpinMameUtil();
+                var result = util.SetPinMamePositionAllROMs(_displayDetails);
+                var toolResult = new ToolValidationResult(result);
+                toolResult.ToolName = VpinMameUtil.ToolName;
+                e.Result = toolResult;
+            }
+        }
+
+        public void WriteVpinMameRomKeys()
+        {
+            var util = new VpinMameUtil();
+            if (util.KeyExists())
+            {
+                _backgroundWorkerProgressBar.RunWorkerAsync("PinMameWriteAll");
+            }
+            else
+                _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
+        }
+
+
         public void LogValidationResult(string command, ValidationResult result)
         {
+            var sb = new StringBuilder();
             if (result?.Messages.Count() > 0)
             {
-                _txtData.Text += $"{command} validation messages: \r\n";
+                sb.Append($"{command} validation messages: \r\n");
                 foreach (var message in result.Messages)
                 {
                     if (message.Level == MessageLevel.Error)
@@ -206,14 +280,25 @@ namespace PinCab.Configurator.Utils
                         Log.Warning("{command}: Validation Warning: {message}", command, message.Message);
                     if (message.Level == MessageLevel.Information)
                         Log.Information("{command}: Validation Information: {message}", command, message.Message);
-                    _txtData.Text += message.Message + "\r\n";
+                    sb.Append(message.Message + "\r\n");
                 }
             }
 
             if (result != null && result.IsValid)
-                _txtData.Text += $"{command}: Validated. No issues found.\r\n";
+            {
+                var msg = $"{command}: Validated. No issues found.\r\n";
+                Log.Information(msg);
+                sb.Append(msg);
+            }
+
             else
-                _txtData.Text += $"{command}: Validated. Issues found.\r\n";
+            {
+                var msg = $"{command}: Validated. Issues found.\r\n";
+                Log.Information(msg);
+                sb.Append(msg);
+            }
+
+            _txtData.Text += sb.ToString();
         }
     }
 }

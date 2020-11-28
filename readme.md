@@ -9,6 +9,10 @@ replicate to all the other areas automatically.
 3. Provide a FFMPEG command line examples on how to record screens and specific regions of screens
 4. Add other useful pincab tools into one program
 
+# Requirements
+
+.NET Framework 4.7.2 or higher
+
 # Features
 
 1. Reads Monitors EDID information to display manufacturer details such as Model / Serial number of connected displays

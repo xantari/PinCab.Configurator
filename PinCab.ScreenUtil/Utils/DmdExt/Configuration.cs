@@ -53,7 +53,7 @@ namespace PinCab.ScreenUtil.Utils.DmdExt
 
 		public void Save()
 		{
-			_parser.WriteFile(_iniPath, _data);
+			_parser.WriteFile(_iniPath, _data); //Writes as UTF8 with BOM
 		}
 	}
 

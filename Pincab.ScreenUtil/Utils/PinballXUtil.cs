@@ -63,7 +63,6 @@ namespace PinCab.ScreenUtil.Utils
                 text = text.Replace(" = ", "=").RemoveBlankLines("\r\n");
                 File.WriteAllText(_iniFilePath, text, Encoding.Unicode);
             }
-            //_parser.WriteFile(_iniFilePath, _data, Encoding.Unicode);
         }
 
         public int GetMonitorNumber(string section)

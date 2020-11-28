@@ -230,7 +230,7 @@ namespace PinCab.Configurator.Utils
             if (util.KeyExists())
             {
                 if (!_backgroundWorkerProgressBar.IsBusy)
-                    _backgroundWorkerProgressBar.RunWorkerAsync("PinMameValidateAll");
+                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameValidateAll);
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
@@ -238,23 +238,24 @@ namespace PinCab.Configurator.Utils
 
         private void _backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.Argument.ToString() == "PinMameValidateAll")
+            var arg = (BackgroundProgressAction)Enum.Parse(typeof(BackgroundProgressAction), e.Argument.ToString());
+            if (arg == BackgroundProgressAction.PinMameValidateAll)
             {
                 var util = new VpinMameUtil();
                 var result = util.ValidatePinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
-                toolResult.FunctionExecuted = "PinMameValidateAll";
+                toolResult.FunctionExecuted = arg.ToString();
                 e.Result = toolResult;
             }
-            else if (e.Argument.ToString() == "PinMameWriteAll")
+            else if (arg == BackgroundProgressAction.PinMameWriteAll)
             {
                 var util = new VpinMameUtil();
                 var result = util.SetPinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
-                toolResult.FunctionExecuted = "PinMameWriteAll";
+                toolResult.FunctionExecuted = arg.ToString();
                 e.Result = toolResult;
             }
         }
@@ -265,7 +266,7 @@ namespace PinCab.Configurator.Utils
             if (util.KeyExists())
             {
                 if (!_backgroundWorkerProgressBar.IsBusy)
-                    _backgroundWorkerProgressBar.RunWorkerAsync("PinMameWriteAll");
+                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameWriteAll);
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";

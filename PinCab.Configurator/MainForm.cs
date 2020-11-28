@@ -668,7 +668,7 @@ namespace PinCab.Configurator
         private void validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
-            var msg = "Beginning pinmame ROM validation. Please wait....";
+            var msg = "Beginning pinmame ROM validation. Please wait....\r\n";
             Log.Information(msg);
             txtData.Text += msg;
             helper.ValidateVpinMameRomKeys();
@@ -676,7 +676,7 @@ namespace PinCab.Configurator
         private void writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
-            var msg = "Beginning pinmame ROM DMD region writes. Please wait....";
+            var msg = "Beginning pinmame ROM DMD region writes. Please wait....\r\n";
             Log.Information(msg);
             txtData.Text += msg;
             helper.WriteVpinMameRomKeys();
@@ -693,7 +693,13 @@ namespace PinCab.Configurator
             progressBar.Value = 0;
             //lblProgressText.Text = string.Empty;
             var result = e.Result as ToolValidationResult;
-            helper.LogValidationResult(result.ToolName, result);
+            if (result.OutputValidationMessages)
+            {
+                if (result.MessageType == ValidationMessageType.ToolMessage)
+                    helper.LogToolValidationResult(result.ToolName, result);
+                else 
+                    helper.LogValidationResult(result.ToolName, result);
+            }
         }
     }
 }

@@ -71,7 +71,7 @@ namespace PinCab.ScreenUtil.Utils
             return result;
         }
 
-        public ValidationResult SetPinMamePositionAllROMs(List<DisplayDetail> displayDetails)
+        public ValidationResult SetPinMamePositionAllROMs(List<DisplayDetail> displayDetails, ReportProgressDelegate reportProcess = null)
         {
             var result = new ValidationResult();
 
@@ -105,8 +105,12 @@ namespace PinCab.ScreenUtil.Utils
             }
 
             var keys = GetAllRomKeyNames();
-            foreach(var key in keys)
+            int count = 0;
+            foreach (var key in keys)
             {
+                var percentComplete = Convert.ToInt32(Math.Round(count / Convert.ToDouble(keys.Count()) * 100));
+                reportProcess?.Invoke(percentComplete);
+                count++;
                 var setResult = SetDMDRegionRectangle(key, dmd.GetRectangleWithVirtualOffsets(dmdRectangle), false); //We've already backed up all keys, don't backup the individual keys
 
                 if (!setResult.IsValid)
@@ -115,7 +119,6 @@ namespace PinCab.ScreenUtil.Utils
                     result.Messages.AddRange(setResult.Messages);
                 }
             }
-
 
             result.Messages.Add(new ValidationMessage($"{ VpinMameUtil.ToolName }: Write command completed.", MessageLevel.Information));
 
@@ -269,7 +272,7 @@ namespace PinCab.ScreenUtil.Utils
             return result;
         }
 
-        public ValidationResult ValidatePinMamePositionAllROMs(List<DisplayDetail> displayDetails, ReportProgressDelegate reportProcess)
+        public ValidationResult ValidatePinMamePositionAllROMs(List<DisplayDetail> displayDetails, ReportProgressDelegate reportProcess = null)
         {
             var result = new ValidationResult();
 
@@ -295,8 +298,8 @@ namespace PinCab.ScreenUtil.Utils
             int count = 0;
             foreach (var key in keys)
             {
-                var percentComplete =  Convert.ToInt32(Math.Round(count / Convert.ToDouble(keys.Count()) * 100));
-                reportProcess(percentComplete);
+                var percentComplete = Convert.ToInt32(Math.Round(count / Convert.ToDouble(keys.Count()) * 100));
+                reportProcess?.Invoke(percentComplete);
                 count++;
                 using (var romKey = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(key))
                 {

@@ -229,7 +229,8 @@ namespace PinCab.Configurator.Utils
             var util = new VpinMameUtil();
             if (util.KeyExists())
             {
-                _backgroundWorkerProgressBar.RunWorkerAsync("PinMameValidateAll");
+                if (!_backgroundWorkerProgressBar.IsBusy)
+                    _backgroundWorkerProgressBar.RunWorkerAsync("PinMameValidateAll");
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
@@ -249,9 +250,10 @@ namespace PinCab.Configurator.Utils
             else if (e.Argument.ToString() == "PinMameWriteAll")
             {
                 var util = new VpinMameUtil();
-                var result = util.SetPinMamePositionAllROMs(_displayDetails);
+                var result = util.SetPinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
+                toolResult.MessageType = ValidationMessageType.ToolMessage;
                 toolResult.FunctionExecuted = "PinMameWriteAll";
                 e.Result = toolResult;
             }
@@ -262,7 +264,8 @@ namespace PinCab.Configurator.Utils
             var util = new VpinMameUtil();
             if (util.KeyExists())
             {
-                _backgroundWorkerProgressBar.RunWorkerAsync("PinMameWriteAll");
+                if (!_backgroundWorkerProgressBar.IsBusy)
+                    _backgroundWorkerProgressBar.RunWorkerAsync("PinMameWriteAll");
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
@@ -299,6 +302,27 @@ namespace PinCab.Configurator.Utils
                 var msg = $"{command}: Validated. Issues found.\r\n";
                 Log.Information(msg);
                 sb.Append(msg);
+            }
+
+            _txtData.Text += sb.ToString();
+        }
+
+        public void LogToolValidationResult(string command, ValidationResult result)
+        {
+            var sb = new StringBuilder();
+            if (result?.Messages.Count() > 0)
+            {
+                sb.Append($"{command} messages: \r\n");
+                foreach (var message in result.Messages)
+                {
+                    if (message.Level == MessageLevel.Error)
+                        Log.Error("{command}: Error: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Warning)
+                        Log.Warning("{command}: Warning: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Information)
+                        Log.Information("{command}: Information: {message}", command, message.Message);
+                    sb.Append(message.Message + "\r\n");
+                }
             }
 
             _txtData.Text += sb.ToString();

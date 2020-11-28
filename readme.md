@@ -8,6 +8,7 @@ The motivation behind this program was to solve these issues with Virtual Pinbal
 replicate to all the other areas automatically.
 3. Provide a FFMPEG command line examples on how to record screens and specific regions of screens
 4. Add other useful pincab tools into one program
+5. Ever wonder if your DMD sizes and positions are 100% consistent across all DMD programs? This will tell you.
 
 # Requirements
 
@@ -42,6 +43,9 @@ replicate to all the other areas automatically.
 18. All features of the existing ScreenRes editor exist in program (Utilites >> Screen res editor)
 19. UltraDMD Registry Key read/write/validation
 20. DMDDevice.ini (DMDExt / FlexDMD) read/write/validation
+21. VPinMame registry location settings (for those not using DMDExt).  
+	a. Option to set Default  
+	b. Option to update all previously run ROM's DMD positions  
 
 # Instructions
 
@@ -66,17 +70,14 @@ Logging information is in the Log.txt file in the application root folder.
 
 # TODO
 1. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
-2. VPinMame registry location settings (for those not using DMDExt).  
-	a. Option to set Default  
-	b. Option to update all previously run ROM's DMD positions  
-3. PinUp Popper / Player location settings read/write/validation
-4. Create help HTML pages and hookup to the program
-5. Add all SetDMD functions to program
-6. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
+2. PinUp Popper / Player location settings read/write/validation
+3. Create help HTML pages and hookup to the program
+4. Add all SetDMD functions to program
+5. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
 for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
-7. P-Roc settings read/write/validation
-8. Manual validation output info for Pinball FX2/FX3
-9.  Pinball Y settings read/write/validation
+6. P-Roc settings read/write/validation
+7. Manual validation output info for Pinball FX2/FX3
+8.  Pinball Y settings read/write/validation
 
 
 

@@ -230,7 +230,7 @@ namespace PinCab.Configurator.Utils
             if (util.KeyExists())
             {
                 if (!_backgroundWorkerProgressBar.IsBusy)
-                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameValidateAll);
+                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameValidateAllPreviousRunRoms);
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
@@ -239,19 +239,19 @@ namespace PinCab.Configurator.Utils
         private void _backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
         {
             var arg = (BackgroundProgressAction)Enum.Parse(typeof(BackgroundProgressAction), e.Argument.ToString());
-            if (arg == BackgroundProgressAction.PinMameValidateAll)
+            if (arg == BackgroundProgressAction.PinMameValidateAllPreviousRunRoms)
             {
                 var util = new VpinMameUtil();
-                var result = util.ValidatePinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
+                var result = util.ValidatePinMamePositionAllROMs(_displayDetails, true, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.FunctionExecuted = arg.ToString();
                 e.Result = toolResult;
             }
-            else if (arg == BackgroundProgressAction.PinMameWriteAll)
+            else if (arg == BackgroundProgressAction.PinMameWriteAllPreviousRunRoms)
             {
                 var util = new VpinMameUtil();
-                var result = util.SetPinMamePositionAllROMs(_displayDetails, _backgroundWorkerProgressBar.ReportProgress);
+                var result = util.SetPinMamePositionAllROMs(_displayDetails, true, _backgroundWorkerProgressBar.ReportProgress);
                 var toolResult = new ToolValidationResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
@@ -266,7 +266,7 @@ namespace PinCab.Configurator.Utils
             if (util.KeyExists())
             {
                 if (!_backgroundWorkerProgressBar.IsBusy)
-                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameWriteAll);
+                    _backgroundWorkerProgressBar.RunWorkerAsync(BackgroundProgressAction.PinMameWriteAllPreviousRunRoms);
             }
             else
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";

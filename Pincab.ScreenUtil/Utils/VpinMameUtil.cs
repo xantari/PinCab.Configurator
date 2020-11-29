@@ -71,7 +71,7 @@ namespace PinCab.ScreenUtil.Utils
             return result;
         }
 
-        public ValidationResult SetPinMamePositionAllROMs(List<DisplayDetail> displayDetails, ReportProgressDelegate reportProcess = null)
+        public ValidationResult SetPinMamePositionAllROMs(List<DisplayDetail> displayDetails, bool onlyPreviousRunRoms, ReportProgressDelegate reportProcess = null)
         {
             var result = new ValidationResult();
 
@@ -104,7 +104,8 @@ namespace PinCab.ScreenUtil.Utils
                 keyToBackup.Close();
             }
 
-            var keys = GetAllRomKeyNames();
+            var keys = GetAllRomKeyNames(true, onlyPreviousRunRoms);
+            result.Messages.Add(new ValidationMessage() { Level = MessageLevel.Information, Message = $"Setting DMD rectangle position on all previously run roms. Count: {keys.Count()}" });
             int count = 0;
             foreach (var key in keys)
             {
@@ -272,7 +273,7 @@ namespace PinCab.ScreenUtil.Utils
             return result;
         }
 
-        public ValidationResult ValidatePinMamePositionAllROMs(List<DisplayDetail> displayDetails, ReportProgressDelegate reportProcess = null)
+        public ValidationResult ValidatePinMamePositionAllROMs(List<DisplayDetail> displayDetails, bool onlyPreviousRunRoms, ReportProgressDelegate reportProcess = null)
         {
             var result = new ValidationResult();
 
@@ -293,8 +294,9 @@ namespace PinCab.ScreenUtil.Utils
                 return result;
             }
 
-            var keys = GetAllRomKeyNames();
+            var keys = GetAllRomKeyNames(true, onlyPreviousRunRoms);
             Log.Information("{ToolName}: Processing {count} keys.", ToolName, keys.Count());
+            result.Messages.Add(new ValidationMessage() { Level = MessageLevel.Information, Message = $"Validating DMD rectangle position on all previously run roms. Count: {keys.Count()}" });
             int count = 0;
             foreach (var key in keys)
             {
@@ -368,11 +370,26 @@ namespace PinCab.ScreenUtil.Utils
                 key.Close();
         }
 
-        public string[] GetAllRomKeyNames(bool excludeDefault = true)
+        public string[] GetAllRomKeyNames(bool excludeDefault = true, bool onlyPreviousRunRoms = true)
         {
             var keys = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.GetSubKeyNames();
             if (excludeDefault)
-                return keys.Where(p => p != "default").ToArray();
+                keys = keys.Where(p => p != "default").ToArray();
+            //Always exclude global
+            keys = keys.Where(p => p != "globals").ToArray();
+            if (onlyPreviousRunRoms)
+            {
+                List<string> tempKeys = new List<string>();
+                foreach (var key in keys)
+                {
+                    var regKey = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(key);
+                    if (regKey.GetValueNames().Count() > 1) //If a ROM has been run it will have a lot of keys here, more then the single "Default" key
+                    {
+                        tempKeys.Add(key);
+                    }
+                }
+                keys = tempKeys.ToArray();
+            }
             return keys;
         }
     }

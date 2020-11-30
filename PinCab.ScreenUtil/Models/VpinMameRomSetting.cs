@@ -12,6 +12,10 @@ namespace PinCab.ScreenUtil.Models
     public class VpinMameRomSetting
     {
         /// <summary>
+        /// Primary Key (Rom Name from registry)
+        /// </summary>
+        public string RomName { get; set; }
+        /// <summary>
         /// antialias
         /// Enable/Disable anti Aliasing
         /// </summary>
@@ -44,6 +48,9 @@ namespace PinCab.ScreenUtil.Models
         /// Scanlines - puts CRT style scanlines on the DMD. Probalby also best off. DMD's were plasma and had no scanlines.
         /// </summary>
         public bool? Scanlines { get; set; }
+        /// <summary>
+        /// ddraw
+        /// </summary>
         public bool? DirectDraw { get; set; }
         /// <summary>
         /// showwindmd

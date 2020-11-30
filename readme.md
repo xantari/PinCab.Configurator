@@ -88,3 +88,6 @@ Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [
 
 1. Unable to figure out how to read/write/validate Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios)).
 Settings data appears to be encrypted. Unsure how to read/write to it.
+
+# Notes
+1. Compilation is done using Any CPU, with the Prefer 32-bit flag as it links itself to the 32-bit version of VPinMame for DMD preview

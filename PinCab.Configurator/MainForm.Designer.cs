@@ -100,8 +100,9 @@
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
+            this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
+            this.pinMameROMBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -112,8 +113,8 @@
             this.splitContainerDepictionAndLog.Panel2.SuspendLayout();
             this.splitContainerDepictionAndLog.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panelRegionAndDisplayDetails.SuspendLayout();
             this.panelDepictionAndLog.SuspendLayout();
+            this.panelRegionAndDisplayDetails.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -463,7 +464,8 @@
             // utilitiesToolStripMenuItem
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.b2SScreenresEditorToolStripMenuItem});
+            this.b2SScreenresEditorToolStripMenuItem,
+            this.pinMameROMBrowserToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilitiesToolStripMenuItem.Text = "Utilities";
@@ -471,7 +473,7 @@
             // b2SScreenresEditorToolStripMenuItem
             // 
             this.b2SScreenresEditorToolStripMenuItem.Name = "b2SScreenresEditorToolStripMenuItem";
-            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.b2SScreenresEditorToolStripMenuItem.Text = "B2S Screenres Editor";
             this.b2SScreenresEditorToolStripMenuItem.Click += new System.EventHandler(this.b2SScreenresEditorToolStripMenuItem_Click);
             // 
@@ -743,6 +745,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(756, 537);
             this.tableLayoutPanel1.TabIndex = 31;
             // 
+            // panelDepictionAndLog
+            // 
+            this.panelDepictionAndLog.Controls.Add(this.splitContainerDepictionAndLog);
+            this.panelDepictionAndLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDepictionAndLog.Location = new System.Drawing.Point(3, 199);
+            this.panelDepictionAndLog.Name = "panelDepictionAndLog";
+            this.panelDepictionAndLog.Size = new System.Drawing.Size(750, 335);
+            this.panelDepictionAndLog.TabIndex = 32;
+            // 
             // panelRegionAndDisplayDetails
             // 
             this.panelRegionAndDisplayDetails.Controls.Add(this.label1);
@@ -771,14 +782,12 @@
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
             // 
-            // panelDepictionAndLog
+            // pinMameROMBrowserToolStripMenuItem
             // 
-            this.panelDepictionAndLog.Controls.Add(this.splitContainerDepictionAndLog);
-            this.panelDepictionAndLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDepictionAndLog.Location = new System.Drawing.Point(3, 199);
-            this.panelDepictionAndLog.Name = "panelDepictionAndLog";
-            this.panelDepictionAndLog.Size = new System.Drawing.Size(750, 335);
-            this.panelDepictionAndLog.TabIndex = 32;
+            this.pinMameROMBrowserToolStripMenuItem.Name = "pinMameROMBrowserToolStripMenuItem";
+            this.pinMameROMBrowserToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.pinMameROMBrowserToolStripMenuItem.Text = "Pin Mame ROM Browser";
+            this.pinMameROMBrowserToolStripMenuItem.Click += new System.EventHandler(this.pinMameROMBrowserToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -805,9 +814,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerDepictionAndLog)).EndInit();
             this.splitContainerDepictionAndLog.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panelDepictionAndLog.ResumeLayout(false);
             this.panelRegionAndDisplayDetails.ResumeLayout(false);
             this.panelRegionAndDisplayDetails.PerformLayout();
-            this.panelDepictionAndLog.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -888,6 +897,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panelRegionAndDisplayDetails;
         private System.Windows.Forms.Panel panelDepictionAndLog;
+        private System.Windows.Forms.ToolStripMenuItem pinMameROMBrowserToolStripMenuItem;
     }
 }
 

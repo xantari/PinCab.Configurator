@@ -392,5 +392,108 @@ namespace PinCab.ScreenUtil.Utils
             }
             return keys;
         }
+
+        public List<VpinMameRomSetting> GetAllRomDetails(bool excludeDefault = false, bool onlyPreviousRunRoms = true)
+        {
+            var roms = new List<VpinMameRomSetting>();
+
+            if (!KeyExists())
+                return roms;
+
+            var keys = GetAllRomKeyNames(excludeDefault, onlyPreviousRunRoms);
+
+            foreach (var key in keys)
+            {
+                var regKey = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(key);
+                var model = LoadRomModel(regKey);
+                roms.Add(model);
+            }
+
+            return roms;
+        }
+
+        private VpinMameRomSetting LoadRomModel(RegistryKey key)
+        {
+            var model = new VpinMameRomSetting();
+            model.RomName = key.Name.Substring(key.Name.LastIndexOf("\\") + 1, key.Name.Length - key.Name.LastIndexOf("\\") - 1);
+            var valueList = key.GetValueNames();
+            if (valueList.Contains("antialias"))
+                model.EnableAntiAlias = Convert.ToBoolean(key.GetValue("antialias"));
+            if (valueList.Contains("cheat"))
+                model.SkipStartup = Convert.ToBoolean(key.GetValue("cheat"));
+            if (valueList.Contains("dmd_antialias"))
+                model.AntiAliasPercentage = Convert.ToInt32(key.GetValue("dmd_antialias"));
+            if (valueList.Contains("dmd_opacity"))
+                model.Opacity = Convert.ToInt32(key.GetValue("dmd_opacity"));
+            if (valueList.Contains("dmd_border"))
+                model.Border = Convert.ToBoolean(key.GetValue("dmd_border"));
+            if (valueList.Contains("dmd_title"))
+                model.Title = Convert.ToBoolean(key.GetValue("dmd_title"));
+            if (valueList.Contains("scanlines"))
+                model.Scanlines = Convert.ToBoolean(key.GetValue("scanlines"));
+            if (valueList.Contains("ddraw"))
+                model.DirectDraw = Convert.ToBoolean(key.GetValue("ddraw"));
+            if (valueList.Contains("showwindmd"))
+                model.ShowVPinMameDmd = Convert.ToBoolean(key.GetValue("showwindmd"));
+            if (valueList.Contains("direct3d"))
+                model.Direct3D = Convert.ToBoolean(key.GetValue("direct3d"));
+            if (valueList.Contains("at91jit"))
+                model.At91jit = Convert.ToBoolean(key.GetValue("at91jit"));
+            if (valueList.Contains("showpindmd"))
+                model.ExternalDmdDevice = Convert.ToBoolean(key.GetValue("showpindmd"));
+            if (valueList.Contains("dmd_height"))
+                model.Height = Convert.ToInt32(key.GetValue("dmd_height"));
+            if (valueList.Contains("dmd_width"))
+                model.Width = Convert.ToInt32(key.GetValue("dmd_width"));
+            if (valueList.Contains("dmd_pos_x"))
+                model.OffsetX = Convert.ToInt32(key.GetValue("dmd_pos_x"));
+            if (valueList.Contains("dmd_pos_y"))
+                model.OffsetY = Convert.ToInt32(key.GetValue("dmd_pos_y"));
+            if (valueList.Contains("dmd_perc0"))
+                model.IntensityPerc0 = Convert.ToInt32(key.GetValue("dmd_perc0"));
+            if (valueList.Contains("dmd_perc33"))
+                model.IntensityPerc33 = Convert.ToInt32(key.GetValue("dmd_perc33"));
+            if (valueList.Contains("dmd_perc66"))
+                model.IntensityPerc66 = Convert.ToInt32(key.GetValue("dmd_perc66"));
+            if (valueList.Contains("dmd_colorize"))
+                model.Colorize = Convert.ToBoolean(key.GetValue("dmd_colorize"));
+            if (valueList.Contains("cabinet_mode"))
+                model.CabinetMode = Convert.ToBoolean(key.GetValue("cabinet_mode"));
+            if (valueList.Contains("ignore_rom_crc"))
+                model.IgnoreRomCrc = Convert.ToBoolean(key.GetValue("ignore_rom_crc"));
+            if (valueList.Contains("rol"))
+                model.RotateLeft = Convert.ToBoolean(key.GetValue("rol"));
+            if (valueList.Contains("ror"))
+                model.RotateRight = Convert.ToBoolean(key.GetValue("ror"));
+            if (valueList.Contains("flipy"))
+                model.FlipY = Convert.ToBoolean(key.GetValue("flipy"));
+            if (valueList.Contains("flipx"))
+                model.FlipX = Convert.ToBoolean(key.GetValue("flipx"));
+            if (valueList.Contains("synclevel"))
+                model.SyncLevel = Convert.ToInt32(key.GetValue("synclevel"));
+            if (valueList.Contains("resampling_quality"))
+                model.ResamplingQuality = Convert.ToBoolean(key.GetValue("resampling_quality"));
+            if (valueList.Contains("dmd_doublesize"))
+                model.DoubleDisplaySize = Convert.ToBoolean(key.GetValue("dmd_doublesize"));
+            if (valueList.Contains("fastframes"))
+                model.FastFrames = Convert.ToInt32(key.GetValue("fastframes"));
+            if (valueList.Contains("samplerate"))
+                model.SampleRate = Convert.ToInt32(key.GetValue("samplerate"));
+            if (valueList.Contains("dmd_compact"))
+                model.CompactMode = Convert.ToBoolean(key.GetValue("dmd_compact"));
+            if (valueList.Contains("sound_mode"))
+                model.SoundMode = Convert.ToInt32(key.GetValue("sound_mode"));
+            if (valueList.Contains("samples"))
+                model.UseSamples = Convert.ToBoolean(key.GetValue("samples"));
+            if (valueList.Contains("sound"))
+                model.EnableSound = Convert.ToBoolean(key.GetValue("sound"));
+            if (valueList.Contains("dmd_red"))
+                model.Red = Convert.ToInt32(key.GetValue("dmd_red"));
+            if (valueList.Contains("dmd_green"))
+                model.Green = Convert.ToInt32(key.GetValue("dmd_green"));
+            if (valueList.Contains("dmd_blue"))
+                model.Blue = Convert.ToInt32(key.GetValue("dmd_blue"));
+            return model;
+        }
     }
 }

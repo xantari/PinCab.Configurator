@@ -701,5 +701,15 @@ namespace PinCab.Configurator
                     helper.LogValidationResult(result.ToolName, result);
             }
         }
+
+        private void pinMameROMBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new PinMameRomBrowserForm();
+            var result = form.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+            //    _settings = (new ProgramSettings()).LoadSettings();
+            //}
+        }
     }
 }

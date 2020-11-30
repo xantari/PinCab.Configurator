@@ -74,6 +74,7 @@
             this.dumpHighLevelDisplayInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.b2SScreenresEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pinMameROMBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
@@ -102,7 +103,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
-            this.pinMameROMBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -473,9 +473,16 @@
             // b2SScreenresEditorToolStripMenuItem
             // 
             this.b2SScreenresEditorToolStripMenuItem.Name = "b2SScreenresEditorToolStripMenuItem";
-            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.b2SScreenresEditorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.b2SScreenresEditorToolStripMenuItem.Text = "B2S Screenres Editor";
             this.b2SScreenresEditorToolStripMenuItem.Click += new System.EventHandler(this.b2SScreenresEditorToolStripMenuItem_Click);
+            // 
+            // pinMameROMBrowserToolStripMenuItem
+            // 
+            this.pinMameROMBrowserToolStripMenuItem.Name = "pinMameROMBrowserToolStripMenuItem";
+            this.pinMameROMBrowserToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.pinMameROMBrowserToolStripMenuItem.Text = "PinMAME ROM Browser";
+            this.pinMameROMBrowserToolStripMenuItem.Click += new System.EventHandler(this.pinMameROMBrowserToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -781,13 +788,6 @@
             this.panelRegionAndDisplayDetails.Name = "panelRegionAndDisplayDetails";
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
-            // 
-            // pinMameROMBrowserToolStripMenuItem
-            // 
-            this.pinMameROMBrowserToolStripMenuItem.Name = "pinMameROMBrowserToolStripMenuItem";
-            this.pinMameROMBrowserToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.pinMameROMBrowserToolStripMenuItem.Text = "Pin Mame ROM Browser";
-            this.pinMameROMBrowserToolStripMenuItem.Click += new System.EventHandler(this.pinMameROMBrowserToolStripMenuItem_Click);
             // 
             // MainForm
             // 

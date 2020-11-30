@@ -46,6 +46,7 @@ replicate to all the other areas automatically.
 21. VPinMame registry location settings (for those not using DMDExt).  
 	a. Option to set Default  
 	b. Option to update all previously run ROM's DMD positions  
+22. All functions of SetDMD + more options (Utilities>>PinMAME ROM Browser)
 
 # Instructions
 
@@ -68,16 +69,21 @@ Logging information is in the Log.txt file in the application root folder.
 #### B2S Screenres Editor
 ![B2S Screenres.txt Editor](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/B2sScreenresEditor.png "B2S Screenres Editor")
 
+#### PinMAME ROM Browser (All functions of SetDMD and more)
+![PinMAME ROM Browser](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/PinMameROMBrowserScreenshot.png "PinMAME ROM Browser")
+
+#### PinMAME ROM Setting Editor
+![PinMAME ROM Setting Editor](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/PinMameRomEditorScreenshot.png "PinMAME ROM Setting Editor")
+
 # TODO
 1. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
 2. PinUp Popper / Player location settings read/write/validation
 3. Create help HTML pages and hookup to the program
-4. Add all SetDMD functions to program
-5. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
+4. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
 for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
-6. P-Roc settings read/write/validation
-7. Manual validation output info for Pinball FX2/FX3
-8.  Pinball Y settings read/write/validation
+5. P-Roc settings read/write/validation
+6. Manual validation output info for Pinball FX2/FX3
+7.  Pinball Y settings read/write/validation
 
 
 

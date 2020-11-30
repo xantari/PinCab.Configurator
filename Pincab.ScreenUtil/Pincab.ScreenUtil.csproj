@@ -98,6 +98,8 @@
     <Compile Include="ApplicationHelpers.cs" />
     <Compile Include="Consts\Settings.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\RegistryKeyExtensions.cs" />
     <Compile Include="Extensions\WinformsExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ValidationExtensions.cs" />

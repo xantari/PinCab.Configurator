@@ -45,5 +45,47 @@ namespace PinCab.ScreenUtil.Extensions
 
             return default(T);
         }
+
+        public static void SetThreeStateCheckbox(this CheckBox checkBox, bool? value)
+        {
+            if (value.HasValue)
+                checkBox.Checked = value.Value;
+            else
+                checkBox.CheckState = CheckState.Indeterminate;
+        }
+
+        public static bool? GetThreeStateCheckboxBool(this CheckBox checkBox)
+        {
+            if (checkBox.CheckState == CheckState.Indeterminate)
+                return null;
+            return checkBox.Checked;
+        }
+
+        public static void SetNumericUpDown(this NumericUpDown numeric, int? value)
+        {
+            if (value.HasValue)
+                numeric.Value = value.Value;
+            else
+                numeric.Value = -1;
+        }
+        public static void SetNumericUpDown(this NumericUpDown numeric, uint? value)
+        {
+            if (value.HasValue)
+                numeric.Value = value.Value;
+            else
+                numeric.Value = -1;
+        }
+        public static int? GetNumericUpDown(this NumericUpDown numeric)
+        {
+            if (numeric.Value == -1)
+                return null;
+            return Convert.ToInt32(numeric.Value);
+        }
+        public static uint? GetNumericUpDownUInt(this NumericUpDown numeric)
+        {
+            if (numeric.Value == -1)
+                return null;
+            return Convert.ToUInt32(numeric.Value);
+        }
     }
 }

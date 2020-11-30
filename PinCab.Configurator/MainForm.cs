@@ -706,10 +706,6 @@ namespace PinCab.Configurator
         {
             var form = new PinMameRomBrowserForm();
             var result = form.ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    _settings = (new ProgramSettings()).LoadSettings();
-            //}
         }
     }
 }

@@ -67,6 +67,23 @@
             this.chkRotateRight = new System.Windows.Forms.CheckBox();
             this.chkFlipX = new System.Windows.Forms.CheckBox();
             this.chkFlipY = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.numericSyncLevel = new System.Windows.Forms.NumericUpDown();
+            this.chkResamplingQuality = new System.Windows.Forms.CheckBox();
+            this.chkDoubleDisplaySize = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numericFastFrames = new System.Windows.Forms.NumericUpDown();
+            this.chkCompactMode = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.numericSampleRate = new System.Windows.Forms.NumericUpDown();
+            this.cmbSoundMode = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.chkUseSamples = new System.Windows.Forms.CheckBox();
+            this.chkEnableSound = new System.Windows.Forms.CheckBox();
+            this.colorDialogDmdColor = new System.Windows.Forms.ColorDialog();
+            this.labelDmdColor = new System.Windows.Forms.Label();
+            this.btnDmdColor = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericAntiAliasPercentage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericHeight)).BeginInit();
@@ -76,6 +93,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc33)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc66)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSyncLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFastFrames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSampleRate)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -99,7 +119,7 @@
             // chkEnableAntiAlias
             // 
             this.chkEnableAntiAlias.AutoSize = true;
-            this.chkEnableAntiAlias.Location = new System.Drawing.Point(15, 52);
+            this.chkEnableAntiAlias.Location = new System.Drawing.Point(12, 31);
             this.chkEnableAntiAlias.Name = "chkEnableAntiAlias";
             this.chkEnableAntiAlias.Size = new System.Drawing.Size(119, 17);
             this.chkEnableAntiAlias.TabIndex = 2;
@@ -110,7 +130,7 @@
             // chkSkipStartup
             // 
             this.chkSkipStartup.AutoSize = true;
-            this.chkSkipStartup.Location = new System.Drawing.Point(15, 75);
+            this.chkSkipStartup.Location = new System.Drawing.Point(12, 54);
             this.chkSkipStartup.Name = "chkSkipStartup";
             this.chkSkipStartup.Size = new System.Drawing.Size(84, 17);
             this.chkSkipStartup.TabIndex = 3;
@@ -120,7 +140,12 @@
             // 
             // numericAntiAliasPercentage
             // 
-            this.numericAntiAliasPercentage.Location = new System.Drawing.Point(422, 16);
+            this.numericAntiAliasPercentage.Location = new System.Drawing.Point(429, 33);
+            this.numericAntiAliasPercentage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericAntiAliasPercentage.Name = "numericAntiAliasPercentage";
             this.numericAntiAliasPercentage.Size = new System.Drawing.Size(120, 20);
             this.numericAntiAliasPercentage.TabIndex = 4;
@@ -128,7 +153,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(308, 18);
+            this.label2.Location = new System.Drawing.Point(315, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 5;
@@ -137,7 +162,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(308, 52);
+            this.label3.Location = new System.Drawing.Point(380, 58);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 7;
@@ -145,14 +170,20 @@
             // 
             // numericOpacity
             // 
-            this.numericOpacity.Location = new System.Drawing.Point(422, 50);
+            this.numericOpacity.Location = new System.Drawing.Point(429, 56);
+            this.numericOpacity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericOpacity.Name = "numericOpacity";
             this.numericOpacity.Size = new System.Drawing.Size(120, 20);
             this.numericOpacity.TabIndex = 6;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(15, 608);
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSave.Location = new System.Drawing.Point(12, 550);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 8;
@@ -162,7 +193,8 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(112, 608);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(118, 550);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 9;
@@ -173,7 +205,7 @@
             // chkBorder
             // 
             this.chkBorder.AutoSize = true;
-            this.chkBorder.Location = new System.Drawing.Point(15, 98);
+            this.chkBorder.Location = new System.Drawing.Point(12, 77);
             this.chkBorder.Name = "chkBorder";
             this.chkBorder.Size = new System.Drawing.Size(87, 17);
             this.chkBorder.TabIndex = 10;
@@ -184,7 +216,7 @@
             // chkTitle
             // 
             this.chkTitle.AutoSize = true;
-            this.chkTitle.Location = new System.Drawing.Point(15, 121);
+            this.chkTitle.Location = new System.Drawing.Point(12, 100);
             this.chkTitle.Name = "chkTitle";
             this.chkTitle.Size = new System.Drawing.Size(91, 17);
             this.chkTitle.TabIndex = 11;
@@ -195,7 +227,7 @@
             // chkScanLines
             // 
             this.chkScanLines.AutoSize = true;
-            this.chkScanLines.Location = new System.Drawing.Point(15, 144);
+            this.chkScanLines.Location = new System.Drawing.Point(12, 123);
             this.chkScanLines.Name = "chkScanLines";
             this.chkScanLines.Size = new System.Drawing.Size(109, 17);
             this.chkScanLines.TabIndex = 12;
@@ -206,7 +238,7 @@
             // chkDirectDraw
             // 
             this.chkDirectDraw.AutoSize = true;
-            this.chkDirectDraw.Location = new System.Drawing.Point(15, 190);
+            this.chkDirectDraw.Location = new System.Drawing.Point(12, 169);
             this.chkDirectDraw.Name = "chkDirectDraw";
             this.chkDirectDraw.Size = new System.Drawing.Size(82, 17);
             this.chkDirectDraw.TabIndex = 13;
@@ -217,7 +249,7 @@
             // chkShowVpinMameDmd
             // 
             this.chkShowVpinMameDmd.AutoSize = true;
-            this.chkShowVpinMameDmd.Location = new System.Drawing.Point(15, 213);
+            this.chkShowVpinMameDmd.Location = new System.Drawing.Point(12, 192);
             this.chkShowVpinMameDmd.Name = "chkShowVpinMameDmd";
             this.chkShowVpinMameDmd.Size = new System.Drawing.Size(169, 17);
             this.chkShowVpinMameDmd.TabIndex = 14;
@@ -228,7 +260,7 @@
             // chkDirect3d
             // 
             this.chkDirect3d.AutoSize = true;
-            this.chkDirect3d.Location = new System.Drawing.Point(15, 236);
+            this.chkDirect3d.Location = new System.Drawing.Point(12, 215);
             this.chkDirect3d.Name = "chkDirect3d";
             this.chkDirect3d.Size = new System.Drawing.Size(71, 17);
             this.chkDirect3d.TabIndex = 15;
@@ -239,7 +271,7 @@
             // chkAt91Jit
             // 
             this.chkAt91Jit.AutoSize = true;
-            this.chkAt91Jit.Location = new System.Drawing.Point(15, 167);
+            this.chkAt91Jit.Location = new System.Drawing.Point(12, 146);
             this.chkAt91Jit.Name = "chkAt91Jit";
             this.chkAt91Jit.Size = new System.Drawing.Size(153, 17);
             this.chkAt91Jit.TabIndex = 16;
@@ -250,7 +282,7 @@
             // chkExternalDmdDevice
             // 
             this.chkExternalDmdDevice.AutoSize = true;
-            this.chkExternalDmdDevice.Location = new System.Drawing.Point(15, 259);
+            this.chkExternalDmdDevice.Location = new System.Drawing.Point(12, 238);
             this.chkExternalDmdDevice.Name = "chkExternalDmdDevice";
             this.chkExternalDmdDevice.Size = new System.Drawing.Size(265, 17);
             this.chkExternalDmdDevice.TabIndex = 17;
@@ -261,7 +293,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(308, 98);
+            this.label4.Location = new System.Drawing.Point(380, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 19;
@@ -269,12 +301,17 @@
             // 
             // numericHeight
             // 
-            this.numericHeight.Location = new System.Drawing.Point(422, 96);
+            this.numericHeight.Location = new System.Drawing.Point(429, 79);
             this.numericHeight.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
+            this.numericHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericHeight.Name = "numericHeight";
             this.numericHeight.Size = new System.Drawing.Size(120, 20);
             this.numericHeight.TabIndex = 18;
@@ -282,7 +319,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(308, 122);
+            this.label5.Location = new System.Drawing.Point(383, 107);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 21;
@@ -290,12 +327,17 @@
             // 
             // numericWidth
             // 
-            this.numericWidth.Location = new System.Drawing.Point(422, 120);
+            this.numericWidth.Location = new System.Drawing.Point(429, 105);
             this.numericWidth.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
+            this.numericWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericWidth.Name = "numericWidth";
             this.numericWidth.Size = new System.Drawing.Size(120, 20);
             this.numericWidth.TabIndex = 20;
@@ -303,7 +345,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(308, 148);
+            this.label6.Location = new System.Drawing.Point(276, 134);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(147, 13);
             this.label6.TabIndex = 23;
@@ -311,12 +353,17 @@
             // 
             // numericOffsetX
             // 
-            this.numericOffsetX.Location = new System.Drawing.Point(461, 143);
+            this.numericOffsetX.Location = new System.Drawing.Point(429, 129);
             this.numericOffsetX.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
+            this.numericOffsetX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericOffsetX.Name = "numericOffsetX";
             this.numericOffsetX.Size = new System.Drawing.Size(120, 20);
             this.numericOffsetX.TabIndex = 22;
@@ -324,7 +371,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(308, 171);
+            this.label7.Location = new System.Drawing.Point(276, 157);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(147, 13);
             this.label7.TabIndex = 24;
@@ -332,12 +379,17 @@
             // 
             // numericOffsetY
             // 
-            this.numericOffsetY.Location = new System.Drawing.Point(461, 171);
+            this.numericOffsetY.Location = new System.Drawing.Point(429, 157);
             this.numericOffsetY.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
+            this.numericOffsetY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericOffsetY.Name = "numericOffsetY";
             this.numericOffsetY.Size = new System.Drawing.Size(120, 20);
             this.numericOffsetY.TabIndex = 25;
@@ -345,7 +397,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(309, 203);
+            this.label8.Location = new System.Drawing.Point(269, 192);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(154, 13);
             this.label8.TabIndex = 27;
@@ -353,7 +405,12 @@
             // 
             // numericIntensityPerc0
             // 
-            this.numericIntensityPerc0.Location = new System.Drawing.Point(469, 201);
+            this.numericIntensityPerc0.Location = new System.Drawing.Point(429, 190);
+            this.numericIntensityPerc0.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericIntensityPerc0.Name = "numericIntensityPerc0";
             this.numericIntensityPerc0.Size = new System.Drawing.Size(120, 20);
             this.numericIntensityPerc0.TabIndex = 26;
@@ -361,7 +418,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(309, 227);
+            this.label9.Location = new System.Drawing.Point(284, 215);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(139, 13);
             this.label9.TabIndex = 29;
@@ -369,7 +426,12 @@
             // 
             // numericIntensityPerc33
             // 
-            this.numericIntensityPerc33.Location = new System.Drawing.Point(469, 225);
+            this.numericIntensityPerc33.Location = new System.Drawing.Point(429, 214);
+            this.numericIntensityPerc33.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericIntensityPerc33.Name = "numericIntensityPerc33";
             this.numericIntensityPerc33.Size = new System.Drawing.Size(120, 20);
             this.numericIntensityPerc33.TabIndex = 28;
@@ -377,7 +439,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(309, 249);
+            this.label10.Location = new System.Drawing.Point(284, 237);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(139, 13);
             this.label10.TabIndex = 31;
@@ -385,7 +447,12 @@
             // 
             // numericIntensityPerc66
             // 
-            this.numericIntensityPerc66.Location = new System.Drawing.Point(469, 246);
+            this.numericIntensityPerc66.Location = new System.Drawing.Point(429, 235);
+            this.numericIntensityPerc66.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.numericIntensityPerc66.Name = "numericIntensityPerc66";
             this.numericIntensityPerc66.Size = new System.Drawing.Size(120, 20);
             this.numericIntensityPerc66.TabIndex = 30;
@@ -393,7 +460,7 @@
             // chkColorize
             // 
             this.chkColorize.AutoSize = true;
-            this.chkColorize.Location = new System.Drawing.Point(15, 282);
+            this.chkColorize.Location = new System.Drawing.Point(12, 261);
             this.chkColorize.Name = "chkColorize";
             this.chkColorize.Size = new System.Drawing.Size(116, 17);
             this.chkColorize.TabIndex = 32;
@@ -404,7 +471,7 @@
             // chkCabinetMode
             // 
             this.chkCabinetMode.AutoSize = true;
-            this.chkCabinetMode.Location = new System.Drawing.Point(15, 305);
+            this.chkCabinetMode.Location = new System.Drawing.Point(12, 284);
             this.chkCabinetMode.Name = "chkCabinetMode";
             this.chkCabinetMode.Size = new System.Drawing.Size(92, 17);
             this.chkCabinetMode.TabIndex = 33;
@@ -415,7 +482,7 @@
             // chkIgnoreRomCrcCheck
             // 
             this.chkIgnoreRomCrcCheck.AutoSize = true;
-            this.chkIgnoreRomCrcCheck.Location = new System.Drawing.Point(15, 328);
+            this.chkIgnoreRomCrcCheck.Location = new System.Drawing.Point(12, 307);
             this.chkIgnoreRomCrcCheck.Name = "chkIgnoreRomCrcCheck";
             this.chkIgnoreRomCrcCheck.Size = new System.Drawing.Size(143, 17);
             this.chkIgnoreRomCrcCheck.TabIndex = 34;
@@ -426,7 +493,7 @@
             // chkRotateLeft
             // 
             this.chkRotateLeft.AutoSize = true;
-            this.chkRotateLeft.Location = new System.Drawing.Point(15, 351);
+            this.chkRotateLeft.Location = new System.Drawing.Point(12, 330);
             this.chkRotateLeft.Name = "chkRotateLeft";
             this.chkRotateLeft.Size = new System.Drawing.Size(79, 17);
             this.chkRotateLeft.TabIndex = 35;
@@ -437,7 +504,7 @@
             // chkRotateRight
             // 
             this.chkRotateRight.AutoSize = true;
-            this.chkRotateRight.Location = new System.Drawing.Point(15, 374);
+            this.chkRotateRight.Location = new System.Drawing.Point(12, 353);
             this.chkRotateRight.Name = "chkRotateRight";
             this.chkRotateRight.Size = new System.Drawing.Size(86, 17);
             this.chkRotateRight.TabIndex = 36;
@@ -448,7 +515,7 @@
             // chkFlipX
             // 
             this.chkFlipX.AutoSize = true;
-            this.chkFlipX.Location = new System.Drawing.Point(15, 397);
+            this.chkFlipX.Location = new System.Drawing.Point(12, 376);
             this.chkFlipX.Name = "chkFlipX";
             this.chkFlipX.Size = new System.Drawing.Size(52, 17);
             this.chkFlipX.TabIndex = 37;
@@ -459,7 +526,7 @@
             // chkFlipY
             // 
             this.chkFlipY.AutoSize = true;
-            this.chkFlipY.Location = new System.Drawing.Point(15, 420);
+            this.chkFlipY.Location = new System.Drawing.Point(12, 399);
             this.chkFlipY.Name = "chkFlipY";
             this.chkFlipY.Size = new System.Drawing.Size(52, 17);
             this.chkFlipY.TabIndex = 38;
@@ -467,11 +534,216 @@
             this.chkFlipY.ThreeState = true;
             this.chkFlipY.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(363, 270);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Sync Level";
+            // 
+            // numericSyncLevel
+            // 
+            this.numericSyncLevel.Location = new System.Drawing.Point(428, 268);
+            this.numericSyncLevel.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericSyncLevel.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericSyncLevel.Name = "numericSyncLevel";
+            this.numericSyncLevel.Size = new System.Drawing.Size(120, 20);
+            this.numericSyncLevel.TabIndex = 39;
+            // 
+            // chkResamplingQuality
+            // 
+            this.chkResamplingQuality.AutoSize = true;
+            this.chkResamplingQuality.Location = new System.Drawing.Point(12, 422);
+            this.chkResamplingQuality.Name = "chkResamplingQuality";
+            this.chkResamplingQuality.Size = new System.Drawing.Size(116, 17);
+            this.chkResamplingQuality.TabIndex = 41;
+            this.chkResamplingQuality.Text = "Resampling Quality";
+            this.chkResamplingQuality.ThreeState = true;
+            this.chkResamplingQuality.UseVisualStyleBackColor = true;
+            // 
+            // chkDoubleDisplaySize
+            // 
+            this.chkDoubleDisplaySize.AutoSize = true;
+            this.chkDoubleDisplaySize.Location = new System.Drawing.Point(12, 445);
+            this.chkDoubleDisplaySize.Name = "chkDoubleDisplaySize";
+            this.chkDoubleDisplaySize.Size = new System.Drawing.Size(120, 17);
+            this.chkDoubleDisplaySize.TabIndex = 42;
+            this.chkDoubleDisplaySize.Text = "Double Display Size";
+            this.chkDoubleDisplaySize.ThreeState = true;
+            this.chkDoubleDisplaySize.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(359, 297);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 13);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "Fast Frames";
+            // 
+            // numericFastFrames
+            // 
+            this.numericFastFrames.Location = new System.Drawing.Point(429, 295);
+            this.numericFastFrames.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericFastFrames.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericFastFrames.Name = "numericFastFrames";
+            this.numericFastFrames.Size = new System.Drawing.Size(120, 20);
+            this.numericFastFrames.TabIndex = 43;
+            // 
+            // chkCompactMode
+            // 
+            this.chkCompactMode.AutoSize = true;
+            this.chkCompactMode.Location = new System.Drawing.Point(12, 468);
+            this.chkCompactMode.Name = "chkCompactMode";
+            this.chkCompactMode.Size = new System.Drawing.Size(98, 17);
+            this.chkCompactMode.TabIndex = 45;
+            this.chkCompactMode.Text = "Compact Mode";
+            this.chkCompactMode.ThreeState = true;
+            this.chkCompactMode.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(359, 323);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(68, 13);
+            this.label13.TabIndex = 47;
+            this.label13.Text = "Sample Rate";
+            // 
+            // numericSampleRate
+            // 
+            this.numericSampleRate.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericSampleRate.Location = new System.Drawing.Point(429, 321);
+            this.numericSampleRate.Maximum = new decimal(new int[] {
+            96000,
+            0,
+            0,
+            0});
+            this.numericSampleRate.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.numericSampleRate.Name = "numericSampleRate";
+            this.numericSampleRate.Size = new System.Drawing.Size(120, 20);
+            this.numericSampleRate.TabIndex = 46;
+            // 
+            // cmbSoundMode
+            // 
+            this.cmbSoundMode.FormattingEnabled = true;
+            this.cmbSoundMode.Items.AddRange(new object[] {
+            "0 = Builtin PinMAME Emulation",
+            "1 = Alternate Sound File Support",
+            "2 = PinSound"});
+            this.cmbSoundMode.Location = new System.Drawing.Point(428, 347);
+            this.cmbSoundMode.Name = "cmbSoundMode";
+            this.cmbSoundMode.Size = new System.Drawing.Size(121, 21);
+            this.cmbSoundMode.TabIndex = 48;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(355, 350);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(68, 13);
+            this.label14.TabIndex = 49;
+            this.label14.Text = "Sound Mode";
+            // 
+            // chkUseSamples
+            // 
+            this.chkUseSamples.AutoSize = true;
+            this.chkUseSamples.Location = new System.Drawing.Point(12, 491);
+            this.chkUseSamples.Name = "chkUseSamples";
+            this.chkUseSamples.Size = new System.Drawing.Size(88, 17);
+            this.chkUseSamples.TabIndex = 50;
+            this.chkUseSamples.Text = "Use Samples";
+            this.chkUseSamples.ThreeState = true;
+            this.chkUseSamples.UseVisualStyleBackColor = true;
+            // 
+            // chkEnableSound
+            // 
+            this.chkEnableSound.AutoSize = true;
+            this.chkEnableSound.Location = new System.Drawing.Point(12, 514);
+            this.chkEnableSound.Name = "chkEnableSound";
+            this.chkEnableSound.Size = new System.Drawing.Size(93, 17);
+            this.chkEnableSound.TabIndex = 51;
+            this.chkEnableSound.Text = "Enable Sound";
+            this.chkEnableSound.ThreeState = true;
+            this.chkEnableSound.UseVisualStyleBackColor = true;
+            // 
+            // labelDmdColor
+            // 
+            this.labelDmdColor.AutoSize = true;
+            this.labelDmdColor.Location = new System.Drawing.Point(363, 377);
+            this.labelDmdColor.Name = "labelDmdColor";
+            this.labelDmdColor.Size = new System.Drawing.Size(59, 13);
+            this.labelDmdColor.TabIndex = 52;
+            this.labelDmdColor.Text = "DMD Color";
+            // 
+            // btnDmdColor
+            // 
+            this.btnDmdColor.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnDmdColor.Location = new System.Drawing.Point(428, 372);
+            this.btnDmdColor.Name = "btnDmdColor";
+            this.btnDmdColor.Size = new System.Drawing.Size(75, 23);
+            this.btnDmdColor.TabIndex = 53;
+            this.btnDmdColor.UseVisualStyleBackColor = false;
+            this.btnDmdColor.Click += new System.EventHandler(this.btnDmdColor_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(249, 422);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(299, 109);
+            this.textBox1.TabIndex = 54;
+            this.textBox1.Text = "Notes: \r\n-1 in numeric fields means this value is not set in the registry\r\n\r\nFor " +
+    "Checkboxes, with a black box, that also means it is not set in the registry.";
+            // 
             // PinMameRomSettingEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 643);
+            this.ClientSize = new System.Drawing.Size(562, 583);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnDmdColor);
+            this.Controls.Add(this.labelDmdColor);
+            this.Controls.Add(this.chkEnableSound);
+            this.Controls.Add(this.chkUseSamples);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.cmbSoundMode);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.numericSampleRate);
+            this.Controls.Add(this.chkCompactMode);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.numericFastFrames);
+            this.Controls.Add(this.chkDoubleDisplaySize);
+            this.Controls.Add(this.chkResamplingQuality);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.numericSyncLevel);
             this.Controls.Add(this.chkFlipY);
             this.Controls.Add(this.chkFlipX);
             this.Controls.Add(this.chkRotateRight);
@@ -511,6 +783,7 @@
             this.Controls.Add(this.chkEnableAntiAlias);
             this.Controls.Add(this.lblRomName);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(578, 622);
             this.Name = "PinMameRomSettingEditorForm";
             this.Text = "PinMAME ROM Setting Editor";
             ((System.ComponentModel.ISupportInitialize)(this.numericAntiAliasPercentage)).EndInit();
@@ -522,6 +795,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc33)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericIntensityPerc66)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSyncLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFastFrames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSampleRate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -568,5 +844,22 @@
         private System.Windows.Forms.CheckBox chkRotateRight;
         private System.Windows.Forms.CheckBox chkFlipX;
         private System.Windows.Forms.CheckBox chkFlipY;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown numericSyncLevel;
+        private System.Windows.Forms.CheckBox chkResamplingQuality;
+        private System.Windows.Forms.CheckBox chkDoubleDisplaySize;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown numericFastFrames;
+        private System.Windows.Forms.CheckBox chkCompactMode;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown numericSampleRate;
+        private System.Windows.Forms.ComboBox cmbSoundMode;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox chkUseSamples;
+        private System.Windows.Forms.CheckBox chkEnableSound;
+        private System.Windows.Forms.ColorDialog colorDialogDmdColor;
+        private System.Windows.Forms.Label labelDmdColor;
+        private System.Windows.Forms.Button btnDmdColor;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

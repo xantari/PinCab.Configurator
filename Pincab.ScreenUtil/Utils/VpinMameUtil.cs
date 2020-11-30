@@ -126,6 +126,97 @@ namespace PinCab.ScreenUtil.Utils
             return result;
         }
 
+        public ValidationResult SetPinMamePositionAllROMs(VpinMameRomSetting setting, bool onlyPreviousRunRoms, ReportProgressDelegate reportProcess = null)
+        {
+            var result = new ValidationResult();
+
+            if (!KeyExists())
+            {
+                result.Messages.Add(new ValidationMessage
+                    ($"{ToolName}: Unable to find VPinMame Registry key. Have you installed it yet?", MessageLevel.Error));
+            }
+
+            if (result.Messages.HasAnyErrors()) //Don't proceed forward with validations if they haven't defined the minimum necessary items
+            {
+                result.IsValid = false;
+                return result;
+            }
+
+            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
+            Directory.CreateDirectory(currentFolder);
+            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+
+            using (var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame"))
+            {
+                RegistryUtil.ExportViaRegExe(keyToBackup.Name, filePath);
+                keyToBackup.Close();
+            }
+
+            var keys = GetAllRomKeyNames(true, onlyPreviousRunRoms);
+            result.Messages.Add(new ValidationMessage() { Level = MessageLevel.Information, Message = $"Setting registry key values on all previously run roms. Count: {keys.Count()}" });
+            int count = 0;
+            foreach (var key in keys)
+            {
+                var percentComplete = Convert.ToInt32(Math.Round(count / Convert.ToDouble(keys.Count()) * 100));
+                reportProcess?.Invoke(percentComplete);
+                count++;
+                setting.RomName = key;
+                SaveRomModelToRegsitry(setting);
+            }
+
+            result.Messages.Add(new ValidationMessage($"{ VpinMameUtil.ToolName }: Write command completed.", MessageLevel.Information));
+
+            return result;
+        }
+
+        public ValidationResult SetPinMamePositionAllROMs(VpinMameRomSetting setting, List<string> PropertiesToCopy, bool onlyPreviousRunRoms, ReportProgressDelegate reportProcess = null)
+        {
+            var result = new ValidationResult();
+
+            if (!KeyExists())
+            {
+                result.Messages.Add(new ValidationMessage
+                    ($"{ToolName}: Unable to find VPinMame Registry key. Have you installed it yet?", MessageLevel.Error));
+            }
+
+            if (result.Messages.HasAnyErrors()) //Don't proceed forward with validations if they haven't defined the minimum necessary items
+            {
+                result.IsValid = false;
+                return result;
+            }
+
+            var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
+            Directory.CreateDirectory(currentFolder);
+            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+
+            using (var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame"))
+            {
+                RegistryUtil.ExportViaRegExe(keyToBackup.Name, filePath);
+                keyToBackup.Close();
+            }
+
+            var keys = GetAllRomKeyNames(true, onlyPreviousRunRoms);
+            result.Messages.Add(new ValidationMessage() { Level = MessageLevel.Information, Message = $"Setting registry key values on all previously run roms. Count: {keys.Count()}" });
+            int count = 0;
+            foreach (var key in keys)
+            {
+                var percentComplete = Convert.ToInt32(Math.Round(count / Convert.ToDouble(keys.Count()) * 100));
+                reportProcess?.Invoke(percentComplete);
+                count++;
+                var model = GetRomModel(key);
+                foreach(var name in PropertiesToCopy)
+                {
+                    object val = setting.GetPropValue(name);
+                    model.SetPropValue(name, val);
+                }
+                SaveRomModelToRegsitry(model);
+            }
+
+            result.Messages.Add(new ValidationMessage($"{ VpinMameUtil.ToolName }: Write command completed.", MessageLevel.Information));
+
+            return result;
+        }
+
         public RegionRectangle GetDMDRegionRectangle(string key)
         {
             if (key == null)
@@ -412,8 +503,19 @@ namespace PinCab.ScreenUtil.Utils
             return roms;
         }
 
+        public VpinMameRomSetting GetRomModel(string romKeyName)
+        {
+            var key = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(romKeyName);
+            var model = LoadRomModel(key);
+            if (key != null)
+                key.Close();
+            return model;
+        }
+
         private VpinMameRomSetting LoadRomModel(RegistryKey key)
         {
+            if (key == null)
+                return null;
             var model = new VpinMameRomSetting();
             model.RomName = key.Name.Substring(key.Name.LastIndexOf("\\") + 1, key.Name.Length - key.Name.LastIndexOf("\\") - 1);
             var valueList = key.GetValueNames();
@@ -494,6 +596,55 @@ namespace PinCab.ScreenUtil.Utils
             if (valueList.Contains("dmd_blue"))
                 model.Blue = Convert.ToInt32(key.GetValue("dmd_blue"));
             return model;
+        }
+
+        public void SaveRomModelToRegsitry(VpinMameRomSetting setting)
+        {
+            if (setting == null)
+                return;
+
+            using (var key = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(setting.RomName, true))
+            {
+                key.SetOrDeleteKeyBoolAsInt("antialias", setting.EnableAntiAlias);
+                key.SetOrDeleteKeyBoolAsInt("cheat", setting.SkipStartup);
+                key.SetOrDeleteKeyInt("dmd_antialias", setting.AntiAliasPercentage);
+                key.SetOrDeleteKeyInt("dmd_opacity", setting.Opacity);
+                key.SetOrDeleteKeyBoolAsInt("dmd_border", setting.Border);
+                key.SetOrDeleteKeyBoolAsInt("dmd_title", setting.Title);
+                key.SetOrDeleteKeyBoolAsInt("scanlines", setting.Scanlines);
+                key.SetOrDeleteKeyBoolAsInt("ddraw", setting.DirectDraw);
+                key.SetOrDeleteKeyBoolAsInt("showwindmd", setting.ShowVPinMameDmd);
+                key.SetOrDeleteKeyBoolAsInt("direct3d", setting.Direct3D);
+                key.SetOrDeleteKeyBoolAsInt("at91jit", setting.At91jit);
+                key.SetOrDeleteKeyBoolAsInt("showpindmd", setting.ExternalDmdDevice);
+                key.SetOrDeleteKeyInt("dmd_height", setting.Height);
+                key.SetOrDeleteKeyInt("dmd_width", setting.Width);
+                key.SetOrDeleteKeyInt("dmd_pos_x", setting.OffsetX);
+                key.SetOrDeleteKeyInt("dmd_pos_y", setting.OffsetY);
+                key.SetOrDeleteKeyInt("dmd_perc0", setting.IntensityPerc0);
+                key.SetOrDeleteKeyInt("dmd_perc33", setting.IntensityPerc33);
+                key.SetOrDeleteKeyInt("dmd_perc66", setting.IntensityPerc66);
+                key.SetOrDeleteKeyBoolAsInt("dmd_colorize", setting.Colorize);
+                key.SetOrDeleteKeyBoolAsInt("cabinet_mode", setting.CabinetMode);
+                key.SetOrDeleteKeyBoolAsInt("ignore_rom_crc", setting.IgnoreRomCrc);
+                key.SetOrDeleteKeyBoolAsInt("rol", setting.RotateLeft);
+                key.SetOrDeleteKeyBoolAsInt("ror", setting.RotateRight);
+                key.SetOrDeleteKeyBoolAsInt("flipy", setting.FlipY);
+                key.SetOrDeleteKeyBoolAsInt("flipx", setting.FlipX);
+                key.SetOrDeleteKeyInt("synclevel", setting.SyncLevel);
+                key.SetOrDeleteKeyBoolAsInt("resampling_quality", setting.ResamplingQuality);
+                key.SetOrDeleteKeyBoolAsInt("dmd_doublesize", setting.DoubleDisplaySize);
+                key.SetOrDeleteKeyInt("fastframes", setting.FastFrames);
+                key.SetOrDeleteKeyInt("samplerate", setting.SampleRate);
+                key.SetOrDeleteKeyBoolAsInt("dmd_compact", setting.CompactMode);
+                key.SetOrDeleteKeyInt("sound_mode", setting.SoundMode);
+                key.SetOrDeleteKeyBoolAsInt("samples", setting.UseSamples);
+                key.SetOrDeleteKeyBoolAsInt("sound", setting.EnableSound);
+                key.SetOrDeleteKeyInt("dmd_red", setting.Red);
+                key.SetOrDeleteKeyInt("dmd_green", setting.Green);
+                key.SetOrDeleteKeyInt("dmd_blue", setting.Blue);
+                key.Close();
+            }
         }
     }
 }

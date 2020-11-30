@@ -38,6 +38,17 @@
             this.txtRomSearch = new System.Windows.Forms.TextBox();
             this.dataGridViewRomList = new System.Windows.Forms.DataGridView();
             this.RomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copySelectedCellValueToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copySelectedRowDataToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runROMUsingNativeVPinMameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopRunningROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.externalDmdDeviceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.showVPinMameDmdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,25 +87,16 @@
             this.redDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.greenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.blueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedCellValueToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedRowDataToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingNativeVPinMameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vpinMameRomSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -135,6 +137,7 @@
             // 
             // lblInfo
             // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.AutoSize = true;
             this.lblInfo.Location = new System.Drawing.Point(877, 6);
             this.lblInfo.Name = "lblInfo";
@@ -166,7 +169,6 @@
             this.dataGridViewRomList.AutoGenerateColumns = false;
             this.dataGridViewRomList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridViewRomList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridViewRomList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRomList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RomName,
             this.externalDmdDeviceDataGridViewTextBoxColumn,
@@ -215,6 +217,7 @@
             this.dataGridViewRomList.ReadOnly = true;
             this.dataGridViewRomList.Size = new System.Drawing.Size(1049, 370);
             this.dataGridViewRomList.TabIndex = 2;
+            this.dataGridViewRomList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRomList_CellDoubleClick);
             // 
             // RomName
             // 
@@ -223,6 +226,98 @@
             this.RomName.Name = "RomName";
             this.RomName.ReadOnly = true;
             this.RomName.Width = 82;
+            // 
+            // contextMenuStripGridActions
+            // 
+            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.copySelectedCellValueToAllROMSToolStripMenuItem,
+            this.copySelectedRowDataToAllROMSToolStripMenuItem,
+            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem,
+            this.runROMUsingNativeVPinMameToolStripMenuItem,
+            this.stopRunningROMToolStripMenuItem});
+            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(325, 136);
+            this.contextMenuStripGridActions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripGridActions_ItemClicked);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // copySelectedCellValueToAllROMSToolStripMenuItem
+            // 
+            this.copySelectedCellValueToAllROMSToolStripMenuItem.Name = "copySelectedCellValueToAllROMSToolStripMenuItem";
+            this.copySelectedCellValueToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.copySelectedCellValueToAllROMSToolStripMenuItem.Text = "Copy Selected Cell Value to All ROMS";
+            // 
+            // copySelectedRowDataToAllROMSToolStripMenuItem
+            // 
+            this.copySelectedRowDataToAllROMSToolStripMenuItem.Name = "copySelectedRowDataToAllROMSToolStripMenuItem";
+            this.copySelectedRowDataToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.copySelectedRowDataToAllROMSToolStripMenuItem.Text = "Copy Selected Row Data to All ROMS";
+            // 
+            // runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem
+            // 
+            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Name = "runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem";
+            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Text = "Run ROM using External DMD Device / DMDExt";
+            // 
+            // runROMUsingNativeVPinMameToolStripMenuItem
+            // 
+            this.runROMUsingNativeVPinMameToolStripMenuItem.Name = "runROMUsingNativeVPinMameToolStripMenuItem";
+            this.runROMUsingNativeVPinMameToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.runROMUsingNativeVPinMameToolStripMenuItem.Text = "Run ROM using Native VPinMame";
+            // 
+            // stopRunningROMToolStripMenuItem
+            // 
+            this.stopRunningROMToolStripMenuItem.Name = "stopRunningROMToolStripMenuItem";
+            this.stopRunningROMToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.stopRunningROMToolStripMenuItem.Text = "Stop Running ROM";
+            this.stopRunningROMToolStripMenuItem.Visible = false;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar.Location = new System.Drawing.Point(0, 532);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(1049, 23);
+            this.progressBar.TabIndex = 3;
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 0);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(1049, 102);
+            this.txtLog.TabIndex = 4;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 56);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewRomList);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtLog);
+            this.splitContainer1.Size = new System.Drawing.Size(1049, 476);
+            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.TabIndex = 5;
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            this.backgroundWorkerProgressBar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProgressBar_DoWork);
+            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
+            this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
             // externalDmdDeviceDataGridViewTextBoxColumn
             // 
@@ -593,86 +688,9 @@
             this.blueDataGridViewTextBoxColumn.ReadOnly = true;
             this.blueDataGridViewTextBoxColumn.Width = 53;
             // 
-            // contextMenuStripGridActions
-            // 
-            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.copySelectedCellValueToAllROMSToolStripMenuItem,
-            this.copySelectedRowDataToAllROMSToolStripMenuItem,
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem,
-            this.runROMUsingNativeVPinMameToolStripMenuItem});
-            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(325, 114);
-            this.contextMenuStripGridActions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripGridActions_ItemClicked);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // copySelectedCellValueToAllROMSToolStripMenuItem
-            // 
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Name = "copySelectedCellValueToAllROMSToolStripMenuItem";
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Text = "Copy Selected Cell Value to All ROMS";
-            // 
-            // copySelectedRowDataToAllROMSToolStripMenuItem
-            // 
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Name = "copySelectedRowDataToAllROMSToolStripMenuItem";
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Text = "Copy Selected Row Data to All ROMS";
-            // 
-            // runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem
-            // 
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Name = "runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem";
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Text = "Run ROM using External DMD Device / DMDExt";
-            // 
-            // runROMUsingNativeVPinMameToolStripMenuItem
-            // 
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Name = "runROMUsingNativeVPinMameToolStripMenuItem";
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Text = "Run ROM using Native VPinMame";
-            // 
             // vpinMameRomSettingBindingSource
             // 
             this.vpinMameRomSettingBindingSource.DataSource = typeof(PinCab.ScreenUtil.Models.VpinMameRomSetting);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 532);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1049, 23);
-            this.progressBar1.TabIndex = 3;
-            // 
-            // txtLog
-            // 
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Location = new System.Drawing.Point(0, 0);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(1049, 102);
-            this.txtLog.TabIndex = 4;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 56);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewRomList);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtLog);
-            this.splitContainer1.Size = new System.Drawing.Size(1049, 476);
-            this.splitContainer1.SplitterDistance = 370;
-            this.splitContainer1.TabIndex = 5;
             // 
             // PinMameRomBrowserForm
             // 
@@ -680,7 +698,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 555);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -692,12 +710,12 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -711,7 +729,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridViewRomList;
         private System.Windows.Forms.BindingSource vpinMameRomSettingBindingSource;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label lblRomSearch;
@@ -762,5 +780,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn blueDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runROMUsingNativeVPinMameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopRunningROMToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
     }
 }

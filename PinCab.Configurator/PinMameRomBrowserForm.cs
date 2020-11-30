@@ -1,7 +1,11 @@
-﻿using PinCab.ScreenUtil.Extensions;
+﻿using PinCab.Configurator.Models;
+using PinCab.Configurator.Utils;
+using PinCab.ScreenUtil;
+using PinCab.ScreenUtil.Extensions;
 using PinCab.ScreenUtil.Models;
 using PinCab.ScreenUtil.Utils;
 using PinCab.ScreenUtil.WinForms;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,13 +22,21 @@ namespace PinCab.Configurator
     {
         private readonly VpinMameUtil _util = new VpinMameUtil();
         private List<VpinMameRomSetting> _roms = new List<VpinMameRomSetting>();
-        private VPinMAMELib.Controller controller = new VPinMAMELib.Controller();
+        private VPinMAMELib.Controller _controller = new VPinMAMELib.Controller();
+        //private FormHelper helper;
+        //private ProgramSettings _settings;
+        //private List<DisplayDetail> _displayDetails { get; set; } = new List<DisplayDetail>();
+
+        //public PinMameRomBrowserForm(ProgramSettings settings, List<DisplayDetail> displayDetails)
         public PinMameRomBrowserForm()
         {
             InitializeComponent();
 
             ConfigureGrid();
             LoadRomList();
+            //_settings = settings;
+            //_displayDetails = displayDetails;
+            //helper = new FormHelper(_settings, _displayDetails, txtLog, backgroundWorkerProgressBar);
         }
 
         private void LoadRomList()
@@ -53,6 +65,11 @@ namespace PinCab.Configurator
 
         private void txtRomSearch_TextChanged(object sender, EventArgs e)
         {
+            SearchByText();
+        }
+
+        private void SearchByText()
+        {
             vpinMameRomSettingBindingSource.DataSource = _roms.Where(p => p.RomName.Contains(txtRomSearch.Text)).ToSortableBindingList();
         }
 
@@ -65,27 +82,142 @@ namespace PinCab.Configurator
                 return;
             }
             if (e.ClickedItem == editToolStripMenuItem)
+                ShowRomEditor();
+            else if (e.ClickedItem == copySelectedCellValueToAllROMSToolStripMenuItem)
+                CopyCellDataToAllRoms();
+            else if (e.ClickedItem == copySelectedRowDataToAllROMSToolStripMenuItem)
+                CopyRowDataToAllRoms();
+            else if (e.ClickedItem == runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem)
+                DisplayRomUsingPinMame(true);
+            else if (e.ClickedItem == runROMUsingNativeVPinMameToolStripMenuItem)
+                DisplayRomUsingPinMame(false);
+            else if (e.ClickedItem == stopRunningROMToolStripMenuItem)
+                StopRunningRom();
+        }
+
+        private void StopRunningRom()
+        {
+            if (_controller.Running)
+                _controller.Stop();
+            stopRunningROMToolStripMenuItem.Visible = false;
+            runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Visible = true;
+            runROMUsingNativeVPinMameToolStripMenuItem.Visible = true;
+        }
+
+        private void CopyRowDataToAllRoms()
+        {
+            if (backgroundWorkerProgressBar.IsBusy)
+                return;
+            if (dataGridViewRomList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("You must select a row first.");
+                return;
+            }
+            var selectedRom = dataGridViewRomList.SelectedRows[0].DataBoundItem as VpinMameRomSetting;
+            var result = MessageBox.Show("Are you sure?\r\n\r\nThis will copy all values from rom: " + selectedRom.RomName + " to all other ROMs.\r\n\r\n Note: This does NOT edit the \"default\" key.", "Are you sure?", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                if (!backgroundWorkerProgressBar.IsBusy)
+                {
+                    txtLog.Text = string.Empty;
+                    var action = new PinmameBackgroundAction();
+                    action.Action = BackgroundProgressAction.PinMameWriteRowDataToAllPreviousRunRoms;
+                    action.Setting = selectedRom;
+                    backgroundWorkerProgressBar.RunWorkerAsync(action);
+                }
+            }
+        }
+
+        private void CopyCellDataToAllRoms()
+        {
+            if (backgroundWorkerProgressBar.IsBusy)
+                return;
+            if (dataGridViewRomList.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("You must select a cell first.");
+                return;
+            }
+            if (dataGridViewRomList.SelectedCells[0].ColumnIndex == 0) //Don't allow copy of rom name cell
+            {
+                MessageBox.Show("You must select a valid cell first.");
+                return;
+            }
+            var selectedRom = dataGridViewRomList.SelectedCells[0].OwningRow.DataBoundItem as VpinMameRomSetting;
+            var highlightedCellValue = dataGridViewRomList.SelectedCells[0].OwningColumn.DataPropertyName;
+            var result = MessageBox.Show("Are you sure?\r\n\r\nThis will copy cell value: " + highlightedCellValue + " from rom: " + selectedRom.RomName + " to all other ROMs.\r\n\r\n Note: This does NOT edit the \"default\" key.", "Are you sure?", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                if (!backgroundWorkerProgressBar.IsBusy)
+                {
+                    txtLog.Text = string.Empty;
+                    var action = new PinmameBackgroundAction();
+                    action.Action = BackgroundProgressAction.PinMameWriteCellDataToAllPreviousRunRoms;
+                    action.Setting = selectedRom;
+                    action.CellsToCopy.Add(highlightedCellValue);
+                    backgroundWorkerProgressBar.RunWorkerAsync(action);
+                }
+            }
+        }
+
+        private void DisplayRomUsingPinMame(bool externalDmd)
+        {
+            try
             {
                 var rom = GetActiveRowRom();
-                var editor = new PinMameRomSettingEditorForm(rom);
-                var result = editor.ShowDialog();
-            }
-            else if (e.ClickedItem == copySelectedCellValueToAllROMSToolStripMenuItem)
-            {
+                if (_controller.Running)
+                    _controller.Stop();
 
+                //11/29/2020 - MRO: There is an issue re-starting pinmame if the user uses External DMD device, and you click
+                //the "X" on the window (you can do that on the taskbar), which closes the DMD window.
+                //However after that point you can no longer start a DMD window anymore and the _controller.Hidden
+                //property is stuck at "true" and you can't ever get it back. Not sure the work around to it.
+                //Reinstantiating the _controller object doesn't seem to work either for some reason.
+                _controller.GameName = rom.RomName;
+                _controller.ShowFrame = false;
+                _controller.Hidden = false;
+                _controller.ShowDMDOnly = true;
+                _controller.ShowTitle = false;
+                if (externalDmd)
+                {
+                    _controller.ShowWinDMD = false;
+                    _controller.ShowPinDMD = true;
+                }
+                else
+                {
+                    _controller.ShowWinDMD = true;
+                    _controller.ShowPinDMD = false;
+                }
+                _controller.Run();
+                stopRunningROMToolStripMenuItem.Visible = true;
+                runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Visible = false;
+                runROMUsingNativeVPinMameToolStripMenuItem.Visible = false;
             }
-            else if (e.ClickedItem == copySelectedRowDataToAllROMSToolStripMenuItem)
+            catch (Exception ex)
             {
-
+                txtLog.Text = "Error starting PinMAME. Error: " + ex.ToString();
             }
-            else if (e.ClickedItem == runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem)
+        }
+
+        private void ShowRomEditor()
+        {
+            var rom = GetActiveRowRom();
+            var editor = new PinMameRomSettingEditorForm(rom, _controller);
+            var result = editor.ShowDialog();
+            if (result == DialogResult.OK)
             {
+                //Reload the grid list
+                //var selectedRow  = dataGridViewRomList.SelectedRows.Count > 0 ? dataGridViewRomList.SelectedRows[0] : null;
+                //var selectedCell = dataGridViewRomList.SelectedCells.Count > 0 ? dataGridViewRomList.SelectedCells[0] : null;
 
+                RefreshGrid();
             }
-            else if (e.ClickedItem == runROMUsingNativeVPinMameToolStripMenuItem)
-            {
+        }
 
-            }
+        private void RefreshGrid()
+        {
+            LoadRomList();
+            if (!string.IsNullOrEmpty(txtRomSearch.Text))
+                SearchByText();
         }
 
         private int GetActiveRowIndex()
@@ -104,6 +236,74 @@ namespace PinCab.Configurator
         {
             var data = dataGridViewRomList.DataSource as BindingSource;
             return data.Current as VpinMameRomSetting;
+        }
+
+        private void dataGridViewRomList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ShowRomEditor();
+        }
+
+        private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar.Value = 0;
+            var result = e.Result as ToolValidationResult;
+            if (result.OutputValidationMessages)
+            {
+                if (result.MessageType == ValidationMessageType.ToolMessage)
+                    LogToolValidationResult(result.ToolName, result);
+                //else
+                //    helper.LogValidationResult(result.ToolName, result);
+            }
+            RefreshGrid();
+        }
+
+        private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var arg = (PinmameBackgroundAction)e.Argument;
+            if (arg.Action == BackgroundProgressAction.PinMameWriteRowDataToAllPreviousRunRoms)
+            {
+                var result = _util.SetPinMamePositionAllROMs(arg.Setting, true, backgroundWorkerProgressBar.ReportProgress);
+                var toolResult = new ToolValidationResult(result);
+                toolResult.ToolName = VpinMameUtil.ToolName;
+                toolResult.MessageType = ValidationMessageType.ToolMessage;
+                toolResult.FunctionExecuted = arg.Action.ToString();
+                e.Result = toolResult;
+            }
+            else if (arg.Action == BackgroundProgressAction.PinMameWriteCellDataToAllPreviousRunRoms)
+            {
+                var result = _util.SetPinMamePositionAllROMs(arg.Setting, true, backgroundWorkerProgressBar.ReportProgress);
+                var toolResult = new ToolValidationResult(result);
+                toolResult.ToolName = VpinMameUtil.ToolName;
+                toolResult.MessageType = ValidationMessageType.ToolMessage;
+                toolResult.FunctionExecuted = arg.Action.ToString();
+                e.Result = toolResult;
+            }
+        }
+
+        public void LogToolValidationResult(string command, ValidationResult result)
+        {
+            var sb = new StringBuilder();
+            if (result?.Messages.Count() > 0)
+            {
+                sb.Append($"{command} messages: \r\n");
+                foreach (var message in result.Messages)
+                {
+                    if (message.Level == MessageLevel.Error)
+                        Log.Error("{command}: Error: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Warning)
+                        Log.Warning("{command}: Warning: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Information)
+                        Log.Information("{command}: Information: {message}", command, message.Message);
+                    sb.Append(message.Message + "\r\n");
+                }
+            }
+
+            txtLog.Text += sb.ToString();
         }
     }
 }

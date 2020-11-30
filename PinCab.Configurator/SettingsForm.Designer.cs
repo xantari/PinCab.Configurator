@@ -92,7 +92,7 @@
             this.tbSettings.Location = new System.Drawing.Point(0, 0);
             this.tbSettings.Name = "tbSettings";
             this.tbSettings.SelectedIndex = 0;
-            this.tbSettings.Size = new System.Drawing.Size(682, 549);
+            this.tbSettings.Size = new System.Drawing.Size(682, 298);
             this.tbSettings.TabIndex = 7;
             // 
             // tabPagePinballProgramSettings
@@ -118,7 +118,7 @@
             this.tabPagePinballProgramSettings.Controls.Add(this.label8);
             this.tabPagePinballProgramSettings.Location = new System.Drawing.Point(4, 22);
             this.tabPagePinballProgramSettings.Name = "tabPagePinballProgramSettings";
-            this.tabPagePinballProgramSettings.Size = new System.Drawing.Size(674, 523);
+            this.tabPagePinballProgramSettings.Size = new System.Drawing.Size(674, 272);
             this.tabPagePinballProgramSettings.TabIndex = 2;
             this.tabPagePinballProgramSettings.Text = "Pinball Program Settings";
             this.tabPagePinballProgramSettings.UseVisualStyleBackColor = true;
@@ -318,7 +318,7 @@
             this.tabPageFrontEnd.Location = new System.Drawing.Point(4, 22);
             this.tabPageFrontEnd.Name = "tabPageFrontEnd";
             this.tabPageFrontEnd.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFrontEnd.Size = new System.Drawing.Size(674, 523);
+            this.tabPageFrontEnd.Size = new System.Drawing.Size(674, 272);
             this.tabPageFrontEnd.TabIndex = 0;
             this.tabPageFrontEnd.Text = "Front End";
             this.tabPageFrontEnd.UseVisualStyleBackColor = true;
@@ -425,7 +425,7 @@
             this.tabPageFFMpeg.Location = new System.Drawing.Point(4, 22);
             this.tabPageFFMpeg.Name = "tabPageFFMpeg";
             this.tabPageFFMpeg.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFFMpeg.Size = new System.Drawing.Size(674, 523);
+            this.tabPageFFMpeg.Size = new System.Drawing.Size(674, 272);
             this.tabPageFFMpeg.TabIndex = 1;
             this.tabPageFFMpeg.Text = "FFMPEG";
             this.tabPageFFMpeg.UseVisualStyleBackColor = true;
@@ -565,7 +565,7 @@
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 519);
+            this.panel1.Location = new System.Drawing.Point(0, 268);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(682, 30);
             this.panel1.TabIndex = 8;
@@ -596,7 +596,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 549);
+            this.ClientSize = new System.Drawing.Size(682, 298);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbSettings);
             this.HelpButton = true;

@@ -9,6 +9,8 @@ namespace PinCab.Configurator.Utils
     public enum BackgroundProgressAction
     {
         PinMameWriteAllPreviousRunRoms,
-        PinMameValidateAllPreviousRunRoms
+        PinMameValidateAllPreviousRunRoms,
+        PinMameWriteRowDataToAllPreviousRunRoms,
+        PinMameWriteCellDataToAllPreviousRunRoms
     }
 }

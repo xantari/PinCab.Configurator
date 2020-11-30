@@ -47,6 +47,7 @@ replicate to all the other areas automatically.
 	a. Option to set Default  
 	b. Option to update all previously run ROM's DMD positions  
 22. All functions of SetDMD + more options (Utilities>>PinMAME ROM Browser)
+	a. You can preview the ROM settings in either DMDExt or VPinMame's native renderer
 
 # Instructions
 

@@ -176,11 +176,16 @@ namespace PinCab.Configurator
 
         private void btnPinupPlayerFilePath_Click(object sender, EventArgs e)
         {
-            using (FolderBrowserDialog fileDialog = new FolderBrowserDialog())
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
             {
-                fileDialog.ShowDialog();
+                fileDialog.Filter = "ini Files|*.ini|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "PinUpPlayer.ini";
+                fileDialog.RestoreDirectory = true;
+                var result = fileDialog.ShowDialog();
 
-                txtPinupPlayerFilePath.Text = fileDialog.SelectedPath;
+                if (result == DialogResult.OK)
+                    txtPinupPlayerFilePath.Text = fileDialog.FileName;
             }
         }
 

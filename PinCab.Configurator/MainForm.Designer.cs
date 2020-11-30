@@ -318,6 +318,7 @@
             this.writepinupPlayerToolStripMenuItem.Name = "writepinupPlayerToolStripMenuItem";
             this.writepinupPlayerToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writepinupPlayerToolStripMenuItem.Text = "Pinup Player";
+            this.writepinupPlayerToolStripMenuItem.Click += new System.EventHandler(this.writepinupPlayerToolStripMenuItem_Click);
             // 
             // writepinupPopperToolStripMenuItem
             // 
@@ -425,6 +426,7 @@
             this.validatepinupPlayerToolStripMenuItem1.Name = "validatepinupPlayerToolStripMenuItem1";
             this.validatepinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.validatepinupPlayerToolStripMenuItem1.Text = "Pinup Player";
+            this.validatepinupPlayerToolStripMenuItem1.Click += new System.EventHandler(this.validatepinupPlayerToolStripMenuItem1_Click);
             // 
             // validatepinupPopperPupDatabasedbToolStripMenuItem
             // 

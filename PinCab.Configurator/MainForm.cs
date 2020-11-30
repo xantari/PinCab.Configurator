@@ -707,5 +707,15 @@ namespace PinCab.Configurator
             var form = new PinMameRomBrowserForm();
             var result = form.ShowDialog();
         }
+
+        private void validatepinupPlayerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void writepinupPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

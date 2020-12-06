@@ -41,7 +41,7 @@ namespace PinCab.ScreenUtil.Utils
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\DMDDevice\\";
             var fileInfo = new FileInfo(_dmdDeviceInitPath);
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}";
+            string filePath = currentFolder + $"{fileInfo.Name}_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}";
             File.Copy(_dmdDeviceInitPath, filePath);
 
             Log.Information("{ToolName}: Wrote settings backup: {location}", ToolName, filePath);

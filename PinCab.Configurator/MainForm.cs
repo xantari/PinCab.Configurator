@@ -74,6 +74,11 @@ namespace PinCab.Configurator
                         loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
                         loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
                     }
+                    else 
+                    {
+                        Log.Information("Display: {display} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.", display.DisplayName);
+                        txtData.Text += $"Display: {display.DisplayName} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.\r\n";
+                    }
                 }
             }
         }

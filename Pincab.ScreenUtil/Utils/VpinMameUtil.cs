@@ -96,7 +96,7 @@ namespace PinCab.ScreenUtil.Utils
 
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}.reg";
 
             using (var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame"))
             {
@@ -144,7 +144,7 @@ namespace PinCab.ScreenUtil.Utils
 
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}.reg";
 
             using (var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame"))
             {
@@ -187,7 +187,7 @@ namespace PinCab.ScreenUtil.Utils
 
             var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
             Directory.CreateDirectory(currentFolder);
-            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+            string filePath = currentFolder + $"VpinMame_AllKeys_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}.reg";
 
             using (var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame"))
             {
@@ -258,7 +258,7 @@ namespace PinCab.ScreenUtil.Utils
             {
                 var currentFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\VPinMame\\";
                 Directory.CreateDirectory(currentFolder);
-                string filePath = currentFolder + $"VpinMame_{key}_{DateTime.Now.ToString("yyyy-MM-dd_hhMMss")}.reg";
+                string filePath = currentFolder + $"VpinMame_{key}_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}.reg";
                 var keyToBackup = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Freeware")?.OpenSubKey("Visual PinMame")?.OpenSubKey(key);
                 if (keyToBackup != null)
                 {

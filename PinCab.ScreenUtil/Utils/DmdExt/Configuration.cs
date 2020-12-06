@@ -13,7 +13,7 @@ namespace PinCab.ScreenUtil.Utils.DmdExt
     public class Configuration
     {
         private readonly string _iniPath;
-        private readonly FileIniDataParser _parser;
+        private readonly StreamIniDataParser _parser;
         private readonly IniData _data;
 		private string _gameName;
 		public GameConfig GameConfig { get; private set; }
@@ -44,16 +44,31 @@ namespace PinCab.ScreenUtil.Utils.DmdExt
 			else
 				throw new IniNotFoundException(iniPath);
 
-			_parser = new FileIniDataParser();
-			_data = _parser.ReadFile(_iniPath);
 
+			//_parser = new FileIniDataParser();
+			//_data = _parser.ReadData(_iniPath);
+			_parser = new StreamIniDataParser();
+			using (FileStream fs = File.Open(_iniPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+			{
+				using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+				{
+					_data = _parser.ReadData(sr);
+				}
+			}
 
 			VirtualDmd = new VirtualDmdConfig(_data, this);
 		}
 
 		public void Save()
 		{
-			_parser.WriteFile(_iniPath, _data); //Writes as UTF8 with BOM
+			using (FileStream fs = File.Open(_iniPath, FileMode.Create, FileAccess.Write))
+			{
+				using (StreamWriter sr = new StreamWriter(fs, Encoding.UTF8))
+				{
+					_parser.WriteData(sr, _data, new CondensedFileIniFormatter(_data.Configuration));
+				}
+			}
+			//_parser.WriteFile(_iniPath, _data); //Writes as UTF8 with BOM
 		}
 	}
 

@@ -107,6 +107,7 @@
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
+    <Compile Include="Models\PinupPlayerSetting.cs" />
     <Compile Include="Models\ToolValidationResult.cs" />
     <Compile Include="Models\VpinMameRomSetting.cs" />
     <Compile Include="Utils\DmdDeviceUtil.cs" />

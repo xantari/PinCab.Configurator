@@ -657,15 +657,15 @@
             "0 = Builtin PinMAME Emulation",
             "1 = Alternate Sound File Support",
             "2 = PinSound"});
-            this.cmbSoundMode.Location = new System.Drawing.Point(428, 347);
+            this.cmbSoundMode.Location = new System.Drawing.Point(366, 347);
             this.cmbSoundMode.Name = "cmbSoundMode";
-            this.cmbSoundMode.Size = new System.Drawing.Size(121, 21);
+            this.cmbSoundMode.Size = new System.Drawing.Size(183, 21);
             this.cmbSoundMode.TabIndex = 48;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(355, 350);
+            this.label14.Location = new System.Drawing.Point(292, 350);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 13);
             this.label14.TabIndex = 49;

@@ -1,4 +1,4 @@
-# PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCabScreenConfigurator)
+# PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCabConfigurator)
 This tool allows you to layout your screens and validate your screen configuration in all virtual pinball related programs.
 
 The motivation behind this program was to solve these issues with Virtual Pinball cabinet setups:

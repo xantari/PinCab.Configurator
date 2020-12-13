@@ -326,6 +326,7 @@
             this.writepRocSettingsToolStripMenuItem.Name = "writepRocSettingsToolStripMenuItem";
             this.writepRocSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writepRocSettingsToolStripMenuItem.Text = "P-ROC Settings";
+            this.writepRocSettingsToolStripMenuItem.Click += new System.EventHandler(this.writepRocSettingsToolStripMenuItem_Click);
             // 
             // pinballFX2FX3DisplayOnlyToolStripMenuItem
             // 
@@ -435,6 +436,7 @@
             this.validatepROCSettingsToolStripMenuItem1.Name = "validatepROCSettingsToolStripMenuItem1";
             this.validatepROCSettingsToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.validatepROCSettingsToolStripMenuItem1.Text = "P-ROC Settings";
+            this.validatepROCSettingsToolStripMenuItem1.Click += new System.EventHandler(this.validatepROCSettingsToolStripMenuItem1_Click);
             // 
             // debugToolStripMenuItem
             // 

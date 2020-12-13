@@ -52,6 +52,7 @@ replicate to all the other areas automatically.
 24. PinUp Popper 1.4+ is supported since it uses the Pinup Player screen settings. Older versions of pinup popper which use SQLLite database for screen positions are not supported.
 25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 26. Pinball Y settings read/write/validation
+27. P-Roc DMD Settings display
 
 # Instructions
 
@@ -89,7 +90,6 @@ for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
 	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media
 	c. Hook into PuPmedia.php on VPinball.com to fetch media as well
 	d. Hook into PinballX's media library (if you have defined your GameEx credentials)
-4. P-Roc settings read/write/validation
 
 
 

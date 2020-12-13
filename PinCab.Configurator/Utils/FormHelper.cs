@@ -365,6 +365,15 @@ namespace PinCab.Configurator.Utils
             Log.Information($"{PinballFxUtil.ToolName}: Write command completed.");
         }
 
+        public void WritePRocSettings()
+        {
+            var util = new ProcUtil();
+            var result = util.GetDisplayDetails(_displayDetails);
+            LogToolValidationResult("GetDisplayDetails", result);
+            _txtData.Text += $"{ProcUtil.ToolName}: Write command completed.\r\n";
+            Log.Information($"{ProcUtil.ToolName}: Write command completed.");
+        }
+
         public void LogValidationResult(string command, ValidationResult result)
         {
             var sb = new StringBuilder();

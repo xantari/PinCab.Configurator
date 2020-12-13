@@ -747,5 +747,17 @@ namespace PinCab.Configurator
             helper.ClearMessages();
             helper.WritePinballYSettings();
         }
+
+        private void validatepROCSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WritePRocSettings();
+        }
+
+        private void writepRocSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WritePRocSettings();
+        }
     }
 }

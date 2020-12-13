@@ -130,6 +130,7 @@
     <Compile Include="Models\RegionRectangleCoordinate.cs" />
     <Compile Include="Models\ToolValidationResult.cs" />
     <Compile Include="Models\VpinMameRomSetting.cs" />
+    <Compile Include="Utils\ProcUtil.cs" />
     <Compile Include="Utils\PinballFxUtil.cs" />
     <Compile Include="Utils\DmdDeviceUtil.cs" />
     <Compile Include="Utils\DmdExt\CondensedFileIniFormatter.cs" />

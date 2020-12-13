@@ -272,6 +272,48 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += $"{VpinMameUtil.ToolName}: Unable to find VPinMame registry key. Have you installed it and registered it yet?";
         }
 
+        public void ValidatePinupPlayerSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.PinupPlayerPath))
+            {
+                if (!File.Exists(_settings.PinupPlayerPath))
+                {
+                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    return;
+                }
+                var util = new PinupPlayerUtil(_settings.PinupPlayerPath);
+                var result = util.Validate(_displayDetails);
+                LogValidationResult(PinupPlayerUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path not set. Check settings.";
+        }
+
+        public void WritePinupPlayerSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.PinupPlayerPath))
+            {
+                if (!File.Exists(_settings.PinupPlayerPath))
+                {
+                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    return;
+                }
+                var util = new PinupPlayerUtil(_settings.PinupPlayerPath);
+
+                util.SetDisplayDetails(Consts.DMD, _displayDetails);
+                util.SetDisplayDetails(Consts.Playfield, _displayDetails);
+                util.SetDisplayDetails(Consts.Backglass, _displayDetails);
+                util.SetDisplayDetails(Consts.Topper, _displayDetails);
+                util.SetDisplayDetails(Consts.Apron, _displayDetails);
+
+                util.SaveSettings();
+                _txtData.Text += $"{PinupPlayerUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{PinupPlayerUtil.ToolName}: Write command completed.");
+            }
+            else
+                _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path not set. Check settings.";
+        }
+
 
         public void LogValidationResult(string command, ValidationResult result)
         {

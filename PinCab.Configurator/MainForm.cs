@@ -123,7 +123,6 @@ namespace PinCab.Configurator
 
         private void generateFFMpegCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             var result = _displayDetails.ValidateDisplayConfiguration();
             if (!result.IsValid)
             {
@@ -623,6 +622,7 @@ namespace PinCab.Configurator
         {
             helper.ClearMessages();
             //TODO: Fill this in
+            MessageBox.Show("Not implemented yet.");
         }
 
         private void b2SScreenresEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -715,12 +715,19 @@ namespace PinCab.Configurator
 
         private void validatepinupPlayerToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            helper.ClearMessages();
+            helper.ValidatePinupPlayerSettings();
         }
 
         private void writepinupPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            helper.ClearMessages();
+            helper.WritePinupPlayerSettings();
+        }
 
+        private void writeAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not Implemented yet");
         }
     }
 }

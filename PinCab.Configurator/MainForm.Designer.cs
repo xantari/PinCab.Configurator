@@ -257,6 +257,7 @@
             this.writeAllSettingsToolStripMenuItem.Name = "writeAllSettingsToolStripMenuItem";
             this.writeAllSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writeAllSettingsToolStripMenuItem.Text = "All Settings";
+            this.writeAllSettingsToolStripMenuItem.Click += new System.EventHandler(this.writeAllSettingsToolStripMenuItem_Click);
             // 
             // writePinballXiniToolStripMenuItem
             // 

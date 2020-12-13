@@ -115,6 +115,8 @@
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
+    <Compile Include="Models\PinballX\PinballXGame.cs" />
+    <Compile Include="Models\PinballX\PinballXMenu.cs" />
     <Compile Include="Models\PinballY\PinballYSetting.cs" />
     <Compile Include="Models\PinballY\PinballYWindow.cs" />
     <Compile Include="Models\PinballY\PinballYWindowRectangle.cs" />

@@ -759,5 +759,11 @@ namespace PinCab.Configurator
             helper.ClearMessages();
             helper.WritePRocSettings();
         }
+
+        private void gameManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new GameManagerForm();
+            var result = form.ShowDialog();
+        }
     }
 }

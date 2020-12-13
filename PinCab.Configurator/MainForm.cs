@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
-using PinCab.ScreenUtil.Utils;
 using PinCab.ScreenUtil.Models;
 
 namespace PinCab.Configurator
@@ -728,6 +727,12 @@ namespace PinCab.Configurator
         private void writeAllSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not Implemented yet");
+        }
+
+        private void pinballFX2FX3DisplayOnlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WritePinballFxSettings();
         }
     }
 }

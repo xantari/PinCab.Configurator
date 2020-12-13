@@ -49,6 +49,8 @@ replicate to all the other areas automatically.
 22. All functions of SetDMD + more options (Utilities>>PinMAME ROM Browser)  
 	a. You can preview the ROM settings in either DMDExt or VPinMame's native renderer  
 23. Pinup Player location settings read/write/validation
+24. PinUp Popper 1.4+ is supported since it uses the Pinup Player screen settings. Older versions of pinup popper which use SQLLite database for screen positions are not supported.
+25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 
 # Instructions
 
@@ -79,7 +81,6 @@ Logging information is in the Log.txt file in the application root folder.
 
 # TODO
 1. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
-2. PinUp Popper location settings read/write/validation
 3. Create help HTML pages and hookup to the program
 4. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
 for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
@@ -88,7 +89,6 @@ for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
 	c. Hook into PuPmedia.php on VPinball.com to fetch media as well
 	d. Hook into PinballX's media library (if you have defined your GameEx credentials)
 5. P-Roc settings read/write/validation
-6. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 7.  Pinball Y settings read/write/validation
 
 

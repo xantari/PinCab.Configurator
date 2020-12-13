@@ -53,7 +53,6 @@
             this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepinballYSettingstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepinupPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.writepinupPopperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepRocSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateallSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +66,6 @@
             this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys = new System.Windows.Forms.ToolStripMenuItem();
             this.validatepinballYSettingstxtToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.validatepinupPlayerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.validatepinupPopperPupDatabasedbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validatepROCSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpDisplayInfoToFileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,6 +101,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -246,8 +245,8 @@
             this.writevPinMameUpdateAllROMsRegistryKeyToolStripMenuItem,
             this.writepinballYSettingstxtToolStripMenuItem,
             this.writepinupPlayerToolStripMenuItem,
-            this.writepinupPopperToolStripMenuItem,
-            this.writepRocSettingsToolStripMenuItem});
+            this.writepRocSettingsToolStripMenuItem,
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem});
             this.writeConfigurationToolStripMenuItem.Name = "writeConfigurationToolStripMenuItem";
             this.writeConfigurationToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.writeConfigurationToolStripMenuItem.Text = "Write";
@@ -318,14 +317,8 @@
             // 
             this.writepinupPlayerToolStripMenuItem.Name = "writepinupPlayerToolStripMenuItem";
             this.writepinupPlayerToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writepinupPlayerToolStripMenuItem.Text = "Pinup Player";
+            this.writepinupPlayerToolStripMenuItem.Text = "Pinup Player / Popper 1.4+";
             this.writepinupPlayerToolStripMenuItem.Click += new System.EventHandler(this.writepinupPlayerToolStripMenuItem_Click);
-            // 
-            // writepinupPopperToolStripMenuItem
-            // 
-            this.writepinupPopperToolStripMenuItem.Name = "writepinupPopperToolStripMenuItem";
-            this.writepinupPopperToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.writepinupPopperToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
             // writepRocSettingsToolStripMenuItem
             // 
@@ -347,7 +340,6 @@
             this.validateToolStripMenuItemValidateVPinMameAllRomsRegistryKeys,
             this.validatepinballYSettingstxtToolStripMenuItem1,
             this.validatepinupPlayerToolStripMenuItem1,
-            this.validatepinupPopperPupDatabasedbToolStripMenuItem,
             this.validatepROCSettingsToolStripMenuItem1});
             this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
             this.validateToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
@@ -426,14 +418,8 @@
             // 
             this.validatepinupPlayerToolStripMenuItem1.Name = "validatepinupPlayerToolStripMenuItem1";
             this.validatepinupPlayerToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
-            this.validatepinupPlayerToolStripMenuItem1.Text = "Pinup Player";
+            this.validatepinupPlayerToolStripMenuItem1.Text = "Pinup Player / Popper 1.4+";
             this.validatepinupPlayerToolStripMenuItem1.Click += new System.EventHandler(this.validatepinupPlayerToolStripMenuItem1_Click);
-            // 
-            // validatepinupPopperPupDatabasedbToolStripMenuItem
-            // 
-            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Name = "validatepinupPopperPupDatabasedbToolStripMenuItem";
-            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.validatepinupPopperPupDatabasedbToolStripMenuItem.Text = "Pinup Popper (PupDatabase.db)";
             // 
             // validatepROCSettingsToolStripMenuItem1
             // 
@@ -792,6 +778,13 @@
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
             // 
+            // pinballFX2FX3DisplayOnlyToolStripMenuItem
+            // 
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Name = "pinballFX2FX3DisplayOnlyToolStripMenuItem";
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Text = "Pinball FX2 / FX3 (Display Only)";
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Click += new System.EventHandler(this.pinballFX2FX3DisplayOnlyToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -871,7 +864,6 @@
         private System.Windows.Forms.ToolStripMenuItem dumpDisplayInfoToFileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem writepinballYSettingstxtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writepinupPlayerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem writepinupPopperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writePinballXiniToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dumpHighLevelDisplayInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem writepRocSettingsToolStripMenuItem;
@@ -880,7 +872,6 @@
         private System.Windows.Forms.ToolStripMenuItem validateDmdDeviceiniToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem validatepinballYSettingstxtToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem validatepinupPlayerToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem validatepinupPopperPupDatabasedbToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem validatepROCSettingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown numericUpDownRegionXOffset;
@@ -901,6 +892,7 @@
         private System.Windows.Forms.Panel panelRegionAndDisplayDetails;
         private System.Windows.Forms.Panel panelDepictionAndLog;
         private System.Windows.Forms.ToolStripMenuItem pinMameROMBrowserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pinballFX2FX3DisplayOnlyToolStripMenuItem;
     }
 }
 

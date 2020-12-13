@@ -314,6 +314,14 @@ namespace PinCab.Configurator.Utils
                 _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path not set. Check settings.";
         }
 
+        public void WritePinballFxSettings()
+        {
+            var util = new PinballFxUtil();
+            var result = util.GetDisplayDetails(_displayDetails);
+            LogToolValidationResult("GetDisplayDetails", result);
+            _txtData.Text += $"{PinballFxUtil.ToolName}: Write command completed.\r\n";
+            Log.Information($"{PinballFxUtil.ToolName}: Write command completed.");
+        }
 
         public void LogValidationResult(string command, ValidationResult result)
         {

@@ -278,7 +278,7 @@ namespace PinCab.Configurator.Utils
             {
                 if (!File.Exists(_settings.PinupPlayerPath))
                 {
-                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.PinballYSettingsPath;
                     return;
                 }
                 var util = new PinupPlayerUtil(_settings.PinupPlayerPath);
@@ -295,7 +295,7 @@ namespace PinCab.Configurator.Utils
             {
                 if (!File.Exists(_settings.PinupPlayerPath))
                 {
-                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.DMDDeviceIniPath;
+                    _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path file not found: " + _settings.PinupPlayerPath;
                     return;
                 }
                 var util = new PinupPlayerUtil(_settings.PinupPlayerPath);
@@ -312,6 +312,48 @@ namespace PinCab.Configurator.Utils
             }
             else
                 _txtData.Text += $"{PinupPlayerUtil.ToolName}: PinUpPlayer.ini path not set. Check settings.";
+        }
+
+        public void ValidatePinballYSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.PinballYSettingsPath))
+            {
+                if (!File.Exists(_settings.PinballYSettingsPath))
+                {
+                    _txtData.Text += $"{PinballYUtil.ToolName}: Settings.txt path file not found: " + _settings.PinballYSettingsPath;
+                    return;
+                }
+                var util = new PinballYUtil(_settings.PinballYSettingsPath);
+                var result = util.Validate(_displayDetails);
+                LogValidationResult(PinballYUtil.ToolName, result);
+            }
+            else
+                _txtData.Text += $"{PinballYUtil.ToolName}: Settings.txt path not set. Check settings.";
+        }
+
+        public void WritePinballYSettings()
+        {
+            if (!string.IsNullOrEmpty(_settings.PinballYSettingsPath))
+            {
+                if (!File.Exists(_settings.PinballYSettingsPath))
+                {
+                    _txtData.Text += $"{PinballYUtil.ToolName}: Settings.txt path file not found: " + _settings.PinballYSettingsPath;
+                    return;
+                }
+                var util = new PinballYUtil(_settings.PinballYSettingsPath);
+
+                util.SetDisplayDetails(Consts.DMD, _displayDetails);
+                util.SetDisplayDetails(Consts.Playfield, _displayDetails);
+                util.SetDisplayDetails(Consts.Backglass, _displayDetails);
+                util.SetDisplayDetails(Consts.Topper, _displayDetails);
+                util.SetDisplayDetails(Consts.Apron, _displayDetails);
+
+                util.SaveSettings();
+                _txtData.Text += $"{PinballYUtil.ToolName}: Write command completed.\r\n";
+                Log.Information($"{PinballYUtil.ToolName}: Write command completed.");
+            }
+            else
+                _txtData.Text += $"{PinballYUtil.ToolName}: Settings.txt path not set. Check settings.";
         }
 
         public void WritePinballFxSettings()

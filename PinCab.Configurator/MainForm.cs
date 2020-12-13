@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
 using PinCab.ScreenUtil.Models;
+using PinCab.ScreenUtil.Utils.PinballY;
 
 namespace PinCab.Configurator
 {
@@ -733,6 +734,18 @@ namespace PinCab.Configurator
         {
             helper.ClearMessages();
             helper.WritePinballFxSettings();
+        }
+
+        private void validatepinballYSettingstxtToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.ValidatePinballYSettings();
+        }
+
+        private void writepinballYSettingstxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helper.ClearMessages();
+            helper.WritePinballYSettings();
         }
     }
 }

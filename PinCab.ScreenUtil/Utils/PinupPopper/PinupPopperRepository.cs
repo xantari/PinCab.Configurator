@@ -14,6 +14,35 @@ namespace PinCab.ScreenUtil.Utils.PinupPopper
         {
         }
 
+        public Emulator GetEmulator(int id)
+        {
+            if (!ValidateConnection()) return null;
+
+            using (var cnn = PinupPopperConnection())
+            {
+                cnn.Open();
+                Emulator result = cnn.Query<Emulator>(
+                    @"SELECT EMUID, EmuName, Description, DirGames, DirMedia, EmuDisplay, Visible, DirRoms, EmuLaunchDir, HideScreens, GamesExt, ImageExt, VideoExt, EscapeKeyCode, LaunchScript, PostScript, KeepDisplays, ProcessName, WinTitle, SkipScan, emuVolume, DirGamesShare, DirRomsShare, DirMediaShare, CanPause, CoreFile, HelpScript, AutoScanStartup, IgnoreFileScan, SafeLaunch, SafeReturn
+                    FROM Emulators
+                    WHERE EMUID = @id", new { id }).FirstOrDefault();
+                return result;
+            }
+        }
+
+        public List<Emulator> GetAllEmulators()
+        {
+            if (!ValidateConnection()) return null;
+
+            using (var cnn = PinupPopperConnection())
+            {
+                cnn.Open();
+                var result = cnn.Query<Emulator>(
+                    @"SELECT EMUID, EmuName, Description, DirGames, DirMedia, EmuDisplay, Visible, DirRoms, EmuLaunchDir, HideScreens, GamesExt, ImageExt, VideoExt, EscapeKeyCode, LaunchScript, PostScript, KeepDisplays, ProcessName, WinTitle, SkipScan, emuVolume, DirGamesShare, DirRomsShare, DirMediaShare, CanPause, CoreFile, HelpScript, AutoScanStartup, IgnoreFileScan, SafeLaunch, SafeReturn
+                    FROM Emulators").ToList();
+                return result;
+            }
+        }
+
         public Screen GetScreen(int screenId)
         {
             if (!ValidateConnection()) return null;
@@ -25,7 +54,7 @@ namespace PinCab.ScreenUtil.Utils.PinupPopper
                     @"SELECT ScreenID, ScreenName, ScreenDisplay, POSx, POSy, ScreenWidth, ScreenHeight, WindowState, FullScreen, Visible, VerifyPOS, 
                     Rotation, MonitorNum, ScreenType, RotateThumbs, ThumbWidth, ThumbHeight, AlphaBlend
                     FROM Screens
-                    WHERE ScreenID = @id", new { screenId }).FirstOrDefault();
+                    WHERE ScreenID = @screenId", new { screenId }).FirstOrDefault();
                 return result;
             }
         }
@@ -69,6 +98,20 @@ namespace PinCab.ScreenUtil.Utils.PinupPopper
                 var result = cnn.Query<Game>(
                     @"SELECT GameID, EMUID, GameName, GameFileName, GameDisplay, UseEmuDefaults, Visible, Notes, DateAdded, GameYear, ROM, Manufact, NumPlayers, ResolutionX, ResolutionY, OutputScreen, ThemeColor, GameType, TAGS, Category, Author, LaunchCustomVar, GKeepDisplays, GameTheme, GameRating, Special, sysVolume, DOFStuff, MediaSearch, AudioChannels, CUSTOM2, CUSTOM3, GAMEVER, ALTEXE, IPDBNum, DateUpdated, DateFileUpdated, AutoRecFlag, AltRunMode, WebLinkURL, DesignedBy
                         FROM Games;").ToList();
+                return result;
+            }
+        }
+
+        public List<Game> GetGamesByEmulator(int emuid)
+        {
+            if (!ValidateConnection()) return null;
+
+            using (var cnn = PinupPopperConnection())
+            {
+                cnn.Open();
+                var result = cnn.Query<Game>(
+                    @"SELECT GameID, EMUID, GameName, GameFileName, GameDisplay, UseEmuDefaults, Visible, Notes, DateAdded, GameYear, ROM, Manufact, NumPlayers, ResolutionX, ResolutionY, OutputScreen, ThemeColor, GameType, TAGS, Category, Author, LaunchCustomVar, GKeepDisplays, GameTheme, GameRating, Special, sysVolume, DOFStuff, MediaSearch, AudioChannels, CUSTOM2, CUSTOM3, GAMEVER, ALTEXE, IPDBNum, DateUpdated, DateFileUpdated, AutoRecFlag, AltRunMode, WebLinkURL, DesignedBy
+                        FROM Games where EMUID=@emuid", new { emuid }).ToList();
                 return result;
             }
         }

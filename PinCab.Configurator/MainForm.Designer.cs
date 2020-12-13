@@ -54,6 +54,7 @@
             this.writepinballYSettingstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepinupPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writepRocSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateallSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monitorConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +102,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
-            this.pinballFX2FX3DisplayOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -312,6 +312,7 @@
             this.writepinballYSettingstxtToolStripMenuItem.Name = "writepinballYSettingstxtToolStripMenuItem";
             this.writepinballYSettingstxtToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writepinballYSettingstxtToolStripMenuItem.Text = "PinballY Settings.txt";
+            this.writepinballYSettingstxtToolStripMenuItem.Click += new System.EventHandler(this.writepinballYSettingstxtToolStripMenuItem_Click);
             // 
             // writepinupPlayerToolStripMenuItem
             // 
@@ -325,6 +326,13 @@
             this.writepRocSettingsToolStripMenuItem.Name = "writepRocSettingsToolStripMenuItem";
             this.writepRocSettingsToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
             this.writepRocSettingsToolStripMenuItem.Text = "P-ROC Settings";
+            // 
+            // pinballFX2FX3DisplayOnlyToolStripMenuItem
+            // 
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Name = "pinballFX2FX3DisplayOnlyToolStripMenuItem";
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Text = "Pinball FX2 / FX3 (Display Only)";
+            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Click += new System.EventHandler(this.pinballFX2FX3DisplayOnlyToolStripMenuItem_Click);
             // 
             // validateToolStripMenuItem
             // 
@@ -413,6 +421,7 @@
             this.validatepinballYSettingstxtToolStripMenuItem1.Name = "validatepinballYSettingstxtToolStripMenuItem1";
             this.validatepinballYSettingstxtToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.validatepinballYSettingstxtToolStripMenuItem1.Text = "PinballY Settings.txt";
+            this.validatepinballYSettingstxtToolStripMenuItem1.Click += new System.EventHandler(this.validatepinballYSettingstxtToolStripMenuItem1_Click);
             // 
             // validatepinupPlayerToolStripMenuItem1
             // 
@@ -777,13 +786,6 @@
             this.panelRegionAndDisplayDetails.Name = "panelRegionAndDisplayDetails";
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
-            // 
-            // pinballFX2FX3DisplayOnlyToolStripMenuItem
-            // 
-            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Name = "pinballFX2FX3DisplayOnlyToolStripMenuItem";
-            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Size = new System.Drawing.Size(297, 22);
-            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Text = "Pinball FX2 / FX3 (Display Only)";
-            this.pinballFX2FX3DisplayOnlyToolStripMenuItem.Click += new System.EventHandler(this.pinballFX2FX3DisplayOnlyToolStripMenuItem_Click);
             // 
             // MainForm
             // 

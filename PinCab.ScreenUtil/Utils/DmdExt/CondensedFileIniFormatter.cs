@@ -75,7 +75,9 @@ namespace PinCab.ScreenUtil.Utils.DmdExt
             if (sb.Length > 0) sb.Append(Configuration.NewLineStr);
 
             // Leading comments
+#pragma warning disable CS0618 // Type or member is obsolete
             WriteComments(section.LeadingComments, sb);
+#pragma warning restore CS0618 // Type or member is obsolete
 
             //Write section name
             sb.Append(string.Format("{0}{1}{2}{3}",
@@ -87,7 +89,9 @@ namespace PinCab.ScreenUtil.Utils.DmdExt
             WriteKeyValueData(section.Keys, sb);
 
             // Trailing comments
+#pragma warning disable CS0618 // Type or member is obsolete
             WriteComments(section.TrailingComments, sb);
+#pragma warning restore CS0618 // Type or member is obsolete
         }
 
         private void WriteKeyValueData(KeyDataCollection keyDataCollection, StringBuilder sb)

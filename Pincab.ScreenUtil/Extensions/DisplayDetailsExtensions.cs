@@ -20,6 +20,21 @@ namespace PinCab.ScreenUtil
             return null;
         }
 
+        public static RegionRectangleCoordinate GetVirtualCoordinateRectangle(this DisplayDetail display, RegionRectangle rectangle)
+        {
+            var rect = new RegionRectangleCoordinate();
+
+            rect.RegionLabel = rectangle.RegionLabel;
+            rect.RegionColor = rectangle.RegionColor;
+
+            rect.Left = display.VirtualLeft() + rectangle.RegionOffsetX;
+            rect.Top = display.VirtualTop() + rectangle.RegionOffsetY;
+            rect.Right = display.VirtualLeft() + rectangle.RegionOffsetX + rectangle.RegionDisplayWidth;
+            rect.Bottom = display.VirtualTop() + rectangle.RegionOffsetY + rectangle.RegionDisplayHeight;
+
+            return rect;
+        }
+
         public static int VirtualResolutionWidth(this DisplayDetail display)
         {
             return display.Display.CurrentSetting.Position.X + display.Display.CurrentSetting.Resolution.Width;

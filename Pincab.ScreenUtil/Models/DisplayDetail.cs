@@ -71,5 +71,22 @@ namespace PinCab.ScreenUtil
 
             return ScreenScalingFactor; // 1.25 = 125%
         }
+
+        public int VirtualLeft()
+        {
+            return Display.CurrentSetting.Position.X;
+        }
+        public int VirtualTop()
+        {
+            return Display.CurrentSetting.Position.Y;
+        }
+        public int VirtualRight()
+        {
+            return Display.CurrentSetting.Position.X + Display.CurrentSetting.Resolution.Width;
+        }
+        public int VirtualBottom()
+        {
+            return Display.CurrentSetting.Position.Y + Display.CurrentSetting.Resolution.Height;
+        }
     }
 }

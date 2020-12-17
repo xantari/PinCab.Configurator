@@ -51,8 +51,8 @@ replicate to all the other areas automatically.
 23. Pinup Player location settings read/write/validation
 24. PinUp Popper 1.4+ is supported since it uses the Pinup Player screen settings. Older versions of pinup popper which use SQLLite database for screen positions are not supported.
 25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
-26. Pinball Y settings read/write/validation
-27. P-Roc DMD Settings display
+26. Pinball Y settings read/write/validation 
+27. P-Roc DMD Settings display 
 
 # Instructions
 
@@ -86,10 +86,10 @@ Logging information is in the Log.txt file in the application root folder.
 2. Create help HTML pages and hookup to the program
 3. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
 for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
-	a. Add function to rename a table, and have it rename all corresponding files (All media, Backglass directB2s file) so that when you name your tables with the version # of the table all the media comes along with it.
-	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media
-	c. Hook into PuPmedia.php on VPinball.com to fetch media as well
-	d. Hook into PinballX's media library (if you have defined your GameEx credentials)
+	a. Add function to rename a table, and have it rename all corresponding files (All media, Backglass directB2s file) so that when you name your tables with the version # of the table all the media comes along with it.  
+	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media  
+	c. Hook into PuPmedia.php on VPinball.com to fetch media as well  
+	d. Hook into PinballX's media library (if you have defined your GameEx credentials)  
 
 
 

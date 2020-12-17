@@ -90,6 +90,8 @@ for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
 	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media  
 	c. Hook into PuPmedia.php on VPinball.com to fetch media as well  
 	d. Hook into PinballX's media library (if you have defined your GameEx credentials)  
+	e. Convert the Pinball Game spreadsheet into JSON format and check into Git so that it can be used as a easy way to load tables into the front end. Automatically popup embedded programs Chromium based browser to fetch the table or media.  
+	f. Maintain an install time of the table in a local database (extra fields in PinballY/PinballX XML, and already a field in PinUpPoppers Games table), so you can compare the last updated date/time stamp in the pinball game spreadsheet to see if updates to a table are available.  
 
 
 

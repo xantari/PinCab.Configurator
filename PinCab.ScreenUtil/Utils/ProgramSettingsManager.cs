@@ -1,40 +1,23 @@
 ﻿using Newtonsoft.Json;
-using PinCab.ScreenUtil;
+using PinCab.ScreenUtil.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PinCab.Configurator
+namespace PinCab.ScreenUtil.Utils
 {
-    [Serializable]
-    public class ProgramSettings
+    public interface IProgramSettingsManager
     {
-        public ProgramSettings()
-        {
-            DisplaySettings = new List<DisplaySettings>();
-            RecordTimeSeconds = 30;
-            RecordFramerate = 30;
-        }
+        ProgramSettings LoadSettings(string fileAndPathToSettingFile = "");
+        void SaveSettings(ProgramSettings settings, string fileAndPathToSettingFile = "");
+    }
 
-        public string FFMpegFullPath { get; set; }
-        public int RecordTimeSeconds { get; set; }
-        public int RecordFramerate { get; set; }
-        public string RecordingTempFolderPath { get; set; }
-
-        public string PinupPopperSqlLiteDbPath { get; set; }
-        public string PinballYSettingsPath { get; set; }
-        public string PinballXIniPath { get; set; }
-        public string B2SScreenResPath { get; set; }
-        public string PinupPlayerPath { get; set; }
-        public string FutureDMDIniPath { get; set; }
-        public string DMDDeviceIniPath { get; set; }
-        public string PRocUserSettingsPath { get; set; }
-
-        public List<DisplaySettings> DisplaySettings { get; set; }
+    public class ProgramSettingsManager : IProgramSettingsManager
+    {
+        public ProgramSettingsManager() { }
 
         public ProgramSettings LoadSettings(string fileAndPathToSettingFile = "")
         {
@@ -51,7 +34,7 @@ namespace PinCab.Configurator
             return null;
         }
 
-        public void SaveSettings(string fileAndPathToSettingFile = "")
+        public void SaveSettings(ProgramSettings settings, string fileAndPathToSettingFile = "")
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
@@ -62,7 +45,7 @@ namespace PinCab.Configurator
             using (StreamWriter sw = new StreamWriter(settingsFileNameAndPath, false))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                GetJsonSerilizerSettings().Serialize(writer, this);
+                GetJsonSerilizerSettings().Serialize(writer, settings);
             }
         }
 
@@ -76,20 +59,4 @@ namespace PinCab.Configurator
         }
     }
 
-    [Serializable]
-    public class DisplaySettings
-    {
-        public DisplaySettings()
-        {
-            RegionRectangles = new List<RegionRectangle>();
-        }
-
-        /// <summary>
-        /// Monitor unique display name (\\.\Display1 for example)
-        /// </summary>
-        public string DisplayName { get; set; }
-        public string DisplayLabel { get; set; }
-        public List<RegionRectangle> RegionRectangles { get; set; }
-    }
 }
-

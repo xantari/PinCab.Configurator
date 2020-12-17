@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PinCab.ScreenUtil.Models;
 
 namespace PinCab.Configurator
 {
@@ -21,6 +22,8 @@ namespace PinCab.Configurator
     {
         private VpinMameUtil vpinMame { get; set; }
         private UltraDmdUtil ultraDmd { get; set; }
+        private readonly ProgramSettingsManager _settingManager = new ProgramSettingsManager();
+
         public SettingsForm()
         {
             InitializeComponent();
@@ -34,8 +37,7 @@ namespace PinCab.Configurator
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            ProgramSettings settings = new ProgramSettings();
-            settings = settings.LoadSettings();
+            var settings = _settingManager.LoadSettings();
 
             if (settings != null)
             {
@@ -59,8 +61,7 @@ namespace PinCab.Configurator
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            ProgramSettings settings = new ProgramSettings();
-            settings = settings.LoadSettings();
+            var settings = _settingManager.LoadSettings();
             if (settings == null)
                 settings = new ProgramSettings();
             settings.FFMpegFullPath = txtFFMpegFilePath.Text;
@@ -76,7 +77,7 @@ namespace PinCab.Configurator
             settings.DMDDeviceIniPath = txtDMDDeviceIniFilePath.Text;
             settings.PRocUserSettingsPath = txtPRocUserSettings.Text;
 
-            settings.SaveSettings();
+            _settingManager.SaveSettings(settings);
             this.Close();
         }
 

@@ -171,7 +171,6 @@
     <Compile Include="ScreenBoundsDisplayForm.Designer.cs">
       <DependentUpon>ScreenBoundsDisplayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProgramSettings.cs" />
     <Compile Include="ScreenResEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -82,6 +82,9 @@
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
@@ -115,8 +118,15 @@
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
+    <Compile Include="Models\DisplaySettings.cs" />
+    <Compile Include="Models\FrontEnd.cs" />
     <Compile Include="Models\PinballX\PinballXGame.cs" />
     <Compile Include="Models\PinballX\PinballXMenu.cs" />
+    <Compile Include="Models\PinballX\PinballXSystem.cs" />
+    <Compile Include="Models\PinballX\Platform.cs" />
+    <Compile Include="Models\ProgramSettings.cs" />
+    <Compile Include="Utils\FrontEndManager.cs" />
+    <Compile Include="Utils\PinballX\PinballXManager.cs" />
     <Compile Include="Models\PinballY\PinballYSetting.cs" />
     <Compile Include="Models\PinballY\PinballYWindow.cs" />
     <Compile Include="Models\PinballY\PinballYWindowRectangle.cs" />
@@ -153,6 +163,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Utils\PinupPopper\PinupPopperBaseRepository.cs" />
     <Compile Include="Utils\PinupPopper\PinupPopperRepository.cs" />
+    <Compile Include="Utils\ProgramSettingsManager.cs" />
     <Compile Include="Utils\RegistryUtil.cs" />
     <Compile Include="Utils\UltraDmdUtil.cs" />
     <Compile Include="Utils\VpinMameUtil.cs" />

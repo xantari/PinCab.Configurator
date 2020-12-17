@@ -93,8 +93,8 @@ namespace PinCab.ScreenUtil.Models.PinballX
         [XmlIgnore]
         public string DatabaseFile { get; set; }
 
-        //[XmlIgnore]
-        //public PinballXSystem System { get; set; }
+        [XmlIgnore]
+        public PinballXSystem System { get; set; }
 
         public void Update(PinballXGame newGame)
         {

@@ -20,13 +20,13 @@ namespace PinCab.Configurator
         private ProgramSettings _settings;
         private B2sUtil _util;
         private List<DisplayDetail> _displayDetails { get; set; } = new List<DisplayDetail>();
+        private readonly ProgramSettingsManager _settingsManager = new ProgramSettingsManager();
 
         public ScreenResEditorForm()
         {
             InitializeComponent();
 
-            ProgramSettings settings = new ProgramSettings();
-            _settings = settings.LoadSettings();
+            _settings = _settingsManager.LoadSettings();
             LoadDisplayDetails();
 
             if (!string.IsNullOrEmpty(_settings.B2SScreenResPath))

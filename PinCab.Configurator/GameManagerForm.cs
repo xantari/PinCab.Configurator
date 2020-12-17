@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PinCab.ScreenUtil.Models.PinballX;
+using PinCab.ScreenUtil.Utils;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +15,36 @@ namespace PinCab.Configurator
 {
     public partial class GameManagerForm : Form
     {
+        private readonly FrontEndManager manager = new FrontEndManager();
         public GameManagerForm()
         {
             InitializeComponent();
+
+            InitForm();
+        }
+
+        private void InitForm()
+        {
+            var frontEnds = manager.GetListOfActiveFrontEnds();
+            if (frontEnds.Count == 0)
+            {
+                txtLog.Text = "No Front Ends detected. Have you pointed to the settings file for atleast one front end?";
+                return;
+            }
+            else 
+            {
+                cmbFrontEnd.Items.AddRange(frontEnds.ToArray());
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

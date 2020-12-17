@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using WindowsDisplayAPI;
 using PinCab.ScreenUtil.Models;
 using PinCab.ScreenUtil.Utils.PinballY;
+using PinCab.ScreenUtil.Utils;
 
 namespace PinCab.Configurator
 {
@@ -41,6 +42,7 @@ namespace PinCab.Configurator
 
         public static bool ChangesOccurred = false;
         private int _currentlySelectedDisplayIndex = -1;
+        private ProgramSettingsManager settingManager = new ProgramSettingsManager();
 
 
         public MainForm()
@@ -62,8 +64,7 @@ namespace PinCab.Configurator
 
         private void UpdateDisplayDetailsFromSettingsFile()
         {
-            ProgramSettings settings = new ProgramSettings();
-            _settings = settings.LoadSettings();
+            _settings = settingManager.LoadSettings();
             if (_settings != null)
             {
                 foreach (var display in _settings?.DisplaySettings)
@@ -399,7 +400,7 @@ namespace PinCab.Configurator
             }
 
             Log.Information("Saved Settings. {@settings}", _settings);
-            _settings.SaveSettings();
+            settingManager.SaveSettings(_settings);
         }
 
         private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -413,14 +414,13 @@ namespace PinCab.Configurator
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
-                _settings = (new ProgramSettings()).LoadSettings();
+                _settings = settingManager.LoadSettings();
             }
         }
 
         private void loadConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgramSettings setting = new ProgramSettings();
-            _settings = setting.LoadSettings();
+            _settings = settingManager.LoadSettings();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

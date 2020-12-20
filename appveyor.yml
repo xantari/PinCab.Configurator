@@ -1,0 +1,33 @@
+version: 0.1.{build}
+branches:
+  only:
+  - master
+skip_tags: true
+image: Visual Studio 2019
+configuration: Debug
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+nuget:
+  account_feed: true
+  project_feed: true
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: minimal
+artifacts:
+- path: PinCab.Configurator\bin\$(configuration)\
+  name: PinCab.Configurator
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: wuTpCKPXLXuhXsS1HPtKuIcES4J3y1d1TolTkpQqC3XMXTIYF2vD2I5bl3tGv+8R
+  artifact: PinCab.Configurator
+  prerelease: true
+skip_commits:
+  files:
+    - docs/*

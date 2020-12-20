@@ -475,7 +475,7 @@ namespace PinCab.Configurator
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: Launch the help page (index.html)
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki");
         }
 
         private void dumpHighLevelDisplayInformationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -629,10 +629,6 @@ namespace PinCab.Configurator
         {
             var form = new ScreenResEditorForm();
             var result = form.ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    _settings = (new ProgramSettings()).LoadSettings();
-            //}
         }
 
         private void validateultraDMDRegistryKeyToolStripMenuItem1_Click(object sender, EventArgs e)

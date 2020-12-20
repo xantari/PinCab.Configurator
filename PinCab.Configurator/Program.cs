@@ -28,7 +28,7 @@ namespace PinCab.Configurator
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("log.txt")
+                .WriteTo.File("Logs\\log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             Log.Information("Application Started. Version: {version}", Assembly.GetExecutingAssembly().GetName().Version.ToString());

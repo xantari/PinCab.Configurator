@@ -31,11 +31,11 @@ replicate to all the other areas automatically.
    	a. FFMPEG  
 	b. Front End settings file (Pinball X / Pinball Y / Pinup Popper)  
 	c. B2S Screenres.txt, P-ROC, DMDDevice.ini, Future DMD INI, Pinup Player  
-9. Add ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen such as TerryRed's PinCab configuration)
+9. Ability to define multiple visible window boxes on a single screen (for those who display both their topper and DMD on same screen such as TerryRed's PinCab configuration)
 10. Exception handling / Logging
 11. Realtime updating of region Size and Offset changes
 12. PinCab Screen configuration data (Read/Write). Can save your configuration data for easy movement to new monitor/videocard configuration during upgrades.
-13. High level debug information that shows monitors connected, their orientation with full virtual desktop space calculations (takes into account the X/Y offsets)
+13. High level debug information that shows monitors connected, their orientation with virtual desktop space calculations (takes into account the X/Y offsets)
 14. Pinball X .ini read/write/validation
 15. Autobackup registry keys and settings files whenever we write to them. Save to programs Backup folder.
 16. Future DMD (Future Pinball) read/write/validation

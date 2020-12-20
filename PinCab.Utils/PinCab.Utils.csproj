@@ -14,6 +14,10 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <!--https://stackoverflow.com/questions/2011434/preventing-referenced-assembly-pdb-and-xml-files-copied-to-output-->
+    <AllowedReferenceRelatedFileExtensions>
+        *.pdb;
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

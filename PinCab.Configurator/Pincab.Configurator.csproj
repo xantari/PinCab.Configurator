@@ -27,9 +27,10 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-      <AllowedReferenceRelatedFileExtensions>
-          *.pdb;
-      </AllowedReferenceRelatedFileExtensions>
+    <!--https://stackoverflow.com/questions/2011434/preventing-referenced-assembly-pdb-and-xml-files-copied-to-output-->
+    <AllowedReferenceRelatedFileExtensions>
+        *.pdb;
+    </AllowedReferenceRelatedFileExtensions>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>

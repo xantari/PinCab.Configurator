@@ -690,7 +690,7 @@
             // 
             // vpinMameRomSettingBindingSource
             // 
-            this.vpinMameRomSettingBindingSource.DataSource = typeof(PinCab.ScreenUtil.Models.VpinMameRomSetting);
+            this.vpinMameRomSettingBindingSource.DataSource = typeof(PinCab.Utils.Models.VpinMameRomSetting);
             // 
             // PinMameRomBrowserForm
             // 

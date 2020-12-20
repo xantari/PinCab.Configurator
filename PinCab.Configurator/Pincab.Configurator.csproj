@@ -233,9 +233,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Pincab.ScreenUtil\PinCab.ScreenUtil.csproj">
+    <ProjectReference Include="..\PinCab.Utils\PinCab.Utils.csproj">
       <Project>{c7093723-a805-4c85-aaed-05d6f626ba09}</Project>
-      <Name>PinCab.ScreenUtil</Name>
+      <Name>PinCab.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

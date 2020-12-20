@@ -1,10 +1,10 @@
 ﻿using PinCab.Configurator.Models;
 using PinCab.Configurator.Utils;
-using PinCab.ScreenUtil;
-using PinCab.ScreenUtil.Extensions;
-using PinCab.ScreenUtil.Models;
-using PinCab.ScreenUtil.Utils;
-using PinCab.ScreenUtil.WinForms;
+using PinCab.Utils;
+using PinCab.Utils.Extensions;
+using PinCab.Utils.Models;
+using PinCab.Utils.Utils;
+using PinCab.Utils.WinForms;
 using Serilog;
 using System;
 using System.Collections.Generic;

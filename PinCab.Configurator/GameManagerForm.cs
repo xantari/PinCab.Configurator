@@ -1,5 +1,5 @@
-﻿using PinCab.ScreenUtil.Models.PinballX;
-using PinCab.ScreenUtil.Utils;
+﻿using PinCab.Utils.Models.PinballX;
+using PinCab.Utils.Utils;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -42,9 +42,5 @@ namespace PinCab.Configurator
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

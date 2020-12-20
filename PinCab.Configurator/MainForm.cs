@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using PinCab.ScreenUtil;
+using PinCab.Utils;
 using PinCab.Configurator.Utils;
 using Serilog;
 using System;
@@ -10,9 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WindowsDisplayAPI;
-using PinCab.ScreenUtil.Models;
-using PinCab.ScreenUtil.Utils.PinballY;
-using PinCab.ScreenUtil.Utils;
+using PinCab.Utils.Models;
+using PinCab.Utils.Utils.PinballY;
+using PinCab.Utils.Utils;
 
 namespace PinCab.Configurator
 {

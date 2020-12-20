@@ -1,5 +1,5 @@
-﻿using PinCab.ScreenUtil;
-using PinCab.ScreenUtil.Utils;
+﻿using PinCab.Utils;
+using PinCab.Utils.Utils;
 using PinCab.Configurator.Properties;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PinCab.ScreenUtil.Models;
+using PinCab.Utils.Models;
 
 namespace PinCab.Configurator
 {

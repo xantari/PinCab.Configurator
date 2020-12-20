@@ -1,5 +1,5 @@
 ﻿using PinCab.Configurator.Utils;
-using PinCab.ScreenUtil.Models;
+using PinCab.Utils.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

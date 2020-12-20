@@ -237,7 +237,12 @@ namespace PinCab.Configurator
 
         private void SettingsForm_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            //TODO: Launch the help page for the tab they are on
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Settings");
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Settings");
         }
     }
 }

@@ -74,6 +74,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.tbSettings.SuspendLayout();
             this.tabPagePinballProgramSettings.SuspendLayout();
             this.tabPageFrontEnd.SuspendLayout();
@@ -562,6 +563,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnHelp);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -591,6 +593,17 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnHelp.Location = new System.Drawing.Point(304, 4);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.TabIndex = 4;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // SettingsForm
             // 
@@ -667,5 +680,6 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lblUltraDMDFound;
         private System.Windows.Forms.Label lblVPinMameFound;
+        private System.Windows.Forms.Button btnHelp;
     }
 }

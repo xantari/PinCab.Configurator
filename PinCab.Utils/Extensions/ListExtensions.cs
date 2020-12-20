@@ -19,5 +19,13 @@ namespace PinCab.Utils.Extensions
         {
             return new SortableBindingList<T>(collection.ToList());
         }
+
+        public static List<string> ReplaceAllInList(this IEnumerable<string> collection, string stringToReplace, string replacement)
+        {
+            var list = new List<string>();
+            foreach (var itm in collection)
+                list.Add(itm.Replace(stringToReplace, replacement));
+            return list;
+        }
     }
 }

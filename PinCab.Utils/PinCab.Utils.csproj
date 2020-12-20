@@ -120,6 +120,7 @@
     <Compile Include="Extensions\EdidExtensions.cs" />
     <Compile Include="Models\DisplaySettings.cs" />
     <Compile Include="Models\FrontEnd.cs" />
+    <Compile Include="ViewModels\FrontEndGameViewModel.cs" />
     <Compile Include="Models\PinballX\PinballXGame.cs" />
     <Compile Include="Models\PinballX\PinballXMenu.cs" />
     <Compile Include="Models\PinballX\PinballXSystem.cs" />

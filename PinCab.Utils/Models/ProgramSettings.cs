@@ -36,6 +36,9 @@ namespace PinCab.Utils.Models
 
         public List<DisplaySettings> DisplaySettings { get; set; }
 
+        public string LastSelectedFrontEnd { get; set; }
+        public string LastSelectedDatabaseFile { get; set; }
+
         public bool PinupPopperExists()
         {
             if (string.IsNullOrWhiteSpace(PinupPopperSqlLiteDbPath))

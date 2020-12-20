@@ -21,7 +21,7 @@ namespace PinCab.Utils.Models.PinballX
         public string Executable { get; set; }
         public string Parameters { get; set; }
         /// <summary>
-        /// A list of database files (without path) of this system.
+        /// A list of database files (with path) of this system.
         /// </summary>
         public List<string> DatabaseFiles { get; private set; } = new List<string>();
 
@@ -56,6 +56,14 @@ namespace PinCab.Utils.Models.PinballX
             SetByData(data);
         }
 
+        public List<string> GetDatabaseFilesWithoutDatabasePath()
+        {
+            var list = new List<string>();
+            foreach (var database in DatabaseFiles)
+                list.Add(database.Replace(DatabasePath.Replace(Name,string.Empty), string.Empty));
+            return list;
+        }
+
         private void SetByData(KeyDataCollection data)
         {
             DirectoryInfo info = new DirectoryInfo(PinballXIniFilePath);
@@ -86,11 +94,6 @@ namespace PinCab.Utils.Models.PinballX
             MediaPath = Path.Combine(PinballXFolder, "Media", Name);
 
             DatabaseFiles = GetDatabaseFiles();
-
-            foreach(var database in DatabaseFiles)
-            {
-                
-            }
         }
 
         private List<string> GetDatabaseFiles()

@@ -23,20 +23,12 @@ namespace PinCab.Configurator
         private readonly VpinMameUtil _util = new VpinMameUtil();
         private List<VpinMameRomSetting> _roms = new List<VpinMameRomSetting>();
         private VPinMAMELib.Controller _controller = new VPinMAMELib.Controller();
-        //private FormHelper helper;
-        //private ProgramSettings _settings;
-        //private List<DisplayDetail> _displayDetails { get; set; } = new List<DisplayDetail>();
-
-        //public PinMameRomBrowserForm(ProgramSettings settings, List<DisplayDetail> displayDetails)
         public PinMameRomBrowserForm()
         {
             InitializeComponent();
 
             ConfigureGrid();
             LoadRomList();
-            //_settings = settings;
-            //_displayDetails = displayDetails;
-            //helper = new FormHelper(_settings, _displayDetails, txtLog, backgroundWorkerProgressBar);
         }
 
         private void LoadRomList()
@@ -205,10 +197,6 @@ namespace PinCab.Configurator
             var result = editor.ShowDialog();
             if (result == DialogResult.OK)
             {
-                //Reload the grid list
-                //var selectedRow  = dataGridViewRomList.SelectedRows.Count > 0 ? dataGridViewRomList.SelectedRows[0] : null;
-                //var selectedCell = dataGridViewRomList.SelectedCells.Count > 0 ? dataGridViewRomList.SelectedCells[0] : null;
-
                 RefreshGrid();
             }
         }
@@ -256,8 +244,6 @@ namespace PinCab.Configurator
             {
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     LogToolValidationResult(result.ToolName, result);
-                //else
-                //    helper.LogValidationResult(result.ToolName, result);
             }
             RefreshGrid();
         }

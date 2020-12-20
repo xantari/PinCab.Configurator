@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PinCab Configurator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("PinCab Configurator - A Game and System Manager for Virtual Pinball Cabinets")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Keelio Software (www.keelio.com)")]
+[assembly: AssemblyCompany("https://github.com/xantari")]
 [assembly: AssemblyProduct("PinCab Configurator")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

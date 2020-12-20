@@ -219,6 +219,7 @@
     <None Include="Backup\readme.md" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PinCab.ScreenUtil.Models.VpinMameRomSetting.datasource" />
+    <None Include="Properties\DataSources\PinCab.Utils.ViewModels.FrontEndGameViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

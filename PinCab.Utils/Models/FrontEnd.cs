@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ namespace PinCab.Utils.Models
 
     public enum FrontEndSystem
     {
+        [Description("Pinball X")]
         PinballX,
+        [Description("Pinball Y")]
         PinballY,
+        [Description("Pinup Popper")]
         PinupPopper
     }
 }

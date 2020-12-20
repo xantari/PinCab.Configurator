@@ -31,77 +31,72 @@ namespace PinCab.Configurator
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridViewRomList = new System.Windows.Forms.DataGridView();
-            this.RomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.romNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enableAntiAliasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.skipStartupDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.antiAliasPercentageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.opacityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scanlinesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.directDrawDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.showVPinMameDmdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.direct3DDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.at91jitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.externalDmdDeviceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.widthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetXDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intensityPerc0DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intensityPerc33DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.intensityPerc66DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colorizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cabinetModeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ignoreRomCrcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rotateLeftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rotateRightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flipXDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flipYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.syncLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.resamplingQualityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doubleDisplaySizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fastFramesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sampleRateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compactModeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.soundModeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.useSamplesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enableSoundDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.redDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.greenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.blueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewGameList = new System.Windows.Forms.DataGridView();
+            this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yearDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enabledDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alternateExeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideDmdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideTopperDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideBackglassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.playersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.themeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.versionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iPDBNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateModifiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.romDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backglassStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.launchAudioStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realDMDColorStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readDMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableAudioStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableDesktopStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topperStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedCellValueToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedRowDataToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingNativeVPinMameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopRunningROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vpinMameRomSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmbDatabase = new System.Windows.Forms.ComboBox();
+            this.lblDatabase = new System.Windows.Forms.Label();
             this.cmbFrontEnd = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.txtRomSearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findStrandedMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGameList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -109,449 +104,386 @@ namespace PinCab.Configurator
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 56);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 86);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewRomList);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewGameList);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtLog);
-            this.splitContainer1.Size = new System.Drawing.Size(955, 474);
-            this.splitContainer1.SplitterDistance = 368;
+            this.splitContainer1.Size = new System.Drawing.Size(955, 444);
+            this.splitContainer1.SplitterDistance = 344;
             this.splitContainer1.TabIndex = 9;
             // 
-            // dataGridViewRomList
-            // 
-            this.dataGridViewRomList.AllowUserToAddRows = false;
-            this.dataGridViewRomList.AllowUserToDeleteRows = false;
-            this.dataGridViewRomList.AutoGenerateColumns = false;
-            this.dataGridViewRomList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewRomList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridViewRomList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RomName,
-            this.romNameDataGridViewTextBoxColumn,
-            this.enableAntiAliasDataGridViewTextBoxColumn,
-            this.skipStartupDataGridViewTextBoxColumn,
-            this.antiAliasPercentageDataGridViewTextBoxColumn,
-            this.opacityDataGridViewTextBoxColumn,
-            this.borderDataGridViewTextBoxColumn,
-            this.titleDataGridViewTextBoxColumn,
-            this.scanlinesDataGridViewTextBoxColumn,
-            this.directDrawDataGridViewTextBoxColumn,
-            this.showVPinMameDmdDataGridViewTextBoxColumn,
-            this.direct3DDataGridViewTextBoxColumn,
-            this.at91jitDataGridViewTextBoxColumn,
-            this.externalDmdDeviceDataGridViewTextBoxColumn,
-            this.heightDataGridViewTextBoxColumn,
-            this.widthDataGridViewTextBoxColumn,
-            this.offsetXDataGridViewTextBoxColumn,
-            this.offsetYDataGridViewTextBoxColumn,
-            this.intensityPerc0DataGridViewTextBoxColumn,
-            this.intensityPerc33DataGridViewTextBoxColumn,
-            this.intensityPerc66DataGridViewTextBoxColumn,
-            this.colorizeDataGridViewTextBoxColumn,
-            this.cabinetModeDataGridViewTextBoxColumn,
-            this.ignoreRomCrcDataGridViewTextBoxColumn,
-            this.rotateLeftDataGridViewTextBoxColumn,
-            this.rotateRightDataGridViewTextBoxColumn,
-            this.flipXDataGridViewTextBoxColumn,
-            this.flipYDataGridViewTextBoxColumn,
-            this.syncLevelDataGridViewTextBoxColumn,
-            this.resamplingQualityDataGridViewTextBoxColumn,
-            this.doubleDisplaySizeDataGridViewTextBoxColumn,
-            this.fastFramesDataGridViewTextBoxColumn,
-            this.sampleRateDataGridViewTextBoxColumn,
-            this.compactModeDataGridViewTextBoxColumn,
-            this.soundModeDataGridViewTextBoxColumn,
-            this.useSamplesDataGridViewTextBoxColumn,
-            this.enableSoundDataGridViewTextBoxColumn,
-            this.redDataGridViewTextBoxColumn,
-            this.greenDataGridViewTextBoxColumn,
-            this.blueDataGridViewTextBoxColumn});
-            this.dataGridViewRomList.ContextMenuStrip = this.contextMenuStripGridActions;
-            this.dataGridViewRomList.DataSource = this.vpinMameRomSettingBindingSource;
-            this.dataGridViewRomList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewRomList.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewRomList.Name = "dataGridViewRomList";
-            this.dataGridViewRomList.ReadOnly = true;
-            this.dataGridViewRomList.Size = new System.Drawing.Size(955, 368);
-            this.dataGridViewRomList.TabIndex = 2;
-            // 
-            // RomName
-            // 
-            this.RomName.DataPropertyName = "GameName";
-            this.RomName.HeaderText = "GameName";
-            this.RomName.Name = "RomName";
-            this.RomName.ReadOnly = true;
-            this.RomName.Width = 88;
-            // 
-            // romNameDataGridViewTextBoxColumn
-            // 
-            this.romNameDataGridViewTextBoxColumn.DataPropertyName = "RomName";
-            this.romNameDataGridViewTextBoxColumn.HeaderText = "RomName";
-            this.romNameDataGridViewTextBoxColumn.Name = "romNameDataGridViewTextBoxColumn";
-            this.romNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.romNameDataGridViewTextBoxColumn.Width = 82;
-            // 
-            // enableAntiAliasDataGridViewTextBoxColumn
-            // 
-            this.enableAntiAliasDataGridViewTextBoxColumn.DataPropertyName = "EnableAntiAlias";
-            this.enableAntiAliasDataGridViewTextBoxColumn.HeaderText = "EnableAntiAlias";
-            this.enableAntiAliasDataGridViewTextBoxColumn.Name = "enableAntiAliasDataGridViewTextBoxColumn";
-            this.enableAntiAliasDataGridViewTextBoxColumn.ReadOnly = true;
-            this.enableAntiAliasDataGridViewTextBoxColumn.Width = 105;
-            // 
-            // skipStartupDataGridViewTextBoxColumn
-            // 
-            this.skipStartupDataGridViewTextBoxColumn.DataPropertyName = "SkipStartup";
-            this.skipStartupDataGridViewTextBoxColumn.HeaderText = "SkipStartup";
-            this.skipStartupDataGridViewTextBoxColumn.Name = "skipStartupDataGridViewTextBoxColumn";
-            this.skipStartupDataGridViewTextBoxColumn.ReadOnly = true;
-            this.skipStartupDataGridViewTextBoxColumn.Width = 87;
-            // 
-            // antiAliasPercentageDataGridViewTextBoxColumn
-            // 
-            this.antiAliasPercentageDataGridViewTextBoxColumn.DataPropertyName = "AntiAliasPercentage";
-            this.antiAliasPercentageDataGridViewTextBoxColumn.HeaderText = "AntiAliasPercentage";
-            this.antiAliasPercentageDataGridViewTextBoxColumn.Name = "antiAliasPercentageDataGridViewTextBoxColumn";
-            this.antiAliasPercentageDataGridViewTextBoxColumn.ReadOnly = true;
-            this.antiAliasPercentageDataGridViewTextBoxColumn.Width = 127;
-            // 
-            // opacityDataGridViewTextBoxColumn
-            // 
-            this.opacityDataGridViewTextBoxColumn.DataPropertyName = "Opacity";
-            this.opacityDataGridViewTextBoxColumn.HeaderText = "Opacity";
-            this.opacityDataGridViewTextBoxColumn.Name = "opacityDataGridViewTextBoxColumn";
-            this.opacityDataGridViewTextBoxColumn.ReadOnly = true;
-            this.opacityDataGridViewTextBoxColumn.Width = 68;
+            // dataGridViewGameList
+            // 
+            this.dataGridViewGameList.AllowUserToAddRows = false;
+            this.dataGridViewGameList.AllowUserToDeleteRows = false;
+            this.dataGridViewGameList.AutoGenerateColumns = false;
+            this.dataGridViewGameList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewGameList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewGameList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fileNameDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn,
+            this.manufacturerDataGridViewTextBoxColumn,
+            this.yearDataGridViewTextBoxColumn,
+            this.typeDataGridViewTextBoxColumn,
+            this.enabledDataGridViewTextBoxColumn,
+            this.alternateExeDataGridViewTextBoxColumn,
+            this.hideDmdDataGridViewTextBoxColumn,
+            this.hideTopperDataGridViewTextBoxColumn,
+            this.hideBackglassDataGridViewTextBoxColumn,
+            this.ratingDataGridViewTextBoxColumn,
+            this.playersDataGridViewTextBoxColumn,
+            this.commentDataGridViewTextBoxColumn,
+            this.themeDataGridViewTextBoxColumn,
+            this.authorDataGridViewTextBoxColumn,
+            this.versionDataGridViewTextBoxColumn,
+            this.iPDBNumberDataGridViewTextBoxColumn,
+            this.dateAddedDataGridViewTextBoxColumn,
+            this.dateModifiedDataGridViewTextBoxColumn,
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn,
+            this.romDataGridViewTextBoxColumn,
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn,
+            this.backglassStatusDataGridViewTextBoxColumn,
+            this.dMDStatusDataGridViewTextBoxColumn,
+            this.launchAudioStatusDataGridViewTextBoxColumn,
+            this.realDMDColorStatusDataGridViewTextBoxColumn,
+            this.readDMDStatusDataGridViewTextBoxColumn,
+            this.tableAudioStatusDataGridViewTextBoxColumn,
+            this.tableStatusDataGridViewTextBoxColumn,
+            this.tableDesktopStatusDataGridViewTextBoxColumn,
+            this.topperStatusDataGridViewTextBoxColumn,
+            this.hasWheelImageDataGridViewCheckBoxColumn});
+            this.dataGridViewGameList.ContextMenuStrip = this.contextMenuStripGridActions;
+            this.dataGridViewGameList.DataSource = this.frontEndGameBindingSource;
+            this.dataGridViewGameList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewGameList.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewGameList.Name = "dataGridViewGameList";
+            this.dataGridViewGameList.ReadOnly = true;
+            this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
+            this.dataGridViewGameList.TabIndex = 2;
+            // 
+            // fileNameDataGridViewTextBoxColumn
+            // 
+            this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
+            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fileNameDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // manufacturerDataGridViewTextBoxColumn
+            // 
+            this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
+            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.manufacturerDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // yearDataGridViewTextBoxColumn
+            // 
+            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
+            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
+            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
+            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
+            this.yearDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // enabledDataGridViewTextBoxColumn
+            // 
+            this.enabledDataGridViewTextBoxColumn.DataPropertyName = "Enabled";
+            this.enabledDataGridViewTextBoxColumn.HeaderText = "Enabled";
+            this.enabledDataGridViewTextBoxColumn.Name = "enabledDataGridViewTextBoxColumn";
+            this.enabledDataGridViewTextBoxColumn.ReadOnly = true;
+            this.enabledDataGridViewTextBoxColumn.Width = 71;
+            // 
+            // alternateExeDataGridViewTextBoxColumn
+            // 
+            this.alternateExeDataGridViewTextBoxColumn.DataPropertyName = "AlternateExe";
+            this.alternateExeDataGridViewTextBoxColumn.HeaderText = "AlternateExe";
+            this.alternateExeDataGridViewTextBoxColumn.Name = "alternateExeDataGridViewTextBoxColumn";
+            this.alternateExeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.alternateExeDataGridViewTextBoxColumn.Width = 92;
             // 
-            // borderDataGridViewTextBoxColumn
-            // 
-            this.borderDataGridViewTextBoxColumn.DataPropertyName = "Border";
-            this.borderDataGridViewTextBoxColumn.HeaderText = "Border";
-            this.borderDataGridViewTextBoxColumn.Name = "borderDataGridViewTextBoxColumn";
-            this.borderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.borderDataGridViewTextBoxColumn.Width = 63;
+            // hideDmdDataGridViewTextBoxColumn
+            // 
+            this.hideDmdDataGridViewTextBoxColumn.DataPropertyName = "HideDmd";
+            this.hideDmdDataGridViewTextBoxColumn.HeaderText = "HideDmd";
+            this.hideDmdDataGridViewTextBoxColumn.Name = "hideDmdDataGridViewTextBoxColumn";
+            this.hideDmdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideDmdDataGridViewTextBoxColumn.Width = 76;
             // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 52;
+            // hideTopperDataGridViewTextBoxColumn
+            // 
+            this.hideTopperDataGridViewTextBoxColumn.DataPropertyName = "HideTopper";
+            this.hideTopperDataGridViewTextBoxColumn.HeaderText = "HideTopper";
+            this.hideTopperDataGridViewTextBoxColumn.Name = "hideTopperDataGridViewTextBoxColumn";
+            this.hideTopperDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideTopperDataGridViewTextBoxColumn.Width = 88;
             // 
-            // scanlinesDataGridViewTextBoxColumn
-            // 
-            this.scanlinesDataGridViewTextBoxColumn.DataPropertyName = "Scanlines";
-            this.scanlinesDataGridViewTextBoxColumn.HeaderText = "Scanlines";
-            this.scanlinesDataGridViewTextBoxColumn.Name = "scanlinesDataGridViewTextBoxColumn";
-            this.scanlinesDataGridViewTextBoxColumn.ReadOnly = true;
-            this.scanlinesDataGridViewTextBoxColumn.Width = 78;
+            // hideBackglassDataGridViewTextBoxColumn
+            // 
+            this.hideBackglassDataGridViewTextBoxColumn.DataPropertyName = "HideBackglass";
+            this.hideBackglassDataGridViewTextBoxColumn.HeaderText = "HideBackglass";
+            this.hideBackglassDataGridViewTextBoxColumn.Name = "hideBackglassDataGridViewTextBoxColumn";
+            this.hideBackglassDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideBackglassDataGridViewTextBoxColumn.Width = 103;
             // 
-            // directDrawDataGridViewTextBoxColumn
-            // 
-            this.directDrawDataGridViewTextBoxColumn.DataPropertyName = "DirectDraw";
-            this.directDrawDataGridViewTextBoxColumn.HeaderText = "DirectDraw";
-            this.directDrawDataGridViewTextBoxColumn.Name = "directDrawDataGridViewTextBoxColumn";
-            this.directDrawDataGridViewTextBoxColumn.ReadOnly = true;
-            this.directDrawDataGridViewTextBoxColumn.Width = 85;
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Width = 63;
             // 
-            // showVPinMameDmdDataGridViewTextBoxColumn
-            // 
-            this.showVPinMameDmdDataGridViewTextBoxColumn.DataPropertyName = "ShowVPinMameDmd";
-            this.showVPinMameDmdDataGridViewTextBoxColumn.HeaderText = "ShowVPinMameDmd";
-            this.showVPinMameDmdDataGridViewTextBoxColumn.Name = "showVPinMameDmdDataGridViewTextBoxColumn";
-            this.showVPinMameDmdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.showVPinMameDmdDataGridViewTextBoxColumn.Width = 132;
+            // playersDataGridViewTextBoxColumn
+            // 
+            this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
+            this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
+            this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
+            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
+            this.playersDataGridViewTextBoxColumn.Width = 66;
             // 
-            // direct3DDataGridViewTextBoxColumn
-            // 
-            this.direct3DDataGridViewTextBoxColumn.DataPropertyName = "Direct3D";
-            this.direct3DDataGridViewTextBoxColumn.HeaderText = "Direct3D";
-            this.direct3DDataGridViewTextBoxColumn.Name = "direct3DDataGridViewTextBoxColumn";
-            this.direct3DDataGridViewTextBoxColumn.ReadOnly = true;
-            this.direct3DDataGridViewTextBoxColumn.Width = 74;
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.commentDataGridViewTextBoxColumn.Width = 76;
             // 
-            // at91jitDataGridViewTextBoxColumn
-            // 
-            this.at91jitDataGridViewTextBoxColumn.DataPropertyName = "At91jit";
-            this.at91jitDataGridViewTextBoxColumn.HeaderText = "At91jit";
-            this.at91jitDataGridViewTextBoxColumn.Name = "at91jitDataGridViewTextBoxColumn";
-            this.at91jitDataGridViewTextBoxColumn.ReadOnly = true;
-            this.at91jitDataGridViewTextBoxColumn.Width = 61;
+            // themeDataGridViewTextBoxColumn
+            // 
+            this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
+            this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
+            this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
+            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.themeDataGridViewTextBoxColumn.Width = 65;
             // 
-            // externalDmdDeviceDataGridViewTextBoxColumn
-            // 
-            this.externalDmdDeviceDataGridViewTextBoxColumn.DataPropertyName = "ExternalDmdDevice";
-            this.externalDmdDeviceDataGridViewTextBoxColumn.HeaderText = "ExternalDmdDevice";
-            this.externalDmdDeviceDataGridViewTextBoxColumn.Name = "externalDmdDeviceDataGridViewTextBoxColumn";
-            this.externalDmdDeviceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.externalDmdDeviceDataGridViewTextBoxColumn.Width = 126;
+            // authorDataGridViewTextBoxColumn
+            // 
+            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
+            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
+            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.authorDataGridViewTextBoxColumn.Width = 63;
             // 
-            // heightDataGridViewTextBoxColumn
-            // 
-            this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
-            this.heightDataGridViewTextBoxColumn.HeaderText = "Height";
-            this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
-            this.heightDataGridViewTextBoxColumn.ReadOnly = true;
-            this.heightDataGridViewTextBoxColumn.Width = 63;
+            // versionDataGridViewTextBoxColumn
+            // 
+            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
+            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
+            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
+            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.versionDataGridViewTextBoxColumn.Width = 67;
             // 
-            // widthDataGridViewTextBoxColumn
-            // 
-            this.widthDataGridViewTextBoxColumn.DataPropertyName = "Width";
-            this.widthDataGridViewTextBoxColumn.HeaderText = "Width";
-            this.widthDataGridViewTextBoxColumn.Name = "widthDataGridViewTextBoxColumn";
-            this.widthDataGridViewTextBoxColumn.ReadOnly = true;
-            this.widthDataGridViewTextBoxColumn.Width = 60;
+            // iPDBNumberDataGridViewTextBoxColumn
+            // 
+            this.iPDBNumberDataGridViewTextBoxColumn.DataPropertyName = "IPDBNumber";
+            this.iPDBNumberDataGridViewTextBoxColumn.HeaderText = "IPDBNumber";
+            this.iPDBNumberDataGridViewTextBoxColumn.Name = "iPDBNumberDataGridViewTextBoxColumn";
+            this.iPDBNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iPDBNumberDataGridViewTextBoxColumn.Width = 94;
             // 
-            // offsetXDataGridViewTextBoxColumn
-            // 
-            this.offsetXDataGridViewTextBoxColumn.DataPropertyName = "OffsetX";
-            this.offsetXDataGridViewTextBoxColumn.HeaderText = "OffsetX";
-            this.offsetXDataGridViewTextBoxColumn.Name = "offsetXDataGridViewTextBoxColumn";
-            this.offsetXDataGridViewTextBoxColumn.ReadOnly = true;
-            this.offsetXDataGridViewTextBoxColumn.Width = 67;
+            // dateAddedDataGridViewTextBoxColumn
+            // 
+            this.dateAddedDataGridViewTextBoxColumn.DataPropertyName = "DateAdded";
+            this.dateAddedDataGridViewTextBoxColumn.HeaderText = "DateAdded";
+            this.dateAddedDataGridViewTextBoxColumn.Name = "dateAddedDataGridViewTextBoxColumn";
+            this.dateAddedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateAddedDataGridViewTextBoxColumn.Width = 86;
             // 
-            // offsetYDataGridViewTextBoxColumn
-            // 
-            this.offsetYDataGridViewTextBoxColumn.DataPropertyName = "OffsetY";
-            this.offsetYDataGridViewTextBoxColumn.HeaderText = "OffsetY";
-            this.offsetYDataGridViewTextBoxColumn.Name = "offsetYDataGridViewTextBoxColumn";
-            this.offsetYDataGridViewTextBoxColumn.ReadOnly = true;
-            this.offsetYDataGridViewTextBoxColumn.Width = 67;
+            // dateModifiedDataGridViewTextBoxColumn
+            // 
+            this.dateModifiedDataGridViewTextBoxColumn.DataPropertyName = "DateModified";
+            this.dateModifiedDataGridViewTextBoxColumn.HeaderText = "DateModified";
+            this.dateModifiedDataGridViewTextBoxColumn.Name = "dateModifiedDataGridViewTextBoxColumn";
+            this.dateModifiedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateModifiedDataGridViewTextBoxColumn.Width = 95;
             // 
-            // intensityPerc0DataGridViewTextBoxColumn
-            // 
-            this.intensityPerc0DataGridViewTextBoxColumn.DataPropertyName = "IntensityPerc0";
-            this.intensityPerc0DataGridViewTextBoxColumn.HeaderText = "IntensityPerc0";
-            this.intensityPerc0DataGridViewTextBoxColumn.Name = "intensityPerc0DataGridViewTextBoxColumn";
-            this.intensityPerc0DataGridViewTextBoxColumn.ReadOnly = true;
-            this.intensityPerc0DataGridViewTextBoxColumn.Width = 99;
-            // 
-            // intensityPerc33DataGridViewTextBoxColumn
-            // 
-            this.intensityPerc33DataGridViewTextBoxColumn.DataPropertyName = "IntensityPerc33";
-            this.intensityPerc33DataGridViewTextBoxColumn.HeaderText = "IntensityPerc33";
-            this.intensityPerc33DataGridViewTextBoxColumn.Name = "intensityPerc33DataGridViewTextBoxColumn";
-            this.intensityPerc33DataGridViewTextBoxColumn.ReadOnly = true;
-            this.intensityPerc33DataGridViewTextBoxColumn.Width = 105;
-            // 
-            // intensityPerc66DataGridViewTextBoxColumn
-            // 
-            this.intensityPerc66DataGridViewTextBoxColumn.DataPropertyName = "IntensityPerc66";
-            this.intensityPerc66DataGridViewTextBoxColumn.HeaderText = "IntensityPerc66";
-            this.intensityPerc66DataGridViewTextBoxColumn.Name = "intensityPerc66DataGridViewTextBoxColumn";
-            this.intensityPerc66DataGridViewTextBoxColumn.ReadOnly = true;
-            this.intensityPerc66DataGridViewTextBoxColumn.Width = 105;
-            // 
-            // colorizeDataGridViewTextBoxColumn
-            // 
-            this.colorizeDataGridViewTextBoxColumn.DataPropertyName = "Colorize";
-            this.colorizeDataGridViewTextBoxColumn.HeaderText = "Colorize";
-            this.colorizeDataGridViewTextBoxColumn.Name = "colorizeDataGridViewTextBoxColumn";
-            this.colorizeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.colorizeDataGridViewTextBoxColumn.Width = 69;
-            // 
-            // cabinetModeDataGridViewTextBoxColumn
-            // 
-            this.cabinetModeDataGridViewTextBoxColumn.DataPropertyName = "CabinetMode";
-            this.cabinetModeDataGridViewTextBoxColumn.HeaderText = "CabinetMode";
-            this.cabinetModeDataGridViewTextBoxColumn.Name = "cabinetModeDataGridViewTextBoxColumn";
-            this.cabinetModeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.cabinetModeDataGridViewTextBoxColumn.Width = 95;
-            // 
-            // ignoreRomCrcDataGridViewTextBoxColumn
-            // 
-            this.ignoreRomCrcDataGridViewTextBoxColumn.DataPropertyName = "IgnoreRomCrc";
-            this.ignoreRomCrcDataGridViewTextBoxColumn.HeaderText = "IgnoreRomCrc";
-            this.ignoreRomCrcDataGridViewTextBoxColumn.Name = "ignoreRomCrcDataGridViewTextBoxColumn";
-            this.ignoreRomCrcDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rotateLeftDataGridViewTextBoxColumn
-            // 
-            this.rotateLeftDataGridViewTextBoxColumn.DataPropertyName = "RotateLeft";
-            this.rotateLeftDataGridViewTextBoxColumn.HeaderText = "RotateLeft";
-            this.rotateLeftDataGridViewTextBoxColumn.Name = "rotateLeftDataGridViewTextBoxColumn";
-            this.rotateLeftDataGridViewTextBoxColumn.ReadOnly = true;
-            this.rotateLeftDataGridViewTextBoxColumn.Width = 82;
-            // 
-            // rotateRightDataGridViewTextBoxColumn
-            // 
-            this.rotateRightDataGridViewTextBoxColumn.DataPropertyName = "RotateRight";
-            this.rotateRightDataGridViewTextBoxColumn.HeaderText = "RotateRight";
-            this.rotateRightDataGridViewTextBoxColumn.Name = "rotateRightDataGridViewTextBoxColumn";
-            this.rotateRightDataGridViewTextBoxColumn.ReadOnly = true;
-            this.rotateRightDataGridViewTextBoxColumn.Width = 89;
-            // 
-            // flipXDataGridViewTextBoxColumn
-            // 
-            this.flipXDataGridViewTextBoxColumn.DataPropertyName = "FlipX";
-            this.flipXDataGridViewTextBoxColumn.HeaderText = "FlipX";
-            this.flipXDataGridViewTextBoxColumn.Name = "flipXDataGridViewTextBoxColumn";
-            this.flipXDataGridViewTextBoxColumn.ReadOnly = true;
-            this.flipXDataGridViewTextBoxColumn.Width = 55;
-            // 
-            // flipYDataGridViewTextBoxColumn
-            // 
-            this.flipYDataGridViewTextBoxColumn.DataPropertyName = "FlipY";
-            this.flipYDataGridViewTextBoxColumn.HeaderText = "FlipY";
-            this.flipYDataGridViewTextBoxColumn.Name = "flipYDataGridViewTextBoxColumn";
-            this.flipYDataGridViewTextBoxColumn.ReadOnly = true;
-            this.flipYDataGridViewTextBoxColumn.Width = 55;
-            // 
-            // syncLevelDataGridViewTextBoxColumn
-            // 
-            this.syncLevelDataGridViewTextBoxColumn.DataPropertyName = "SyncLevel";
-            this.syncLevelDataGridViewTextBoxColumn.HeaderText = "SyncLevel";
-            this.syncLevelDataGridViewTextBoxColumn.Name = "syncLevelDataGridViewTextBoxColumn";
-            this.syncLevelDataGridViewTextBoxColumn.ReadOnly = true;
-            this.syncLevelDataGridViewTextBoxColumn.Width = 82;
-            // 
-            // resamplingQualityDataGridViewTextBoxColumn
-            // 
-            this.resamplingQualityDataGridViewTextBoxColumn.DataPropertyName = "ResamplingQuality";
-            this.resamplingQualityDataGridViewTextBoxColumn.HeaderText = "ResamplingQuality";
-            this.resamplingQualityDataGridViewTextBoxColumn.Name = "resamplingQualityDataGridViewTextBoxColumn";
-            this.resamplingQualityDataGridViewTextBoxColumn.ReadOnly = true;
-            this.resamplingQualityDataGridViewTextBoxColumn.Width = 119;
-            // 
-            // doubleDisplaySizeDataGridViewTextBoxColumn
-            // 
-            this.doubleDisplaySizeDataGridViewTextBoxColumn.DataPropertyName = "DoubleDisplaySize";
-            this.doubleDisplaySizeDataGridViewTextBoxColumn.HeaderText = "DoubleDisplaySize";
-            this.doubleDisplaySizeDataGridViewTextBoxColumn.Name = "doubleDisplaySizeDataGridViewTextBoxColumn";
-            this.doubleDisplaySizeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.doubleDisplaySizeDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // fastFramesDataGridViewTextBoxColumn
-            // 
-            this.fastFramesDataGridViewTextBoxColumn.DataPropertyName = "FastFrames";
-            this.fastFramesDataGridViewTextBoxColumn.HeaderText = "FastFrames";
-            this.fastFramesDataGridViewTextBoxColumn.Name = "fastFramesDataGridViewTextBoxColumn";
-            this.fastFramesDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fastFramesDataGridViewTextBoxColumn.Width = 86;
-            // 
-            // sampleRateDataGridViewTextBoxColumn
-            // 
-            this.sampleRateDataGridViewTextBoxColumn.DataPropertyName = "SampleRate";
-            this.sampleRateDataGridViewTextBoxColumn.HeaderText = "SampleRate";
-            this.sampleRateDataGridViewTextBoxColumn.Name = "sampleRateDataGridViewTextBoxColumn";
-            this.sampleRateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sampleRateDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // compactModeDataGridViewTextBoxColumn
-            // 
-            this.compactModeDataGridViewTextBoxColumn.DataPropertyName = "CompactMode";
-            this.compactModeDataGridViewTextBoxColumn.HeaderText = "CompactMode";
-            this.compactModeDataGridViewTextBoxColumn.Name = "compactModeDataGridViewTextBoxColumn";
-            this.compactModeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.compactModeDataGridViewTextBoxColumn.Width = 101;
-            // 
-            // soundModeDataGridViewTextBoxColumn
-            // 
-            this.soundModeDataGridViewTextBoxColumn.DataPropertyName = "SoundMode";
-            this.soundModeDataGridViewTextBoxColumn.HeaderText = "SoundMode";
-            this.soundModeDataGridViewTextBoxColumn.Name = "soundModeDataGridViewTextBoxColumn";
-            this.soundModeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.soundModeDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // useSamplesDataGridViewTextBoxColumn
-            // 
-            this.useSamplesDataGridViewTextBoxColumn.DataPropertyName = "UseSamples";
-            this.useSamplesDataGridViewTextBoxColumn.HeaderText = "UseSamples";
-            this.useSamplesDataGridViewTextBoxColumn.Name = "useSamplesDataGridViewTextBoxColumn";
-            this.useSamplesDataGridViewTextBoxColumn.ReadOnly = true;
-            this.useSamplesDataGridViewTextBoxColumn.Width = 91;
-            // 
-            // enableSoundDataGridViewTextBoxColumn
-            // 
-            this.enableSoundDataGridViewTextBoxColumn.DataPropertyName = "EnableSound";
-            this.enableSoundDataGridViewTextBoxColumn.HeaderText = "EnableSound";
-            this.enableSoundDataGridViewTextBoxColumn.Name = "enableSoundDataGridViewTextBoxColumn";
-            this.enableSoundDataGridViewTextBoxColumn.ReadOnly = true;
-            this.enableSoundDataGridViewTextBoxColumn.Width = 96;
-            // 
-            // redDataGridViewTextBoxColumn
-            // 
-            this.redDataGridViewTextBoxColumn.DataPropertyName = "Red";
-            this.redDataGridViewTextBoxColumn.HeaderText = "Red";
-            this.redDataGridViewTextBoxColumn.Name = "redDataGridViewTextBoxColumn";
-            this.redDataGridViewTextBoxColumn.ReadOnly = true;
-            this.redDataGridViewTextBoxColumn.Width = 52;
-            // 
-            // greenDataGridViewTextBoxColumn
-            // 
-            this.greenDataGridViewTextBoxColumn.DataPropertyName = "Green";
-            this.greenDataGridViewTextBoxColumn.HeaderText = "Green";
-            this.greenDataGridViewTextBoxColumn.Name = "greenDataGridViewTextBoxColumn";
-            this.greenDataGridViewTextBoxColumn.ReadOnly = true;
-            this.greenDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // blueDataGridViewTextBoxColumn
-            // 
-            this.blueDataGridViewTextBoxColumn.DataPropertyName = "Blue";
-            this.blueDataGridViewTextBoxColumn.HeaderText = "Blue";
-            this.blueDataGridViewTextBoxColumn.Name = "blueDataGridViewTextBoxColumn";
-            this.blueDataGridViewTextBoxColumn.ReadOnly = true;
-            this.blueDataGridViewTextBoxColumn.Width = 53;
+            // hasUpdatesAvailableDataGridViewCheckBoxColumn
+            // 
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.DataPropertyName = "HasUpdatesAvailable";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.HeaderText = "HasUpdatesAvailable";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Name = "hasUpdatesAvailableDataGridViewCheckBoxColumn";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Width = 115;
+            // 
+            // romDataGridViewTextBoxColumn
+            // 
+            this.romDataGridViewTextBoxColumn.DataPropertyName = "Rom";
+            this.romDataGridViewTextBoxColumn.HeaderText = "Rom";
+            this.romDataGridViewTextBoxColumn.Name = "romDataGridViewTextBoxColumn";
+            this.romDataGridViewTextBoxColumn.ReadOnly = true;
+            this.romDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // vPinGameDatabaseIdDataGridViewTextBoxColumn
+            // 
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.DataPropertyName = "VPinGameDatabaseId";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.HeaderText = "VPinGameDatabaseId";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Name = "vPinGameDatabaseIdDataGridViewTextBoxColumn";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Width = 137;
+            // 
+            // backglassStatusDataGridViewTextBoxColumn
+            // 
+            this.backglassStatusDataGridViewTextBoxColumn.DataPropertyName = "BackglassStatus";
+            this.backglassStatusDataGridViewTextBoxColumn.HeaderText = "BackglassStatus";
+            this.backglassStatusDataGridViewTextBoxColumn.Name = "backglassStatusDataGridViewTextBoxColumn";
+            this.backglassStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.backglassStatusDataGridViewTextBoxColumn.Width = 111;
+            // 
+            // dMDStatusDataGridViewTextBoxColumn
+            // 
+            this.dMDStatusDataGridViewTextBoxColumn.DataPropertyName = "DMDStatus";
+            this.dMDStatusDataGridViewTextBoxColumn.HeaderText = "DMDStatus";
+            this.dMDStatusDataGridViewTextBoxColumn.Name = "dMDStatusDataGridViewTextBoxColumn";
+            this.dMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dMDStatusDataGridViewTextBoxColumn.Width = 87;
+            // 
+            // launchAudioStatusDataGridViewTextBoxColumn
+            // 
+            this.launchAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "LaunchAudioStatus";
+            this.launchAudioStatusDataGridViewTextBoxColumn.HeaderText = "LaunchAudioStatus";
+            this.launchAudioStatusDataGridViewTextBoxColumn.Name = "launchAudioStatusDataGridViewTextBoxColumn";
+            this.launchAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchAudioStatusDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // realDMDColorStatusDataGridViewTextBoxColumn
+            // 
+            this.realDMDColorStatusDataGridViewTextBoxColumn.DataPropertyName = "RealDMDColorStatus";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.HeaderText = "RealDMDColorStatus";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.Name = "realDMDColorStatusDataGridViewTextBoxColumn";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.realDMDColorStatusDataGridViewTextBoxColumn.Width = 133;
+            // 
+            // readDMDStatusDataGridViewTextBoxColumn
+            // 
+            this.readDMDStatusDataGridViewTextBoxColumn.DataPropertyName = "ReadDMDStatus";
+            this.readDMDStatusDataGridViewTextBoxColumn.HeaderText = "ReadDMDStatus";
+            this.readDMDStatusDataGridViewTextBoxColumn.Name = "readDMDStatusDataGridViewTextBoxColumn";
+            this.readDMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.readDMDStatusDataGridViewTextBoxColumn.Width = 113;
+            // 
+            // tableAudioStatusDataGridViewTextBoxColumn
+            // 
+            this.tableAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "TableAudioStatus";
+            this.tableAudioStatusDataGridViewTextBoxColumn.HeaderText = "TableAudioStatus";
+            this.tableAudioStatusDataGridViewTextBoxColumn.Name = "tableAudioStatusDataGridViewTextBoxColumn";
+            this.tableAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableAudioStatusDataGridViewTextBoxColumn.Width = 116;
+            // 
+            // tableStatusDataGridViewTextBoxColumn
+            // 
+            this.tableStatusDataGridViewTextBoxColumn.DataPropertyName = "TableStatus";
+            this.tableStatusDataGridViewTextBoxColumn.HeaderText = "TableStatus";
+            this.tableStatusDataGridViewTextBoxColumn.Name = "tableStatusDataGridViewTextBoxColumn";
+            this.tableStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableStatusDataGridViewTextBoxColumn.Width = 89;
+            // 
+            // tableDesktopStatusDataGridViewTextBoxColumn
+            // 
+            this.tableDesktopStatusDataGridViewTextBoxColumn.DataPropertyName = "TableDesktopStatus";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.HeaderText = "TableDesktopStatus";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.Name = "tableDesktopStatusDataGridViewTextBoxColumn";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableDesktopStatusDataGridViewTextBoxColumn.Width = 129;
+            // 
+            // topperStatusDataGridViewTextBoxColumn
+            // 
+            this.topperStatusDataGridViewTextBoxColumn.DataPropertyName = "TopperStatus";
+            this.topperStatusDataGridViewTextBoxColumn.HeaderText = "TopperStatus";
+            this.topperStatusDataGridViewTextBoxColumn.Name = "topperStatusDataGridViewTextBoxColumn";
+            this.topperStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.topperStatusDataGridViewTextBoxColumn.Width = 96;
+            // 
+            // hasWheelImageDataGridViewCheckBoxColumn
+            // 
+            this.hasWheelImageDataGridViewCheckBoxColumn.DataPropertyName = "HasWheelImage";
+            this.hasWheelImageDataGridViewCheckBoxColumn.HeaderText = "HasWheelImage";
+            this.hasWheelImageDataGridViewCheckBoxColumn.Name = "hasWheelImageDataGridViewCheckBoxColumn";
+            this.hasWheelImageDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasWheelImageDataGridViewCheckBoxColumn.Width = 92;
             // 
             // contextMenuStripGridActions
             // 
             this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
-            this.copySelectedCellValueToAllROMSToolStripMenuItem,
-            this.copySelectedRowDataToAllROMSToolStripMenuItem,
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem,
-            this.runROMUsingNativeVPinMameToolStripMenuItem,
-            this.stopRunningROMToolStripMenuItem});
+            this.findMediaToolStripMenuItem,
+            this.recordMediaToolStripMenuItem,
+            this.previewMediaToolStripMenuItem,
+            this.addGameToolStripMenuItem,
+            this.deleteGameToolStripMenuItem,
+            this.launchGameToolStripMenuItem,
+            this.viewIPDBPageToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(325, 136);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(157, 180);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // copySelectedCellValueToAllROMSToolStripMenuItem
+            // findMediaToolStripMenuItem
             // 
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Name = "copySelectedCellValueToAllROMSToolStripMenuItem";
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Text = "Copy Selected Cell Value to All ROMS";
+            this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
+            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.findMediaToolStripMenuItem.Text = "Find Media";
             // 
-            // copySelectedRowDataToAllROMSToolStripMenuItem
+            // recordMediaToolStripMenuItem
             // 
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Name = "copySelectedRowDataToAllROMSToolStripMenuItem";
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Text = "Copy Selected Row Data to All ROMS";
+            this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
+            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.recordMediaToolStripMenuItem.Text = "Record Media";
             // 
-            // runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem
+            // previewMediaToolStripMenuItem
             // 
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Name = "runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem";
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Text = "Run ROM using External DMD Device / DMDExt";
+            this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
+            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.previewMediaToolStripMenuItem.Text = "Preview Media";
             // 
-            // runROMUsingNativeVPinMameToolStripMenuItem
+            // addGameToolStripMenuItem
             // 
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Name = "runROMUsingNativeVPinMameToolStripMenuItem";
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Text = "Run ROM using Native VPinMame";
+            this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
+            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.addGameToolStripMenuItem.Text = "Add Game";
             // 
-            // stopRunningROMToolStripMenuItem
+            // deleteGameToolStripMenuItem
             // 
-            this.stopRunningROMToolStripMenuItem.Name = "stopRunningROMToolStripMenuItem";
-            this.stopRunningROMToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.stopRunningROMToolStripMenuItem.Text = "Stop Running ROM";
-            this.stopRunningROMToolStripMenuItem.Visible = false;
+            this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
+            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteGameToolStripMenuItem.Text = "Delete Game";
             // 
-            // vpinMameRomSettingBindingSource
+            // launchGameToolStripMenuItem
             // 
-            this.vpinMameRomSettingBindingSource.DataSource = typeof(PinCab.Utils.Models.VpinMameRomSetting);
+            this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
+            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.launchGameToolStripMenuItem.Text = "Launch Game";
+            // 
+            // frontEndGameBindingSource
+            // 
+            this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
             // 
             // txtLog
             // 
@@ -559,7 +491,7 @@ namespace PinCab.Configurator
             this.txtLog.Location = new System.Drawing.Point(0, 0);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(955, 102);
+            this.txtLog.Size = new System.Drawing.Size(955, 96);
             this.txtLog.TabIndex = 4;
             // 
             // progressBar
@@ -576,26 +508,36 @@ namespace PinCab.Configurator
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.cmbDatabase);
+            this.panel1.Controls.Add(this.lblDatabase);
             this.panel1.Controls.Add(this.cmbFrontEnd);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.lblSearch);
-            this.panel1.Controls.Add(this.txtRomSearch);
+            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(955, 32);
+            this.panel1.Size = new System.Drawing.Size(955, 62);
             this.panel1.TabIndex = 7;
             // 
-            // button1
+            // cmbDatabase
             // 
-            this.button1.Location = new System.Drawing.Point(356, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmbDatabase.FormattingEnabled = true;
+            this.cmbDatabase.Location = new System.Drawing.Point(236, 4);
+            this.cmbDatabase.Name = "cmbDatabase";
+            this.cmbDatabase.Size = new System.Drawing.Size(264, 21);
+            this.cmbDatabase.TabIndex = 6;
+            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
+            // 
+            // lblDatabase
+            // 
+            this.lblDatabase.AutoSize = true;
+            this.lblDatabase.Location = new System.Drawing.Point(176, 6);
+            this.lblDatabase.Name = "lblDatabase";
+            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
+            this.lblDatabase.TabIndex = 5;
+            this.lblDatabase.Text = "Database";
             // 
             // cmbFrontEnd
             // 
@@ -606,6 +548,7 @@ namespace PinCab.Configurator
             this.cmbFrontEnd.Size = new System.Drawing.Size(107, 21);
             this.cmbFrontEnd.TabIndex = 4;
             this.cmbFrontEnd.ValueMember = "System";
+            this.cmbFrontEnd.SelectedIndexChanged += new System.EventHandler(this.cmbFrontEnd_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -629,18 +572,19 @@ namespace PinCab.Configurator
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(188, 7);
+            this.lblSearch.Location = new System.Drawing.Point(3, 33);
             this.lblSearch.Name = "lblSearch";
             this.lblSearch.Size = new System.Drawing.Size(41, 13);
             this.lblSearch.TabIndex = 1;
             this.lblSearch.Text = "Search";
             // 
-            // txtRomSearch
+            // txtSearch
             // 
-            this.txtRomSearch.Location = new System.Drawing.Point(235, 4);
-            this.txtRomSearch.Name = "txtRomSearch";
-            this.txtRomSearch.Size = new System.Drawing.Size(100, 20);
-            this.txtRomSearch.TabIndex = 0;
+            this.txtSearch.Location = new System.Drawing.Point(63, 30);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(107, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // menuStrip1
             // 
@@ -671,16 +615,23 @@ namespace PinCab.Configurator
             // utilitiesToolStripMenuItem
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findStrandedMediaToolStripMenuItem});
+            this.mediaAuditToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilitiesToolStripMenuItem.Text = "Utilities";
             // 
-            // findStrandedMediaToolStripMenuItem
+            // mediaAuditToolStripMenuItem
             // 
-            this.findStrandedMediaToolStripMenuItem.Name = "findStrandedMediaToolStripMenuItem";
-            this.findStrandedMediaToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.findStrandedMediaToolStripMenuItem.Text = "Find Stranded Media";
+            this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.mediaAuditToolStripMenuItem.Text = "Media Audit";
+            this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
+            // 
+            // viewIPDBPageToolStripMenuItem
+            // 
+            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
+            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
             // 
             // GameManagerForm
             // 
@@ -693,14 +644,15 @@ namespace PinCab.Configurator
             this.Controls.Add(this.menuStrip1);
             this.Name = "GameManagerForm";
             this.Text = "Game Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameManagerForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGameList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vpinMameRomSettingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -713,69 +665,64 @@ namespace PinCab.Configurator
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dataGridViewRomList;
+        private System.Windows.Forms.DataGridView dataGridViewGameList;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGridActions;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copySelectedCellValueToAllROMSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copySelectedRowDataToAllROMSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runROMUsingNativeVPinMameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopRunningROMToolStripMenuItem;
-        private System.Windows.Forms.BindingSource vpinMameRomSettingBindingSource;
+        private System.Windows.Forms.ToolStripMenuItem findMediaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addGameToolStripMenuItem;
+        private System.Windows.Forms.BindingSource frontEndGameBindingSource;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.TextBox txtRomSearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem utilitiesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem findStrandedMediaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mediaAuditToolStripMenuItem;
         private System.Windows.Forms.ComboBox cmbFrontEnd;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RomName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn romNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn enableAntiAliasDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn skipStartupDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn antiAliasPercentageDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn opacityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn borderDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scanlinesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn directDrawDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn showVPinMameDmdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn direct3DDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn at91jitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn externalDmdDeviceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn heightDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn widthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn offsetXDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn offsetYDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn intensityPerc0DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn intensityPerc33DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn intensityPerc66DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colorizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cabinetModeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ignoreRomCrcDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rotateLeftDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rotateRightDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn flipXDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn flipYDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn syncLevelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn resamplingQualityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn doubleDisplaySizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fastFramesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sampleRateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn compactModeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn soundModeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn useSamplesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn enableSoundDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn redDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn greenDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn blueDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cmbDatabase;
+        private System.Windows.Forms.Label lblDatabase;
+        private System.Windows.Forms.ToolStripMenuItem recordMediaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem previewMediaToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn manufacturerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yearDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn enabledDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alternateExeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hideDmdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hideTopperDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hideBackglassDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn playersDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn themeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn authorDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn versionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iPDBNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateAddedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateModifiedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasUpdatesAvailableDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn romDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vPinGameDatabaseIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn backglassStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dMDStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn launchAudioStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn realDMDColorStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn readDMDStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableAudioStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tableDesktopStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn topperStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasWheelImageDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem viewIPDBPageToolStripMenuItem;
     }
 }

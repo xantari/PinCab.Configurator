@@ -764,6 +764,10 @@ namespace PinCab.Configurator
         {
             var form = new GameManagerForm();
             var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _settings = settingManager.LoadSettings();
+            }
         }
     }
 }

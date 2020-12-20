@@ -291,5 +291,10 @@ namespace PinCab.Configurator
 
             txtLog.Text += sb.ToString();
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/PinMAME-ROM-Browser");
+        }
     }
 }

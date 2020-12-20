@@ -53,6 +53,7 @@
             this.txtDmdYOffset = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.chkYFlip = new System.Windows.Forms.CheckBox();
+            this.btnHelp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlayfieldWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlayfieldHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBackglassWidth)).BeginInit();
@@ -155,7 +156,6 @@
             this.txtBackglassWidth.Name = "txtBackglassWidth";
             this.txtBackglassWidth.Size = new System.Drawing.Size(120, 20);
             this.txtBackglassWidth.TabIndex = 7;
-            this.txtBackglassWidth.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label3
             // 
@@ -375,11 +375,23 @@
             this.chkYFlip.Text = "Y-Flip (Flips the DMD/LED display upside down, used in P2K Style cabs)";
             this.chkYFlip.UseVisualStyleBackColor = true;
             // 
+            // btnHelp
+            // 
+            this.btnHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnHelp.Location = new System.Drawing.Point(254, 324);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(75, 23);
+            this.btnHelp.TabIndex = 25;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseVisualStyleBackColor = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // ScreenResEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 357);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.chkYFlip);
             this.Controls.Add(this.txtDmdYOffset);
             this.Controls.Add(this.label11);
@@ -451,5 +463,6 @@
         private System.Windows.Forms.NumericUpDown txtDmdYOffset;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox chkYFlip;
+        private System.Windows.Forms.Button btnHelp;
     }
 }

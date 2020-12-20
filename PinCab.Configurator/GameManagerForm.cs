@@ -142,5 +142,10 @@ namespace PinCab.Configurator
                 (!string.IsNullOrEmpty(p.Version) && p.Version.ToLower().Contains(searchText))
                 ).ToSortableBindingList();
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Game-Manager");
+        }
     }
 }

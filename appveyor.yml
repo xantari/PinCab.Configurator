@@ -32,3 +32,4 @@ skip_commits:
   files:
     - docs/*
     - Screenshots/*
+    - .github/*

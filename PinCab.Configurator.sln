@@ -6,6 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pincab.Configurator", "PinC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3C3D453-72DB-4D75-AC90-479F2575B882}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		readme.md = readme.md
 	EndProjectSection
 EndProject

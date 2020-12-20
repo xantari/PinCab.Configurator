@@ -72,6 +72,7 @@ namespace PinCab.Configurator
             this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -89,7 +90,7 @@ namespace PinCab.Configurator
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -481,6 +482,12 @@ namespace PinCab.Configurator
             this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.launchGameToolStripMenuItem.Text = "Launch Game";
             // 
+            // viewIPDBPageToolStripMenuItem
+            // 
+            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
+            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
+            // 
             // frontEndGameBindingSource
             // 
             this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
@@ -590,7 +597,8 @@ namespace PinCab.Configurator
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.utilitiesToolStripMenuItem});
+            this.utilitiesToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(955, 24);
@@ -623,15 +631,16 @@ namespace PinCab.Configurator
             // mediaAuditToolStripMenuItem
             // 
             this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mediaAuditToolStripMenuItem.Text = "Media Audit";
             this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
             // 
-            // viewIPDBPageToolStripMenuItem
+            // helpToolStripMenuItem
             // 
-            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
-            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // GameManagerForm
             // 
@@ -724,5 +733,6 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewTextBoxColumn topperStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasWheelImageDataGridViewCheckBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem viewIPDBPageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }

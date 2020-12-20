@@ -112,9 +112,9 @@ namespace PinCab.Configurator
             this.Close();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void btnHelp_Click(object sender, EventArgs e)
         {
-
+            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/B2S-Screenres-Editor");
         }
     }
 }

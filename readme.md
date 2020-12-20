@@ -1,14 +1,15 @@
 # PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCabConfigurator)
-This tool allows you to layout your screens and validate your screen configuration in all virtual pinball related programs.
 
-The motivation behind this program was to solve these issues with Virtual Pinball cabinet setups:
+This tool allows you to manage your games in any front end, verify your screen settings across all virtual pinball related programs and has other virtual pinball related helper tools.
+
+See below for a full feature list.
+
+The initial motivation behind this program was to solve these issues with Virtual Pinball cabinet setups, but quickly grew beyond that:
 
 1. It's difficult to set all the various program settings related to Virtual Pinball as there are so many addon programs involved that each need their own screen setup.
 2. Changing Video Cards or Displays causes you to have to re-setup the new coordinates in many different areas. Instead the idea is to define it in one place and have those settings
 replicate to all the other areas automatically.
-3. Provide a FFMPEG command line examples on how to record screens and specific regions of screens
-4. Add other useful pincab tools into one program
-5. Ever wonder if your DMD sizes and positions are 100% consistent across all DMD programs? This will tell you.
+3. Ever wonder if your DMD sizes and positions are 100% consistent across all DMD programs? This will tell you.
 
 # Requirements
 

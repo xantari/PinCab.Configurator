@@ -33,3 +33,6 @@ skip_commits:
     - docs/*
     - Screenshots/*
     - .github/*
+    - readme.md
+    - .gitignore
+    - .gitattributes

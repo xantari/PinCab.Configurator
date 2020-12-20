@@ -11,6 +11,8 @@ The initial motivation behind this program was to solve these issues with Virtua
 replicate to all the other areas automatically.
 3. Ever wonder if your DMD sizes and positions are 100% consistent across all DMD programs? This will tell you.
 
+Wiki here: https://github.com/xantari/PinCab.Configurator/wiki (Or click on Wiki on the menu above in Github)
+
 # Requirements
 
 .NET Framework 4.7.2 or higher

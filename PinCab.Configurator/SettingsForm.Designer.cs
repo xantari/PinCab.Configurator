@@ -596,7 +596,6 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnHelp.Location = new System.Drawing.Point(304, 4);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(75, 23);

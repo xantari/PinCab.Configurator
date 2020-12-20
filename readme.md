@@ -90,11 +90,11 @@ for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
 	a. Add function to rename a table, and have it rename all corresponding files (All media, Backglass directB2s file) so that when you name your tables with the version # of the table all the media comes along with it.  
 	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media  
 	c. Hook into PuPmedia.php on VPinball.com to fetch media as well  
-	d. Hook into PinballX's media library (if you have defined your GameEx credentials)  
+	d. Hook into PinballX's (GameEx) media library (if you have defined your GameEx credentials)  
 	e. Convert the Pinball Game spreadsheet into JSON format and check into Git so that it can be used as a easy way to load tables into the front end. Automatically popup embedded programs Chromium based browser to fetch the table or media.  
 	f. Maintain an install time of the table in a local database (extra fields in PinballY/PinballX XML, and already a field in PinUpPoppers Games table), so you can compare the last updated date/time stamp in the pinball game spreadsheet to see if updates to a table are available.  
 	g. Add a pinball games database URL pointer to fetch updates on program load. Default it to Github so we can get PR's on updates to the games database.  
-
+4. Get a more robust dump of the IPDB database in JSON format with as much data from IPDB as possible.
 
 
 # Thank you!

@@ -7,6 +7,7 @@ using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,11 +101,68 @@ namespace PinCab.Utils.Utils
                             Version = game.Version,
                             PopperGameId = null
                         };
+
+                        //Load the Media Statuses for this game
+                        LoadPinballXMediaStatus(system, frontEndGame);
+
+                        //TODO: cross reference DateAdded with last updated date from game database and flip the HasUpdatesAvailable flag
+
                         frontEndGames.Add(frontEndGame);
                     }
                 }
             }
             return frontEndGames;
+        }
+
+        private void LoadPinballXMediaStatus(PinballXSystem system, FrontEndGameViewModel model)
+        {
+            var rootMediaPath = system.MediaPath.Replace(system.Name, string.Empty);
+            if (Directory.GetFiles(system.MediaPath + "\\Wheel Images").Any(x => x.Contains(model.FileName)) ||
+                Directory.GetFiles(system.MediaPath + "\\Wheel Images").Any(x => x.Contains(model.Description))
+            )
+            {
+                model.HasWheelImage = true;
+            }
+
+            if (Directory.GetFiles(rootMediaPath + "Flyer Images", "*", 
+                    SearchOption.AllDirectories).Any(x => x.Contains(model.FileName)) ||
+                    Directory.GetFiles(rootMediaPath + "Flyer Images", "*",
+                    SearchOption.AllDirectories).Any(x => x.Contains(model.Description))
+)
+            {
+                model.HasFlyer = true;
+            }
+
+            if (Directory.GetFiles(rootMediaPath + "Instruction Cards", "*",
+                    SearchOption.AllDirectories).Any(x => x.Contains(model.FileName)) ||
+                    Directory.GetFiles(rootMediaPath + "Instruction Cards", "*",
+                    SearchOption.AllDirectories).Any(x => x.Contains(model.Description))
+)
+            {
+                model.HasInstructionCard = true;
+            }
+
+            if (Directory.GetFiles(system.MediaPath + "\\Backglass Images").Any(x => x.Contains(model.FileName)) ||
+                Directory.GetFiles(system.MediaPath + "\\Backglass Images").Any(x => x.Contains(model.Description)))
+            {
+                model.BackglassStatus = MediaStatus.Image;
+            }
+            if (Directory.GetFiles(system.MediaPath + "\\Backglass Videos").Any(x => x.Contains(model.FileName)) ||
+                Directory.GetFiles(system.MediaPath + "\\Backglass Videos").Any(x => x.Contains(model.Description)))
+            {
+                model.BackglassStatus = model.BackglassStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+            }
+
+            if (Directory.GetFiles(system.MediaPath + "\\DMD Images").Any(x => x.Contains(model.FileName)) ||
+                Directory.GetFiles(system.MediaPath + "\\DMD Images").Any(x => x.Contains(model.Description)))
+            {
+                model.DMDStatus = MediaStatus.Image;
+            }
+            if (Directory.GetFiles(system.MediaPath + "\\DMD Videos").Any(x => x.Contains(model.FileName)) ||
+                Directory.GetFiles(system.MediaPath + "\\DMD Videos").Any(x => x.Contains(model.Description)))
+            {
+                model.DMDStatus = model.DMDStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+            }
         }
     }
 }

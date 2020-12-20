@@ -32,6 +32,33 @@ namespace PinCab.Configurator
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewGameList = new System.Windows.Forms.DataGridView();
+            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cmbDatabase = new System.Windows.Forms.ComboBox();
+            this.lblDatabase = new System.Windows.Forms.Label();
+            this.cmbFrontEnd = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,34 +90,10 @@ namespace PinCab.Configurator
             this.tableStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableDesktopStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.topperStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerMediaStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recordMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.previewMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cmbDatabase = new System.Windows.Forms.ComboBox();
-            this.lblDatabase = new System.Windows.Forms.Label();
-            this.cmbFrontEnd = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HasInstructionCard = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasFlyer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -159,7 +162,10 @@ namespace PinCab.Configurator
             this.tableStatusDataGridViewTextBoxColumn,
             this.tableDesktopStatusDataGridViewTextBoxColumn,
             this.topperStatusDataGridViewTextBoxColumn,
-            this.hasWheelImageDataGridViewCheckBoxColumn});
+            this.ManufacturerMediaStatus,
+            this.hasWheelImageDataGridViewCheckBoxColumn,
+            this.HasInstructionCard,
+            this.HasFlyer});
             this.dataGridViewGameList.ContextMenuStrip = this.contextMenuStripGridActions;
             this.dataGridViewGameList.DataSource = this.frontEndGameBindingSource;
             this.dataGridViewGameList.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -168,262 +174,6 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.ReadOnly = true;
             this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
             this.dataGridViewGameList.TabIndex = 2;
-            // 
-            // fileNameDataGridViewTextBoxColumn
-            // 
-            this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
-            this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
-            this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
-            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fileNameDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.Width = 85;
-            // 
-            // manufacturerDataGridViewTextBoxColumn
-            // 
-            this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
-            this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
-            this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
-            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.manufacturerDataGridViewTextBoxColumn.Width = 95;
-            // 
-            // yearDataGridViewTextBoxColumn
-            // 
-            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
-            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
-            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
-            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
-            this.yearDataGridViewTextBoxColumn.Width = 54;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.typeDataGridViewTextBoxColumn.Width = 56;
-            // 
-            // enabledDataGridViewTextBoxColumn
-            // 
-            this.enabledDataGridViewTextBoxColumn.DataPropertyName = "Enabled";
-            this.enabledDataGridViewTextBoxColumn.HeaderText = "Enabled";
-            this.enabledDataGridViewTextBoxColumn.Name = "enabledDataGridViewTextBoxColumn";
-            this.enabledDataGridViewTextBoxColumn.ReadOnly = true;
-            this.enabledDataGridViewTextBoxColumn.Width = 71;
-            // 
-            // alternateExeDataGridViewTextBoxColumn
-            // 
-            this.alternateExeDataGridViewTextBoxColumn.DataPropertyName = "AlternateExe";
-            this.alternateExeDataGridViewTextBoxColumn.HeaderText = "AlternateExe";
-            this.alternateExeDataGridViewTextBoxColumn.Name = "alternateExeDataGridViewTextBoxColumn";
-            this.alternateExeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.alternateExeDataGridViewTextBoxColumn.Width = 92;
-            // 
-            // hideDmdDataGridViewTextBoxColumn
-            // 
-            this.hideDmdDataGridViewTextBoxColumn.DataPropertyName = "HideDmd";
-            this.hideDmdDataGridViewTextBoxColumn.HeaderText = "HideDmd";
-            this.hideDmdDataGridViewTextBoxColumn.Name = "hideDmdDataGridViewTextBoxColumn";
-            this.hideDmdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.hideDmdDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // hideTopperDataGridViewTextBoxColumn
-            // 
-            this.hideTopperDataGridViewTextBoxColumn.DataPropertyName = "HideTopper";
-            this.hideTopperDataGridViewTextBoxColumn.HeaderText = "HideTopper";
-            this.hideTopperDataGridViewTextBoxColumn.Name = "hideTopperDataGridViewTextBoxColumn";
-            this.hideTopperDataGridViewTextBoxColumn.ReadOnly = true;
-            this.hideTopperDataGridViewTextBoxColumn.Width = 88;
-            // 
-            // hideBackglassDataGridViewTextBoxColumn
-            // 
-            this.hideBackglassDataGridViewTextBoxColumn.DataPropertyName = "HideBackglass";
-            this.hideBackglassDataGridViewTextBoxColumn.HeaderText = "HideBackglass";
-            this.hideBackglassDataGridViewTextBoxColumn.Name = "hideBackglassDataGridViewTextBoxColumn";
-            this.hideBackglassDataGridViewTextBoxColumn.ReadOnly = true;
-            this.hideBackglassDataGridViewTextBoxColumn.Width = 103;
-            // 
-            // ratingDataGridViewTextBoxColumn
-            // 
-            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
-            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
-            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ratingDataGridViewTextBoxColumn.Width = 63;
-            // 
-            // playersDataGridViewTextBoxColumn
-            // 
-            this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
-            this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
-            this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
-            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
-            this.playersDataGridViewTextBoxColumn.Width = 66;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.commentDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // themeDataGridViewTextBoxColumn
-            // 
-            this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
-            this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
-            this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
-            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.themeDataGridViewTextBoxColumn.Width = 65;
-            // 
-            // authorDataGridViewTextBoxColumn
-            // 
-            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
-            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
-            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
-            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.authorDataGridViewTextBoxColumn.Width = 63;
-            // 
-            // versionDataGridViewTextBoxColumn
-            // 
-            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
-            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
-            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
-            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.versionDataGridViewTextBoxColumn.Width = 67;
-            // 
-            // iPDBNumberDataGridViewTextBoxColumn
-            // 
-            this.iPDBNumberDataGridViewTextBoxColumn.DataPropertyName = "IPDBNumber";
-            this.iPDBNumberDataGridViewTextBoxColumn.HeaderText = "IPDBNumber";
-            this.iPDBNumberDataGridViewTextBoxColumn.Name = "iPDBNumberDataGridViewTextBoxColumn";
-            this.iPDBNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iPDBNumberDataGridViewTextBoxColumn.Width = 94;
-            // 
-            // dateAddedDataGridViewTextBoxColumn
-            // 
-            this.dateAddedDataGridViewTextBoxColumn.DataPropertyName = "DateAdded";
-            this.dateAddedDataGridViewTextBoxColumn.HeaderText = "DateAdded";
-            this.dateAddedDataGridViewTextBoxColumn.Name = "dateAddedDataGridViewTextBoxColumn";
-            this.dateAddedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateAddedDataGridViewTextBoxColumn.Width = 86;
-            // 
-            // dateModifiedDataGridViewTextBoxColumn
-            // 
-            this.dateModifiedDataGridViewTextBoxColumn.DataPropertyName = "DateModified";
-            this.dateModifiedDataGridViewTextBoxColumn.HeaderText = "DateModified";
-            this.dateModifiedDataGridViewTextBoxColumn.Name = "dateModifiedDataGridViewTextBoxColumn";
-            this.dateModifiedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dateModifiedDataGridViewTextBoxColumn.Width = 95;
-            // 
-            // hasUpdatesAvailableDataGridViewCheckBoxColumn
-            // 
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.DataPropertyName = "HasUpdatesAvailable";
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.HeaderText = "HasUpdatesAvailable";
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Name = "hasUpdatesAvailableDataGridViewCheckBoxColumn";
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Width = 115;
-            // 
-            // romDataGridViewTextBoxColumn
-            // 
-            this.romDataGridViewTextBoxColumn.DataPropertyName = "Rom";
-            this.romDataGridViewTextBoxColumn.HeaderText = "Rom";
-            this.romDataGridViewTextBoxColumn.Name = "romDataGridViewTextBoxColumn";
-            this.romDataGridViewTextBoxColumn.ReadOnly = true;
-            this.romDataGridViewTextBoxColumn.Width = 54;
-            // 
-            // vPinGameDatabaseIdDataGridViewTextBoxColumn
-            // 
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.DataPropertyName = "VPinGameDatabaseId";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.HeaderText = "VPinGameDatabaseId";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Name = "vPinGameDatabaseIdDataGridViewTextBoxColumn";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Width = 137;
-            // 
-            // backglassStatusDataGridViewTextBoxColumn
-            // 
-            this.backglassStatusDataGridViewTextBoxColumn.DataPropertyName = "BackglassStatus";
-            this.backglassStatusDataGridViewTextBoxColumn.HeaderText = "BackglassStatus";
-            this.backglassStatusDataGridViewTextBoxColumn.Name = "backglassStatusDataGridViewTextBoxColumn";
-            this.backglassStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.backglassStatusDataGridViewTextBoxColumn.Width = 111;
-            // 
-            // dMDStatusDataGridViewTextBoxColumn
-            // 
-            this.dMDStatusDataGridViewTextBoxColumn.DataPropertyName = "DMDStatus";
-            this.dMDStatusDataGridViewTextBoxColumn.HeaderText = "DMDStatus";
-            this.dMDStatusDataGridViewTextBoxColumn.Name = "dMDStatusDataGridViewTextBoxColumn";
-            this.dMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dMDStatusDataGridViewTextBoxColumn.Width = 87;
-            // 
-            // launchAudioStatusDataGridViewTextBoxColumn
-            // 
-            this.launchAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "LaunchAudioStatus";
-            this.launchAudioStatusDataGridViewTextBoxColumn.HeaderText = "LaunchAudioStatus";
-            this.launchAudioStatusDataGridViewTextBoxColumn.Name = "launchAudioStatusDataGridViewTextBoxColumn";
-            this.launchAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.launchAudioStatusDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // realDMDColorStatusDataGridViewTextBoxColumn
-            // 
-            this.realDMDColorStatusDataGridViewTextBoxColumn.DataPropertyName = "RealDMDColorStatus";
-            this.realDMDColorStatusDataGridViewTextBoxColumn.HeaderText = "RealDMDColorStatus";
-            this.realDMDColorStatusDataGridViewTextBoxColumn.Name = "realDMDColorStatusDataGridViewTextBoxColumn";
-            this.realDMDColorStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.realDMDColorStatusDataGridViewTextBoxColumn.Width = 133;
-            // 
-            // readDMDStatusDataGridViewTextBoxColumn
-            // 
-            this.readDMDStatusDataGridViewTextBoxColumn.DataPropertyName = "ReadDMDStatus";
-            this.readDMDStatusDataGridViewTextBoxColumn.HeaderText = "ReadDMDStatus";
-            this.readDMDStatusDataGridViewTextBoxColumn.Name = "readDMDStatusDataGridViewTextBoxColumn";
-            this.readDMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.readDMDStatusDataGridViewTextBoxColumn.Width = 113;
-            // 
-            // tableAudioStatusDataGridViewTextBoxColumn
-            // 
-            this.tableAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "TableAudioStatus";
-            this.tableAudioStatusDataGridViewTextBoxColumn.HeaderText = "TableAudioStatus";
-            this.tableAudioStatusDataGridViewTextBoxColumn.Name = "tableAudioStatusDataGridViewTextBoxColumn";
-            this.tableAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tableAudioStatusDataGridViewTextBoxColumn.Width = 116;
-            // 
-            // tableStatusDataGridViewTextBoxColumn
-            // 
-            this.tableStatusDataGridViewTextBoxColumn.DataPropertyName = "TableStatus";
-            this.tableStatusDataGridViewTextBoxColumn.HeaderText = "TableStatus";
-            this.tableStatusDataGridViewTextBoxColumn.Name = "tableStatusDataGridViewTextBoxColumn";
-            this.tableStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tableStatusDataGridViewTextBoxColumn.Width = 89;
-            // 
-            // tableDesktopStatusDataGridViewTextBoxColumn
-            // 
-            this.tableDesktopStatusDataGridViewTextBoxColumn.DataPropertyName = "TableDesktopStatus";
-            this.tableDesktopStatusDataGridViewTextBoxColumn.HeaderText = "TableDesktopStatus";
-            this.tableDesktopStatusDataGridViewTextBoxColumn.Name = "tableDesktopStatusDataGridViewTextBoxColumn";
-            this.tableDesktopStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tableDesktopStatusDataGridViewTextBoxColumn.Width = 129;
-            // 
-            // topperStatusDataGridViewTextBoxColumn
-            // 
-            this.topperStatusDataGridViewTextBoxColumn.DataPropertyName = "TopperStatus";
-            this.topperStatusDataGridViewTextBoxColumn.HeaderText = "TopperStatus";
-            this.topperStatusDataGridViewTextBoxColumn.Name = "topperStatusDataGridViewTextBoxColumn";
-            this.topperStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.topperStatusDataGridViewTextBoxColumn.Width = 96;
-            // 
-            // hasWheelImageDataGridViewCheckBoxColumn
-            // 
-            this.hasWheelImageDataGridViewCheckBoxColumn.DataPropertyName = "HasWheelImage";
-            this.hasWheelImageDataGridViewCheckBoxColumn.HeaderText = "HasWheelImage";
-            this.hasWheelImageDataGridViewCheckBoxColumn.Name = "hasWheelImageDataGridViewCheckBoxColumn";
-            this.hasWheelImageDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasWheelImageDataGridViewCheckBoxColumn.Width = 92;
             // 
             // contextMenuStripGridActions
             // 
@@ -631,7 +381,7 @@ namespace PinCab.Configurator
             // mediaAuditToolStripMenuItem
             // 
             this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.mediaAuditToolStripMenuItem.Text = "Media Audit";
             this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
             // 
@@ -641,6 +391,287 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // fileNameDataGridViewTextBoxColumn
+            // 
+            this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
+            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fileNameDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // manufacturerDataGridViewTextBoxColumn
+            // 
+            this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
+            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.manufacturerDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // yearDataGridViewTextBoxColumn
+            // 
+            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
+            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
+            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
+            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
+            this.yearDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.typeDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // enabledDataGridViewTextBoxColumn
+            // 
+            this.enabledDataGridViewTextBoxColumn.DataPropertyName = "Enabled";
+            this.enabledDataGridViewTextBoxColumn.HeaderText = "Enabled";
+            this.enabledDataGridViewTextBoxColumn.Name = "enabledDataGridViewTextBoxColumn";
+            this.enabledDataGridViewTextBoxColumn.ReadOnly = true;
+            this.enabledDataGridViewTextBoxColumn.Width = 71;
+            // 
+            // alternateExeDataGridViewTextBoxColumn
+            // 
+            this.alternateExeDataGridViewTextBoxColumn.DataPropertyName = "AlternateExe";
+            this.alternateExeDataGridViewTextBoxColumn.HeaderText = "AlternateExe";
+            this.alternateExeDataGridViewTextBoxColumn.Name = "alternateExeDataGridViewTextBoxColumn";
+            this.alternateExeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.alternateExeDataGridViewTextBoxColumn.Width = 92;
+            // 
+            // hideDmdDataGridViewTextBoxColumn
+            // 
+            this.hideDmdDataGridViewTextBoxColumn.DataPropertyName = "HideDmd";
+            this.hideDmdDataGridViewTextBoxColumn.HeaderText = "HideDmd";
+            this.hideDmdDataGridViewTextBoxColumn.Name = "hideDmdDataGridViewTextBoxColumn";
+            this.hideDmdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideDmdDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // hideTopperDataGridViewTextBoxColumn
+            // 
+            this.hideTopperDataGridViewTextBoxColumn.DataPropertyName = "HideTopper";
+            this.hideTopperDataGridViewTextBoxColumn.HeaderText = "HideTopper";
+            this.hideTopperDataGridViewTextBoxColumn.Name = "hideTopperDataGridViewTextBoxColumn";
+            this.hideTopperDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideTopperDataGridViewTextBoxColumn.Width = 88;
+            // 
+            // hideBackglassDataGridViewTextBoxColumn
+            // 
+            this.hideBackglassDataGridViewTextBoxColumn.DataPropertyName = "HideBackglass";
+            this.hideBackglassDataGridViewTextBoxColumn.HeaderText = "HideBackglass";
+            this.hideBackglassDataGridViewTextBoxColumn.Name = "hideBackglassDataGridViewTextBoxColumn";
+            this.hideBackglassDataGridViewTextBoxColumn.ReadOnly = true;
+            this.hideBackglassDataGridViewTextBoxColumn.Width = 103;
+            // 
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // playersDataGridViewTextBoxColumn
+            // 
+            this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
+            this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
+            this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
+            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
+            this.playersDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.commentDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // themeDataGridViewTextBoxColumn
+            // 
+            this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
+            this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
+            this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
+            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.themeDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // authorDataGridViewTextBoxColumn
+            // 
+            this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
+            this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
+            this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
+            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
+            this.authorDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // versionDataGridViewTextBoxColumn
+            // 
+            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
+            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
+            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
+            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.versionDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // iPDBNumberDataGridViewTextBoxColumn
+            // 
+            this.iPDBNumberDataGridViewTextBoxColumn.DataPropertyName = "IPDBNumber";
+            this.iPDBNumberDataGridViewTextBoxColumn.HeaderText = "IPDB #";
+            this.iPDBNumberDataGridViewTextBoxColumn.Name = "iPDBNumberDataGridViewTextBoxColumn";
+            this.iPDBNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iPDBNumberDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // dateAddedDataGridViewTextBoxColumn
+            // 
+            this.dateAddedDataGridViewTextBoxColumn.DataPropertyName = "DateAdded";
+            this.dateAddedDataGridViewTextBoxColumn.HeaderText = "Date Added";
+            this.dateAddedDataGridViewTextBoxColumn.Name = "dateAddedDataGridViewTextBoxColumn";
+            this.dateAddedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateAddedDataGridViewTextBoxColumn.Width = 89;
+            // 
+            // dateModifiedDataGridViewTextBoxColumn
+            // 
+            this.dateModifiedDataGridViewTextBoxColumn.DataPropertyName = "DateModified";
+            this.dateModifiedDataGridViewTextBoxColumn.HeaderText = "Date Modified";
+            this.dateModifiedDataGridViewTextBoxColumn.Name = "dateModifiedDataGridViewTextBoxColumn";
+            this.dateModifiedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateModifiedDataGridViewTextBoxColumn.Width = 98;
+            // 
+            // hasUpdatesAvailableDataGridViewCheckBoxColumn
+            // 
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.DataPropertyName = "HasUpdatesAvailable";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.HeaderText = "HasUpdatesAvailable";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Name = "hasUpdatesAvailableDataGridViewCheckBoxColumn";
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Width = 115;
+            // 
+            // romDataGridViewTextBoxColumn
+            // 
+            this.romDataGridViewTextBoxColumn.DataPropertyName = "Rom";
+            this.romDataGridViewTextBoxColumn.HeaderText = "Rom";
+            this.romDataGridViewTextBoxColumn.Name = "romDataGridViewTextBoxColumn";
+            this.romDataGridViewTextBoxColumn.ReadOnly = true;
+            this.romDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // vPinGameDatabaseIdDataGridViewTextBoxColumn
+            // 
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.DataPropertyName = "VPinGameDatabaseId";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.HeaderText = "VPinGameDatabaseId";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Name = "vPinGameDatabaseIdDataGridViewTextBoxColumn";
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Visible = false;
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Width = 137;
+            // 
+            // backglassStatusDataGridViewTextBoxColumn
+            // 
+            this.backglassStatusDataGridViewTextBoxColumn.DataPropertyName = "BackglassStatus";
+            this.backglassStatusDataGridViewTextBoxColumn.HeaderText = "Backglass Media";
+            this.backglassStatusDataGridViewTextBoxColumn.Name = "backglassStatusDataGridViewTextBoxColumn";
+            this.backglassStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.backglassStatusDataGridViewTextBoxColumn.Width = 113;
+            // 
+            // dMDStatusDataGridViewTextBoxColumn
+            // 
+            this.dMDStatusDataGridViewTextBoxColumn.DataPropertyName = "DMDStatus";
+            this.dMDStatusDataGridViewTextBoxColumn.HeaderText = "DMD Media";
+            this.dMDStatusDataGridViewTextBoxColumn.Name = "dMDStatusDataGridViewTextBoxColumn";
+            this.dMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dMDStatusDataGridViewTextBoxColumn.Width = 89;
+            // 
+            // launchAudioStatusDataGridViewTextBoxColumn
+            // 
+            this.launchAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "LaunchAudioStatus";
+            this.launchAudioStatusDataGridViewTextBoxColumn.HeaderText = "Launch Audio Media";
+            this.launchAudioStatusDataGridViewTextBoxColumn.Name = "launchAudioStatusDataGridViewTextBoxColumn";
+            this.launchAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchAudioStatusDataGridViewTextBoxColumn.Width = 130;
+            // 
+            // realDMDColorStatusDataGridViewTextBoxColumn
+            // 
+            this.realDMDColorStatusDataGridViewTextBoxColumn.DataPropertyName = "RealDMDColorStatus";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.HeaderText = "Read DMD Color Media";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.Name = "realDMDColorStatusDataGridViewTextBoxColumn";
+            this.realDMDColorStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.realDMDColorStatusDataGridViewTextBoxColumn.Width = 145;
+            // 
+            // readDMDStatusDataGridViewTextBoxColumn
+            // 
+            this.readDMDStatusDataGridViewTextBoxColumn.DataPropertyName = "ReadDMDStatus";
+            this.readDMDStatusDataGridViewTextBoxColumn.HeaderText = "Read DMD Media";
+            this.readDMDStatusDataGridViewTextBoxColumn.Name = "readDMDStatusDataGridViewTextBoxColumn";
+            this.readDMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.readDMDStatusDataGridViewTextBoxColumn.Width = 118;
+            // 
+            // tableAudioStatusDataGridViewTextBoxColumn
+            // 
+            this.tableAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "TableAudioStatus";
+            this.tableAudioStatusDataGridViewTextBoxColumn.HeaderText = "Table Audio Media";
+            this.tableAudioStatusDataGridViewTextBoxColumn.Name = "tableAudioStatusDataGridViewTextBoxColumn";
+            this.tableAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableAudioStatusDataGridViewTextBoxColumn.Width = 121;
+            // 
+            // tableStatusDataGridViewTextBoxColumn
+            // 
+            this.tableStatusDataGridViewTextBoxColumn.DataPropertyName = "TableStatus";
+            this.tableStatusDataGridViewTextBoxColumn.HeaderText = "Table Media";
+            this.tableStatusDataGridViewTextBoxColumn.Name = "tableStatusDataGridViewTextBoxColumn";
+            this.tableStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableStatusDataGridViewTextBoxColumn.Width = 91;
+            // 
+            // tableDesktopStatusDataGridViewTextBoxColumn
+            // 
+            this.tableDesktopStatusDataGridViewTextBoxColumn.DataPropertyName = "TableDesktopStatus";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.HeaderText = "Table Desktop Media";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.Name = "tableDesktopStatusDataGridViewTextBoxColumn";
+            this.tableDesktopStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tableDesktopStatusDataGridViewTextBoxColumn.Width = 134;
+            // 
+            // topperStatusDataGridViewTextBoxColumn
+            // 
+            this.topperStatusDataGridViewTextBoxColumn.DataPropertyName = "TopperStatus";
+            this.topperStatusDataGridViewTextBoxColumn.HeaderText = "Topper Media";
+            this.topperStatusDataGridViewTextBoxColumn.Name = "topperStatusDataGridViewTextBoxColumn";
+            this.topperStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.topperStatusDataGridViewTextBoxColumn.Width = 98;
+            // 
+            // ManufacturerMediaStatus
+            // 
+            this.ManufacturerMediaStatus.DataPropertyName = "ManufacturerMediaStatus";
+            this.ManufacturerMediaStatus.HeaderText = "Manufacturer Media";
+            this.ManufacturerMediaStatus.Name = "ManufacturerMediaStatus";
+            this.ManufacturerMediaStatus.ReadOnly = true;
+            this.ManufacturerMediaStatus.Width = 127;
+            // 
+            // hasWheelImageDataGridViewCheckBoxColumn
+            // 
+            this.hasWheelImageDataGridViewCheckBoxColumn.DataPropertyName = "HasWheelImage";
+            this.hasWheelImageDataGridViewCheckBoxColumn.HeaderText = "Wheel Image";
+            this.hasWheelImageDataGridViewCheckBoxColumn.Name = "hasWheelImageDataGridViewCheckBoxColumn";
+            this.hasWheelImageDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasWheelImageDataGridViewCheckBoxColumn.Width = 76;
+            // 
+            // HasInstructionCard
+            // 
+            this.HasInstructionCard.DataPropertyName = "HasInstructionCard";
+            this.HasInstructionCard.HeaderText = "Instruction Card";
+            this.HasInstructionCard.Name = "HasInstructionCard";
+            this.HasInstructionCard.ReadOnly = true;
+            this.HasInstructionCard.Width = 87;
+            // 
+            // HasFlyer
+            // 
+            this.HasFlyer.DataPropertyName = "HasFlyer";
+            this.HasFlyer.HeaderText = "Flyer";
+            this.HasFlyer.Name = "HasFlyer";
+            this.HasFlyer.ReadOnly = true;
+            this.HasFlyer.Width = 35;
             // 
             // GameManagerForm
             // 
@@ -700,6 +731,8 @@ namespace PinCab.Configurator
         private System.Windows.Forms.ToolStripMenuItem deleteGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem previewMediaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewIPDBPageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn manufacturerDataGridViewTextBoxColumn;
@@ -731,8 +764,9 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewTextBoxColumn tableStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableDesktopStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn topperStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ManufacturerMediaStatus;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasWheelImageDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem viewIPDBPageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn HasInstructionCard;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn HasFlyer;
     }
 }

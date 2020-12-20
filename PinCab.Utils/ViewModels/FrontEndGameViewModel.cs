@@ -9,7 +9,19 @@ namespace PinCab.Utils.ViewModels
 {
     public class FrontEndGameViewModel
     {
-        public FrontEndGameViewModel() { }
+        public FrontEndGameViewModel()
+        {
+            BackglassStatus = MediaStatus.NotFound;
+            DMDStatus = MediaStatus.NotFound;
+            LaunchAudioStatus = MediaStatus.NotFound;
+            RealDMDColorStatus = MediaStatus.NotFound;
+            ReadDMDStatus = MediaStatus.NotFound;
+            TableAudioStatus = MediaStatus.NotFound;
+            TableStatus = MediaStatus.NotFound;
+            TableDesktopStatus = MediaStatus.NotFound;
+            TopperStatus = MediaStatus.NotFound;
+            ManufacturerMediaStatus = MediaStatus.NotFound;
+        }
 
         public FrontEnd FrontEnd { get; set; }
 
@@ -55,6 +67,9 @@ namespace PinCab.Utils.ViewModels
         public MediaStatus TableStatus { get; set; }
         public MediaStatus TableDesktopStatus { get; set; }
         public MediaStatus TopperStatus { get; set; }
+        public MediaStatus ManufacturerMediaStatus { get; set; }
+        public bool HasFlyer { get; set; }
+        public bool HasInstructionCard { get; set; }
         public bool HasWheelImage { get; set; }
     }
 }

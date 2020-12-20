@@ -17,7 +17,7 @@ namespace PinCab.Configurator
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,7 +33,17 @@ namespace PinCab.Configurator
 
             Log.Information("Application Started. Version: {version}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
-            Application.Run(new MainForm());
+            if (args.Count() > 0)
+            {
+                if (args.Contains("-screenreseditor"))
+                    Application.Run(new ScreenResEditorForm());
+                if (args.Contains("-gamemanager"))
+                    Application.Run(new GameManagerForm());
+                if (args.Contains("-rombrowser"))
+                    Application.Run(new PinMameRomBrowserForm());
+            }
+            else
+                Application.Run(new MainForm());
         }
 
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)

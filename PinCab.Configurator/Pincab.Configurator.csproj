@@ -217,6 +217,15 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Backup\readme.md" />
+    <Content Include="ScreenresEditor.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RomBrowser.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameManager.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PinCab.ScreenUtil.Models.VpinMameRomSetting.datasource" />
     <None Include="Properties\DataSources\PinCab.Utils.ViewModels.FrontEndGameViewModel.datasource" />

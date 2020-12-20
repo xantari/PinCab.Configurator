@@ -31,3 +31,4 @@ deploy:
 skip_commits:
   files:
     - docs/*
+    - Screenshots/*

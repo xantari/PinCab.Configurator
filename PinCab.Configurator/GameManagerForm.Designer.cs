@@ -32,6 +32,41 @@ namespace PinCab.Configurator
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewGameList = new System.Windows.Forms.DataGridView();
+            this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yearDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enabledDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alternateExeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideDmdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideTopperDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hideBackglassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.playersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.themeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.versionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iPDBNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateModifiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasUpdatesAvailableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.romDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vPinGameDatabaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backglassStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realDMDColorStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.readDMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableDesktopStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.topperStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ManufacturerMediaStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasInstructionCard = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasFlyer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasLaunchAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasTableAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,41 +94,6 @@ namespace PinCab.Configurator
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.yearDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enabledDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alternateExeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hideDmdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hideTopperDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hideBackglassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.playersDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.themeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.versionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iPDBNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateAddedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateModifiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.romDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.backglassStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.launchAudioStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.realDMDColorStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readDMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableAudioStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableDesktopStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.topperStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ManufacturerMediaStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.HasInstructionCard = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.HasFlyer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -155,242 +155,26 @@ namespace PinCab.Configurator
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn,
             this.backglassStatusDataGridViewTextBoxColumn,
             this.dMDStatusDataGridViewTextBoxColumn,
-            this.launchAudioStatusDataGridViewTextBoxColumn,
             this.realDMDColorStatusDataGridViewTextBoxColumn,
             this.readDMDStatusDataGridViewTextBoxColumn,
-            this.tableAudioStatusDataGridViewTextBoxColumn,
             this.tableStatusDataGridViewTextBoxColumn,
             this.tableDesktopStatusDataGridViewTextBoxColumn,
             this.topperStatusDataGridViewTextBoxColumn,
             this.ManufacturerMediaStatus,
             this.hasWheelImageDataGridViewCheckBoxColumn,
             this.HasInstructionCard,
-            this.HasFlyer});
+            this.HasFlyer,
+            this.HasLaunchAudio,
+            this.HasTableAudio});
             this.dataGridViewGameList.ContextMenuStrip = this.contextMenuStripGridActions;
             this.dataGridViewGameList.DataSource = this.frontEndGameBindingSource;
             this.dataGridViewGameList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewGameList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewGameList.Name = "dataGridViewGameList";
             this.dataGridViewGameList.ReadOnly = true;
+            this.dataGridViewGameList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
             this.dataGridViewGameList.TabIndex = 2;
-            // 
-            // contextMenuStripGridActions
-            // 
-            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.findMediaToolStripMenuItem,
-            this.recordMediaToolStripMenuItem,
-            this.previewMediaToolStripMenuItem,
-            this.addGameToolStripMenuItem,
-            this.deleteGameToolStripMenuItem,
-            this.launchGameToolStripMenuItem,
-            this.viewIPDBPageToolStripMenuItem});
-            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(157, 180);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // findMediaToolStripMenuItem
-            // 
-            this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
-            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.findMediaToolStripMenuItem.Text = "Find Media";
-            // 
-            // recordMediaToolStripMenuItem
-            // 
-            this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
-            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.recordMediaToolStripMenuItem.Text = "Record Media";
-            // 
-            // previewMediaToolStripMenuItem
-            // 
-            this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
-            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.previewMediaToolStripMenuItem.Text = "Preview Media";
-            // 
-            // addGameToolStripMenuItem
-            // 
-            this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
-            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.addGameToolStripMenuItem.Text = "Add Game";
-            // 
-            // deleteGameToolStripMenuItem
-            // 
-            this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
-            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.deleteGameToolStripMenuItem.Text = "Delete Game";
-            // 
-            // launchGameToolStripMenuItem
-            // 
-            this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
-            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.launchGameToolStripMenuItem.Text = "Launch Game";
-            // 
-            // viewIPDBPageToolStripMenuItem
-            // 
-            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
-            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
-            // 
-            // frontEndGameBindingSource
-            // 
-            this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
-            // 
-            // txtLog
-            // 
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Location = new System.Drawing.Point(0, 0);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(955, 96);
-            this.txtLog.TabIndex = 4;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar.Location = new System.Drawing.Point(0, 530);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(955, 23);
-            this.progressBar.TabIndex = 8;
-            // 
-            // backgroundWorkerProgressBar
-            // 
-            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.cmbDatabase);
-            this.panel1.Controls.Add(this.lblDatabase);
-            this.panel1.Controls.Add(this.cmbFrontEnd);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblInfo);
-            this.panel1.Controls.Add(this.lblSearch);
-            this.panel1.Controls.Add(this.txtSearch);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(955, 62);
-            this.panel1.TabIndex = 7;
-            // 
-            // cmbDatabase
-            // 
-            this.cmbDatabase.FormattingEnabled = true;
-            this.cmbDatabase.Location = new System.Drawing.Point(236, 4);
-            this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(264, 21);
-            this.cmbDatabase.TabIndex = 6;
-            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
-            // 
-            // lblDatabase
-            // 
-            this.lblDatabase.AutoSize = true;
-            this.lblDatabase.Location = new System.Drawing.Point(176, 6);
-            this.lblDatabase.Name = "lblDatabase";
-            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
-            this.lblDatabase.TabIndex = 5;
-            this.lblDatabase.Text = "Database";
-            // 
-            // cmbFrontEnd
-            // 
-            this.cmbFrontEnd.DisplayMember = "Name";
-            this.cmbFrontEnd.FormattingEnabled = true;
-            this.cmbFrontEnd.Location = new System.Drawing.Point(63, 4);
-            this.cmbFrontEnd.Name = "cmbFrontEnd";
-            this.cmbFrontEnd.Size = new System.Drawing.Size(107, 21);
-            this.cmbFrontEnd.TabIndex = 4;
-            this.cmbFrontEnd.ValueMember = "System";
-            this.cmbFrontEnd.SelectedIndexChanged += new System.EventHandler(this.cmbFrontEnd_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Front End";
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(783, 6);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(160, 13);
-            this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "Right Click Cell or Row for Menu";
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(3, 33);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(41, 13);
-            this.lblSearch.TabIndex = 1;
-            this.lblSearch.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(63, 30);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(107, 20);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.utilitiesToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(955, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // utilitiesToolStripMenuItem
-            // 
-            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mediaAuditToolStripMenuItem});
-            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
-            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.utilitiesToolStripMenuItem.Text = "Utilities";
-            // 
-            // mediaAuditToolStripMenuItem
-            // 
-            this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
-            this.mediaAuditToolStripMenuItem.Text = "Media Audit";
-            this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // fileNameDataGridViewTextBoxColumn
             // 
@@ -585,14 +369,6 @@ namespace PinCab.Configurator
             this.dMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.dMDStatusDataGridViewTextBoxColumn.Width = 89;
             // 
-            // launchAudioStatusDataGridViewTextBoxColumn
-            // 
-            this.launchAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "LaunchAudioStatus";
-            this.launchAudioStatusDataGridViewTextBoxColumn.HeaderText = "Launch Audio Media";
-            this.launchAudioStatusDataGridViewTextBoxColumn.Name = "launchAudioStatusDataGridViewTextBoxColumn";
-            this.launchAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.launchAudioStatusDataGridViewTextBoxColumn.Width = 130;
-            // 
             // realDMDColorStatusDataGridViewTextBoxColumn
             // 
             this.realDMDColorStatusDataGridViewTextBoxColumn.DataPropertyName = "RealDMDColorStatus";
@@ -608,14 +384,6 @@ namespace PinCab.Configurator
             this.readDMDStatusDataGridViewTextBoxColumn.Name = "readDMDStatusDataGridViewTextBoxColumn";
             this.readDMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.readDMDStatusDataGridViewTextBoxColumn.Width = 118;
-            // 
-            // tableAudioStatusDataGridViewTextBoxColumn
-            // 
-            this.tableAudioStatusDataGridViewTextBoxColumn.DataPropertyName = "TableAudioStatus";
-            this.tableAudioStatusDataGridViewTextBoxColumn.HeaderText = "Table Audio Media";
-            this.tableAudioStatusDataGridViewTextBoxColumn.Name = "tableAudioStatusDataGridViewTextBoxColumn";
-            this.tableAudioStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tableAudioStatusDataGridViewTextBoxColumn.Width = 121;
             // 
             // tableStatusDataGridViewTextBoxColumn
             // 
@@ -672,6 +440,240 @@ namespace PinCab.Configurator
             this.HasFlyer.Name = "HasFlyer";
             this.HasFlyer.ReadOnly = true;
             this.HasFlyer.Width = 35;
+            // 
+            // HasLaunchAudio
+            // 
+            this.HasLaunchAudio.DataPropertyName = "HasLaunchAudio";
+            this.HasLaunchAudio.HeaderText = "Launch Audio";
+            this.HasLaunchAudio.Name = "HasLaunchAudio";
+            this.HasLaunchAudio.ReadOnly = true;
+            this.HasLaunchAudio.Width = 79;
+            // 
+            // HasTableAudio
+            // 
+            this.HasTableAudio.DataPropertyName = "HasTableAudio";
+            this.HasTableAudio.HeaderText = "Table Audio Media";
+            this.HasTableAudio.Name = "HasTableAudio";
+            this.HasTableAudio.ReadOnly = true;
+            this.HasTableAudio.Width = 102;
+            // 
+            // contextMenuStripGridActions
+            // 
+            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.findMediaToolStripMenuItem,
+            this.recordMediaToolStripMenuItem,
+            this.previewMediaToolStripMenuItem,
+            this.addGameToolStripMenuItem,
+            this.deleteGameToolStripMenuItem,
+            this.launchGameToolStripMenuItem,
+            this.viewIPDBPageToolStripMenuItem});
+            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(157, 180);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // findMediaToolStripMenuItem
+            // 
+            this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
+            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.findMediaToolStripMenuItem.Text = "Find Media";
+            // 
+            // recordMediaToolStripMenuItem
+            // 
+            this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
+            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.recordMediaToolStripMenuItem.Text = "Record Media";
+            // 
+            // previewMediaToolStripMenuItem
+            // 
+            this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
+            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.previewMediaToolStripMenuItem.Text = "Preview Media";
+            // 
+            // addGameToolStripMenuItem
+            // 
+            this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
+            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.addGameToolStripMenuItem.Text = "Add Game";
+            // 
+            // deleteGameToolStripMenuItem
+            // 
+            this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
+            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteGameToolStripMenuItem.Text = "Delete Game";
+            // 
+            // launchGameToolStripMenuItem
+            // 
+            this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
+            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.launchGameToolStripMenuItem.Text = "Launch Game";
+            // 
+            // viewIPDBPageToolStripMenuItem
+            // 
+            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
+            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
+            this.viewIPDBPageToolStripMenuItem.Click += new System.EventHandler(this.viewIPDBPageToolStripMenuItem_Click);
+            // 
+            // frontEndGameBindingSource
+            // 
+            this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 0);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(955, 96);
+            this.txtLog.TabIndex = 4;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar.Location = new System.Drawing.Point(0, 530);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(955, 23);
+            this.progressBar.TabIndex = 8;
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cmbDatabase);
+            this.panel1.Controls.Add(this.lblDatabase);
+            this.panel1.Controls.Add(this.cmbFrontEnd);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblInfo);
+            this.panel1.Controls.Add(this.lblSearch);
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(955, 62);
+            this.panel1.TabIndex = 7;
+            // 
+            // cmbDatabase
+            // 
+            this.cmbDatabase.FormattingEnabled = true;
+            this.cmbDatabase.Location = new System.Drawing.Point(236, 4);
+            this.cmbDatabase.Name = "cmbDatabase";
+            this.cmbDatabase.Size = new System.Drawing.Size(264, 21);
+            this.cmbDatabase.TabIndex = 6;
+            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
+            // 
+            // lblDatabase
+            // 
+            this.lblDatabase.AutoSize = true;
+            this.lblDatabase.Location = new System.Drawing.Point(176, 6);
+            this.lblDatabase.Name = "lblDatabase";
+            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
+            this.lblDatabase.TabIndex = 5;
+            this.lblDatabase.Text = "Database";
+            // 
+            // cmbFrontEnd
+            // 
+            this.cmbFrontEnd.DisplayMember = "Name";
+            this.cmbFrontEnd.FormattingEnabled = true;
+            this.cmbFrontEnd.Location = new System.Drawing.Point(63, 4);
+            this.cmbFrontEnd.Name = "cmbFrontEnd";
+            this.cmbFrontEnd.Size = new System.Drawing.Size(107, 21);
+            this.cmbFrontEnd.TabIndex = 4;
+            this.cmbFrontEnd.ValueMember = "System";
+            this.cmbFrontEnd.SelectedIndexChanged += new System.EventHandler(this.cmbFrontEnd_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Front End";
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(783, 6);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(160, 13);
+            this.lblInfo.TabIndex = 2;
+            this.lblInfo.Text = "Right Click Cell or Row for Menu";
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(3, 33);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(63, 30);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(107, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.utilitiesToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(955, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mediaAuditToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // mediaAuditToolStripMenuItem
+            // 
+            this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.mediaAuditToolStripMenuItem.Text = "Media Audit";
+            this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // GameManagerForm
             // 
@@ -757,10 +759,8 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewTextBoxColumn vPinGameDatabaseIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn backglassStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dMDStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn launchAudioStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn realDMDColorStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn readDMDStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableAudioStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tableDesktopStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn topperStatusDataGridViewTextBoxColumn;
@@ -768,5 +768,7 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasWheelImageDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn HasInstructionCard;
         private System.Windows.Forms.DataGridViewCheckBoxColumn HasFlyer;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn HasLaunchAudio;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn HasTableAudio;
     }
 }

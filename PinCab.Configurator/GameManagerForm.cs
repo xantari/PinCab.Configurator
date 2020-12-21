@@ -105,6 +105,11 @@ namespace PinCab.Configurator
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RefreshGameGrid();
+        }
+
+        private void RefreshGameGrid()
+        {
             if (cmbDatabase.SelectedIndex >= 0)
             {
                 var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
@@ -130,7 +135,7 @@ namespace PinCab.Configurator
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             string searchText = txtSearch.Text.ToLower();
-            dataGridViewGameList.DataSource = _fullGameListCache.Where(p => 
+            dataGridViewGameList.DataSource = _fullGameListCache.Where(p =>
                 (!string.IsNullOrEmpty(p.Rom) && p.Rom.ToLower().Contains(searchText)) ||
                 (!string.IsNullOrEmpty(p.Year) && p.Year.ToLower().Contains(searchText)) ||
                 (!string.IsNullOrEmpty(p.FileName) && p.FileName.ToLower().Contains(searchText)) ||
@@ -148,6 +153,17 @@ namespace PinCab.Configurator
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Game-Manager");
+        }
+
+        private void viewIPDBPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewGameList.SelectedCells.Count > 0)
+            {
+                var cell = dataGridViewGameList.SelectedCells[0];
+                var selectedRow = dataGridViewGameList.Rows[cell.RowIndex].DataBoundItem as FrontEndGameViewModel;
+                if (!string.IsNullOrEmpty(selectedRow.IPDBNumber))
+                    System.Diagnostics.Process.Start("https://www.ipdb.org/machine.cgi?id=" + selectedRow.IPDBNumber);
+            }
         }
     }
 }

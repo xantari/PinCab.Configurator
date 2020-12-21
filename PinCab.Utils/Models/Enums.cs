@@ -36,4 +36,10 @@ namespace PinCab.Utils.Models
         [Description("Image and Video")]
         ImageAndVideo
     }
+
+    public enum SearchMode
+    {
+        ByFileNameExactMatch,
+        ByDescriptionExactMatch
+    }
 }

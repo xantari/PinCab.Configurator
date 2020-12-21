@@ -13,10 +13,8 @@ namespace PinCab.Utils.ViewModels
         {
             BackglassStatus = MediaStatus.NotFound;
             DMDStatus = MediaStatus.NotFound;
-            LaunchAudioStatus = MediaStatus.NotFound;
             RealDMDColorStatus = MediaStatus.NotFound;
             ReadDMDStatus = MediaStatus.NotFound;
-            TableAudioStatus = MediaStatus.NotFound;
             TableStatus = MediaStatus.NotFound;
             TableDesktopStatus = MediaStatus.NotFound;
             TopperStatus = MediaStatus.NotFound;
@@ -60,16 +58,16 @@ namespace PinCab.Utils.ViewModels
         //Media Statuses of found media
         public MediaStatus BackglassStatus { get; set; }
         public MediaStatus DMDStatus { get; set; }
-        public MediaStatus LaunchAudioStatus { get; set; }
         public MediaStatus RealDMDColorStatus { get; set; }
         public MediaStatus ReadDMDStatus { get; set; }
-        public MediaStatus TableAudioStatus { get; set; }
         public MediaStatus TableStatus { get; set; }
         public MediaStatus TableDesktopStatus { get; set; }
         public MediaStatus TopperStatus { get; set; }
         public MediaStatus ManufacturerMediaStatus { get; set; }
+        public bool HasLaunchAudio { get; set; }
         public bool HasFlyer { get; set; }
         public bool HasInstructionCard { get; set; }
         public bool HasWheelImage { get; set; }
+        public bool HasTableAudio { get; set; }
     }
 }

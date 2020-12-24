@@ -116,7 +116,7 @@ namespace PinCab.Utils.Utils
             {
                 foreach (var system in _pinballXSystems)
                 {
-                    Log.Information("GetAllMediaItems: Processing PinballX System: {@system}", system);
+                    Log.Information("GetAllMediaItems: Processing PinballX System: {name}. Media Path: {path}", system.Name, system.MediaPath);
                     var rootMediaPath = system.MediaPath.Replace(system.Name, string.Empty);
                     string wheelPath = system.MediaPath + "\\Wheel Images";
                     string flyerPath = rootMediaPath + "Flyer Images";

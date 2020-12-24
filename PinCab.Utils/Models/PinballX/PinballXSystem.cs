@@ -49,22 +49,23 @@ namespace PinCab.Utils.Models.PinballX
         /// <param name="pinballXIniFilePath"></param>
         /// <param name="name">Pass in NULL if a custom system</param>
         /// <param name="data"></param>
-        public PinballXSystem(string pinballXIniFilePath, string name,  KeyDataCollection data)
+        /// <param name="platform">If passed in will use that platform type. If null, will detect platform from SystemType flag if present, otherwise it is an unknown platform</param>
+        public PinballXSystem(string pinballXIniFilePath, string name, KeyDataCollection data, Platform? platform)
         {
             PinballXIniFilePath = pinballXIniFilePath;
             Name = name;
-            SetByData(data);
+            SetByData(data, platform);
         }
 
         public List<string> GetDatabaseFilesWithoutDatabasePath()
         {
             var list = new List<string>();
             foreach (var database in DatabaseFiles)
-                list.Add(database.Replace(DatabasePath.Replace(Name,string.Empty), string.Empty));
+                list.Add(database.Replace(DatabasePath.Replace(Name, string.Empty), string.Empty));
             return list;
         }
 
-        private void SetByData(KeyDataCollection data)
+        private void SetByData(KeyDataCollection data, Platform? platform)
         {
             DirectoryInfo info = new DirectoryInfo(PinballXIniFilePath);
             PinballXFolder = info.Parent.Parent.FullName;
@@ -76,19 +77,20 @@ namespace PinCab.Utils.Models.PinballX
             Parameters = data["Parameters"];
             if (Name == null) //Custom system, not the predefined Future Pinball or Visual Pinball systems
                 Name = data["Name"];
-            var systemType = data["SystemType"];
-            if ("0".Equals(systemType))
+            if (!platform.HasValue)
             {
-                Type = Platform.Custom;
+                var systemType = data["SystemType"];
+                if ("0".Equals(systemType))
+                    Type = Platform.Custom;
+                else if ("1".Equals(systemType))
+                    Type = Platform.VP;
+                else if ("2".Equals(systemType))
+                    Type = Platform.FP;
+                else
+                    Type = Platform.Undefined;
             }
-            else if ("1".Equals(systemType))
-            {
-                Type = Platform.VP;
-            }
-            else if ("2".Equals(systemType))
-            {
-                Type = Platform.FP;
-            }
+            else
+                Type = platform.Value;
 
             DatabasePath = Path.Combine(PinballXFolder, "Databases", Name);
             MediaPath = Path.Combine(PinballXFolder, "Media", Name);
@@ -102,6 +104,21 @@ namespace PinCab.Utils.Models.PinballX
                 .GetFiles(DatabasePath)
                 .Where(filePath => ".xml".Equals(Path.GetExtension(filePath), StringComparison.InvariantCultureIgnoreCase))
                 .ToList();
+        }
+
+        /// <summary>
+        /// Returns false if not a valid system (stray/empty entries in pinballx.ini)
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValid()
+        {
+            if (string.IsNullOrEmpty(Name))
+                return false;
+            if (string.IsNullOrEmpty(Executable))
+                return false;
+            if (Type == Platform.Undefined)
+                return false;
+            return true;
         }
     }
 }

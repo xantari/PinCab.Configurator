@@ -119,6 +119,15 @@ namespace PinCab.Configurator
                 var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
                 _fullGameListCache = _manager.GetGamesForFrontEndAndDatabase(frontEnd, cmbDatabase.SelectedItem.ToString());
                 dataGridViewGameList.DataSource = _fullGameListCache.ToSortableBindingList();
+                if (frontEnd.System == FrontEndSystem.PinballX)
+                {
+                    var system = _manager.PinballXSystems.FirstOrDefault(p => p.DatabaseFiles.Any(c => c.Contains(cmbDatabase.SelectedItem.ToString())));
+                    if (system.Enabled)
+                        lblDatabaseStatus.Text = "Enabled";
+                    else
+                        lblDatabaseStatus.Text = "Disabled";
+                }
+                
             }
         }
 

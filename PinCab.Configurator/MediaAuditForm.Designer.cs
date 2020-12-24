@@ -45,11 +45,11 @@ namespace PinCab.Configurator
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediaIssuesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frontEndDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullPathToFileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MediaType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mediaIssuesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -150,6 +150,7 @@ namespace PinCab.Configurator
             // cmbFrontEnd
             // 
             this.cmbFrontEnd.DisplayMember = "Name";
+            this.cmbFrontEnd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFrontEnd.FormattingEnabled = true;
             this.cmbFrontEnd.Location = new System.Drawing.Point(63, 4);
             this.cmbFrontEnd.Name = "cmbFrontEnd";
@@ -210,10 +211,6 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // mediaIssuesBindingSource
-            // 
-            this.mediaIssuesBindingSource.DataSource = typeof(PinCab.Utils.Models.MediaAuditResult);
-            // 
             // frontEndDataGridViewTextBoxColumn
             // 
             this.frontEndDataGridViewTextBoxColumn.DataPropertyName = "FrontEnd";
@@ -245,6 +242,10 @@ namespace PinCab.Configurator
             this.MediaType.HeaderText = "Media Type";
             this.MediaType.Name = "MediaType";
             this.MediaType.ReadOnly = true;
+            // 
+            // mediaIssuesBindingSource
+            // 
+            this.mediaIssuesBindingSource.DataSource = typeof(PinCab.Utils.Models.MediaAuditResult);
             // 
             // MediaAuditForm
             // 

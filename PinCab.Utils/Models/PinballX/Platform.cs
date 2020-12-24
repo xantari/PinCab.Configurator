@@ -11,6 +11,7 @@ namespace PinCab.Utils.Models.PinballX
 	/// </summary>
 	public enum Platform
 	{
+		Undefined,
 		/// <summary>
 		/// Visual Pinball
 		/// </summary>
@@ -20,6 +21,9 @@ namespace PinCab.Utils.Models.PinballX
 		/// Future Pinball
 		/// </summary>
 		FP,
+		PinballFX2,
+		PinballFX3,
+		PinballArcade,
 
 		/// <summary>
 		/// Anything else

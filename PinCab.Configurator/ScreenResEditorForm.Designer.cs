@@ -194,6 +194,7 @@
             // 
             // cmbDisplay
             // 
+            this.cmbDisplay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDisplay.FormattingEnabled = true;
             this.cmbDisplay.Location = new System.Drawing.Point(112, 61);
             this.cmbDisplay.Name = "cmbDisplay";

@@ -108,11 +108,23 @@ namespace PinCab.Utils.Utils.PinballX
             {
                 if (data["VisualPinball"] != null)
                 {
-                    systems.Add(new PinballXSystem(_pinballXIni, "Visual Pinball", data["VisualPinball"]));
+                    systems.Add(new PinballXSystem(_pinballXIni, "Visual Pinball", data["VisualPinball"], Platform.VP));
                 }
                 if (data["FuturePinball"] != null)
                 {
-                    systems.Add(new PinballXSystem(_pinballXIni, "Future Pinball", data["FuturePinball"]));
+                    systems.Add(new PinballXSystem(_pinballXIni, "Future Pinball", data["FuturePinball"], Platform.FP));
+                }
+                if (data["PinballFX3"] != null)
+                {
+                    systems.Add(new PinballXSystem(_pinballXIni, "Pinball FX3", data["PinballFX3"], Platform.PinballFX3));
+                }
+                if (data["PinballFX2"] != null)
+                {
+                    systems.Add(new PinballXSystem(_pinballXIni, "Pinball FX2", data["PinballFX2"], Platform.PinballFX2));
+                }
+                if (data["PinballArcade"] != null)
+                {
+                    systems.Add(new PinballXSystem(_pinballXIni, "Pinball Arcade", data["PinballArcade"], Platform.PinballArcade));
                 }
 
                 for (var i = 0; i < 20; i++)
@@ -120,7 +132,9 @@ namespace PinCab.Utils.Utils.PinballX
                     var systemName = "System_" + i;
                     if (data[systemName] != null && data[systemName].Count > 0)
                     {
-                        systems.Add(new PinballXSystem(_pinballXIni, null, data[systemName]));
+                        var system = new PinballXSystem(_pinballXIni, null, data[systemName], null);
+                        if (system.IsValid())
+                            systems.Add(system);
                     }
                 }
             }
@@ -173,7 +187,7 @@ namespace PinCab.Utils.Utils.PinballX
                 menu.Games = system.Games[databaseFile];
                 MarshallXml(menu, databaseFile);
             }
-            else 
+            else
             {
                 Log.Information("Cannot find database file {0} to save in the database files collection for system: {1}.", databaseFile, system.Name);
             }

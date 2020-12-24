@@ -652,6 +652,7 @@
             // 
             // cmbSoundMode
             // 
+            this.cmbSoundMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSoundMode.FormattingEnabled = true;
             this.cmbSoundMode.Items.AddRange(new object[] {
             "0 = Builtin PinMAME Emulation",

@@ -89,6 +89,7 @@ namespace PinCab.Configurator
                 {
                     foreach (var system in _manager.PinballXSystems) //Get the short name of the database, not the full path
                         cmbDatabase.Items.AddRange(system.GetDatabaseFilesWithoutDatabasePath().ToArray());
+                    txtLog.Text = string.Join("\r\n", _manager.GetFrontEndWarnings(frontEnd));
                 }
                 else
                     MessageBox.Show("Front End Not implemented yet.");

@@ -44,6 +44,19 @@ namespace PinCab.Utils.Utils
             return list;
         }
 
+        public List<string> GetFrontEndWarnings(FrontEnd frontEnd)
+        {
+            var warnings = new List<string>();
+            if (frontEnd.System == FrontEndSystem.PinballX)
+            {
+                //Ensure that fuzzy file matching is turned off, if not tell the user to fix it.
+                var iniData = _pinballXManager.ParseIni(_settings.PinballXIniPath);
+                if (iniData["FileSystem"]["EnableFileMatching"].ToLower() == "true")
+                    warnings.Add("File matching is turned on. Launch PinballX Settings and turn off file matching or you may get unpredictable media showing in the front end. This program relies on this setting being turned off for it's media auditing function to work properly.");
+            }
+            return warnings;
+        }
+
         public List<PinballXSystem> PinballXSystems { get { return _pinballXSystems; } }
         public ProgramSettings Settings { get { return _settings; } }
 

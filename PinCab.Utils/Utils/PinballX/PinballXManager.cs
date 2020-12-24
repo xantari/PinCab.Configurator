@@ -102,7 +102,6 @@ namespace PinCab.Utils.Utils.PinballX
         public List<PinballXSystem> ParseSystems()
         {
             var systems = new List<PinballXSystem>();
-            // only notify after this block
 
             var data = ParseIni(_pinballXIni);
             if (data != null)

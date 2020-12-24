@@ -65,21 +65,26 @@ namespace PinCab.Configurator
         private void UpdateDisplayDetailsFromSettingsFile()
         {
             _settings = settingManager.LoadSettings();
-            if (_settings != null)
+            if (_settings == null)
             {
-                foreach (var display in _settings?.DisplaySettings)
+                string msg = "Settings file not found. Creating brand new file.";
+                Log.Information(msg);
+                txtData.Text += msg + "\r\n";
+                _settings = new ProgramSettings();
+                settingManager.SaveSettings(_settings);
+            }
+            foreach (var display in _settings?.DisplaySettings)
+            {
+                var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
+                if (loadedDisplaySettingToUpdate != null)
                 {
-                    var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
-                    if (loadedDisplaySettingToUpdate != null)
-                    {
-                        loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
-                        loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
-                    }
-                    else 
-                    {
-                        Log.Information("Display: {display} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.", display.DisplayName);
-                        txtData.Text += $"Display: {display.DisplayName} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.\r\n";
-                    }
+                    loadedDisplaySettingToUpdate.DisplayLabel = display.DisplayLabel;
+                    loadedDisplaySettingToUpdate.RegionRectangles = display.RegionRectangles;
+                }
+                else
+                {
+                    Log.Information("Display: {display} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.", display.DisplayName);
+                    txtData.Text += $"Display: {display.DisplayName} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.\r\n";
                 }
             }
         }
@@ -183,11 +188,7 @@ namespace PinCab.Configurator
             {
                 hideForm.Value?.Hide();
             }
-            if (listBoxDisplays.SelectedIndex == _currentlySelectedDisplayIndex) //if they marked the same one, keep the display hidden so they can toggle it on/off
-            {
-                _currentlySelectedDisplayIndex = -1;
-                return;
-            }
+
             _currentlySelectedDisplayIndex = listBoxDisplays.SelectedIndex;
             var form = ScreenBoundDisplayForms.FirstOrDefault(p => p.Key == display?.Display.DisplayName);
             form.Value?.Show();
@@ -698,7 +699,7 @@ namespace PinCab.Configurator
             {
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     helper.LogToolValidationResult(result.ToolName, result);
-                else 
+                else
                     helper.LogValidationResult(result.ToolName, result);
             }
         }
@@ -763,6 +764,15 @@ namespace PinCab.Configurator
             if (result == DialogResult.OK)
             {
                 _settings = settingManager.LoadSettings();
+            }
+        }
+
+        private void listBoxDisplays_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listBoxDisplays.SelectedIndex == _currentlySelectedDisplayIndex) //if they marked the same one, keep the display hidden so they can toggle it on/off
+            {
+                _currentlySelectedDisplayIndex = -1;
+                listBoxDisplays.SelectedIndex = -1;
             }
         }
     }

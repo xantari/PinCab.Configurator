@@ -74,6 +74,7 @@
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.b2SScreenresEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pinMameROMBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
@@ -102,7 +103,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
-            this.gameManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -133,6 +133,7 @@
             this.listBoxDisplays.Name = "listBoxDisplays";
             this.listBoxDisplays.Size = new System.Drawing.Size(652, 56);
             this.listBoxDisplays.TabIndex = 1;
+            this.listBoxDisplays.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBoxDisplays_MouseClick);
             this.listBoxDisplays.SelectedIndexChanged += new System.EventHandler(this.listBoxDisplays_SelectedIndexChanged);
             // 
             // label2
@@ -486,6 +487,13 @@
             this.pinMameROMBrowserToolStripMenuItem.Text = "PinMAME ROM Browser";
             this.pinMameROMBrowserToolStripMenuItem.Click += new System.EventHandler(this.pinMameROMBrowserToolStripMenuItem_Click);
             // 
+            // gameManagerToolStripMenuItem
+            // 
+            this.gameManagerToolStripMenuItem.Name = "gameManagerToolStripMenuItem";
+            this.gameManagerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gameManagerToolStripMenuItem.Text = "Game Manager";
+            this.gameManagerToolStripMenuItem.Click += new System.EventHandler(this.gameManagerToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -790,13 +798,6 @@
             this.panelRegionAndDisplayDetails.Name = "panelRegionAndDisplayDetails";
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
-            // 
-            // gameManagerToolStripMenuItem
-            // 
-            this.gameManagerToolStripMenuItem.Name = "gameManagerToolStripMenuItem";
-            this.gameManagerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.gameManagerToolStripMenuItem.Text = "Game Manager";
-            this.gameManagerToolStripMenuItem.Click += new System.EventHandler(this.gameManagerToolStripMenuItem_Click);
             // 
             // MainForm
             // 

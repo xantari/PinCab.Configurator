@@ -63,6 +63,116 @@ namespace PinCab.Utils.Utils
             return frontEndGames;
         }
 
+        public List<MediaAuditResult> GetMediaAuditResults(FrontEnd frontEnd)
+        {
+            var auditResults = new List<MediaAuditResult>();
+            if (frontEnd != null)
+            {
+                if (frontEnd.System == FrontEndSystem.PinballX)
+                {
+                    var games = new List<FrontEndGameViewModel>();
+                    foreach (var system in _pinballXSystems) 
+                    {
+                        foreach(var database in system.DatabaseFiles)
+                            games.AddRange(GetPinballXFrontEndGames(frontEnd, database));
+                    }
+                    //Now that we have all the games loaded and we have the statuses on all the media we can check into stranded media
+                    //by parsing all the media folders and getting every file inside of it, and matching it up with the games.MediaItems files
+                    //and if we have files that don't exist in the games.MediaItems list it is considered a stranded media item
+                    List<string> allGameMedia = new List<string>();
+                    foreach(var game in games)
+                        allGameMedia.AddRange(game.MediaItems.Select(c => c.MediaFullPath));
+
+                    var allMediaFiles = GetAllMediaItems(frontEnd);
+
+                    foreach(var media in allMediaFiles)
+                    {
+                        if (!allGameMedia.Contains(media.MediaFullPath))
+                            auditResults.Add(new MediaAuditResult() { FrontEnd = frontEnd, FullPathToFile = media.MediaFullPath, Status = MediaAuditStatus.UnusedMedia, MediaType = media.MediaType });
+                    }
+                }
+            }
+            return auditResults;
+        }
+
+        public List<MediaItem> GetAllMediaItems(FrontEnd frontEnd)
+        {
+            var mediaItems = new List<MediaItem>();
+
+            if (frontEnd.System == FrontEndSystem.PinballX)
+            {
+                foreach (var system in _pinballXSystems)
+                {
+                    var rootMediaPath = system.MediaPath.Replace(system.Name, string.Empty);
+                    string wheelPath = system.MediaPath + "\\Wheel Images";
+                    string flyerPath = rootMediaPath + "Flyer Images";
+                    string instructionCardpath = rootMediaPath + "Instruction Cards";
+                    string backglassImagePath = system.MediaPath + "\\Backglass Images";
+                    string backglassVideoPath = system.MediaPath + "\\Backglass Videos";
+                    string dmdImagePath = system.MediaPath + "\\DMD Images";
+                    string dmdVideoPath = system.MediaPath + "\\DMD Videos";
+                    string launchAudioPath = system.MediaPath + "\\Launch Audio";
+                    string realDmdColorImagePath = system.MediaPath + "\\Real DMD Color Images";
+                    string realDmdColorVideoPath = system.MediaPath + "\\Real DMD Color Videos";
+                    string realDmdImagePath = system.MediaPath + "\\Real DMD Images";
+                    string realDmdVideoPath = system.MediaPath + "\\Real DMD Videos";
+                    string tableAudioPath = system.MediaPath + "\\Table Audio";
+                    string tableImagePath = system.MediaPath + "\\Table Images";
+                    string tableVideoPath = system.MediaPath + "\\Table Videos";
+                    string tableImageDesktopPath = system.MediaPath + "\\Table Images Desktop";
+                    string tableVideoDesktopPath = system.MediaPath + "\\Table Videos Desktop";
+                    string topperImagePath = system.MediaPath + "\\Topper Images";
+                    string topperVideoPath = system.MediaPath + "\\Topper Videos";
+
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Wheel, wheelPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Flyer, flyerPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.InstructionCard, instructionCardpath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Backglass, backglassImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Backglass, backglassVideoPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.DMD, dmdImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.DMD, dmdVideoPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Launch, launchAudioPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.RealDmdColor, realDmdColorImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.RealDmdColor, realDmdColorVideoPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.RealDmd, realDmdImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.RealDmd, realDmdVideoPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Table, tableAudioPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Table, tableImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Table, tableVideoPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.TableDesktop, tableImageDesktopPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.TableDesktop, tableVideoDesktopPath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Topper, topperImagePath));
+                    mediaItems.AddRange(GetMediaItemsInDirectory(MediaCategory.Topper, topperVideoPath));
+                }
+            }
+
+            return mediaItems;
+        }
+
+        private List<MediaItem> GetMediaItemsInDirectory(MediaCategory category, string directory)
+        {
+            var mediaItems = new List<MediaItem>();
+            
+            if (Directory.Exists(directory))
+            {
+                var filesInDirectory = Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories);
+                foreach(var filePath in filesInDirectory)
+                {
+                    var mediaItem = new MediaItem() { Category = category, MediaFullPath = filePath };
+                    var mimeType = MimeTypes.MimeTypeMap.GetMimeType(filePath);
+                    if (mimeType.Contains("audio"))
+                        mediaItem.MediaType = MediaType.Audio;
+                    else if (mimeType.Contains("video"))
+                        mediaItem.MediaType = MediaType.Video;
+                    else if (mimeType.Contains("image"))
+                        mediaItem.MediaType = MediaType.Image;
+                    mediaItems.Add(mediaItem);
+                }
+            }
+
+            return mediaItems;
+        }
+
         private List<FrontEndGameViewModel> GetPinballXFrontEndGames(FrontEnd frontEnd, string databaseFile)
         {
             var frontEndGames = new List<FrontEndGameViewModel>();
@@ -204,54 +314,114 @@ namespace PinCab.Utils.Utils
             }
 
             if (wheelImages.Count() > 0)
+            {
                 model.HasWheelImage = true;
+                model.MediaItems.AddRange(wheelImages.Select(c => new MediaItem() { Category = MediaCategory.Wheel, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (flyers.Count() > 0)
+            {
                 model.HasFlyer = true;
+                model.MediaItems.AddRange(flyers.Select(c => new MediaItem() { Category = MediaCategory.Flyer, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (instructionCards.Count() > 0)
+            {
                 model.HasInstructionCard = true;
+                model.MediaItems.AddRange(instructionCards.Select(c => new MediaItem() { Category = MediaCategory.InstructionCard, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (backglassImages.Count() > 0)
+            {
                 model.BackglassStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(backglassImages.Select(c => new MediaItem() { Category = MediaCategory.Backglass, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (backglassVideos.Count() > 0)
+            {
                 model.BackglassStatus = model.BackglassStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(backglassVideos.Select(c => new MediaItem() { Category = MediaCategory.Backglass, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (dmdImages.Count() > 0)
+            {
                 model.DMDStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(dmdImages.Select(c => new MediaItem() { Category = MediaCategory.DMD, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (dmdVideos.Count() > 0)
+            {
                 model.DMDStatus = model.DMDStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(dmdVideos.Select(c => new MediaItem() { Category = MediaCategory.DMD, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (launchAudios.Count() > 0)
+            {
                 model.HasLaunchAudio = true;
+                model.MediaItems.AddRange(launchAudios.Select(c => new MediaItem() { Category = MediaCategory.Launch, MediaFullPath = c, MediaType = MediaType.Audio }));
+            }
             if (realDmdColorImages.Count() > 0)
+            {
                 model.RealDMDColorStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(realDmdColorImages.Select(c => new MediaItem() { Category = MediaCategory.RealDmdColor, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (realDmdColorVideos.Count() > 0)
+            {
                 model.RealDMDColorStatus = model.RealDMDColorStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(realDmdColorVideos.Select(c => new MediaItem() { Category = MediaCategory.RealDmdColor, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (realDmdImages.Count() > 0)
+            {
                 model.ReadDMDStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(realDmdImages.Select(c => new MediaItem() { Category = MediaCategory.RealDmd, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (realDmdVideos.Count() > 0)
+            {
                 model.ReadDMDStatus = model.ReadDMDStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(realDmdVideos.Select(c => new MediaItem() { Category = MediaCategory.RealDmd, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (launchAudios.Count() > 0)
+            {
                 model.HasTableAudio = true;
+                model.MediaItems.AddRange(launchAudios.Select(c => new MediaItem() { Category = MediaCategory.Launch, MediaFullPath = c, MediaType = MediaType.Audio }));
+            }
             if (tableImages.Count() > 0)
+            {
                 model.TableStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(tableImages.Select(c => new MediaItem() { Category = MediaCategory.Table, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (tableVideos.Count() > 0)
+            {
                 model.TableStatus = model.TableStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(tableVideos.Select(c => new MediaItem() { Category = MediaCategory.Table, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (tableDesktopImages.Count() > 0)
+            {
                 model.TableDesktopStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(tableDesktopImages.Select(c => new MediaItem() { Category = MediaCategory.TableDesktop, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (tableDesktopVideos.Count() > 0)
+            {
                 model.TableDesktopStatus = model.TableDesktopStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(tableDesktopVideos.Select(c => new MediaItem() { Category = MediaCategory.TableDesktop, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
             if (topperImages.Count() > 0)
+            {
                 model.TopperStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(topperImages.Select(c => new MediaItem() { Category = MediaCategory.Topper, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
             if (topperVideos.Count() > 0)
+            {
                 model.TopperStatus = model.TopperStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
+                model.MediaItems.AddRange(topperVideos.Select(c => new MediaItem() { Category = MediaCategory.Topper, MediaFullPath = c, MediaType = MediaType.Video }));
+            }
         }
 
         private List<string> GetMedia(string searchPath, string fileNameSearchText, bool searchSubDirectorys = false)
         {
             List<string> mediaFilesFound = new List<string>();
-            string[] files = null;
-            if (searchSubDirectorys)
-                files = Directory.GetFiles(searchPath, fileNameSearchText + "*", SearchOption.AllDirectories);
-            else
-                files = Directory.GetFiles(searchPath, fileNameSearchText + "*", SearchOption.TopDirectoryOnly);
-            mediaFilesFound.AddRange(files.Where(p => Path.GetFileNameWithoutExtension(p) == fileNameSearchText));
+            if (Directory.Exists(searchPath))
+            {
+                string[] files = null;
+                if (searchSubDirectorys)
+                    files = Directory.GetFiles(searchPath, fileNameSearchText + "*", SearchOption.AllDirectories);
+                else
+                    files = Directory.GetFiles(searchPath, fileNameSearchText + "*", SearchOption.TopDirectoryOnly);
+                mediaFilesFound.AddRange(files.Where(p => Path.GetFileNameWithoutExtension(p) == fileNameSearchText));
+            }
             return mediaFilesFound;
         }
     }

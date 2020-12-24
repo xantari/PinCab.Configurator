@@ -19,6 +19,7 @@ namespace PinCab.Utils.ViewModels
             TableDesktopStatus = MediaStatus.NotFound;
             TopperStatus = MediaStatus.NotFound;
             ManufacturerMediaStatus = MediaStatus.NotFound;
+            MediaItems = new List<MediaItem>();
         }
 
         public FrontEnd FrontEnd { get; set; }
@@ -53,7 +54,7 @@ namespace PinCab.Utils.ViewModels
         /// <summary>
         /// Linked VPin Game Database Id, for eventual game database for easy updates to tables
         /// </summary>
-        public int VPinGameDatabaseId { get; set; }
+        public int? VPinGameDatabaseId { get; set; }
 
         //Media Statuses of found media
         public MediaStatus BackglassStatus { get; set; }
@@ -69,5 +70,7 @@ namespace PinCab.Utils.ViewModels
         public bool HasInstructionCard { get; set; }
         public bool HasWheelImage { get; set; }
         public bool HasTableAudio { get; set; }
+
+        public List<MediaItem> MediaItems { get; set; }
     }
 }

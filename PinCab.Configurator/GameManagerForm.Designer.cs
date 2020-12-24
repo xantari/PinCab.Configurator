@@ -128,7 +128,6 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.AllowUserToAddRows = false;
             this.dataGridViewGameList.AllowUserToDeleteRows = false;
             this.dataGridViewGameList.AutoGenerateColumns = false;
-            this.dataGridViewGameList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridViewGameList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridViewGameList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fileNameDataGridViewTextBoxColumn,
@@ -175,13 +174,13 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
             this.dataGridViewGameList.TabIndex = 2;
+            this.dataGridViewGameList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewGameList_DataBindingComplete);
             // 
             // fileNameDataGridViewTextBoxColumn
             // 
             this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
             this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
             this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
-            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.fileNameDataGridViewTextBoxColumn.Width = 76;
             // 
             // descriptionDataGridViewTextBoxColumn
@@ -189,7 +188,6 @@ namespace PinCab.Configurator
             this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
             this.descriptionDataGridViewTextBoxColumn.Width = 85;
             // 
             // manufacturerDataGridViewTextBoxColumn
@@ -197,7 +195,6 @@ namespace PinCab.Configurator
             this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
             this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
             this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
-            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
             this.manufacturerDataGridViewTextBoxColumn.Width = 95;
             // 
             // yearDataGridViewTextBoxColumn
@@ -205,7 +202,6 @@ namespace PinCab.Configurator
             this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
             this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
             this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
-            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
             this.yearDataGridViewTextBoxColumn.Width = 54;
             // 
             // typeDataGridViewTextBoxColumn
@@ -213,7 +209,6 @@ namespace PinCab.Configurator
             this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
             this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
             this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
             this.typeDataGridViewTextBoxColumn.Width = 56;
             // 
             // enabledDataGridViewTextBoxColumn
@@ -221,7 +216,6 @@ namespace PinCab.Configurator
             this.enabledDataGridViewTextBoxColumn.DataPropertyName = "Enabled";
             this.enabledDataGridViewTextBoxColumn.HeaderText = "Enabled";
             this.enabledDataGridViewTextBoxColumn.Name = "enabledDataGridViewTextBoxColumn";
-            this.enabledDataGridViewTextBoxColumn.ReadOnly = true;
             this.enabledDataGridViewTextBoxColumn.Width = 71;
             // 
             // alternateExeDataGridViewTextBoxColumn
@@ -229,7 +223,6 @@ namespace PinCab.Configurator
             this.alternateExeDataGridViewTextBoxColumn.DataPropertyName = "AlternateExe";
             this.alternateExeDataGridViewTextBoxColumn.HeaderText = "AlternateExe";
             this.alternateExeDataGridViewTextBoxColumn.Name = "alternateExeDataGridViewTextBoxColumn";
-            this.alternateExeDataGridViewTextBoxColumn.ReadOnly = true;
             this.alternateExeDataGridViewTextBoxColumn.Width = 92;
             // 
             // hideDmdDataGridViewTextBoxColumn
@@ -237,7 +230,6 @@ namespace PinCab.Configurator
             this.hideDmdDataGridViewTextBoxColumn.DataPropertyName = "HideDmd";
             this.hideDmdDataGridViewTextBoxColumn.HeaderText = "HideDmd";
             this.hideDmdDataGridViewTextBoxColumn.Name = "hideDmdDataGridViewTextBoxColumn";
-            this.hideDmdDataGridViewTextBoxColumn.ReadOnly = true;
             this.hideDmdDataGridViewTextBoxColumn.Width = 76;
             // 
             // hideTopperDataGridViewTextBoxColumn
@@ -245,7 +237,6 @@ namespace PinCab.Configurator
             this.hideTopperDataGridViewTextBoxColumn.DataPropertyName = "HideTopper";
             this.hideTopperDataGridViewTextBoxColumn.HeaderText = "HideTopper";
             this.hideTopperDataGridViewTextBoxColumn.Name = "hideTopperDataGridViewTextBoxColumn";
-            this.hideTopperDataGridViewTextBoxColumn.ReadOnly = true;
             this.hideTopperDataGridViewTextBoxColumn.Width = 88;
             // 
             // hideBackglassDataGridViewTextBoxColumn
@@ -253,7 +244,6 @@ namespace PinCab.Configurator
             this.hideBackglassDataGridViewTextBoxColumn.DataPropertyName = "HideBackglass";
             this.hideBackglassDataGridViewTextBoxColumn.HeaderText = "HideBackglass";
             this.hideBackglassDataGridViewTextBoxColumn.Name = "hideBackglassDataGridViewTextBoxColumn";
-            this.hideBackglassDataGridViewTextBoxColumn.ReadOnly = true;
             this.hideBackglassDataGridViewTextBoxColumn.Width = 103;
             // 
             // ratingDataGridViewTextBoxColumn
@@ -261,7 +251,6 @@ namespace PinCab.Configurator
             this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
             this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
             this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
             this.ratingDataGridViewTextBoxColumn.Width = 63;
             // 
             // playersDataGridViewTextBoxColumn
@@ -269,7 +258,6 @@ namespace PinCab.Configurator
             this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
             this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
             this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
-            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
             this.playersDataGridViewTextBoxColumn.Width = 66;
             // 
             // commentDataGridViewTextBoxColumn
@@ -277,7 +265,6 @@ namespace PinCab.Configurator
             this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
             this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
             this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
             this.commentDataGridViewTextBoxColumn.Width = 76;
             // 
             // themeDataGridViewTextBoxColumn
@@ -285,7 +272,6 @@ namespace PinCab.Configurator
             this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
             this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
             this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
-            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
             this.themeDataGridViewTextBoxColumn.Width = 65;
             // 
             // authorDataGridViewTextBoxColumn
@@ -293,7 +279,6 @@ namespace PinCab.Configurator
             this.authorDataGridViewTextBoxColumn.DataPropertyName = "Author";
             this.authorDataGridViewTextBoxColumn.HeaderText = "Author";
             this.authorDataGridViewTextBoxColumn.Name = "authorDataGridViewTextBoxColumn";
-            this.authorDataGridViewTextBoxColumn.ReadOnly = true;
             this.authorDataGridViewTextBoxColumn.Width = 63;
             // 
             // versionDataGridViewTextBoxColumn
@@ -301,7 +286,6 @@ namespace PinCab.Configurator
             this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
             this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
             this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
-            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
             this.versionDataGridViewTextBoxColumn.Width = 67;
             // 
             // iPDBNumberDataGridViewTextBoxColumn
@@ -309,7 +293,6 @@ namespace PinCab.Configurator
             this.iPDBNumberDataGridViewTextBoxColumn.DataPropertyName = "IPDBNumber";
             this.iPDBNumberDataGridViewTextBoxColumn.HeaderText = "IPDB #";
             this.iPDBNumberDataGridViewTextBoxColumn.Name = "iPDBNumberDataGridViewTextBoxColumn";
-            this.iPDBNumberDataGridViewTextBoxColumn.ReadOnly = true;
             this.iPDBNumberDataGridViewTextBoxColumn.Width = 67;
             // 
             // dateAddedDataGridViewTextBoxColumn
@@ -317,7 +300,6 @@ namespace PinCab.Configurator
             this.dateAddedDataGridViewTextBoxColumn.DataPropertyName = "DateAdded";
             this.dateAddedDataGridViewTextBoxColumn.HeaderText = "Date Added";
             this.dateAddedDataGridViewTextBoxColumn.Name = "dateAddedDataGridViewTextBoxColumn";
-            this.dateAddedDataGridViewTextBoxColumn.ReadOnly = true;
             this.dateAddedDataGridViewTextBoxColumn.Width = 89;
             // 
             // dateModifiedDataGridViewTextBoxColumn
@@ -325,7 +307,6 @@ namespace PinCab.Configurator
             this.dateModifiedDataGridViewTextBoxColumn.DataPropertyName = "DateModified";
             this.dateModifiedDataGridViewTextBoxColumn.HeaderText = "Date Modified";
             this.dateModifiedDataGridViewTextBoxColumn.Name = "dateModifiedDataGridViewTextBoxColumn";
-            this.dateModifiedDataGridViewTextBoxColumn.ReadOnly = true;
             this.dateModifiedDataGridViewTextBoxColumn.Width = 98;
             // 
             // hasUpdatesAvailableDataGridViewCheckBoxColumn
@@ -333,7 +314,6 @@ namespace PinCab.Configurator
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn.DataPropertyName = "HasUpdatesAvailable";
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn.HeaderText = "HasUpdatesAvailable";
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Name = "hasUpdatesAvailableDataGridViewCheckBoxColumn";
-            this.hasUpdatesAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn.Width = 115;
             // 
             // romDataGridViewTextBoxColumn
@@ -341,7 +321,6 @@ namespace PinCab.Configurator
             this.romDataGridViewTextBoxColumn.DataPropertyName = "Rom";
             this.romDataGridViewTextBoxColumn.HeaderText = "Rom";
             this.romDataGridViewTextBoxColumn.Name = "romDataGridViewTextBoxColumn";
-            this.romDataGridViewTextBoxColumn.ReadOnly = true;
             this.romDataGridViewTextBoxColumn.Width = 54;
             // 
             // vPinGameDatabaseIdDataGridViewTextBoxColumn
@@ -349,7 +328,6 @@ namespace PinCab.Configurator
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn.DataPropertyName = "VPinGameDatabaseId";
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn.HeaderText = "VPinGameDatabaseId";
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Name = "vPinGameDatabaseIdDataGridViewTextBoxColumn";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.ReadOnly = true;
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Visible = false;
             this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Width = 137;
             // 
@@ -358,7 +336,6 @@ namespace PinCab.Configurator
             this.backglassStatusDataGridViewTextBoxColumn.DataPropertyName = "BackglassStatus";
             this.backglassStatusDataGridViewTextBoxColumn.HeaderText = "Backglass Media";
             this.backglassStatusDataGridViewTextBoxColumn.Name = "backglassStatusDataGridViewTextBoxColumn";
-            this.backglassStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.backglassStatusDataGridViewTextBoxColumn.Width = 113;
             // 
             // dMDStatusDataGridViewTextBoxColumn
@@ -366,7 +343,6 @@ namespace PinCab.Configurator
             this.dMDStatusDataGridViewTextBoxColumn.DataPropertyName = "DMDStatus";
             this.dMDStatusDataGridViewTextBoxColumn.HeaderText = "DMD Media";
             this.dMDStatusDataGridViewTextBoxColumn.Name = "dMDStatusDataGridViewTextBoxColumn";
-            this.dMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.dMDStatusDataGridViewTextBoxColumn.Width = 89;
             // 
             // realDMDColorStatusDataGridViewTextBoxColumn
@@ -374,7 +350,6 @@ namespace PinCab.Configurator
             this.realDMDColorStatusDataGridViewTextBoxColumn.DataPropertyName = "RealDMDColorStatus";
             this.realDMDColorStatusDataGridViewTextBoxColumn.HeaderText = "Read DMD Color Media";
             this.realDMDColorStatusDataGridViewTextBoxColumn.Name = "realDMDColorStatusDataGridViewTextBoxColumn";
-            this.realDMDColorStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.realDMDColorStatusDataGridViewTextBoxColumn.Width = 145;
             // 
             // readDMDStatusDataGridViewTextBoxColumn
@@ -382,7 +357,6 @@ namespace PinCab.Configurator
             this.readDMDStatusDataGridViewTextBoxColumn.DataPropertyName = "ReadDMDStatus";
             this.readDMDStatusDataGridViewTextBoxColumn.HeaderText = "Read DMD Media";
             this.readDMDStatusDataGridViewTextBoxColumn.Name = "readDMDStatusDataGridViewTextBoxColumn";
-            this.readDMDStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.readDMDStatusDataGridViewTextBoxColumn.Width = 118;
             // 
             // tableStatusDataGridViewTextBoxColumn
@@ -390,7 +364,6 @@ namespace PinCab.Configurator
             this.tableStatusDataGridViewTextBoxColumn.DataPropertyName = "TableStatus";
             this.tableStatusDataGridViewTextBoxColumn.HeaderText = "Table Media";
             this.tableStatusDataGridViewTextBoxColumn.Name = "tableStatusDataGridViewTextBoxColumn";
-            this.tableStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.tableStatusDataGridViewTextBoxColumn.Width = 91;
             // 
             // tableDesktopStatusDataGridViewTextBoxColumn
@@ -398,7 +371,6 @@ namespace PinCab.Configurator
             this.tableDesktopStatusDataGridViewTextBoxColumn.DataPropertyName = "TableDesktopStatus";
             this.tableDesktopStatusDataGridViewTextBoxColumn.HeaderText = "Table Desktop Media";
             this.tableDesktopStatusDataGridViewTextBoxColumn.Name = "tableDesktopStatusDataGridViewTextBoxColumn";
-            this.tableDesktopStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.tableDesktopStatusDataGridViewTextBoxColumn.Width = 134;
             // 
             // topperStatusDataGridViewTextBoxColumn
@@ -406,7 +378,6 @@ namespace PinCab.Configurator
             this.topperStatusDataGridViewTextBoxColumn.DataPropertyName = "TopperStatus";
             this.topperStatusDataGridViewTextBoxColumn.HeaderText = "Topper Media";
             this.topperStatusDataGridViewTextBoxColumn.Name = "topperStatusDataGridViewTextBoxColumn";
-            this.topperStatusDataGridViewTextBoxColumn.ReadOnly = true;
             this.topperStatusDataGridViewTextBoxColumn.Width = 98;
             // 
             // ManufacturerMediaStatus
@@ -414,7 +385,6 @@ namespace PinCab.Configurator
             this.ManufacturerMediaStatus.DataPropertyName = "ManufacturerMediaStatus";
             this.ManufacturerMediaStatus.HeaderText = "Manufacturer Media";
             this.ManufacturerMediaStatus.Name = "ManufacturerMediaStatus";
-            this.ManufacturerMediaStatus.ReadOnly = true;
             this.ManufacturerMediaStatus.Width = 127;
             // 
             // hasWheelImageDataGridViewCheckBoxColumn
@@ -422,7 +392,6 @@ namespace PinCab.Configurator
             this.hasWheelImageDataGridViewCheckBoxColumn.DataPropertyName = "HasWheelImage";
             this.hasWheelImageDataGridViewCheckBoxColumn.HeaderText = "Wheel Image";
             this.hasWheelImageDataGridViewCheckBoxColumn.Name = "hasWheelImageDataGridViewCheckBoxColumn";
-            this.hasWheelImageDataGridViewCheckBoxColumn.ReadOnly = true;
             this.hasWheelImageDataGridViewCheckBoxColumn.Width = 76;
             // 
             // HasInstructionCard
@@ -430,7 +399,6 @@ namespace PinCab.Configurator
             this.HasInstructionCard.DataPropertyName = "HasInstructionCard";
             this.HasInstructionCard.HeaderText = "Instruction Card";
             this.HasInstructionCard.Name = "HasInstructionCard";
-            this.HasInstructionCard.ReadOnly = true;
             this.HasInstructionCard.Width = 87;
             // 
             // HasFlyer
@@ -438,7 +406,6 @@ namespace PinCab.Configurator
             this.HasFlyer.DataPropertyName = "HasFlyer";
             this.HasFlyer.HeaderText = "Flyer";
             this.HasFlyer.Name = "HasFlyer";
-            this.HasFlyer.ReadOnly = true;
             this.HasFlyer.Width = 35;
             // 
             // HasLaunchAudio
@@ -446,7 +413,6 @@ namespace PinCab.Configurator
             this.HasLaunchAudio.DataPropertyName = "HasLaunchAudio";
             this.HasLaunchAudio.HeaderText = "Launch Audio";
             this.HasLaunchAudio.Name = "HasLaunchAudio";
-            this.HasLaunchAudio.ReadOnly = true;
             this.HasLaunchAudio.Width = 79;
             // 
             // HasTableAudio
@@ -454,7 +420,6 @@ namespace PinCab.Configurator
             this.HasTableAudio.DataPropertyName = "HasTableAudio";
             this.HasTableAudio.HeaderText = "Table Audio Media";
             this.HasTableAudio.Name = "HasTableAudio";
-            this.HasTableAudio.ReadOnly = true;
             this.HasTableAudio.Width = 102;
             // 
             // contextMenuStripGridActions

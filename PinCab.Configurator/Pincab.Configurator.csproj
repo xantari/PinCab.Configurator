@@ -142,6 +142,12 @@
     <Compile Include="AboutBoxForm.Designer.cs">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MediaAuditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MediaAuditForm.Designer.cs">
+      <DependentUpon>MediaAuditForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     <EmbeddedResource Include="AboutBoxForm.resx">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MediaAuditForm.resx">
+      <DependentUpon>MediaAuditForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameManagerForm.resx">
       <DependentUpon>GameManagerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +241,7 @@
     </Content>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\PinCab.ScreenUtil.Models.VpinMameRomSetting.datasource" />
+    <None Include="Properties\DataSources\PinCab.Utils.Models.MediaAuditResult.datasource" />
     <None Include="Properties\DataSources\PinCab.Utils.ViewModels.FrontEndGameViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

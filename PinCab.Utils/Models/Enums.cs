@@ -42,4 +42,36 @@ namespace PinCab.Utils.Models
         ByFileNameExactMatch,
         ByDescriptionExactMatch
     }
+
+    public enum MediaType
+    {
+        Unknown,
+        Image,
+        Audio,
+        Video
+    }
+
+    public enum MediaCategory
+    {
+        Unknown,
+        Wheel,
+        Flyer,
+        InstructionCard,
+        Backglass,
+        DMD,
+        Launch, //Launch image/video
+        RealDmdColor,
+        RealDmd,
+        Table,
+        TableDesktop,
+        Topper
+    }
+
+    public enum MediaAuditStatus
+    {
+        [Description("Missing Media")]
+        MissingMedia,
+        [Description("Unused Media")]
+        UnusedMedia
+    }
 }

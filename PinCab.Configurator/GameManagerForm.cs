@@ -69,6 +69,8 @@ namespace PinCab.Configurator
             foreach (DataGridViewColumn column in dataGridViewGameList.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                column.Resizable = DataGridViewTriState.True;
             }
         }
 
@@ -100,7 +102,8 @@ namespace PinCab.Configurator
 
         private void mediaAuditToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var mediaAuditForm = new MediaAuditForm();
+            var result = mediaAuditForm.ShowDialog();
         }
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
@@ -164,6 +167,11 @@ namespace PinCab.Configurator
                 if (!string.IsNullOrEmpty(selectedRow.IPDBNumber))
                     System.Diagnostics.Process.Start("https://www.ipdb.org/machine.cgi?id=" + selectedRow.IPDBNumber);
             }
+        }
+
+        private void dataGridViewGameList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridViewGameList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
     }
 }

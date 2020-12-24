@@ -13,6 +13,11 @@ namespace PinCab.Utils.Models
         public string Name { get;set;}
         public string SettingFilePath { get; set; }
         public FrontEndSystem System { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public enum FrontEndSystem

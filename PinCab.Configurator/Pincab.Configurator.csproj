@@ -167,6 +167,12 @@
     <Compile Include="PinMameRomBrowserForm.Designer.cs">
       <DependentUpon>PinMameRomBrowserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditGameForm.Designer.cs">
+      <DependentUpon>AddEditGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PinMameRomSettingEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PinMameRomBrowserForm.resx">
       <DependentUpon>PinMameRomBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditGameForm.resx">
+      <DependentUpon>AddEditGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PinMameRomSettingEditor.resx">
       <DependentUpon>PinMameRomSettingEditor.cs</DependentUpon>

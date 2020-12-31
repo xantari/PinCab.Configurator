@@ -237,8 +237,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Backup\readme.md" />
+    <None Include="Resources\FolderOpened_75x.png" />
+    <None Include="Resources\BrowserLink_75x.png" />
     <Content Include="ScreenresEditor.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

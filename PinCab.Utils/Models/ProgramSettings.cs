@@ -39,6 +39,13 @@ namespace PinCab.Utils.Models
         public string LastSelectedFrontEnd { get; set; }
         public string LastSelectedDatabaseFile { get; set; }
 
+        public int DatabaseUpdateRecheckMinutes { get; set; }
+        public string IPDBDatabaseUrl { get; set; }
+        public string VPForumsDatabaseUrl { get; set; }
+        public string VPinballDatabaseUrl { get; set; }
+        public string VPUniverseDatabaseUrl { get; set; }
+        public string VPSSpreadsheetUrl { get; set; }
+
         public bool PinupPopperExists()
         {
             if (string.IsNullOrWhiteSpace(PinupPopperSqlLiteDbPath))

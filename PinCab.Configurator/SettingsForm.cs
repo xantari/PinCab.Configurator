@@ -53,6 +53,12 @@ namespace PinCab.Configurator
                 txtFutureDMDFilePath.Text = settings.FutureDMDIniPath;
                 txtDMDDeviceIniFilePath.Text = settings.DMDDeviceIniPath;
                 txtPRocUserSettings.Text = settings.PRocUserSettingsPath;
+                numericRecheckMinutes.Value = settings.DatabaseUpdateRecheckMinutes;
+                txtIpdbUrl.Text = settings.IPDBDatabaseUrl;
+                txtVpForumsUrl.Text = settings.VPForumsDatabaseUrl;
+                txtVPinballUrl.Text = settings.VPinballDatabaseUrl;
+                txtVpUniverseUrl.Text = settings.VPUniverseDatabaseUrl;
+                txtVpsSpreadsheetUrl.Text = settings.VPSSpreadsheetUrl;
 
                 lblVPinMameFound.Text = vpinMame.KeyExists().ToString();
                 lblUltraDMDFound.Text = ultraDmd.KeyExists().ToString();
@@ -76,6 +82,12 @@ namespace PinCab.Configurator
             settings.FutureDMDIniPath = txtFutureDMDFilePath.Text;
             settings.DMDDeviceIniPath = txtDMDDeviceIniFilePath.Text;
             settings.PRocUserSettingsPath = txtPRocUserSettings.Text;
+            settings.DatabaseUpdateRecheckMinutes = Convert.ToInt32(numericRecheckMinutes.Value);
+            settings.IPDBDatabaseUrl = txtIpdbUrl.Text;
+            settings.VPForumsDatabaseUrl = txtVpForumsUrl.Text;
+            settings.VPinballDatabaseUrl = txtVPinballUrl.Text;
+            settings.VPUniverseDatabaseUrl = txtVpUniverseUrl.Text;
+            settings.VPSSpreadsheetUrl = txtVpsSpreadsheetUrl.Text;
 
             _settingManager.SaveSettings(settings);
             this.Close();
@@ -243,6 +255,31 @@ namespace PinCab.Configurator
         private void btnHelp_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Settings");
+        }
+
+        private void btnIpdbUrl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtIpdbUrl.Text);
+        }
+
+        private void btnVpForumsUrl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtVpForumsUrl.Text);
+        }
+
+        private void btnVpinballUrl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtVPinballUrl.Text);
+        }
+
+        private void btnVpUniverseUrl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtVpUniverseUrl.Text);
+        }
+
+        private void btnVpsSpreadsheetUrl_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(txtVpsSpreadsheetUrl.Text);
         }
     }
 }

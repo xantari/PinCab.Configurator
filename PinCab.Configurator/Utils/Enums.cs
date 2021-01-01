@@ -13,4 +13,9 @@ namespace PinCab.Configurator.Utils
         PinMameWriteRowDataToAllPreviousRunRoms,
         PinMameWriteCellDataToAllPreviousRunRoms
     }
+
+    public enum DatabaseManagerBackgroundProgressAction
+    {
+        DownloadDatabases
+    }
 }

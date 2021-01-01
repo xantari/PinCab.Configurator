@@ -44,7 +44,6 @@ namespace PinCab.Configurator
         private int _currentlySelectedDisplayIndex = -1;
         private ProgramSettingsManager settingManager = new ProgramSettingsManager();
 
-
         public MainForm()
         {
             InitializeComponent();
@@ -773,6 +772,16 @@ namespace PinCab.Configurator
             {
                 _currentlySelectedDisplayIndex = -1;
                 listBoxDisplays.SelectedIndex = -1;
+            }
+        }
+
+        private void databaseManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new DatabaseBrowserForm();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _settings = settingManager.LoadSettings();
             }
         }
     }

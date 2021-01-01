@@ -407,6 +407,8 @@ namespace PinCab.Configurator.Utils
             }
 
             _txtData.Text += sb.ToString();
+            _txtData.Select(_txtData.Text.Length, 0);
+            _txtData.ScrollToCaret();
         }
 
         public void LogToolValidationResult(string command, ValidationResult result)
@@ -428,6 +430,8 @@ namespace PinCab.Configurator.Utils
             }
 
             _txtData.Text += sb.ToString();
+            _txtData.Select(_txtData.Text.Length, 0);
+            _txtData.ScrollToCaret();
         }
     }
 }

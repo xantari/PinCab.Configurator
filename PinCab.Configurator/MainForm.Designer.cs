@@ -103,6 +103,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelDepictionAndLog = new System.Windows.Forms.Panel();
             this.panelRegionAndDisplayDetails = new System.Windows.Forms.Panel();
+            this.databaseManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionXOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRegionYOffset)).BeginInit();
@@ -468,7 +469,8 @@
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.b2SScreenresEditorToolStripMenuItem,
             this.pinMameROMBrowserToolStripMenuItem,
-            this.gameManagerToolStripMenuItem});
+            this.gameManagerToolStripMenuItem,
+            this.databaseManagerToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilitiesToolStripMenuItem.Text = "Utilities";
@@ -799,6 +801,13 @@
             this.panelRegionAndDisplayDetails.Size = new System.Drawing.Size(750, 190);
             this.panelRegionAndDisplayDetails.TabIndex = 32;
             // 
+            // databaseManagerToolStripMenuItem
+            // 
+            this.databaseManagerToolStripMenuItem.Name = "databaseManagerToolStripMenuItem";
+            this.databaseManagerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.databaseManagerToolStripMenuItem.Text = "Database Manager";
+            this.databaseManagerToolStripMenuItem.Click += new System.EventHandler(this.databaseManagerToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -908,6 +917,7 @@
         private System.Windows.Forms.ToolStripMenuItem pinMameROMBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pinballFX2FX3DisplayOnlyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gameManagerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem databaseManagerToolStripMenuItem;
     }
 }
 

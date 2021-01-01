@@ -45,6 +45,7 @@ namespace PinCab.Utils.Models
         public string VPinballDatabaseUrl { get; set; }
         public string VPUniverseDatabaseUrl { get; set; }
         public string VPSSpreadsheetUrl { get; set; }
+        public DateTime LastDatabaseRefreshTimeUtc { get; set; }
 
         public bool PinupPopperExists()
         {

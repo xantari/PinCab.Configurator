@@ -14,10 +14,24 @@ namespace PinCab.Utils.Models
             MessageType = ValidationMessageType.ValidationMessage;
         }
 
+        public ToolValidationResult(string toolName) : base()
+        {
+            ToolName = toolName;
+        }
+
+        public ToolValidationResult(string toolName, ValidationResult result) : base()
+        {
+            ToolName = toolName;
+            IsValid = result.IsValid;
+            Messages = result.Messages;
+            OutputValidationMessages = true;
+            MessageType = ValidationMessageType.ValidationMessage;
+        }
+
         public ToolValidationResult(ValidationResult result) : base()
         {
-            this.IsValid = result.IsValid;
-            this.Messages = result.Messages;
+            IsValid = result.IsValid;
+            Messages = result.Messages;
             OutputValidationMessages = true;
             MessageType = ValidationMessageType.ValidationMessage;
         }

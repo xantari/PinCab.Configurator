@@ -74,4 +74,40 @@ namespace PinCab.Utils.Models
         [Description("Unused Media")]
         UnusedMedia
     }
+
+    public enum DatabaseEntryType
+    {
+        [Description("Unknown")]
+        Unknown,
+        [Description("Wheel")]
+        Wheel,
+        [Description("Flyer")]
+        Flyer,
+        [Description("Instruction Card")]
+        InstructionCard,
+        [Description("Backglass")]
+        Backglass,
+        [Description("Other Front End Media")]
+        OtherFrontEndMedia,
+        [Description("Table")]
+        Table,
+        [Description("Topper")]
+        Topper,
+        [Description("ROM")]
+        ROM,
+        [Description("Pinsound / Alt Sound")]
+        Pinsound,
+        [Description("POV File")]
+        POV,
+        [Description("Pup Pack")]
+        PupPack
+    }
+
+    public enum DatabaseType
+    {
+        VPSSpreadsheet,
+        VPForums,
+        VPUniverse,
+        VPinball
+    }
 }

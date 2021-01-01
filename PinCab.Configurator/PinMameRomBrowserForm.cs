@@ -290,6 +290,8 @@ namespace PinCab.Configurator
             }
 
             txtLog.Text += sb.ToString();
+            txtLog.Select(txtLog.Text.Length, 0);
+            txtLog.ScrollToCaret();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

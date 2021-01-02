@@ -46,6 +46,8 @@ namespace PinCab.Utils.Utils
             _reportProgress = reportProgress;
         }
 
+        public ProgramSettings Settings { get { return _settings; } }
+
         public bool IsValid(DatabaseType type)
         {
             if (type == DatabaseType.VPForums)
@@ -268,7 +270,7 @@ namespace PinCab.Utils.Utils
                 entries.Add(entry);
             }
 
-            foreach(var item in VpforumDatabase.BackglassFiles)
+            foreach (var item in VpforumDatabase.BackglassFiles)
             {
                 var entry = GetBackglassEntry(item, DatabaseType.VPForums);
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));

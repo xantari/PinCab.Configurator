@@ -220,11 +220,8 @@ namespace PinCab.Configurator
         private void refreshDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //Fake the system out by rolling back to a point where it thinks my local database is stale.
-            _dbManager.Settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow.AddDays(-365); 
-            txtLog.Text = "Loading Databases...\r\n";
-            var action = new DatabaseManagerBackgroundAction();
-            action.Action = DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase;
-            backgroundWorkerProgressBar.RunWorkerAsync(action);
+            _dbManager.Settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow.AddDays(-365);
+            LoadDatabaseGrid();
         }
 
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

@@ -32,29 +32,43 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilieisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblTags = new System.Windows.Forms.Label();
+            this.dateTimePickerBegin = new System.Windows.Forms.DateTimePicker();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblRomSearch = new System.Windows.Forms.Label();
             this.txtRomSearch = new System.Windows.Forms.TextBox();
-            this.dataGridViewRomList = new System.Windows.Forms.DataGridView();
-            this.RomName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewEntryList = new System.Windows.Forms.DataGridView();
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedCellValueToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedRowDataToAllROMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runROMUsingNativeVPinMameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopRunningROMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.IpdbInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IpdbId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.cmbDatabase = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -67,6 +81,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.utilieisToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -89,6 +104,21 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // utilieisToolStripMenuItem
+            // 
+            this.utilieisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshDatabaseToolStripMenuItem});
+            this.utilieisToolStripMenuItem.Name = "utilieisToolStripMenuItem";
+            this.utilieisToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilieisToolStripMenuItem.Text = "Utilities";
+            // 
+            // refreshDatabaseToolStripMenuItem
+            // 
+            this.refreshDatabaseToolStripMenuItem.Name = "refreshDatabaseToolStripMenuItem";
+            this.refreshDatabaseToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.refreshDatabaseToolStripMenuItem.Text = "Refresh Database";
+            this.refreshDatabaseToolStripMenuItem.Click += new System.EventHandler(this.refreshDatabaseToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -98,6 +128,17 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.cmbDatabase);
+            this.panel1.Controls.Add(this.cmbType);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblTags);
+            this.panel1.Controls.Add(this.dateTimePickerBegin);
             this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.lblRomSearch);
             this.panel1.Controls.Add(this.txtRomSearch);
@@ -106,6 +147,66 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1049, 90);
             this.panel1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(438, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "End Date";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(496, 6);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(101, 20);
+            this.dateTimePicker1.TabIndex = 8;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(265, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Begin Date";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(52, 30);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(204, 21);
+            this.comboBox1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Tags:";
+            // 
+            // lblTags
+            // 
+            this.lblTags.AutoSize = true;
+            this.lblTags.Location = new System.Drawing.Point(262, 36);
+            this.lblTags.Name = "lblTags";
+            this.lblTags.Size = new System.Drawing.Size(71, 13);
+            this.lblTags.TabIndex = 4;
+            this.lblTags.Text = "Filtered Tags:";
+            // 
+            // dateTimePickerBegin
+            // 
+            this.dateTimePickerBegin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerBegin.Location = new System.Drawing.Point(331, 6);
+            this.dateTimePickerBegin.Name = "dateTimePickerBegin";
+            this.dateTimePickerBegin.Size = new System.Drawing.Size(101, 20);
+            this.dateTimePickerBegin.TabIndex = 3;
             // 
             // lblInfo
             // 
@@ -134,93 +235,51 @@
             this.txtRomSearch.TabIndex = 0;
             this.txtRomSearch.TextChanged += new System.EventHandler(this.txtRomSearch_TextChanged);
             // 
-            // dataGridViewRomList
+            // dataGridViewEntryList
             // 
-            this.dataGridViewRomList.AllowUserToAddRows = false;
-            this.dataGridViewRomList.AllowUserToDeleteRows = false;
-            this.dataGridViewRomList.AutoGenerateColumns = false;
-            this.dataGridViewRomList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridViewRomList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridViewRomList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.RomName,
-            this.titleDataGridViewTextBoxColumn});
-            this.dataGridViewRomList.ContextMenuStrip = this.contextMenuStripGridActions;
-            this.dataGridViewRomList.DataSource = this.vpinDatabaseSettingBindingSource;
-            this.dataGridViewRomList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewRomList.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewRomList.Name = "dataGridViewRomList";
-            this.dataGridViewRomList.ReadOnly = true;
-            this.dataGridViewRomList.Size = new System.Drawing.Size(1049, 324);
-            this.dataGridViewRomList.TabIndex = 2;
-            // 
-            // RomName
-            // 
-            this.RomName.DataPropertyName = "RomName";
-            this.RomName.HeaderText = "RomName";
-            this.RomName.Name = "RomName";
-            this.RomName.ReadOnly = true;
-            this.RomName.Width = 82;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.titleDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.titleDataGridViewTextBoxColumn.ThreeState = true;
-            this.titleDataGridViewTextBoxColumn.Width = 52;
+            this.dataGridViewEntryList.AllowUserToAddRows = false;
+            this.dataGridViewEntryList.AllowUserToDeleteRows = false;
+            this.dataGridViewEntryList.AutoGenerateColumns = false;
+            this.dataGridViewEntryList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewEntryList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewEntryList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.titleDataGridViewTextBoxColumn,
+            this.Url,
+            this.IpdbId,
+            this.Version,
+            this.LastUpdated,
+            this.TypeString,
+            this.DatabaseTypeString});
+            this.dataGridViewEntryList.ContextMenuStrip = this.contextMenuStripGridActions;
+            this.dataGridViewEntryList.DataSource = this.vpinDatabaseSettingBindingSource;
+            this.dataGridViewEntryList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewEntryList.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewEntryList.Name = "dataGridViewEntryList";
+            this.dataGridViewEntryList.ReadOnly = true;
+            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 324);
+            this.dataGridViewEntryList.TabIndex = 2;
+            this.dataGridViewEntryList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewEntryList_DataBindingComplete);
             // 
             // contextMenuStripGridActions
             // 
             this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.copySelectedCellValueToAllROMSToolStripMenuItem,
-            this.copySelectedRowDataToAllROMSToolStripMenuItem,
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem,
-            this.runROMUsingNativeVPinMameToolStripMenuItem,
-            this.stopRunningROMToolStripMenuItem});
+            this.IpdbInfoToolStripMenuItem,
+            this.goToUrlToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(325, 136);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(128, 48);
             this.contextMenuStripGridActions.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripGridActions_ItemClicked);
             // 
-            // editToolStripMenuItem
+            // IpdbInfoToolStripMenuItem
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.IpdbInfoToolStripMenuItem.Name = "IpdbInfoToolStripMenuItem";
+            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.IpdbInfoToolStripMenuItem.Text = "IPDB Info";
             // 
-            // copySelectedCellValueToAllROMSToolStripMenuItem
+            // goToUrlToolStripMenuItem
             // 
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Name = "copySelectedCellValueToAllROMSToolStripMenuItem";
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedCellValueToAllROMSToolStripMenuItem.Text = "Copy Selected Cell Value to All ROMS";
-            // 
-            // copySelectedRowDataToAllROMSToolStripMenuItem
-            // 
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Name = "copySelectedRowDataToAllROMSToolStripMenuItem";
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.copySelectedRowDataToAllROMSToolStripMenuItem.Text = "Copy Selected Row Data to All ROMS";
-            // 
-            // runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem
-            // 
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Name = "runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem";
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem.Text = "Run ROM using External DMD Device / DMDExt";
-            // 
-            // runROMUsingNativeVPinMameToolStripMenuItem
-            // 
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Name = "runROMUsingNativeVPinMameToolStripMenuItem";
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.runROMUsingNativeVPinMameToolStripMenuItem.Text = "Run ROM using Native VPinMame";
-            // 
-            // stopRunningROMToolStripMenuItem
-            // 
-            this.stopRunningROMToolStripMenuItem.Name = "stopRunningROMToolStripMenuItem";
-            this.stopRunningROMToolStripMenuItem.Size = new System.Drawing.Size(324, 22);
-            this.stopRunningROMToolStripMenuItem.Text = "Stop Running ROM";
-            this.stopRunningROMToolStripMenuItem.Visible = false;
+            this.goToUrlToolStripMenuItem.Name = "goToUrlToolStripMenuItem";
+            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.goToUrlToolStripMenuItem.Text = "Go to URL";
             // 
             // vpinDatabaseSettingBindingSource
             // 
@@ -253,7 +312,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewRomList);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewEntryList);
             // 
             // splitContainer1.Panel2
             // 
@@ -268,6 +327,97 @@
             this.backgroundWorkerProgressBar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProgressBar_DoWork);
             this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
             this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titleDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // Url
+            // 
+            this.Url.DataPropertyName = "Url";
+            this.Url.HeaderText = "Url";
+            this.Url.Name = "Url";
+            this.Url.ReadOnly = true;
+            this.Url.Width = 45;
+            // 
+            // IpdbId
+            // 
+            this.IpdbId.DataPropertyName = "IpdbId";
+            this.IpdbId.HeaderText = "Ipdb";
+            this.IpdbId.Name = "IpdbId";
+            this.IpdbId.ReadOnly = true;
+            this.IpdbId.Width = 53;
+            // 
+            // Version
+            // 
+            this.Version.DataPropertyName = "Version";
+            this.Version.HeaderText = "Version";
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            this.Version.Width = 67;
+            // 
+            // LastUpdated
+            // 
+            this.LastUpdated.DataPropertyName = "LastUpdated";
+            this.LastUpdated.HeaderText = "Updated";
+            this.LastUpdated.Name = "LastUpdated";
+            this.LastUpdated.ReadOnly = true;
+            this.LastUpdated.Width = 73;
+            // 
+            // TypeString
+            // 
+            this.TypeString.DataPropertyName = "TypeString";
+            this.TypeString.HeaderText = "Type";
+            this.TypeString.Name = "TypeString";
+            this.TypeString.ReadOnly = true;
+            this.TypeString.Width = 56;
+            // 
+            // DatabaseTypeString
+            // 
+            this.DatabaseTypeString.DataPropertyName = "DatabaseTypeString";
+            this.DatabaseTypeString.HeaderText = "DB";
+            this.DatabaseTypeString.Name = "DatabaseTypeString";
+            this.DatabaseTypeString.ReadOnly = true;
+            this.DatabaseTypeString.Width = 47;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(604, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Type:";
+            // 
+            // cmbType
+            // 
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(644, 6);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(227, 21);
+            this.cmbType.TabIndex = 11;
+            // 
+            // cmbDatabase
+            // 
+            this.cmbDatabase.FormattingEnabled = true;
+            this.cmbDatabase.Location = new System.Drawing.Point(644, 33);
+            this.cmbDatabase.Name = "cmbDatabase";
+            this.cmbDatabase.Size = new System.Drawing.Size(144, 21);
+            this.cmbDatabase.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(582, 36);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Database:";
             // 
             // DatabaseBrowserForm
             // 
@@ -285,7 +435,7 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRomList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -304,7 +454,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dataGridViewRomList;
+        private System.Windows.Forms.DataGridView dataGridViewEntryList;
         private System.Windows.Forms.BindingSource vpinDatabaseSettingBindingSource;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.TextBox txtLog;
@@ -313,15 +463,29 @@
         private System.Windows.Forms.TextBox txtRomSearch;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGridActions;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copySelectedCellValueToAllROMSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copySelectedRowDataToAllROMSToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RomName;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn titleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runROMUsingNativeVPinMameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopRunningROMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem IpdbInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem goToUrlToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTags;
+        private System.Windows.Forms.DateTimePicker dateTimePickerBegin;
+        private System.Windows.Forms.ToolStripMenuItem utilieisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshDatabaseToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Url;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IpdbId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Version;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeString;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTypeString;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbDatabase;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label label4;
     }
 }

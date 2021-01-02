@@ -105,9 +105,15 @@ namespace PinCab.Utils.Models
 
     public enum DatabaseType
     {
+        [Description("VPS Spreadsheet")]
         VPSSpreadsheet,
+        [Description("VP Forums")]
         VPForums,
+        [Description("VP Universe")]
         VPUniverse,
-        VPinball
+        [Description("VPinball")]
+        VPinball,
+        [Description("IPDB")]
+        IPDB
     }
 }

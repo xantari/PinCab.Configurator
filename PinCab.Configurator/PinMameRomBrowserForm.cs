@@ -239,8 +239,8 @@ namespace PinCab.Configurator
         private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 0;
-            var result = e.Result as ToolValidationResult;
-            if (result.OutputValidationMessages)
+            var result = e.Result as ToolResult;
+            if (result.OutputMessages)
             {
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     LogToolValidationResult(result.ToolName, result);
@@ -254,7 +254,7 @@ namespace PinCab.Configurator
             if (arg.Action == BackgroundProgressAction.PinMameWriteRowDataToAllPreviousRunRoms)
             {
                 var result = _util.SetPinMamePositionAllROMs(arg.Setting, true, backgroundWorkerProgressBar.ReportProgress);
-                var toolResult = new ToolValidationResult(result);
+                var toolResult = new ToolResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
                 toolResult.FunctionExecuted = arg.Action.ToString();
@@ -263,7 +263,7 @@ namespace PinCab.Configurator
             else if (arg.Action == BackgroundProgressAction.PinMameWriteCellDataToAllPreviousRunRoms)
             {
                 var result = _util.SetPinMamePositionAllROMs(arg.Setting, true, backgroundWorkerProgressBar.ReportProgress);
-                var toolResult = new ToolValidationResult(result);
+                var toolResult = new ToolResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
                 toolResult.FunctionExecuted = arg.Action.ToString();

@@ -56,7 +56,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnViewIpdb = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -65,13 +65,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.chkHideDmd = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnSelectFile = new System.Windows.Forms.Button();
+            this.btnFillFromIpdb = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
@@ -85,6 +84,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.lblGameDatabase = new System.Windows.Forms.Label();
             this.lnkToGameDatabaseId = new System.Windows.Forms.Button();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -314,14 +314,14 @@
             this.label11.TabIndex = 32;
             this.label11.Text = "Type";
             // 
-            // button1
+            // btnViewIpdb
             // 
-            this.button1.Location = new System.Drawing.Point(167, 212);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 23);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "View IPDB Site";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnViewIpdb.Location = new System.Drawing.Point(167, 212);
+            this.btnViewIpdb.Name = "btnViewIpdb";
+            this.btnViewIpdb.Size = new System.Drawing.Size(91, 23);
+            this.btnViewIpdb.TabIndex = 34;
+            this.btnViewIpdb.Text = "View IPDB Site";
+            this.btnViewIpdb.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -387,13 +387,6 @@
             this.textBox11.Size = new System.Drawing.Size(80, 20);
             this.textBox11.TabIndex = 42;
             // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(231, 321);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(80, 20);
-            this.textBox12.TabIndex = 43;
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -433,23 +426,23 @@
             this.checkBox3.Text = "Hide Topper During Game";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnSelectFile
             // 
-            this.button2.Location = new System.Drawing.Point(301, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 48;
-            this.button2.Text = "Select File";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSelectFile.Location = new System.Drawing.Point(301, 15);
+            this.btnSelectFile.Name = "btnSelectFile";
+            this.btnSelectFile.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectFile.TabIndex = 48;
+            this.btnSelectFile.Text = "Select File";
+            this.btnSelectFile.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnFillFromIpdb
             // 
-            this.button3.Location = new System.Drawing.Point(264, 212);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 23);
-            this.button3.TabIndex = 49;
-            this.button3.Text = "Fill From IPDB";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnFillFromIpdb.Location = new System.Drawing.Point(264, 212);
+            this.btnFillFromIpdb.Name = "btnFillFromIpdb";
+            this.btnFillFromIpdb.Size = new System.Drawing.Size(98, 23);
+            this.btnFillFromIpdb.TabIndex = 49;
+            this.btnFillFromIpdb.Text = "Fill From IPDB";
+            this.btnFillFromIpdb.UseVisualStyleBackColor = true;
             // 
             // checkBox4
             // 
@@ -578,6 +571,13 @@
             this.lnkToGameDatabaseId.Text = "Link to Game Database";
             this.lnkToGameDatabaseId.UseVisualStyleBackColor = true;
             // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(231, 321);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(80, 20);
+            this.textBox12.TabIndex = 43;
+            // 
             // AddEditGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -596,8 +596,8 @@
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnFillFromIpdb);
+            this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.chkHideDmd);
@@ -611,7 +611,7 @@
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnViewIpdb);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox6);
@@ -677,7 +677,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnViewIpdb;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox8;
@@ -686,13 +686,12 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox chkHideDmd;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSelectFile;
+        private System.Windows.Forms.Button btnFillFromIpdb;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox6;
@@ -706,5 +705,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lblGameDatabase;
         private System.Windows.Forms.Button lnkToGameDatabaseId;
+        private System.Windows.Forms.TextBox textBox12;
     }
 }

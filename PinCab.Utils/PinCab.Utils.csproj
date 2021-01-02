@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="ApplicationHelpers.cs" />
     <Compile Include="Consts\Settings.cs" />
+    <Compile Include="Extensions\DatabaseExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\RegistryKeyExtensions.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="Models\PinupPopper\Game.cs" />
     <Compile Include="Models\PinupPopper\Screen.cs" />
     <Compile Include="Models\RegionRectangleCoordinate.cs" />
-    <Compile Include="Models\ToolValidationResult.cs" />
+    <Compile Include="Models\ToolResult.cs" />
     <Compile Include="Models\VpinMameRomSetting.cs" />
     <Compile Include="Utils\ProcUtil.cs" />
     <Compile Include="Utils\PinballFxUtil.cs" />

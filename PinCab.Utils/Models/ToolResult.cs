@@ -6,40 +6,41 @@ using System.Threading.Tasks;
 
 namespace PinCab.Utils.Models
 {
-    public class ToolValidationResult : ValidationResult
+    public class ToolResult : ValidationResult
     {
-        public ToolValidationResult() : base()
+        public ToolResult() : base()
         {
-            OutputValidationMessages = true;
+            OutputMessages = true;
             MessageType = ValidationMessageType.ValidationMessage;
         }
 
-        public ToolValidationResult(string toolName) : base()
+        public ToolResult(string toolName) : base()
         {
             ToolName = toolName;
         }
 
-        public ToolValidationResult(string toolName, ValidationResult result) : base()
+        public ToolResult(string toolName, ValidationResult result) : base()
         {
             ToolName = toolName;
             IsValid = result.IsValid;
             Messages = result.Messages;
-            OutputValidationMessages = true;
+            OutputMessages = true;
             MessageType = ValidationMessageType.ValidationMessage;
         }
 
-        public ToolValidationResult(ValidationResult result) : base()
+        public ToolResult(ValidationResult result) : base()
         {
             IsValid = result.IsValid;
             Messages = result.Messages;
-            OutputValidationMessages = true;
+            OutputMessages = true;
             MessageType = ValidationMessageType.ValidationMessage;
         }
 
         public string ToolName { get; set; }
         public string FunctionExecuted { get; set; }
-        public bool OutputValidationMessages { get; set; }
-        public ValidationMessageType MessageType {get;set;}
+        public bool OutputMessages { get; set; }
+        public ValidationMessageType MessageType { get; set; }
+        public Object Result { get; set; }
     }
 
     public enum ValidationMessageType

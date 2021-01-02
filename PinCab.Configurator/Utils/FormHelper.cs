@@ -243,7 +243,7 @@ namespace PinCab.Configurator.Utils
             {
                 var util = new VpinMameUtil();
                 var result = util.ValidatePinMamePositionAllROMs(_displayDetails, true, _backgroundWorkerProgressBar.ReportProgress);
-                var toolResult = new ToolValidationResult(result);
+                var toolResult = new ToolResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.FunctionExecuted = arg.ToString();
                 e.Result = toolResult;
@@ -252,7 +252,7 @@ namespace PinCab.Configurator.Utils
             {
                 var util = new VpinMameUtil();
                 var result = util.SetPinMamePositionAllROMs(_displayDetails, true, _backgroundWorkerProgressBar.ReportProgress);
-                var toolResult = new ToolValidationResult(result);
+                var toolResult = new ToolResult(result);
                 toolResult.ToolName = VpinMameUtil.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
                 toolResult.FunctionExecuted = arg.ToString();

@@ -693,8 +693,8 @@ namespace PinCab.Configurator
         {
             progressBar.Value = 0;
             //lblProgressText.Text = string.Empty;
-            var result = e.Result as ToolValidationResult;
-            if (result.OutputValidationMessages)
+            var result = e.Result as ToolResult;
+            if (result.OutputMessages)
             {
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     helper.LogToolValidationResult(result.ToolName, result);

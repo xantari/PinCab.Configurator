@@ -36,22 +36,17 @@ namespace PinCab.Configurator
         {
             txtLog.Text += "Loading Databases...\r\n";
             var action = new DatabaseManagerBackgroundAction();
-            action.Action = DatabaseManagerBackgroundProgressAction.DownloadDatabases;
+            action.Action = DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase;
             backgroundWorkerProgressBar.RunWorkerAsync(action);
-            //if (!_util.KeyExists())
-            //{
-            //    txtLog.Text = "VPinMame Registry key not found. Have you installed VPinMame and registered it yet?";
-            //    return;
-            //}
-            //_roms = _util.GetAllRomDetails();
-            //vpinMameRomSettingBindingSource.DataSource = _roms.ToSortableBindingList();
         }
 
         private void ConfigureGrid()
         {
-            foreach (DataGridViewColumn column in dataGridViewRomList.Columns)
+            foreach (DataGridViewColumn column in dataGridViewEntryList.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                column.Resizable = DataGridViewTriState.True;
             }
         }
 
@@ -92,29 +87,29 @@ namespace PinCab.Configurator
             //    StopRunningRom();
         }
 
-        private void RefreshGrid()
-        {
-            LoadDatabaseGrid();
-            if (!string.IsNullOrEmpty(txtRomSearch.Text))
-                SearchByText();
-        }
+        //private void RefreshGrid()
+        //{
+        //    LoadDatabaseGrid();
+        //    if (!string.IsNullOrEmpty(txtRomSearch.Text))
+        //        SearchByText();
+        //}
 
         private int GetActiveRowIndex()
         {
             int rowIndex = -1;
             //If the row is selected get that row index
-            if (dataGridViewRomList.SelectedRows.Count > 0)
-                rowIndex = dataGridViewRomList.SelectedRows[0].Index;
+            if (dataGridViewEntryList.SelectedRows.Count > 0)
+                rowIndex = dataGridViewEntryList.SelectedRows[0].Index;
             //if the cell is selected, get the row index from that instead
-            if (dataGridViewRomList.SelectedCells.Count > 0 && rowIndex == -1)
-                rowIndex = dataGridViewRomList.SelectedCells[0].RowIndex;
+            if (dataGridViewEntryList.SelectedCells.Count > 0 && rowIndex == -1)
+                rowIndex = dataGridViewEntryList.SelectedCells[0].RowIndex;
             return rowIndex;
         }
 
-        private VpinMameRomSetting GetActiveRowRom()
+        private DatabaseBrowserEntry GetActiveRowRom()
         {
-            var data = dataGridViewRomList.DataSource as BindingSource;
-            return data.Current as VpinMameRomSetting;
+            var data = dataGridViewEntryList.DataSource as BindingSource;
+            return data.Current as DatabaseBrowserEntry;
         }
 
         private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -125,13 +120,28 @@ namespace PinCab.Configurator
         private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 0;
-            var result = e.Result as ToolValidationResult;
-            if (result.OutputValidationMessages)
+            var result = e.Result as ToolResult;
+            if (result.OutputMessages)
             {
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     LogToolValidationResult(result.ToolName, result);
             }
-            //RefreshGrid();
+            if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadDatabases.ToString())
+            {
+                //RefreshGrid();
+            }
+            else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.ProcessDatabase.ToString())
+            {
+                //RefreshGrid();
+            }
+            else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString())
+            {
+                if (result.Result != null)
+                {
+                    var entries = result.Result as List<DatabaseBrowserEntry>;
+                    dataGridViewEntryList.DataSource = entries.ToSortableBindingList();
+                }
+            }
         }
 
         private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
@@ -140,10 +150,41 @@ namespace PinCab.Configurator
             if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadDatabases)
             {
                 var result = _dbManager.RefreshAllDatabases();
-                var toolResult = new ToolValidationResult(result);
+                var toolResult = new ToolResult(result);
                 toolResult.ToolName = DatabaseManager.ToolName;
                 toolResult.MessageType = ValidationMessageType.ToolMessage;
                 toolResult.FunctionExecuted = arg.Action.ToString();
+                e.Result = toolResult;
+            }
+            if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
+            {
+                var result = _dbManager.GetAllEntries();
+                var toolResult = new ToolResult();
+                toolResult.ToolName = DatabaseManager.ToolName;
+                toolResult.MessageType = ValidationMessageType.ToolMessage;
+                toolResult.FunctionExecuted = arg.Action.ToString();
+                toolResult.Result = result;
+                e.Result = toolResult;
+            }
+            if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
+            {
+                var result = _dbManager.RefreshAllDatabases();
+                List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+                if (result.IsValid)
+                {
+                    _dbManager.LoadAllDatabases();
+                    entries = _dbManager.GetAllEntries();
+                }
+                var toolResult = new ToolResult(result);
+                toolResult.ToolName = DatabaseManager.ToolName;
+                toolResult.MessageType = ValidationMessageType.ToolMessage;
+                toolResult.FunctionExecuted = arg.Action.ToString();
+                toolResult.Result = entries;
+                toolResult.Messages.Add(new ValidationMessage()
+                {
+                    Level = MessageLevel.Information,
+                    Message = "Grid loaded."
+                });
                 e.Result = toolResult;
             }
         }
@@ -167,13 +208,23 @@ namespace PinCab.Configurator
             }
 
             txtLog.Text += sb.ToString();
-            txtLog.Select(txtLog.Text.Length,0);
+            txtLog.Select(txtLog.Text.Length, 0);
             txtLog.ScrollToCaret();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Database-Browser");
+        }
+
+        private void refreshDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Not implemented yet");
+        }
+
+        private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
     }
 }

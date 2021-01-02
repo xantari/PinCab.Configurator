@@ -96,6 +96,9 @@ namespace PinCab.Configurator
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.markMyVersionAsLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -469,57 +472,60 @@ namespace PinCab.Configurator
             this.addGameToolStripMenuItem,
             this.deleteGameToolStripMenuItem,
             this.launchGameToolStripMenuItem,
-            this.viewIPDBPageToolStripMenuItem});
+            this.viewIPDBPageToolStripMenuItem,
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem,
+            this.showGamesWithUpdatesToolStripMenuItem,
+            this.markMyVersionAsLatestToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(157, 180);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 268);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // findMediaToolStripMenuItem
             // 
             this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
-            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.findMediaToolStripMenuItem.Text = "Find Media";
             // 
             // recordMediaToolStripMenuItem
             // 
             this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
-            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.recordMediaToolStripMenuItem.Text = "Record Media";
             // 
             // previewMediaToolStripMenuItem
             // 
             this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
-            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.previewMediaToolStripMenuItem.Text = "Preview Media";
             // 
             // addGameToolStripMenuItem
             // 
             this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
-            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.addGameToolStripMenuItem.Text = "Add Game";
             // 
             // deleteGameToolStripMenuItem
             // 
             this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
-            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.deleteGameToolStripMenuItem.Text = "Delete Game";
             // 
             // launchGameToolStripMenuItem
             // 
             this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
-            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.launchGameToolStripMenuItem.Text = "Launch Game";
             // 
             // viewIPDBPageToolStripMenuItem
             // 
             this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
-            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
             this.viewIPDBPageToolStripMenuItem.Click += new System.EventHandler(this.viewIPDBPageToolStripMenuItem_Click);
             // 
@@ -688,7 +694,7 @@ namespace PinCab.Configurator
             // mediaAuditToolStripMenuItem
             // 
             this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mediaAuditToolStripMenuItem.Text = "Media Audit";
             this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
             // 
@@ -698,6 +704,24 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // findGamesFromIPDBNotInMyDatabaseToolStripMenuItem
+            // 
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Name = "findGamesFromIPDBNotInMyDatabaseToolStripMenuItem";
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Text = "Find Games From IPDB Not in My Database";
+            // 
+            // showGamesWithUpdatesToolStripMenuItem
+            // 
+            this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
+            this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
+            // 
+            // markMyVersionAsLatestToolStripMenuItem
+            // 
+            this.markMyVersionAsLatestToolStripMenuItem.Name = "markMyVersionAsLatestToolStripMenuItem";
+            this.markMyVersionAsLatestToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.markMyVersionAsLatestToolStripMenuItem.Text = "Mark My Version as Latest";
             // 
             // GameManagerForm
             // 
@@ -796,5 +820,8 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewCheckBoxColumn HasTableAudio;
         private System.Windows.Forms.Label lblDatabaseStatus;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem findGamesFromIPDBNotInMyDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showGamesWithUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem markMyVersionAsLatestToolStripMenuItem;
     }
 }

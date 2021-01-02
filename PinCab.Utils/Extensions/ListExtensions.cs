@@ -27,5 +27,11 @@ namespace PinCab.Utils.Extensions
                 list.Add(itm.Replace(stringToReplace, replacement));
             return list;
         }
+
+        public static List<string> NormalizeTagList(this IEnumerable<string> collection)
+        {
+            var temp = new List<string>();
+            return collection.Distinct().ToList();
+        }
     }
 }

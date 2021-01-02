@@ -16,6 +16,8 @@ namespace PinCab.Configurator.Utils
 
     public enum DatabaseManagerBackgroundProgressAction
     {
-        DownloadDatabases
+        DownloadDatabases,
+        ProcessDatabase,
+        DownloadAndLoadDatabase
     }
 }

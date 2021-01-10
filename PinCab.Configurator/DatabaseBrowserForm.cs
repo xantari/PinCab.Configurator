@@ -87,6 +87,15 @@ namespace PinCab.Configurator
                 column.Resizable = DataGridViewTriState.True;
             }
             dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+
+            foreach (DataGridViewColumn column in dataGridViewChildEntries.Columns)
+            {
+                if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                column.Resizable = DataGridViewTriState.True;
+            }
+            dataGridViewChildEntries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             //Speed tweak testing
             //dataGridViewEntryList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             //dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
@@ -156,7 +165,7 @@ namespace PinCab.Configurator
             int rowIndex = GetActiveRowIndex();
             if (rowIndex == -1)
             {
-                txtLog.Text = "Selected a row or cell first.";
+                txtLog.Text = "Select a row or cell first.";
                 return;
             }
             //if (e.ClickedItem == editToolStripMenuItem)
@@ -172,13 +181,6 @@ namespace PinCab.Configurator
             //else if (e.ClickedItem == stopRunningROMToolStripMenuItem)
             //    StopRunningRom();
         }
-
-        //private void RefreshGrid()
-        //{
-        //    LoadDatabaseGrid();
-        //    if (!string.IsNullOrEmpty(txtRomSearch.Text))
-        //        SearchByText();
-        //}
 
         private int GetActiveRowIndex()
         {
@@ -198,6 +200,12 @@ namespace PinCab.Configurator
             return data;
         }
 
+        private DatabaseBrowserEntry GetChildActiveRowEntry()
+        {
+            var data = bindingSourceChildEntries.Current as DatabaseBrowserEntry;
+            return data;
+        }
+
         private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             toolStripProgressBar.Value = e.ProgressPercentage;
@@ -212,14 +220,6 @@ namespace PinCab.Configurator
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     LogToolValidationResult(result.ToolName, result);
             }
-            //if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadDatabases.ToString())
-            //{
-            //    //RefreshGrid();
-            //}
-            //else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.ProcessDatabase.ToString())
-            //{
-
-            //}
             if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString())
             {
                 if (result.Result != null)
@@ -276,25 +276,6 @@ namespace PinCab.Configurator
         private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
         {
             var arg = (DatabaseManagerBackgroundAction)e.Argument;
-            //if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadDatabases)
-            //{
-            //    var result = _dbManager.RefreshAllDatabases();
-            //    var toolResult = new ToolResult(result);
-            //    toolResult.ToolName = DatabaseManager.ToolName;
-            //    toolResult.MessageType = ValidationMessageType.ToolMessage;
-            //    toolResult.FunctionExecuted = arg.Action.ToString();
-            //    e.Result = toolResult;
-            //}
-            //else if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
-            //{
-            //    var result = _dbManager.GetAllEntries();
-            //    var toolResult = new ToolResult();
-            //    toolResult.ToolName = DatabaseManager.ToolName;
-            //    toolResult.MessageType = ValidationMessageType.ToolMessage;
-            //    toolResult.FunctionExecuted = arg.Action.ToString();
-            //    toolResult.Result = result;
-            //    e.Result = toolResult;
-            //}
             if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
             {
                 e.Result = DownloadAndLoadDatabase();
@@ -500,6 +481,65 @@ namespace PinCab.Configurator
                 contextMenuStripGridActions.Items["IpdbInfoToolStripMenuItem"].Enabled = false;
             else
                 contextMenuStripGridActions.Items["IpdbInfoToolStripMenuItem"].Enabled = true;
+        }
+
+        private void dataGridViewChildEntries_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+        }
+
+        private void dataGridViewChildEntries_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
+        {
+            var row = GetChildActiveRowEntry();
+            if (!row.IpdbId.HasValue)
+                contextMenuStripChildEntries.Items["toolStripMenuItemChildIpdb"].Enabled = false;
+            else
+                contextMenuStripChildEntries.Items["toolStripMenuItemChildIpdb"].Enabled = true;
+        }
+
+        private void toolStripMenuItemChildIpdb_Click(object sender, EventArgs e)
+        {
+            var row = GetChildActiveRowEntry();
+            if (row != null)
+            {
+                if (row.IpdbId.HasValue)
+                {
+                    Process.Start($"https://www.ipdb.org/machine.cgi?id={row.IpdbId.Value}");
+                }
+            }
+        }
+
+        private void toolStripMenuItemChildUrl_Click(object sender, EventArgs e)
+        {
+            var row = GetChildActiveRowEntry();
+            if (row != null)
+            {
+                if (!string.IsNullOrEmpty(row.Url))
+                {
+                    Process.Start(row.Url);
+                }
+            }
+        }
+
+        private void dataGridViewChildEntries_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            var row = GetChildActiveRowEntry();
+            if (row != null)
+            {
+                if (!string.IsNullOrEmpty(row.Url))
+                {
+                    Process.Start(row.Url);
+                }
+            }
+        }
+
+        private void dataGridViewEntryList_SelectionChanged(object sender, EventArgs e)
+        {
+            var entry = GetActiveRowEntry();
+            //Now bind the child grid
+            bindingSourceChildEntries.DataSource = entry.RelatedEntries.ToSortableBindingList();
         }
     }
 }

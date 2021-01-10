@@ -41,6 +41,8 @@ namespace PinCab.Configurator
                     Application.Run(new GameManagerForm());
                 if (args.Contains("-rombrowser"))
                     Application.Run(new PinMameRomBrowserForm());
+                if (args.Contains("-databasebrowser"))
+                    Application.Run(new DatabaseBrowserForm());
             }
             else
                 Application.Run(new MainForm());

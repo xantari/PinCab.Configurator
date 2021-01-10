@@ -56,6 +56,8 @@ Wiki here: https://github.com/xantari/PinCab.Configurator/wiki (Or click on Wiki
 25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 26. Pinball Y settings read/write/validation 
 27. P-Roc DMD Settings display 
+28. Database Manager that fetches data from the continously updated databases here: ![Pinball Databases](https://github.com/xantari/VirtualPinball.Databases "Pinball Databases")
+29. Hooks into the continuously updated IPDB database here: ![IPDB Database](https://github.com/xantari/Ipdb.Database "IPDB Database")
 
 # Instructions
 
@@ -84,6 +86,9 @@ Logging information is in the Log.txt file in the application root folder.
 #### PinMAME ROM Setting Editor
 ![PinMAME ROM Setting Editor](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/PinMameRomEditorScreenshot.png "PinMAME ROM Setting Editor")
 
+#### Database Browser
+![Database Browser](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/DatabaseBrowserScreenshot.png "Database Browser")
+
 # TODO
 1. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
 2. Create help HTML pages and hookup to the program
@@ -93,11 +98,7 @@ for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.
 	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media  
 	c. Hook into PuPmedia.php on VPinball.com to fetch media as well  
 	d. Hook into PinballX's (GameEx) media library (if you have defined your GameEx credentials)  
-	e. Convert the Pinball Game spreadsheet into JSON format and check into Git so that it can be used as a easy way to load tables into the front end. Automatically popup embedded programs Chromium based browser to fetch the table or media.  
-	f. Maintain an install time of the table in a local database (extra fields in PinballY/PinballX XML, and already a field in PinUpPoppers Games table), so you can compare the last updated date/time stamp in the pinball game spreadsheet to see if updates to a table are available.  
-	g. Add a pinball games database URL pointer to fetch updates on program load. Default it to Github so we can get PR's on updates to the games database.  
-4. Get a more robust dump of the IPDB database in JSON format with as much data from IPDB as possible.
-
+	e. Maintain an install time of the table in a local database (extra fields in PinballY/PinballX XML, and already a field in PinUpPoppers Games table), so you can compare the last updated date/time stamp in the pinball game database to see if updates to a table are available.  
 
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!
@@ -106,6 +107,9 @@ Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [
 
 1. Unable to figure out how to read/write/validate Pinball FX2 / FX3 screen settings for Cabinet mode (need to ensure cabinet mode enabled first (must get code from Zen Studios)).
 Settings data appears to be encrypted. Unsure how to read/write to it.
+2. General optimizations / cleanup
+3. Documentation
+4. All PR's welcome!
 
 # Notes
 1. Compilation is done using Any CPU, with the Prefer 32-bit flag as it links itself to the 32-bit version of VPinMame for DMD preview

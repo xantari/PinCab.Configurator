@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,22 +67,43 @@
             this.goToUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerGridAndLog = new System.Windows.Forms.SplitContainer();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.splitContainerTopAndBottomGrids = new System.Windows.Forms.SplitContainer();
+            this.dataGridViewChildEntries = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceChildEntries = new System.Windows.Forms.BindingSource(this.components);
+            this.contextMenuStripChildEntries = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemChildIpdb = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemChildUrl = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerGridAndLog)).BeginInit();
+            this.splitContainerGridAndLog.Panel1.SuspendLayout();
+            this.splitContainerGridAndLog.Panel2.SuspendLayout();
+            this.splitContainerGridAndLog.SuspendLayout();
             this.statusStripBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTopAndBottomGrids)).BeginInit();
+            this.splitContainerTopAndBottomGrids.Panel1.SuspendLayout();
+            this.splitContainerTopAndBottomGrids.Panel2.SuspendLayout();
+            this.splitContainerTopAndBottomGrids.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).BeginInit();
+            this.contextMenuStripChildEntries.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -319,11 +341,12 @@
             this.dataGridViewEntryList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEntryList.Name = "dataGridViewEntryList";
             this.dataGridViewEntryList.ReadOnly = true;
-            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 288);
+            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 187);
             this.dataGridViewEntryList.TabIndex = 2;
             this.dataGridViewEntryList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEntryList_CellDoubleClick);
             this.dataGridViewEntryList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewEntryList_DataBindingComplete);
             this.dataGridViewEntryList.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewEntryList_RowContextMenuStripNeeded);
+            this.dataGridViewEntryList.SelectionChanged += new System.EventHandler(this.dataGridViewEntryList_SelectionChanged);
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -337,8 +360,8 @@
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle13;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -427,26 +450,26 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(1049, 133);
+            this.txtLog.Size = new System.Drawing.Size(1049, 87);
             this.txtLog.TabIndex = 4;
             // 
-            // splitContainer1
+            // splitContainerGridAndLog
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 108);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerGridAndLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerGridAndLog.Location = new System.Drawing.Point(0, 108);
+            this.splitContainerGridAndLog.Name = "splitContainerGridAndLog";
+            this.splitContainerGridAndLog.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerGridAndLog.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewEntryList);
+            this.splitContainerGridAndLog.Panel1.Controls.Add(this.splitContainerTopAndBottomGrids);
             // 
-            // splitContainer1.Panel2
+            // splitContainerGridAndLog.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtLog);
-            this.splitContainer1.Size = new System.Drawing.Size(1049, 425);
-            this.splitContainer1.SplitterDistance = 288;
-            this.splitContainer1.TabIndex = 5;
+            this.splitContainerGridAndLog.Panel2.Controls.Add(this.txtLog);
+            this.splitContainerGridAndLog.Size = new System.Drawing.Size(1049, 425);
+            this.splitContainerGridAndLog.SplitterDistance = 334;
+            this.splitContainerGridAndLog.TabIndex = 5;
             // 
             // backgroundWorkerProgressBar
             // 
@@ -485,12 +508,152 @@
             this.statusStripBottom.TabIndex = 6;
             this.statusStripBottom.Text = "statusStrip1";
             // 
+            // splitContainerTopAndBottomGrids
+            // 
+            this.splitContainerTopAndBottomGrids.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerTopAndBottomGrids.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerTopAndBottomGrids.Name = "splitContainerTopAndBottomGrids";
+            this.splitContainerTopAndBottomGrids.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerTopAndBottomGrids.Panel1
+            // 
+            this.splitContainerTopAndBottomGrids.Panel1.Controls.Add(this.dataGridViewEntryList);
+            // 
+            // splitContainerTopAndBottomGrids.Panel2
+            // 
+            this.splitContainerTopAndBottomGrids.Panel2.Controls.Add(this.dataGridViewChildEntries);
+            this.splitContainerTopAndBottomGrids.Size = new System.Drawing.Size(1049, 334);
+            this.splitContainerTopAndBottomGrids.SplitterDistance = 187;
+            this.splitContainerTopAndBottomGrids.TabIndex = 3;
+            // 
+            // dataGridViewChildEntries
+            // 
+            this.dataGridViewChildEntries.AllowUserToAddRows = false;
+            this.dataGridViewChildEntries.AllowUserToDeleteRows = false;
+            this.dataGridViewChildEntries.AutoGenerateColumns = false;
+            this.dataGridViewChildEntries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridViewChildEntries.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewChildEntries.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8});
+            this.dataGridViewChildEntries.ContextMenuStrip = this.contextMenuStripChildEntries;
+            this.dataGridViewChildEntries.DataSource = this.bindingSourceChildEntries;
+            this.dataGridViewChildEntries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewChildEntries.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewChildEntries.Name = "dataGridViewChildEntries";
+            this.dataGridViewChildEntries.ReadOnly = true;
+            this.dataGridViewChildEntries.Size = new System.Drawing.Size(1049, 143);
+            this.dataGridViewChildEntries.TabIndex = 3;
+            this.dataGridViewChildEntries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewChildEntries_CellDoubleClick);
+            this.dataGridViewChildEntries.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewChildEntries_DataBindingComplete);
+            this.dataGridViewChildEntries.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewChildEntries_RowContextMenuStripNeeded);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 52;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 37;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Url";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Url";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 45;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "IpdbId";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ipdb";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Version";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Version";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "LastUpdated";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Updated";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "TypeString";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Type";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 56;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "DatabaseTypeString";
+            this.dataGridViewTextBoxColumn8.HeaderText = "DB";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 47;
+            // 
+            // bindingSourceChildEntries
+            // 
+            this.bindingSourceChildEntries.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
+            // 
+            // contextMenuStripChildEntries
+            // 
+            this.contextMenuStripChildEntries.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemChildIpdb,
+            this.toolStripMenuItemChildUrl});
+            this.contextMenuStripChildEntries.Name = "contextMenuStripGridActions";
+            this.contextMenuStripChildEntries.Size = new System.Drawing.Size(128, 48);
+            // 
+            // toolStripMenuItemChildIpdb
+            // 
+            this.toolStripMenuItemChildIpdb.Name = "toolStripMenuItemChildIpdb";
+            this.toolStripMenuItemChildIpdb.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemChildIpdb.Text = "IPDB Info";
+            this.toolStripMenuItemChildIpdb.Click += new System.EventHandler(this.toolStripMenuItemChildIpdb_Click);
+            // 
+            // toolStripMenuItemChildUrl
+            // 
+            this.toolStripMenuItemChildUrl.Name = "toolStripMenuItemChildUrl";
+            this.toolStripMenuItemChildUrl.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemChildUrl.Text = "Go to URL";
+            this.toolStripMenuItemChildUrl.Click += new System.EventHandler(this.toolStripMenuItemChildUrl_Click);
+            // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 555);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainerGridAndLog);
             this.Controls.Add(this.panelFilterCriteria);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStripBottom);
@@ -504,13 +667,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainerGridAndLog.Panel1.ResumeLayout(false);
+            this.splitContainerGridAndLog.Panel2.ResumeLayout(false);
+            this.splitContainerGridAndLog.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerGridAndLog)).EndInit();
+            this.splitContainerGridAndLog.ResumeLayout(false);
             this.statusStripBottom.ResumeLayout(false);
             this.statusStripBottom.PerformLayout();
+            this.splitContainerTopAndBottomGrids.Panel1.ResumeLayout(false);
+            this.splitContainerTopAndBottomGrids.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerTopAndBottomGrids)).EndInit();
+            this.splitContainerTopAndBottomGrids.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).EndInit();
+            this.contextMenuStripChildEntries.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -525,7 +695,7 @@
         private System.Windows.Forms.DataGridView dataGridViewEntryList;
         private System.Windows.Forms.BindingSource vpinDatabaseSettingBindingSource;
         private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerGridAndLog;
         private System.Windows.Forms.Label lblRomSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblInfo;
@@ -560,5 +730,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeString;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTypeString;
+        private System.Windows.Forms.SplitContainer splitContainerTopAndBottomGrids;
+        private System.Windows.Forms.DataGridView dataGridViewChildEntries;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.BindingSource bindingSourceChildEntries;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripChildEntries;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildIpdb;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildUrl;
     }
 }

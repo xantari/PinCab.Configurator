@@ -14,6 +14,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VIrtualPinball.Database.Models;
+using VIrtualPinball.Database.Models.VPinball;
+using VIrtualPinball.Database.Models.VPUniverse;
 
 namespace PinCab.Utils.Utils
 {
@@ -318,6 +320,7 @@ namespace PinCab.Utils.Utils
                         Log.Warning("{tool}: VPinball database not loaded. Did you load the databse first?", ToolName);
                         return entries;
                     }
+                    entries.AddRange(GetVpinballEntries());
                 }
                 else if (type == DatabaseType.VPSSpreadsheet)
                 {
@@ -326,6 +329,7 @@ namespace PinCab.Utils.Utils
                         Log.Warning("{tool}: VPSSpreadsheet database not loaded. Did you load the databse first?", ToolName);
                         return entries;
                     }
+                    entries.AddRange(GetVpsSpreadsheetEntries());
                 }
                 else if (type == DatabaseType.VPUniverse)
                 {
@@ -334,6 +338,7 @@ namespace PinCab.Utils.Utils
                         Log.Warning("{tool}: VPUniverse database not loaded. Did you load the databse first?", ToolName);
                         return entries;
                     }
+                    entries.AddRange(GetVpuniverseEntries());
                 }
 
                 return entries;
@@ -355,6 +360,34 @@ namespace PinCab.Utils.Utils
             return null;
         }
 
+        private List<DatabaseBrowserEntry> GetVpsSpreadsheetEntries()
+        {
+            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            foreach (var table in VpsDatabase.VpGames)
+            {
+                var entry = GetVpGameEntry(table, DatabaseType.VPSSpreadsheet);
+                entries.Add(entry);
+            }
+
+            foreach (var table in VpsDatabase.PinballFx3Games)
+            {
+                var entry = GetPinballFx3Entry(table, DatabaseType.VPSSpreadsheet);
+                entries.Add(entry);
+            }
+
+            foreach (var table in VpsDatabase.FuturePinballGames)
+            {
+                var entry = GetFuturePinballEntry(table, DatabaseType.VPSSpreadsheet);
+                entries.Add(entry);
+            }
+
+        
+            //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
+            //area of the database
+
+            return entries;
+        }
+
         private List<DatabaseBrowserEntry> GetVpForumsEntries()
         {
             List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
@@ -367,7 +400,7 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.BackglassFiles)
             {
                 var entry = GetBackglassEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.GetUri()?.PathAndQuery.ToLower() == entry.GetUri()?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
                 {
                     entry.RelatedEntries.Add(relatedGame);
@@ -382,7 +415,7 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.MediaPackFiles)
             {
                 var entry = GetMediaPackEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.GetUri()?.PathAndQuery.ToLower() == entry.GetUri()?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
                 {
                     entry.RelatedEntries.Add(relatedGame);
@@ -396,7 +429,7 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.RomFiles)
             {
                 var entry = GetRomEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.GetUri()?.PathAndQuery.ToLower() == entry.GetUri()?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
                 {
                     entry.RelatedEntries.Add(relatedGame);
@@ -410,7 +443,7 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.TopperFiles)
             {
                 var entry = GetTopperEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.GetUri()?.PathAndQuery.ToLower() == entry.GetUri()?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
                 {
                     entry.RelatedEntries.Add(relatedGame);
@@ -424,7 +457,7 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.WheelArtFiles)
             {
                 var entry = GetWheelEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.GetUri()?.PathAndQuery.ToLower() == entry.GetUri()?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
                 {
                     entry.RelatedEntries.Add(relatedGame);
@@ -432,6 +465,36 @@ namespace PinCab.Utils.Utils
                     entry.Tags.AddRange(GetIpdbTags(relatedGame));
                     entry.Tags = entry.Tags.NormalizeTagList();
                 }
+                entries.Add(entry);
+            }
+
+            //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
+            //area of the database
+
+            return entries;
+        }
+
+        private List<DatabaseBrowserEntry> GetVpinballEntries()
+        {
+            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            foreach (var file in VpinballDatabase.Files)
+            {
+                var entry = GetVpinballFile(file);
+                entries.Add(entry);
+            }
+
+            //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
+            //area of the database
+
+            return entries;
+        }
+
+        private List<DatabaseBrowserEntry> GetVpuniverseEntries()
+        {
+            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            foreach (var file in VpUniverseDatabase.Files)
+            {
+                var entry = GetVpuniverseFile(file);
                 entries.Add(entry);
             }
 
@@ -608,6 +671,179 @@ namespace PinCab.Utils.Utils
             return tags;
         }
 
+        private DatabaseBrowserEntry GetVpuniverseFile(VPUniverseFile file)
+        {
+            var entry = new DatabaseBrowserEntry()
+            {
+                Authors = file.Authors,
+                ChangeLog = file.ChangeLog,
+                DatabaseType = DatabaseType.VPUniverse,
+                Description = file.Description,
+                IpdbId = file.IpdbNumber,
+                Title = file.Title,
+                Type = DatabaseEntryType.Table,
+                Url = file.Url,
+                Version = file.Version
+            };
+            foreach (var tag in file.Tags)
+            {
+                if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
+                    && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
+                )
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        entry.Tags.Add(t);
+                }
+            }
+            if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
+                entry.LastUpdated = file.CreateDate.Value;
+            if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
+                entry.LastUpdated = file.LastUpdatedDate.Value;
+            if (!string.IsNullOrEmpty(file.ChangeLog))
+                entry.Description += "\r\n\r\n" + file.ChangeLog;
+
+            List<string> TagsByIpdbNumber = GetIpdbTags(entry);
+            entry.Tags.AddRange(TagsByIpdbNumber);
+            entry.Tags = entry.Tags.NormalizeTagList();
+            return entry;
+        }
+
+        private DatabaseBrowserEntry GetVpinballFile(VPinballFile file)
+        {
+            var entry = new DatabaseBrowserEntry()
+            {
+                Authors = file.Authors,
+                ChangeLog = file.ChangeLog,
+                DatabaseType = DatabaseType.VPinball,
+                Description = file.Description,
+                IpdbId = file.IpdbNumber,
+                Title = file.Title,
+                Type = DatabaseEntryType.Table,
+                Url = file.Url,
+                Version = file.Version,
+            };
+            foreach (var tag in file.Tags)
+            {
+                if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
+                    && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
+                )
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        entry.Tags.Add(t);
+                }
+            }
+            foreach (var tag in file.Categories)
+            {
+                if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
+                    && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
+                )
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        entry.Tags.Add(t);
+                }
+            }
+            if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
+                entry.LastUpdated = file.CreateDate.Value;
+            if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
+                entry.LastUpdated = file.LastUpdatedDate.Value;
+            if (!string.IsNullOrEmpty(file.ChangeLog))
+                entry.Description += "\r\n\r\n" + file.ChangeLog;
+
+            List<string> TagsByIpdbNumber = GetIpdbTags(entry);
+            entry.Tags.AddRange(TagsByIpdbNumber);
+            entry.Tags = entry.Tags.NormalizeTagList();
+            return entry;
+        }
+
+        private DatabaseBrowserEntry GetFuturePinballEntry(FuturePinballGame file, DatabaseType dbType)
+        {
+            var entry = new DatabaseBrowserEntry()
+            {
+                Authors = file.Authors,
+                DatabaseType = dbType,
+                Title = file.TableName,
+                Type = DatabaseEntryType.Table,
+                Url = file.Url,
+                IpdbId = file.TableInfo?.IpdbNumber,
+                Version = file.Version,
+            };
+            entry.Tags.AddRange(file.TableInfo.ConvertTableInfoToTags());
+            entry.Tags.Add("Future Pinball");
+            if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
+                entry.LastUpdated = file.Date.Value;
+            if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
+                entry.LastUpdated = file.CreateDate.Value;
+            if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
+                entry.LastUpdated = file.LastUpdatedDate.Value;
+
+            List<string> TagsByIpdbNumber = GetIpdbTags(entry);
+            entry.Tags.AddRange(TagsByIpdbNumber);
+            entry.Tags = entry.Tags.NormalizeTagList();
+
+            return entry;
+        }
+
+        private DatabaseBrowserEntry GetPinballFx3Entry(PinballFx3Game file, DatabaseType dbType)
+        {
+            var entry = new DatabaseBrowserEntry()
+            {
+                DatabaseType = dbType,
+                Title = file.TableName,
+                Type = DatabaseEntryType.Table,
+                Url = file.GameFileName,
+                Version = file.Year.ToString()
+            };
+            entry.Tags.Add(file.Category);
+            entry.Tags.Add("Pinball FX3");
+            if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
+                entry.LastUpdated = file.CreateDate.Value;
+            if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
+                entry.LastUpdated = file.LastUpdatedDate.Value;
+
+            List<string> TagsByIpdbNumber = GetIpdbTags(entry);
+            entry.Tags.AddRange(TagsByIpdbNumber);
+            entry.Tags = entry.Tags.NormalizeTagList();
+
+            //Get related media
+            if (file.BackglassFiles != null)
+            {
+                foreach (var backglass in file.BackglassFiles)
+                {
+                    var relatedEntry = GetBackglassEntry(backglass, dbType);
+                    relatedEntry.IpdbId = entry.IpdbId;
+                    relatedEntry.Tags.AddRange(TagsByIpdbNumber);
+                    entry.RelatedEntries.Add(relatedEntry);
+                }
+            }
+
+            if (file.PupPackFiles != null)
+            {
+                foreach (var pupPackFile in file.PupPackFiles)
+                {
+                    var relatedEntry = GetPupPackEntry(pupPackFile, dbType);
+                    relatedEntry.IpdbId = entry.IpdbId;
+                    relatedEntry.Tags.AddRange(TagsByIpdbNumber);
+                    entry.RelatedEntries.Add(relatedEntry);
+                }
+            }
+
+            if (file.WheelArtFiles != null)
+            {
+                foreach (var wheelFile in file.WheelArtFiles)
+                {
+                    var relatedEntry = GetWheelEntry(wheelFile, dbType);
+                    relatedEntry.IpdbId = entry.IpdbId;
+                    relatedEntry.Tags.AddRange(TagsByIpdbNumber);
+                    entry.RelatedEntries.Add(relatedEntry);
+                }
+            }
+
+            return entry;
+        }
+
         private DatabaseBrowserEntry GetVpGameEntry(VpGame file, DatabaseType dbType)
         {
             var entry = new DatabaseBrowserEntry()
@@ -623,17 +859,21 @@ namespace PinCab.Utils.Utils
                 Version = file.Version
             };
             entry.Tags.AddRange(file.TableInfo.ConvertTableInfoToTags());
-            foreach (var tag in file.Tags)
+            if (file.Tags != null)
             {
-                if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
-                    && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
-                )
+                foreach (var tag in file.Tags)
                 {
-                    var t = NormalizeTag(tag);
-                    if (!string.IsNullOrEmpty(t))
-                        entry.Tags.Add(t);
+                    if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
+                        && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
+                    )
+                    {
+                        var t = NormalizeTag(tag);
+                        if (!string.IsNullOrEmpty(t))
+                            entry.Tags.Add(t);
+                    }
                 }
             }
+
             if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                 entry.LastUpdated = file.Date.Value;
             if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date

@@ -126,9 +126,9 @@ namespace PinCab.Configurator
                 DatabaseEntryType type = cmbType.SelectedValue.ToString().GetValueFromDescription<DatabaseEntryType>();
                 list = list.Where(p => p.Type == type);
             }
-            if (cmbDatabase.SelectedValue != null && cmbDatabase.SelectedValue.ToString() != "All")
+            if (cmbDatabase.SelectedItem != null && cmbDatabase.SelectedItem.ToString() != "All")
             {
-                DatabaseType type = cmbDatabase.SelectedValue.ToString().GetValueFromDescription<DatabaseType>();
+                DatabaseType type = cmbDatabase.SelectedItem.ToString().GetValueFromDescription<DatabaseType>();
                 list = list.Where(p => p.DatabaseType == type);
             }
             var tags = GetAllSelectedTags();
@@ -226,7 +226,7 @@ namespace PinCab.Configurator
                 {
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
-                    var entries = result.Result as List<DatabaseBrowserEntry>;
+                    var entries = GetEntriesByFilterCriteria();
                     vpinDatabaseSettingBindingSource.DataSource = entries.ToSortableBindingList();
                     stopWatch.Stop();
                     TimeSpan ts = stopWatch.Elapsed;

@@ -25,21 +25,6 @@ namespace PinCab.Utils.Models
         public string Version { get; set; }
         public DateTime LastUpdated { get; set; }
 
-        [JsonIgnore]
-        public Uri Uri
-        {
-            get
-            {
-                Uri uriResult;
-                bool result = Uri.TryCreate(Url, UriKind.Absolute, out uriResult)
-                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-                if (result)
-                    return uriResult;
-                else
-                    return null;
-            }
-        }
-
         public string TypeString
         {
             get
@@ -66,5 +51,16 @@ namespace PinCab.Utils.Models
         }
 
         public List<DatabaseBrowserEntry> RelatedEntries { get; set; }
+
+        public Uri GetUri()
+        {
+            Uri uriResult;
+            bool result = Uri.TryCreate(Url, UriKind.Absolute, out uriResult)
+                && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+            if (result)
+                return uriResult;
+            else
+                return null;
+        }
     }
 }

@@ -56,8 +56,8 @@ Wiki here: https://github.com/xantari/PinCab.Configurator/wiki (Or click on Wiki
 25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 26. Pinball Y settings read/write/validation 
 27. P-Roc DMD Settings display 
-28. Database Manager that fetches data from the continously updated databases here: ![Pinball Databases](https://github.com/xantari/VirtualPinball.Databases "Pinball Databases")
-29. Hooks into the continuously updated IPDB database here: ![IPDB Database](https://github.com/xantari/Ipdb.Database "IPDB Database")
+28. Database Manager that fetches data from the continously updated databases here: [Pinball Databases](https://github.com/xantari/VirtualPinball.Databases "Pinball Databases")
+29. Hooks into the continuously updated IPDB database here: [IPDB Database](https://github.com/xantari/Ipdb.Database "IPDB Database")
 
 # Instructions
 

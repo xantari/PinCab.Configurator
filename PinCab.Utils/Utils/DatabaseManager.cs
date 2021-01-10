@@ -138,7 +138,7 @@ namespace PinCab.Utils.Utils
                 result.Result = true;
                 _settingManager.SaveSettings(_settings);
             }
-            else 
+            else
             {
                 result.Result = false; //We didn't re-download anything
             }
@@ -245,7 +245,7 @@ namespace PinCab.Utils.Utils
                 //Write the preprocessed database so next load is faster
                 SaveDatabaseCache(entries, preprocessedDatabasePath);
             }
-            else 
+            else
             {
                 _reportProgress?.Invoke(10);
                 entries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
@@ -253,7 +253,7 @@ namespace PinCab.Utils.Utils
                 Log.Information("{toolname}: Loaded preprocessed database.", ToolName, preprocessedDatabasePath);
                 _reportProgress?.Invoke(100);
             }
-            
+
             return entries;
         }
 
@@ -367,45 +367,71 @@ namespace PinCab.Utils.Utils
             foreach (var item in VpforumDatabase.BackglassFiles)
             {
                 var entry = GetBackglassEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
+                {
                     entry.RelatedEntries.Add(relatedGame);
+                    entry.IpdbId = relatedGame.IpdbId;
+                    entry.Tags.AddRange(GetIpdbTags(relatedGame));
+                    //Could add all the related game tags here too, but maybe a bit too busy?
+                    entry.Tags = entry.Tags.NormalizeTagList();
+                }
                 entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.MediaPackFiles)
             {
                 var entry = GetMediaPackEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
+                {
                     entry.RelatedEntries.Add(relatedGame);
+                    entry.IpdbId = relatedGame.IpdbId;
+                    entry.Tags.AddRange(GetIpdbTags(relatedGame));
+                    entry.Tags = entry.Tags.NormalizeTagList();
+                }
                 entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.RomFiles)
             {
                 var entry = GetRomEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
+                {
                     entry.RelatedEntries.Add(relatedGame);
+                    entry.IpdbId = relatedGame.IpdbId;
+                    entry.Tags.AddRange(GetIpdbTags(relatedGame));
+                    entry.Tags = entry.Tags.NormalizeTagList();
+                }
                 entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.TopperFiles)
             {
                 var entry = GetTopperEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
+                {
                     entry.RelatedEntries.Add(relatedGame);
+                    entry.IpdbId = relatedGame.IpdbId;
+                    entry.Tags.AddRange(GetIpdbTags(relatedGame));
+                    entry.Tags = entry.Tags.NormalizeTagList();
+                }
                 entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.WheelArtFiles)
             {
                 var entry = GetWheelEntry(item, DatabaseType.VPForums);
-                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
+                var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Uri?.PathAndQuery.ToLower() == entry.Uri?.PathAndQuery.ToLower())); //Ignore differences in http:// vs https:// in URL and only look at the path string
                 if (relatedGame != null) //Create the reverse link to the game
+                {
                     entry.RelatedEntries.Add(relatedGame);
+                    entry.IpdbId = relatedGame.IpdbId;
+                    entry.Tags.AddRange(GetIpdbTags(relatedGame));
+                    entry.Tags = entry.Tags.NormalizeTagList();
+                }
                 entries.Add(entry);
             }
 
@@ -524,7 +550,7 @@ namespace PinCab.Utils.Utils
                 || t == "vpx 10.6" || t == "vp10" || t.Contains("vpx")
             )
                 t = "VPX";
-            else if (t == "vtp 9.9.5" || t == "vp92" || t == "vp915" || t== "vpinmame 9 recreations" || t == "vpinmame 9.x recreations"
+            else if (t == "vtp 9.9.5" || t == "vp92" || t == "vp915" || t == "vpinmame 9 recreations" || t == "vpinmame 9.x recreations"
                 || t == "vp9 fs cabinet b2s table." || t == "vp9" || t == "vp 9" || t == "vp 9.x" || t == "visual pinball 9"
                 || t == "bs70 vp 9.x cabinet fs b2s" || t == "bs80 vp 9.x cabinet fs b2s" || t == "vp9.2"
             )
@@ -541,10 +567,11 @@ namespace PinCab.Utils.Utils
         }
 
 
-        public HashSet<string> GetAllTags(List<DatabaseBrowserEntry> entries)
+        public HashSet<string> GetAllTags(List<DatabaseBrowserEntry> entries, bool reportProgress = true)
         {
             var tags = new HashSet<string>();
-            _reportProgress?.Invoke(50);
+            if (reportProgress)
+                _reportProgress?.Invoke(50);
             if (Entries == null)
             {
                 Log.Warning("{tool}: Database not loaded yet. Load database using GetAllEntries()", ToolName);
@@ -556,7 +583,8 @@ namespace PinCab.Utils.Utils
                 foreach (var itm in entryTags)
                     tags.Add(itm);
             }
-            _reportProgress?.Invoke(100);
+            if (reportProgress)
+                _reportProgress?.Invoke(100);
             return tags;
         }
 
@@ -616,18 +644,8 @@ namespace PinCab.Utils.Utils
                 entry.Description += "\r\n\r\n" + file.Features;
             entry.Tags.AddRange(file.FeatureFlags.ConvertFeatureFlagsToTags());
 
-            List<string> TagsByIpdbNumber = new List<string>();
-            if (entry.IpdbId.HasValue)
-            {
-                var ipdbTags = GetTagsByIpdbNumber(entry.IpdbId.Value);
-                foreach (var tag in ipdbTags)
-                {
-                    var t = NormalizeTag(tag);
-                    if (!string.IsNullOrEmpty(t))
-                        entry.Tags.Add(t);
-                }
-            }
-
+            List<string> TagsByIpdbNumber = GetIpdbTags(entry);
+            entry.Tags.AddRange(TagsByIpdbNumber);
             entry.Tags = entry.Tags.NormalizeTagList();
 
             //Get related media
@@ -731,6 +749,23 @@ namespace PinCab.Utils.Utils
             }
 
             return entry;
+        }
+
+        private List<string> GetIpdbTags(DatabaseBrowserEntry entry)
+        {
+            var list = new List<string>();
+            if (entry.IpdbId.HasValue)
+            {
+                var ipdbTags = GetTagsByIpdbNumber(entry.IpdbId.Value);
+                foreach (var tag in ipdbTags)
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        list.Add(t);
+                }
+            }
+
+            return list.NormalizeTagList();
         }
 
         private DatabaseBrowserEntry GetWheelEntry(WheelArtFile file, DatabaseType dbType)

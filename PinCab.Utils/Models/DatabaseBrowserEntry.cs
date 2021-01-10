@@ -1,4 +1,5 @@
-﻿using PinCab.Utils.Extensions;
+﻿using Newtonsoft.Json;
+using PinCab.Utils.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,21 @@ namespace PinCab.Utils.Models
         public int? IpdbId { get; set; }
         public string Version { get; set; }
         public DateTime LastUpdated { get; set; }
+
+        [JsonIgnore]
+        public Uri Uri
+        {
+            get
+            {
+                Uri uriResult;
+                bool result = Uri.TryCreate(Url, UriKind.Absolute, out uriResult)
+                    && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+                if (result)
+                    return uriResult;
+                else
+                    return null;
+            }
+        }
 
         public string TypeString
         {

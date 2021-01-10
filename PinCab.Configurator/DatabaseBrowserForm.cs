@@ -134,14 +134,21 @@ namespace PinCab.Configurator
             var tags = GetAllSelectedTags();
             if (tags != null && tags.Count > 0)
             {
-                list = list.Where(c => c.Tags.Any(g => tags.Contains(g)));
+                list = list.Where(c => c.Tags.Any(g => tags.Contains(g))
+                 || c.RelatedEntries.Any(d => d.Tags.Any(k => tags.Contains(k)))
+                );
             }
             return list.ToList();
         }
 
         private void RebindGridUsingFilter()
         {
-            vpinDatabaseSettingBindingSource.DataSource = GetEntriesByFilterCriteria().ToSortableBindingList();
+            var list = GetEntriesByFilterCriteria();
+            vpinDatabaseSettingBindingSource.DataSource = list.ToSortableBindingList();
+            var tags = _dbManager.GetAllTags(list.ToList(), false).OrderBy(c => c).ToList();
+            tags.Insert(0, "(Select Tag)");
+            cmbTags.DataSource = tags;
+            UpdateToolstripStatus();
         }
 
         private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -263,7 +270,7 @@ namespace PinCab.Configurator
         private void UpdateToolstripStatus()
         {
             var entriesInGrid = vpinDatabaseSettingBindingSource.DataSource as SortableBindingList<DatabaseBrowserEntry>;
-            toolStripStatusLabel.Text = "Total Database Entries: " + entriesInGrid.Count.ToString();
+            toolStripStatusLabel.Text = $"Total Database Entries: {_dbManager.Entries.Count} Filtered: {entriesInGrid.Count}";
         }
 
         private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
@@ -339,8 +346,8 @@ namespace PinCab.Configurator
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             //var tagsByCritera = GetEntriesByFilterCriteria(); //vs: _dbManager.Entries (all entries)
-            //var list = 
-            var tags = _dbManager.GetAllTags(_dbManager.Entries).OrderBy(c => c).ToList();
+            var list = vpinDatabaseSettingBindingSource.DataSource as SortableBindingList<DatabaseBrowserEntry>;
+            var tags = _dbManager.GetAllTags(list.ToList()).OrderBy(c => c).ToList();
             tags.Insert(0, "(Select Tag)");
             var toolResult = new ToolResult();
             toolResult.ToolName = DatabaseManager.ToolName;
@@ -474,6 +481,8 @@ namespace PinCab.Configurator
 
         private void dataGridViewEntryList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
             var row = GetActiveRowEntry();
             if (row != null)
             {
@@ -482,6 +491,15 @@ namespace PinCab.Configurator
                     Process.Start(row.Url);
                 }
             }
+        }
+
+        private void dataGridViewEntryList_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
+        {
+            var row = GetActiveRowEntry();
+            if (!row.IpdbId.HasValue)
+                contextMenuStripGridActions.Items["IpdbInfoToolStripMenuItem"].Enabled = false;
+            else
+                contextMenuStripGridActions.Items["IpdbInfoToolStripMenuItem"].Enabled = true;
         }
     }
 }

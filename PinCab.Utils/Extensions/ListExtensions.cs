@@ -17,7 +17,7 @@ namespace PinCab.Utils.Extensions
 
         public static SortableBindingList<T> ToSortableBindingList<T>(this IEnumerable<T> collection)
         {
-            return new SortableBindingList<T>(collection.ToList());
+            return new SortableBindingList<T>(collection);
         }
 
         public static List<string> ReplaceAllInList(this IEnumerable<string> collection, string stringToReplace, string replacement)

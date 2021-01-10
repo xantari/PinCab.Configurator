@@ -12,9 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +33,11 @@ namespace PinCab.Configurator
             InitializeComponent();
 
             _dbManager = new DatabaseManager(backgroundWorkerProgressBar.ReportProgress);
+
+            if (!SystemInformation.TerminalServerSession)
+                DoubleBuffered = true;
+            else
+                DoubleBuffered = false;
 
             ConfigureFilters();
             ConfigureGrid();
@@ -80,6 +87,22 @@ namespace PinCab.Configurator
                 column.Resizable = DataGridViewTriState.True;
             }
             dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            //Speed tweak testing
+            //dataGridViewEntryList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            //dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            //dataGridViewEntryList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            //dataGridViewEntryList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            //dataGridViewEntryList.RowHeadersVisible = false;
+            //// Double buffering can make DGV slow in remote desktop
+            //if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
+            //{
+            //    typeof(DataGridView).InvokeMember(
+            //       "DoubleBuffered",
+            //       BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+            //       null,
+            //       dataGridViewEntryList,
+            //       new object[] { true });
+            //}
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -162,10 +185,10 @@ namespace PinCab.Configurator
             return rowIndex;
         }
 
-        private DatabaseBrowserEntry GetActiveRowRom()
+        private DatabaseBrowserEntry GetActiveRowEntry()
         {
-            var data = vpinDatabaseSettingBindingSource.DataSource as BindingSource;
-            return data.Current as DatabaseBrowserEntry;
+            var data = vpinDatabaseSettingBindingSource.Current as DatabaseBrowserEntry;
+            return data;
         }
 
         private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -182,20 +205,36 @@ namespace PinCab.Configurator
                 if (result.MessageType == ValidationMessageType.ToolMessage)
                     LogToolValidationResult(result.ToolName, result);
             }
-            if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadDatabases.ToString())
-            {
-                //RefreshGrid();
-            }
-            else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.ProcessDatabase.ToString())
-            {
+            //if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadDatabases.ToString())
+            //{
+            //    //RefreshGrid();
+            //}
+            //else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.ProcessDatabase.ToString())
+            //{
 
-            }
-            else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString())
+            //}
+            if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString())
             {
                 if (result.Result != null)
                 {
+                    Stopwatch stopWatch = new Stopwatch();
+                    stopWatch.Start();
                     var entries = result.Result as List<DatabaseBrowserEntry>;
                     vpinDatabaseSettingBindingSource.DataSource = entries.ToSortableBindingList();
+                    stopWatch.Stop();
+                    TimeSpan ts = stopWatch.Elapsed;
+                    var msg = $"Grid binding took: {ts.TotalSeconds} seconds";
+                    Log.Information(msg);
+                    var logResult = new ValidationResult()
+                    {
+                        IsValid = true
+                    };
+                    logResult.Messages.Add(new ValidationMessage()
+                    {
+                        Level = MessageLevel.Information,
+                        Message = msg
+                    });
+                    LogToolValidationResult(result.ToolName, logResult);
 
                     var action = new DatabaseManagerBackgroundAction();
                     action.Action = DatabaseManagerBackgroundProgressAction.LoadTags;
@@ -230,26 +269,26 @@ namespace PinCab.Configurator
         private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
         {
             var arg = (DatabaseManagerBackgroundAction)e.Argument;
-            if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadDatabases)
-            {
-                var result = _dbManager.RefreshAllDatabases();
-                var toolResult = new ToolResult(result);
-                toolResult.ToolName = DatabaseManager.ToolName;
-                toolResult.MessageType = ValidationMessageType.ToolMessage;
-                toolResult.FunctionExecuted = arg.Action.ToString();
-                e.Result = toolResult;
-            }
-            else if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
-            {
-                var result = _dbManager.GetAllEntries();
-                var toolResult = new ToolResult();
-                toolResult.ToolName = DatabaseManager.ToolName;
-                toolResult.MessageType = ValidationMessageType.ToolMessage;
-                toolResult.FunctionExecuted = arg.Action.ToString();
-                toolResult.Result = result;
-                e.Result = toolResult;
-            }
-            else if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
+            //if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadDatabases)
+            //{
+            //    var result = _dbManager.RefreshAllDatabases();
+            //    var toolResult = new ToolResult(result);
+            //    toolResult.ToolName = DatabaseManager.ToolName;
+            //    toolResult.MessageType = ValidationMessageType.ToolMessage;
+            //    toolResult.FunctionExecuted = arg.Action.ToString();
+            //    e.Result = toolResult;
+            //}
+            //else if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
+            //{
+            //    var result = _dbManager.GetAllEntries();
+            //    var toolResult = new ToolResult();
+            //    toolResult.ToolName = DatabaseManager.ToolName;
+            //    toolResult.MessageType = ValidationMessageType.ToolMessage;
+            //    toolResult.FunctionExecuted = arg.Action.ToString();
+            //    toolResult.Result = result;
+            //    e.Result = toolResult;
+            //}
+            if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
             {
                 e.Result = DownloadAndLoadDatabase();
             }
@@ -261,12 +300,17 @@ namespace PinCab.Configurator
 
         private ToolResult DownloadAndLoadDatabase()
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
             var result = _dbManager.RefreshAllDatabases();
             List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
             if (result.IsValid)
             {
                 _dbManager.LoadAllDatabases();
-                entries = _dbManager.GetAllEntries();
+                //A true value indicates there was a re-download of one or more databases from the internet
+                //so we will need to re-create the cached data
+                var forceReload = (bool)result.Result;
+                entries = _dbManager.GetAllEntries(forceReload);
             }
             var toolResult = new ToolResult(result);
             toolResult.ToolName = DatabaseManager.ToolName;
@@ -279,12 +323,23 @@ namespace PinCab.Configurator
                 Level = MessageLevel.Information,
                 Message = "Grid loaded."
             });
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            Log.Information($"Database Loaded in: {ts.TotalSeconds} seconds");
+            toolResult.Messages.Add(new ValidationMessage()
+            {
+                Level = MessageLevel.Information,
+                Message = $"Database Loaded in: {ts.TotalSeconds} seconds"
+            });
             return toolResult;
         }
 
         private ToolResult LoadTags()
         {
-            //TODO: Load the tags based off of the current filter
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            //var tagsByCritera = GetEntriesByFilterCriteria(); //vs: _dbManager.Entries (all entries)
+            //var list = 
             var tags = _dbManager.GetAllTags(_dbManager.Entries).OrderBy(c => c).ToList();
             tags.Insert(0, "(Select Tag)");
             var toolResult = new ToolResult();
@@ -296,6 +351,14 @@ namespace PinCab.Configurator
             {
                 Level = MessageLevel.Information,
                 Message = "Tags loaded."
+            });
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            Log.Information($"Tags Loaded in: {ts.TotalSeconds} seconds");
+            toolResult.Messages.Add(new ValidationMessage()
+            {
+                Level = MessageLevel.Information,
+                Message = $"Tags Loaded in: {ts.TotalSeconds} seconds"
             });
             return toolResult;
         }
@@ -325,7 +388,7 @@ namespace PinCab.Configurator
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Database-Browser");
+            Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Database-Browser");
         }
 
         private void refreshDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -337,7 +400,10 @@ namespace PinCab.Configurator
 
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            //dataGridViewEntryList.FastAutoSizeColumns();
+            //var colSizes = WinformsExtensions.GetAutoSizeColumnsWidth(dataGridViewEntryList);
+            //WinformsExtensions.SetAutoSizeColumnsWidth(dataGridViewEntryList, colSizes);
         }
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
@@ -380,6 +446,42 @@ namespace PinCab.Configurator
                 list.Add((control as Label).Text);
             }
             return list;
+        }
+
+        private void IpdbInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRowEntry();
+            if (row != null)
+            {
+                if (row.IpdbId.HasValue)
+                {
+                    Process.Start($"https://www.ipdb.org/machine.cgi?id={row.IpdbId.Value}");
+                }
+            }
+        }
+
+        private void goToUrlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRowEntry();
+            if (row != null)
+            {
+                if (!string.IsNullOrEmpty(row.Url))
+                {
+                    Process.Start(row.Url);
+                }
+            }
+        }
+
+        private void dataGridViewEntryList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = GetActiveRowEntry();
+            if (row != null)
+            {
+                if (!string.IsNullOrEmpty(row.Url))
+                {
+                    Process.Start(row.Url);
+                }
+            }
         }
     }
 }

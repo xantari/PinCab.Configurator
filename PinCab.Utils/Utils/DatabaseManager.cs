@@ -41,6 +41,8 @@ namespace PinCab.Utils.Utils
         private string vpDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\vpinballdatabase.json";
         private string vpuDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\vpuniversedatabase.json";
         private string ipdbDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\ipdbdatabase.json";
+        private string preprocessedDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\preprocesseddatabase.json";
+        private string tagDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\tagdatabase.json";
 
         private ReportProgressDelegate _reportProgress;
 
@@ -121,14 +123,25 @@ namespace PinCab.Utils.Utils
             _reportProgress?.Invoke(80);
             var ipdbResult = DownloadDatabase(DatabaseType.IPDB);
             _reportProgress?.Invoke(100);
+
             var result = new ToolResult(ToolName);
             result.Messages.AddRange(vpfResult?.Messages);
             result.Messages.AddRange(vpuResult?.Messages);
             result.Messages.AddRange(vpsResult?.Messages);
             result.Messages.AddRange(vpResult?.Messages);
             result.Messages.AddRange(ipdbResult?.Messages);
-            _settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow;
-            _settingManager.SaveSettings(_settings);
+
+            if (((bool)vpfResult.Result) || ((bool)vpuResult.Result) || ((bool)vpsResult.Result)
+            || ((bool)vpResult.Result) || ((bool)ipdbResult.Result))
+            {
+                _settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow; //Only bump the date if we re-downloaded something
+                result.Result = true;
+                _settingManager.SaveSettings(_settings);
+            }
+            else 
+            {
+                result.Result = false; //We didn't re-download anything
+            }
             result.Messages.Add(new ValidationMessage("Database refresh completed.", MessageLevel.Information));
             return result;
         }
@@ -164,12 +177,14 @@ namespace PinCab.Utils.Utils
                     DownloadDatabase(type, _settings.IPDBDatabaseUrl, ipdbDatabasePath);
                     result.Messages.Add(new ValidationMessage($"Downloaded {_settings.IPDBDatabaseUrl} to {ipdbDatabasePath}", MessageLevel.Information));
                 }
+                result.Result = true; //Inidicate we downloaded something
             }
             else
             {
                 var nextRefreshTime = _settings.LastDatabaseRefreshTimeUtc.AddMinutes(_settings.DatabaseUpdateRecheckMinutes);
                 result.Messages.Add(new ValidationMessage($"Not at recheck minutes threshold. Next Refresh: {nextRefreshTime}. Database: {type}", MessageLevel.Information));
                 Log.Information("{toolname}: Not at recheck minutes threshold. Next Refresh: {date}.", ToolName, nextRefreshTime);
+                result.Result = false; //Inidicate we did NOT downloaded something
             }
             return result;
         }
@@ -208,19 +223,37 @@ namespace PinCab.Utils.Utils
             }
         }
 
-        public List<DatabaseBrowserEntry> GetAllEntries()
+        public List<DatabaseBrowserEntry> GetAllEntries(bool forceReload)
         {
             var entries = new List<DatabaseBrowserEntry>();
-            _reportProgress?.Invoke(10);
-            entries.AddRange(GetEntrysByDatabase(DatabaseType.VPForums));
-            _reportProgress?.Invoke(30);
-            entries.AddRange(GetEntrysByDatabase(DatabaseType.VPUniverse));
-            _reportProgress?.Invoke(50);
-            entries.AddRange(GetEntrysByDatabase(DatabaseType.VPSSpreadsheet));
-            _reportProgress?.Invoke(70);
-            entries.AddRange(GetEntrysByDatabase(DatabaseType.VPinball));
-            _reportProgress?.Invoke(100);
-            Entries = entries;
+            //Ensure a local cached copy exists, otherwise force a reload
+            if (!File.Exists(preprocessedDatabasePath))
+                forceReload = true;
+
+            if (forceReload)
+            {
+                _reportProgress?.Invoke(10);
+                entries.AddRange(GetEntrysByDatabase(DatabaseType.VPForums, forceReload));
+                _reportProgress?.Invoke(30);
+                entries.AddRange(GetEntrysByDatabase(DatabaseType.VPUniverse, forceReload));
+                _reportProgress?.Invoke(50);
+                entries.AddRange(GetEntrysByDatabase(DatabaseType.VPSSpreadsheet, forceReload));
+                _reportProgress?.Invoke(70);
+                entries.AddRange(GetEntrysByDatabase(DatabaseType.VPinball, forceReload));
+                _reportProgress?.Invoke(100);
+                Entries = entries;
+                //Write the preprocessed database so next load is faster
+                SaveDatabaseCache(entries, preprocessedDatabasePath);
+            }
+            else 
+            {
+                _reportProgress?.Invoke(10);
+                entries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
+                Entries = entries;
+                Log.Information("{toolname}: Loaded preprocessed database.", ToolName, preprocessedDatabasePath);
+                _reportProgress?.Invoke(100);
+            }
+            
             return entries;
         }
 
@@ -263,10 +296,11 @@ namespace PinCab.Utils.Utils
             return entries;
         }
 
-        public List<DatabaseBrowserEntry> GetEntrysByDatabase(DatabaseType type)
+        public List<DatabaseBrowserEntry> GetEntrysByDatabase(DatabaseType type, bool forceReload)
         {
             List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
-            if (IsValid(type))
+
+            if (IsValid(type) && forceReload)
             {
                 if (type == DatabaseType.VPForums)
                 {
@@ -301,7 +335,22 @@ namespace PinCab.Utils.Utils
                         return entries;
                     }
                 }
+
                 return entries;
+            }
+            //We return the preprocessed database if it exists and we haven't reached a condition where we need to refresh the 
+            //database (reached refresh timeframe or the preprocessed database doesn't exist yet)
+            else if (IsValid(type) && !forceReload)
+            {
+                var loadedEntries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
+                if (type == DatabaseType.VPForums)
+                    return loadedEntries.Where(p => p.DatabaseType == DatabaseType.VPForums).ToList();
+                else if (type == DatabaseType.VPinball)
+                    return loadedEntries.Where(p => p.DatabaseType == DatabaseType.VPinball).ToList();
+                else if (type == DatabaseType.VPSSpreadsheet)
+                    return loadedEntries.Where(p => p.DatabaseType == DatabaseType.VPSSpreadsheet).ToList();
+                else if (type == DatabaseType.VPUniverse)
+                    return loadedEntries.Where(p => p.DatabaseType == DatabaseType.VPUniverse).ToList();
             }
             return null;
         }
@@ -969,6 +1018,26 @@ namespace PinCab.Utils.Utils
                 }
             }
             return list;
+        }
+
+        public void SaveDatabaseCache<T>(T database, string fileAndPathToDatabase)
+        {
+            Log.Warning("{tool}: Preprocessed database cache saved to {path}", ToolName, fileAndPathToDatabase);
+            using (StreamWriter sw = new StreamWriter(fileAndPathToDatabase, false))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                GetJsonSerilizerSettings().Serialize(writer, database);
+            }
+        }
+
+        private JsonSerializer GetJsonSerilizerSettings()
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            //serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            serializer.Formatting = Formatting.Indented;
+            return serializer;
         }
     }
 }

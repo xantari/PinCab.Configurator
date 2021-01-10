@@ -141,6 +141,7 @@
     <Compile Include="Models\FrontEnd.cs" />
     <Compile Include="Models\MediaAuditResult.cs" />
     <Compile Include="Models\MediaItem.cs" />
+    <Compile Include="Models\DatabaseBrowserSettings.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,6 +149,7 @@
     </Compile>
     <Compile Include="Utils\BackgroundQueue.cs" />
     <Compile Include="Utils\DatabaseManager.cs" />
+    <Compile Include="Utils\DatabaseBrowserSettingsManager.cs" />
     <Compile Include="Utils\WinApi.cs" />
     <Compile Include="ViewModels\FrontEndGameViewModel.cs" />
     <Compile Include="Models\PinballX\PinballXGame.cs" />

@@ -26,7 +26,8 @@ namespace PinCab.Configurator
     public partial class DatabaseBrowserForm : Form
     {
         private readonly DatabaseManager _dbManager = new DatabaseManager();
-        private BackgroundQueue _queue = new BackgroundQueue();
+        private readonly DatabaseBrowserSettingsManager _settingManager = new DatabaseBrowserSettingsManager();
+        //private BackgroundQueue _queue = new BackgroundQueue();
 
         public DatabaseBrowserForm()
         {
@@ -47,11 +48,37 @@ namespace PinCab.Configurator
         private void ConfigureFilters()
         {
             //TODO: Load from the last state (create a database form manager that persists filter selections to .json setting file)
-            dateTimePickerBegin.Value = new DateTime(1900, 1, 1);
-            dateTimePickerEnd.Value = DateTime.Today.EndOfDay();
+            var settings = _settingManager.LoadSettings();
+            if (settings == null) //Load the defaults and save to the filesystem
+            {
+                settings = new DatabaseBrowserSettings();
+                _settingManager.SaveSettings(settings);
+            }
+            dateTimePickerBegin.Value = settings.BeginDate.BeginningOfDay();
+            dateTimePickerEnd.Value = settings.EndDate.EndOfDay();
             var databaseTypeList = EnumExtensions.GetEnumDescriptionList<DatabaseEntryType>();
             databaseTypeList.Insert(0, "All");
             cmbType.DataSource = databaseTypeList;
+            txtSearch.Text = settings.SearchTerm;
+
+            foreach (string type in cmbType.Items)
+            {
+                if (type == settings.TypeFilter)
+                    cmbType.SelectedItem = type;
+            }
+
+            foreach (string type in cmbDatabase.Items)
+            {
+                if (type == settings.DatabaseFilter)
+                    cmbDatabase.SelectedItem = type;
+            }
+
+            foreach(var tag in settings.TagFilter)
+            {
+                TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter);
+                tagwinforms.Init();
+                flowLayoutPanelTags.Controls.Add(tagwinforms);
+            }
 
             flowLayoutPanelTags.Padding = new Padding(3, 3, 3, 3);
         }
@@ -540,6 +567,28 @@ namespace PinCab.Configurator
             var entry = GetActiveRowEntry();
             //Now bind the child grid
             bindingSourceChildEntries.DataSource = entry.RelatedEntries.ToSortableBindingList();
+        }
+
+        private void DatabaseBrowserForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var settings = new DatabaseBrowserSettings();
+            settings.BeginDate = dateTimePickerBegin.Value;
+            settings.EndDate = dateTimePickerEnd.Value;
+            settings.SearchTerm = txtSearch.Text;
+            settings.TypeFilter = cmbType.SelectedItem.ToString();
+            settings.DatabaseFilter = cmbDatabase.SelectedItem.ToString();
+            settings.TagFilter = GetAllSelectedTags();
+
+            foreach (DataGridViewColumn column in dataGridViewEntryList.Columns)
+            {
+                settings.DatabaseGridColumnWidths.Add(column.Width);
+            }
+            foreach (DataGridViewColumn column in dataGridViewChildEntries.Columns)
+            {
+                settings.RelatedGridColumnWidths.Add(column.Width);
+            }
+
+            _settingManager.SaveSettings(settings);
         }
     }
 }

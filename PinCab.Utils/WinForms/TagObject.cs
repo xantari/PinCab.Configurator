@@ -45,7 +45,7 @@ namespace PinCab.Utils.WinForms
             TextAlign = ContentAlignment.TopLeft;
             Margin = new Padding(0);
             Padding = new Padding(0);
-            BorderStyle = BorderStyle.FixedSingle;
+            //BorderStyle = BorderStyle.FixedSingle;
             //this.BackColor = Color.FromArgb(30, 30, 30);
             //this.ForeColor = Color.White;
             btnRemove = new PictureBox();

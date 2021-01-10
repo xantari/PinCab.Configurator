@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,11 +68,6 @@
             this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.splitContainerGridAndLog = new System.Windows.Forms.SplitContainer();
-            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
             this.splitContainerTopAndBottomGrids = new System.Windows.Forms.SplitContainer();
             this.dataGridViewChildEntries = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,10 +78,15 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSourceChildEntries = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStripChildEntries = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemChildIpdb = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemChildUrl = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSourceChildEntries = new System.Windows.Forms.BindingSource(this.components);
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
@@ -96,14 +96,14 @@
             this.splitContainerGridAndLog.Panel1.SuspendLayout();
             this.splitContainerGridAndLog.Panel2.SuspendLayout();
             this.splitContainerGridAndLog.SuspendLayout();
-            this.statusStripBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTopAndBottomGrids)).BeginInit();
             this.splitContainerTopAndBottomGrids.Panel1.SuspendLayout();
             this.splitContainerTopAndBottomGrids.Panel2.SuspendLayout();
             this.splitContainerTopAndBottomGrids.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).BeginInit();
             this.contextMenuStripChildEntries.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).BeginInit();
+            this.statusStripBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -129,7 +129,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -360,8 +360,8 @@
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -471,43 +471,6 @@
             this.splitContainerGridAndLog.SplitterDistance = 334;
             this.splitContainerGridAndLog.TabIndex = 5;
             // 
-            // backgroundWorkerProgressBar
-            // 
-            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
-            this.backgroundWorkerProgressBar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProgressBar_DoWork);
-            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
-            this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusLabel.Text = "Status Here";
-            // 
-            // toolStripStatusLabelSpacer
-            // 
-            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
-            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(865, 17);
-            this.toolStripStatusLabelSpacer.Spring = true;
-            // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
-            // 
-            // statusStripBottom
-            // 
-            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel,
-            this.toolStripStatusLabelSpacer,
-            this.toolStripProgressBar});
-            this.statusStripBottom.Location = new System.Drawing.Point(0, 533);
-            this.statusStripBottom.Name = "statusStripBottom";
-            this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
-            this.statusStripBottom.TabIndex = 6;
-            this.statusStripBottom.Text = "statusStrip1";
-            // 
             // splitContainerTopAndBottomGrids
             // 
             this.splitContainerTopAndBottomGrids.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -566,8 +529,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -622,10 +585,6 @@
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             this.dataGridViewTextBoxColumn8.Width = 47;
             // 
-            // bindingSourceChildEntries
-            // 
-            this.bindingSourceChildEntries.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
-            // 
             // contextMenuStripChildEntries
             // 
             this.contextMenuStripChildEntries.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -637,16 +596,57 @@
             // toolStripMenuItemChildIpdb
             // 
             this.toolStripMenuItemChildIpdb.Name = "toolStripMenuItemChildIpdb";
-            this.toolStripMenuItemChildIpdb.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemChildIpdb.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItemChildIpdb.Text = "IPDB Info";
             this.toolStripMenuItemChildIpdb.Click += new System.EventHandler(this.toolStripMenuItemChildIpdb_Click);
             // 
             // toolStripMenuItemChildUrl
             // 
             this.toolStripMenuItemChildUrl.Name = "toolStripMenuItemChildUrl";
-            this.toolStripMenuItemChildUrl.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemChildUrl.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItemChildUrl.Text = "Go to URL";
             this.toolStripMenuItemChildUrl.Click += new System.EventHandler(this.toolStripMenuItemChildUrl_Click);
+            // 
+            // bindingSourceChildEntries
+            // 
+            this.bindingSourceChildEntries.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            this.backgroundWorkerProgressBar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerProgressBar_DoWork);
+            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
+            this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel.Text = "Status Here";
+            // 
+            // toolStripStatusLabelSpacer
+            // 
+            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(865, 17);
+            this.toolStripStatusLabelSpacer.Spring = true;
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // statusStripBottom
+            // 
+            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel,
+            this.toolStripStatusLabelSpacer,
+            this.toolStripProgressBar});
+            this.statusStripBottom.Location = new System.Drawing.Point(0, 533);
+            this.statusStripBottom.Name = "statusStripBottom";
+            this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
+            this.statusStripBottom.TabIndex = 6;
+            this.statusStripBottom.Text = "statusStrip1";
             // 
             // DatabaseBrowserForm
             // 
@@ -660,6 +660,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DatabaseBrowserForm";
             this.Text = "Database Browser";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DatabaseBrowserForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelFilterCriteria.ResumeLayout(false);
@@ -672,15 +673,15 @@
             this.splitContainerGridAndLog.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerGridAndLog)).EndInit();
             this.splitContainerGridAndLog.ResumeLayout(false);
-            this.statusStripBottom.ResumeLayout(false);
-            this.statusStripBottom.PerformLayout();
             this.splitContainerTopAndBottomGrids.Panel1.ResumeLayout(false);
             this.splitContainerTopAndBottomGrids.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTopAndBottomGrids)).EndInit();
             this.splitContainerTopAndBottomGrids.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).EndInit();
             this.contextMenuStripChildEntries.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).EndInit();
+            this.statusStripBottom.ResumeLayout(false);
+            this.statusStripBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

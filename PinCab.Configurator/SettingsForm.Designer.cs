@@ -32,25 +32,33 @@
             this.tabPagePinballProgramSettings = new System.Windows.Forms.TabPage();
             this.lblUltraDMDFound = new System.Windows.Forms.Label();
             this.lblVPinMameFound = new System.Windows.Forms.Label();
+            this.btnPRocUserSettingsFilePath = new System.Windows.Forms.Button();
             this.txtPRocUserSettings = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.btnDMDDeviceIniFilePath = new System.Windows.Forms.Button();
             this.txtDMDDeviceIniFilePath = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.btnFutureDMDFilePath = new System.Windows.Forms.Button();
             this.txtFutureDMDFilePath = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnPinupPlayerFilePath = new System.Windows.Forms.Button();
             this.txtPinupPlayerFilePath = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnB2SScreenresFilePath = new System.Windows.Forms.Button();
             this.txtB2SScreenresFilePath = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPageFrontEnd = new System.Windows.Forms.TabPage();
+            this.btnPinupPopperFilePath = new System.Windows.Forms.Button();
             this.txtPinupPopperDbLocation = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtPinballYLocation = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtPinballXIniFilePath = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnPinballYFilePath = new System.Windows.Forms.Button();
+            this.btnPinballXIniFilePath = new System.Windows.Forms.Button();
             this.tabPageFFMpeg = new System.Windows.Forms.TabPage();
             this.numericFramerate = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -60,38 +68,30 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtFFMpegFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnTempRecordFilePath = new System.Windows.Forms.Button();
+            this.btnFFMpegFilePath = new System.Windows.Forms.Button();
             this.tabPageDatabases = new System.Windows.Forms.TabPage();
             this.numericRecheckMinutes = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
+            this.btnVpsSpreadsheetUrl = new System.Windows.Forms.Button();
             this.txtVpsSpreadsheetUrl = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.btnVpUniverseUrl = new System.Windows.Forms.Button();
             this.txtVpUniverseUrl = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnVpinballUrl = new System.Windows.Forms.Button();
             this.txtVPinballUrl = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.btnVpForumsUrl = new System.Windows.Forms.Button();
             this.txtVpForumsUrl = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.btnIpdbUrl = new System.Windows.Forms.Button();
             this.txtIpdbUrl = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnPRocUserSettingsFilePath = new System.Windows.Forms.Button();
-            this.btnDMDDeviceIniFilePath = new System.Windows.Forms.Button();
-            this.btnFutureDMDFilePath = new System.Windows.Forms.Button();
-            this.btnPinupPlayerFilePath = new System.Windows.Forms.Button();
-            this.btnB2SScreenresFilePath = new System.Windows.Forms.Button();
-            this.btnPinupPopperFilePath = new System.Windows.Forms.Button();
-            this.btnPinballYFilePath = new System.Windows.Forms.Button();
-            this.btnPinballXIniFilePath = new System.Windows.Forms.Button();
-            this.btnTempRecordFilePath = new System.Windows.Forms.Button();
-            this.btnFFMpegFilePath = new System.Windows.Forms.Button();
-            this.btnVpsSpreadsheetUrl = new System.Windows.Forms.Button();
-            this.btnVpUniverseUrl = new System.Windows.Forms.Button();
-            this.btnVpinballUrl = new System.Windows.Forms.Button();
-            this.btnVpForumsUrl = new System.Windows.Forms.Button();
-            this.btnIpdbUrl = new System.Windows.Forms.Button();
             this.tbSettings.SuspendLayout();
             this.tabPagePinballProgramSettings.SuspendLayout();
             this.tabPageFrontEnd.SuspendLayout();
@@ -162,6 +162,19 @@
             this.lblVPinMameFound.TabIndex = 40;
             this.lblVPinMameFound.Text = "Yes/No";
             // 
+            // btnPRocUserSettingsFilePath
+            // 
+            this.btnPRocUserSettingsFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnPRocUserSettingsFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPRocUserSettingsFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPRocUserSettingsFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPRocUserSettingsFilePath.Location = new System.Drawing.Point(563, 118);
+            this.btnPRocUserSettingsFilePath.Name = "btnPRocUserSettingsFilePath";
+            this.btnPRocUserSettingsFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPRocUserSettingsFilePath.TabIndex = 39;
+            this.btnPRocUserSettingsFilePath.UseVisualStyleBackColor = true;
+            this.btnPRocUserSettingsFilePath.Click += new System.EventHandler(this.btnPRocUserSettingsFilePath_Click);
+            // 
             // txtPRocUserSettings
             // 
             this.txtPRocUserSettings.Location = new System.Drawing.Point(156, 119);
@@ -177,6 +190,19 @@
             this.label16.Size = new System.Drawing.Size(128, 13);
             this.label16.TabIndex = 37;
             this.label16.Text = "P-ROC Usersettings.yaml:";
+            // 
+            // btnDMDDeviceIniFilePath
+            // 
+            this.btnDMDDeviceIniFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnDMDDeviceIniFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDMDDeviceIniFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDMDDeviceIniFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDMDDeviceIniFilePath.Location = new System.Drawing.Point(563, 92);
+            this.btnDMDDeviceIniFilePath.Name = "btnDMDDeviceIniFilePath";
+            this.btnDMDDeviceIniFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnDMDDeviceIniFilePath.TabIndex = 34;
+            this.btnDMDDeviceIniFilePath.UseVisualStyleBackColor = true;
+            this.btnDMDDeviceIniFilePath.Click += new System.EventHandler(this.btnDMDDeviceIniFilePath_Click);
             // 
             // txtDMDDeviceIniFilePath
             // 
@@ -212,6 +238,19 @@
             this.label11.TabIndex = 30;
             this.label11.Text = "Ultra DMD Found in Registry:";
             // 
+            // btnFutureDMDFilePath
+            // 
+            this.btnFutureDMDFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnFutureDMDFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFutureDMDFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFutureDMDFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFutureDMDFilePath.Location = new System.Drawing.Point(563, 66);
+            this.btnFutureDMDFilePath.Name = "btnFutureDMDFilePath";
+            this.btnFutureDMDFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnFutureDMDFilePath.TabIndex = 29;
+            this.btnFutureDMDFilePath.UseVisualStyleBackColor = true;
+            this.btnFutureDMDFilePath.Click += new System.EventHandler(this.btnFutureDMDFilePath_Click);
+            // 
             // txtFutureDMDFilePath
             // 
             this.txtFutureDMDFilePath.Location = new System.Drawing.Point(156, 67);
@@ -227,6 +266,19 @@
             this.label10.Size = new System.Drawing.Size(126, 13);
             this.label10.TabIndex = 27;
             this.label10.Text = "Future DMD Ini Location:";
+            // 
+            // btnPinupPlayerFilePath
+            // 
+            this.btnPinupPlayerFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnPinupPlayerFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinupPlayerFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinupPlayerFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinupPlayerFilePath.Location = new System.Drawing.Point(563, 37);
+            this.btnPinupPlayerFilePath.Name = "btnPinupPlayerFilePath";
+            this.btnPinupPlayerFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinupPlayerFilePath.TabIndex = 26;
+            this.btnPinupPlayerFilePath.UseVisualStyleBackColor = true;
+            this.btnPinupPlayerFilePath.Click += new System.EventHandler(this.btnPinupPlayerFilePath_Click);
             // 
             // txtPinupPlayerFilePath
             // 
@@ -244,6 +296,19 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "Pinup Player Location:";
             // 
+            // btnB2SScreenresFilePath
+            // 
+            this.btnB2SScreenresFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnB2SScreenresFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnB2SScreenresFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnB2SScreenresFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnB2SScreenresFilePath.Location = new System.Drawing.Point(563, 9);
+            this.btnB2SScreenresFilePath.Name = "btnB2SScreenresFilePath";
+            this.btnB2SScreenresFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnB2SScreenresFilePath.TabIndex = 23;
+            this.btnB2SScreenresFilePath.UseVisualStyleBackColor = true;
+            this.btnB2SScreenresFilePath.Click += new System.EventHandler(this.btnB2SScreenresFilePath_Click);
+            // 
             // txtB2SScreenresFilePath
             // 
             this.txtB2SScreenresFilePath.Location = new System.Drawing.Point(156, 10);
@@ -256,9 +321,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(8, 14);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(142, 13);
+            this.label8.Size = new System.Drawing.Size(139, 13);
             this.label8.TabIndex = 21;
-            this.label8.Text = "B2S Screenrest.txt Location:";
+            this.label8.Text = "B2S Screenres.txt Location:";
             // 
             // tabPageFrontEnd
             // 
@@ -278,6 +343,19 @@
             this.tabPageFrontEnd.TabIndex = 0;
             this.tabPageFrontEnd.Text = "Front End";
             this.tabPageFrontEnd.UseVisualStyleBackColor = true;
+            // 
+            // btnPinupPopperFilePath
+            // 
+            this.btnPinupPopperFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnPinupPopperFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinupPopperFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinupPopperFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinupPopperFilePath.Location = new System.Drawing.Point(566, 60);
+            this.btnPinupPopperFilePath.Name = "btnPinupPopperFilePath";
+            this.btnPinupPopperFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinupPopperFilePath.TabIndex = 26;
+            this.btnPinupPopperFilePath.UseVisualStyleBackColor = true;
+            this.btnPinupPopperFilePath.Click += new System.EventHandler(this.btnPinupPopperFilePath_Click);
             // 
             // txtPinupPopperDbLocation
             // 
@@ -326,6 +404,32 @@
             this.label5.Size = new System.Drawing.Size(109, 13);
             this.label5.TabIndex = 18;
             this.label5.Text = "Pinball X Ini Location:";
+            // 
+            // btnPinballYFilePath
+            // 
+            this.btnPinballYFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnPinballYFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinballYFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinballYFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinballYFilePath.Location = new System.Drawing.Point(566, 32);
+            this.btnPinballYFilePath.Name = "btnPinballYFilePath";
+            this.btnPinballYFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinballYFilePath.TabIndex = 23;
+            this.btnPinballYFilePath.UseVisualStyleBackColor = true;
+            this.btnPinballYFilePath.Click += new System.EventHandler(this.btnPinballYFilePath_Click);
+            // 
+            // btnPinballXIniFilePath
+            // 
+            this.btnPinballXIniFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnPinballXIniFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPinballXIniFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPinballXIniFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnPinballXIniFilePath.Location = new System.Drawing.Point(566, 8);
+            this.btnPinballXIniFilePath.Name = "btnPinballXIniFilePath";
+            this.btnPinballXIniFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnPinballXIniFilePath.TabIndex = 20;
+            this.btnPinballXIniFilePath.UseVisualStyleBackColor = true;
+            this.btnPinballXIniFilePath.Click += new System.EventHandler(this.btnPinballXIniFilePath_Click);
             // 
             // tabPageFFMpeg
             // 
@@ -451,6 +555,32 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "FFMpeg File Path:";
             // 
+            // btnTempRecordFilePath
+            // 
+            this.btnTempRecordFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnTempRecordFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnTempRecordFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTempRecordFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnTempRecordFilePath.Location = new System.Drawing.Point(565, 77);
+            this.btnTempRecordFilePath.Name = "btnTempRecordFilePath";
+            this.btnTempRecordFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnTempRecordFilePath.TabIndex = 17;
+            this.btnTempRecordFilePath.UseVisualStyleBackColor = true;
+            this.btnTempRecordFilePath.Click += new System.EventHandler(this.btnTempRecordFilePath_Click);
+            // 
+            // btnFFMpegFilePath
+            // 
+            this.btnFFMpegFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnFFMpegFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFFMpegFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFFMpegFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFFMpegFilePath.Location = new System.Drawing.Point(565, 8);
+            this.btnFFMpegFilePath.Name = "btnFFMpegFilePath";
+            this.btnFFMpegFilePath.Size = new System.Drawing.Size(38, 23);
+            this.btnFFMpegFilePath.TabIndex = 10;
+            this.btnFFMpegFilePath.UseVisualStyleBackColor = true;
+            this.btnFFMpegFilePath.Click += new System.EventHandler(this.btnFFMpegFilePath_Click);
+            // 
             // tabPageDatabases
             // 
             this.tabPageDatabases.Controls.Add(this.numericRecheckMinutes);
@@ -509,6 +639,19 @@
             this.label20.TabIndex = 55;
             this.label20.Text = "Database Update Recheck Minutes";
             // 
+            // btnVpsSpreadsheetUrl
+            // 
+            this.btnVpsSpreadsheetUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnVpsSpreadsheetUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnVpsSpreadsheetUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVpsSpreadsheetUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnVpsSpreadsheetUrl.Location = new System.Drawing.Point(563, 119);
+            this.btnVpsSpreadsheetUrl.Name = "btnVpsSpreadsheetUrl";
+            this.btnVpsSpreadsheetUrl.Size = new System.Drawing.Size(38, 23);
+            this.btnVpsSpreadsheetUrl.TabIndex = 54;
+            this.btnVpsSpreadsheetUrl.UseVisualStyleBackColor = true;
+            this.btnVpsSpreadsheetUrl.Click += new System.EventHandler(this.btnVpsSpreadsheetUrl_Click);
+            // 
             // txtVpsSpreadsheetUrl
             // 
             this.txtVpsSpreadsheetUrl.Location = new System.Drawing.Point(156, 120);
@@ -524,6 +667,19 @@
             this.label14.Size = new System.Drawing.Size(143, 13);
             this.label14.TabIndex = 52;
             this.label14.Text = "VPS Spreadsheet Database:";
+            // 
+            // btnVpUniverseUrl
+            // 
+            this.btnVpUniverseUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnVpUniverseUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnVpUniverseUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVpUniverseUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnVpUniverseUrl.Location = new System.Drawing.Point(563, 93);
+            this.btnVpUniverseUrl.Name = "btnVpUniverseUrl";
+            this.btnVpUniverseUrl.Size = new System.Drawing.Size(38, 23);
+            this.btnVpUniverseUrl.TabIndex = 51;
+            this.btnVpUniverseUrl.UseVisualStyleBackColor = true;
+            this.btnVpUniverseUrl.Click += new System.EventHandler(this.btnVpUniverseUrl_Click);
             // 
             // txtVpUniverseUrl
             // 
@@ -541,6 +697,19 @@
             this.label15.TabIndex = 49;
             this.label15.Text = "VP Universe Database:";
             // 
+            // btnVpinballUrl
+            // 
+            this.btnVpinballUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnVpinballUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnVpinballUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVpinballUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnVpinballUrl.Location = new System.Drawing.Point(563, 67);
+            this.btnVpinballUrl.Name = "btnVpinballUrl";
+            this.btnVpinballUrl.Size = new System.Drawing.Size(38, 23);
+            this.btnVpinballUrl.TabIndex = 48;
+            this.btnVpinballUrl.UseVisualStyleBackColor = true;
+            this.btnVpinballUrl.Click += new System.EventHandler(this.btnVpinballUrl_Click);
+            // 
             // txtVPinballUrl
             // 
             this.txtVPinballUrl.Location = new System.Drawing.Point(156, 68);
@@ -557,6 +726,19 @@
             this.label17.TabIndex = 46;
             this.label17.Text = "VPinball Database:";
             // 
+            // btnVpForumsUrl
+            // 
+            this.btnVpForumsUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnVpForumsUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnVpForumsUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVpForumsUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnVpForumsUrl.Location = new System.Drawing.Point(563, 38);
+            this.btnVpForumsUrl.Name = "btnVpForumsUrl";
+            this.btnVpForumsUrl.Size = new System.Drawing.Size(38, 23);
+            this.btnVpForumsUrl.TabIndex = 45;
+            this.btnVpForumsUrl.UseVisualStyleBackColor = true;
+            this.btnVpForumsUrl.Click += new System.EventHandler(this.btnVpForumsUrl_Click);
+            // 
             // txtVpForumsUrl
             // 
             this.txtVpForumsUrl.Location = new System.Drawing.Point(156, 39);
@@ -572,6 +754,19 @@
             this.label18.Size = new System.Drawing.Size(107, 13);
             this.label18.TabIndex = 43;
             this.label18.Text = "VPForums Database:";
+            // 
+            // btnIpdbUrl
+            // 
+            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnIpdbUrl.Location = new System.Drawing.Point(563, 10);
+            this.btnIpdbUrl.Name = "btnIpdbUrl";
+            this.btnIpdbUrl.Size = new System.Drawing.Size(38, 23);
+            this.btnIpdbUrl.TabIndex = 42;
+            this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
             // 
             // txtIpdbUrl
             // 
@@ -631,201 +826,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnPRocUserSettingsFilePath
-            // 
-            this.btnPRocUserSettingsFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnPRocUserSettingsFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPRocUserSettingsFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPRocUserSettingsFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPRocUserSettingsFilePath.Location = new System.Drawing.Point(563, 118);
-            this.btnPRocUserSettingsFilePath.Name = "btnPRocUserSettingsFilePath";
-            this.btnPRocUserSettingsFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPRocUserSettingsFilePath.TabIndex = 39;
-            this.btnPRocUserSettingsFilePath.UseVisualStyleBackColor = true;
-            this.btnPRocUserSettingsFilePath.Click += new System.EventHandler(this.btnPRocUserSettingsFilePath_Click);
-            // 
-            // btnDMDDeviceIniFilePath
-            // 
-            this.btnDMDDeviceIniFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnDMDDeviceIniFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDMDDeviceIniFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDMDDeviceIniFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnDMDDeviceIniFilePath.Location = new System.Drawing.Point(563, 92);
-            this.btnDMDDeviceIniFilePath.Name = "btnDMDDeviceIniFilePath";
-            this.btnDMDDeviceIniFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnDMDDeviceIniFilePath.TabIndex = 34;
-            this.btnDMDDeviceIniFilePath.UseVisualStyleBackColor = true;
-            this.btnDMDDeviceIniFilePath.Click += new System.EventHandler(this.btnDMDDeviceIniFilePath_Click);
-            // 
-            // btnFutureDMDFilePath
-            // 
-            this.btnFutureDMDFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnFutureDMDFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFutureDMDFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFutureDMDFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnFutureDMDFilePath.Location = new System.Drawing.Point(563, 66);
-            this.btnFutureDMDFilePath.Name = "btnFutureDMDFilePath";
-            this.btnFutureDMDFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnFutureDMDFilePath.TabIndex = 29;
-            this.btnFutureDMDFilePath.UseVisualStyleBackColor = true;
-            this.btnFutureDMDFilePath.Click += new System.EventHandler(this.btnFutureDMDFilePath_Click);
-            // 
-            // btnPinupPlayerFilePath
-            // 
-            this.btnPinupPlayerFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnPinupPlayerFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPinupPlayerFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPinupPlayerFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPinupPlayerFilePath.Location = new System.Drawing.Point(563, 37);
-            this.btnPinupPlayerFilePath.Name = "btnPinupPlayerFilePath";
-            this.btnPinupPlayerFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPinupPlayerFilePath.TabIndex = 26;
-            this.btnPinupPlayerFilePath.UseVisualStyleBackColor = true;
-            this.btnPinupPlayerFilePath.Click += new System.EventHandler(this.btnPinupPlayerFilePath_Click);
-            // 
-            // btnB2SScreenresFilePath
-            // 
-            this.btnB2SScreenresFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnB2SScreenresFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnB2SScreenresFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnB2SScreenresFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnB2SScreenresFilePath.Location = new System.Drawing.Point(563, 9);
-            this.btnB2SScreenresFilePath.Name = "btnB2SScreenresFilePath";
-            this.btnB2SScreenresFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnB2SScreenresFilePath.TabIndex = 23;
-            this.btnB2SScreenresFilePath.UseVisualStyleBackColor = true;
-            this.btnB2SScreenresFilePath.Click += new System.EventHandler(this.btnB2SScreenresFilePath_Click);
-            // 
-            // btnPinupPopperFilePath
-            // 
-            this.btnPinupPopperFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnPinupPopperFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPinupPopperFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPinupPopperFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPinupPopperFilePath.Location = new System.Drawing.Point(566, 60);
-            this.btnPinupPopperFilePath.Name = "btnPinupPopperFilePath";
-            this.btnPinupPopperFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPinupPopperFilePath.TabIndex = 26;
-            this.btnPinupPopperFilePath.UseVisualStyleBackColor = true;
-            this.btnPinupPopperFilePath.Click += new System.EventHandler(this.btnPinupPopperFilePath_Click);
-            // 
-            // btnPinballYFilePath
-            // 
-            this.btnPinballYFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnPinballYFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPinballYFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPinballYFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPinballYFilePath.Location = new System.Drawing.Point(566, 32);
-            this.btnPinballYFilePath.Name = "btnPinballYFilePath";
-            this.btnPinballYFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPinballYFilePath.TabIndex = 23;
-            this.btnPinballYFilePath.UseVisualStyleBackColor = true;
-            this.btnPinballYFilePath.Click += new System.EventHandler(this.btnPinballYFilePath_Click);
-            // 
-            // btnPinballXIniFilePath
-            // 
-            this.btnPinballXIniFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnPinballXIniFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPinballXIniFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPinballXIniFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnPinballXIniFilePath.Location = new System.Drawing.Point(566, 8);
-            this.btnPinballXIniFilePath.Name = "btnPinballXIniFilePath";
-            this.btnPinballXIniFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnPinballXIniFilePath.TabIndex = 20;
-            this.btnPinballXIniFilePath.UseVisualStyleBackColor = true;
-            this.btnPinballXIniFilePath.Click += new System.EventHandler(this.btnPinballXIniFilePath_Click);
-            // 
-            // btnTempRecordFilePath
-            // 
-            this.btnTempRecordFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnTempRecordFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnTempRecordFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTempRecordFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnTempRecordFilePath.Location = new System.Drawing.Point(565, 77);
-            this.btnTempRecordFilePath.Name = "btnTempRecordFilePath";
-            this.btnTempRecordFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnTempRecordFilePath.TabIndex = 17;
-            this.btnTempRecordFilePath.UseVisualStyleBackColor = true;
-            this.btnTempRecordFilePath.Click += new System.EventHandler(this.btnTempRecordFilePath_Click);
-            // 
-            // btnFFMpegFilePath
-            // 
-            this.btnFFMpegFilePath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnFFMpegFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFFMpegFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFFMpegFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnFFMpegFilePath.Location = new System.Drawing.Point(565, 8);
-            this.btnFFMpegFilePath.Name = "btnFFMpegFilePath";
-            this.btnFFMpegFilePath.Size = new System.Drawing.Size(38, 23);
-            this.btnFFMpegFilePath.TabIndex = 10;
-            this.btnFFMpegFilePath.UseVisualStyleBackColor = true;
-            this.btnFFMpegFilePath.Click += new System.EventHandler(this.btnFFMpegFilePath_Click);
-            // 
-            // btnVpsSpreadsheetUrl
-            // 
-            this.btnVpsSpreadsheetUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnVpsSpreadsheetUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnVpsSpreadsheetUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVpsSpreadsheetUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnVpsSpreadsheetUrl.Location = new System.Drawing.Point(563, 119);
-            this.btnVpsSpreadsheetUrl.Name = "btnVpsSpreadsheetUrl";
-            this.btnVpsSpreadsheetUrl.Size = new System.Drawing.Size(38, 23);
-            this.btnVpsSpreadsheetUrl.TabIndex = 54;
-            this.btnVpsSpreadsheetUrl.UseVisualStyleBackColor = true;
-            this.btnVpsSpreadsheetUrl.Click += new System.EventHandler(this.btnVpsSpreadsheetUrl_Click);
-            // 
-            // btnVpUniverseUrl
-            // 
-            this.btnVpUniverseUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnVpUniverseUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnVpUniverseUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVpUniverseUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnVpUniverseUrl.Location = new System.Drawing.Point(563, 93);
-            this.btnVpUniverseUrl.Name = "btnVpUniverseUrl";
-            this.btnVpUniverseUrl.Size = new System.Drawing.Size(38, 23);
-            this.btnVpUniverseUrl.TabIndex = 51;
-            this.btnVpUniverseUrl.UseVisualStyleBackColor = true;
-            this.btnVpUniverseUrl.Click += new System.EventHandler(this.btnVpUniverseUrl_Click);
-            // 
-            // btnVpinballUrl
-            // 
-            this.btnVpinballUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnVpinballUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnVpinballUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVpinballUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnVpinballUrl.Location = new System.Drawing.Point(563, 67);
-            this.btnVpinballUrl.Name = "btnVpinballUrl";
-            this.btnVpinballUrl.Size = new System.Drawing.Size(38, 23);
-            this.btnVpinballUrl.TabIndex = 48;
-            this.btnVpinballUrl.UseVisualStyleBackColor = true;
-            this.btnVpinballUrl.Click += new System.EventHandler(this.btnVpinballUrl_Click);
-            // 
-            // btnVpForumsUrl
-            // 
-            this.btnVpForumsUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnVpForumsUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnVpForumsUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVpForumsUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnVpForumsUrl.Location = new System.Drawing.Point(563, 38);
-            this.btnVpForumsUrl.Name = "btnVpForumsUrl";
-            this.btnVpForumsUrl.Size = new System.Drawing.Size(38, 23);
-            this.btnVpForumsUrl.TabIndex = 45;
-            this.btnVpForumsUrl.UseVisualStyleBackColor = true;
-            this.btnVpForumsUrl.Click += new System.EventHandler(this.btnVpForumsUrl_Click);
-            // 
-            // btnIpdbUrl
-            // 
-            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnIpdbUrl.Location = new System.Drawing.Point(563, 10);
-            this.btnIpdbUrl.Name = "btnIpdbUrl";
-            this.btnIpdbUrl.Size = new System.Drawing.Size(38, 23);
-            this.btnIpdbUrl.TabIndex = 42;
-            this.btnIpdbUrl.UseVisualStyleBackColor = true;
-            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
             // 
             // SettingsForm
             // 

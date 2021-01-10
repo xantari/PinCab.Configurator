@@ -1,4 +1,6 @@
-﻿using PinCab.Configurator.Models;
+﻿using FluentDateTime;
+using Newtonsoft.Json;
+using PinCab.Configurator.Models;
 using PinCab.Configurator.Utils;
 using PinCab.Utils;
 using PinCab.Utils.Extensions;
@@ -11,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,33 +24,62 @@ namespace PinCab.Configurator
     public partial class DatabaseBrowserForm : Form
     {
         private readonly DatabaseManager _dbManager = new DatabaseManager();
-        private readonly List<DatabaseBrowserEntry> Entries = new List<DatabaseBrowserEntry>();
+        private BackgroundQueue _queue = new BackgroundQueue();
+
         public DatabaseBrowserForm()
         {
             InitializeComponent();
 
             _dbManager = new DatabaseManager(backgroundWorkerProgressBar.ReportProgress);
 
+            ConfigureFilters();
             ConfigureGrid();
             LoadDatabaseGrid();
+        }
+
+        private void ConfigureFilters()
+        {
+            //TODO: Load from the last state (create a database form manager that persists filter selections to .json setting file)
+            dateTimePickerBegin.Value = new DateTime(1900, 1, 1);
+            dateTimePickerEnd.Value = DateTime.Today.EndOfDay();
+            var databaseTypeList = EnumExtensions.GetEnumDescriptionList<DatabaseEntryType>();
+            databaseTypeList.Insert(0, "All");
+            cmbType.DataSource = databaseTypeList;
+
+            flowLayoutPanelTags.Padding = new Padding(3, 3, 3, 3);
         }
 
         private void LoadDatabaseGrid()
         {
             txtLog.Text += "Loading Databases...\r\n";
+            toolStripStatusLabel.Text = "Loading Databases...";
             var action = new DatabaseManagerBackgroundAction();
             action.Action = DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase;
             backgroundWorkerProgressBar.RunWorkerAsync(action);
+            //_queue.QueueTask(() => DownloadAndLoadDatabase());
+            //_queue.QueueTask(() => LoadTags());
+
+            //// The Progress<T> constructor captures our UI context,
+            ////  so the lambda will be run on the UI thread.
+            //var progress = new Progress<int>(percent =>
+            //{
+            //    toolStripProgressBar.Value = percent;
+            //});
+
+            //await Task.Run(() => DownloadAndLoadDatabase());
+            //await Task.Run(() => LoadTags());
         }
 
         private void ConfigureGrid()
         {
             foreach (DataGridViewColumn column in dataGridViewEntryList.Columns)
             {
-                column.SortMode = DataGridViewColumnSortMode.Automatic;
+                if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
+                    column.SortMode = DataGridViewColumnSortMode.Automatic;
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 column.Resizable = DataGridViewTriState.True;
             }
+            dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,14 +87,38 @@ namespace PinCab.Configurator
             Close();
         }
 
-        private void txtRomSearch_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            SearchByText();
+            RebindGridUsingFilter();
         }
 
-        private void SearchByText()
+        private List<DatabaseBrowserEntry> GetEntriesByFilterCriteria()
         {
-            vpinDatabaseSettingBindingSource.DataSource = Entries.Where(p => p.Title.Contains(txtRomSearch.Text)).ToSortableBindingList();
+            var list = _dbManager.Entries.Where(p => p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
+            list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
+                && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
+
+            if (cmbType.SelectedValue != null && cmbType.SelectedValue.ToString() != "All")
+            {
+                DatabaseEntryType type = cmbType.SelectedValue.ToString().GetValueFromDescription<DatabaseEntryType>();
+                list = list.Where(p => p.Type == type);
+            }
+            if (cmbDatabase.SelectedValue != null && cmbDatabase.SelectedValue.ToString() != "All")
+            {
+                DatabaseType type = cmbDatabase.SelectedValue.ToString().GetValueFromDescription<DatabaseType>();
+                list = list.Where(p => p.DatabaseType == type);
+            }
+            var tags = GetAllSelectedTags();
+            if (tags != null && tags.Count > 0)
+            {
+                list = list.Where(c => c.Tags.Any(g => tags.Contains(g)));
+            }
+            return list.ToList();
+        }
+
+        private void RebindGridUsingFilter()
+        {
+            vpinDatabaseSettingBindingSource.DataSource = GetEntriesByFilterCriteria().ToSortableBindingList();
         }
 
         private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -108,18 +164,18 @@ namespace PinCab.Configurator
 
         private DatabaseBrowserEntry GetActiveRowRom()
         {
-            var data = dataGridViewEntryList.DataSource as BindingSource;
+            var data = vpinDatabaseSettingBindingSource.DataSource as BindingSource;
             return data.Current as DatabaseBrowserEntry;
         }
 
         private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar.Value = e.ProgressPercentage;
+            toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorkerProgressBar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            progressBar.Value = 0;
+            toolStripProgressBar.Value = 0;
             var result = e.Result as ToolResult;
             if (result.OutputMessages)
             {
@@ -132,16 +188,43 @@ namespace PinCab.Configurator
             }
             else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.ProcessDatabase.ToString())
             {
-                //RefreshGrid();
+
             }
             else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString())
             {
                 if (result.Result != null)
                 {
                     var entries = result.Result as List<DatabaseBrowserEntry>;
-                    dataGridViewEntryList.DataSource = entries.ToSortableBindingList();
+                    vpinDatabaseSettingBindingSource.DataSource = entries.ToSortableBindingList();
+
+                    var action = new DatabaseManagerBackgroundAction();
+                    action.Action = DatabaseManagerBackgroundProgressAction.LoadTags;
+                    backgroundWorkerProgressBar.RunWorkerAsync(action);
+                    //For debugging tags and consolidating them
+                    //var tags = _dbManager.GetAllTags().OrderBy(c => c).ToList();
+                    //using (StreamWriter sw = new StreamWriter("C:\\test.json", false))
+                    //using (JsonWriter writer = new JsonTextWriter(sw))
+                    //{
+                    //    JsonSerializer serializer = new JsonSerializer();
+                    //    serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    //    serializer.NullValueHandling = NullValueHandling.Ignore;
+                    //    serializer.Formatting = Formatting.Indented;
+                    //    serializer.Serialize(writer, tags);
+                    //}
                 }
             }
+            else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.LoadTags.ToString())
+            {
+                var tags = result.Result as List<string>;
+                cmbTags.DataSource = tags;
+            }
+            UpdateToolstripStatus();
+        }
+
+        private void UpdateToolstripStatus()
+        {
+            var entriesInGrid = vpinDatabaseSettingBindingSource.DataSource as SortableBindingList<DatabaseBrowserEntry>;
+            toolStripStatusLabel.Text = "Total Database Entries: " + entriesInGrid.Count.ToString();
         }
 
         private void backgroundWorkerProgressBar_DoWork(object sender, DoWorkEventArgs e)
@@ -156,7 +239,7 @@ namespace PinCab.Configurator
                 toolResult.FunctionExecuted = arg.Action.ToString();
                 e.Result = toolResult;
             }
-            if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
+            else if (arg.Action == DatabaseManagerBackgroundProgressAction.ProcessDatabase)
             {
                 var result = _dbManager.GetAllEntries();
                 var toolResult = new ToolResult();
@@ -166,27 +249,55 @@ namespace PinCab.Configurator
                 toolResult.Result = result;
                 e.Result = toolResult;
             }
-            if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
+            else if (arg.Action == DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase)
             {
-                var result = _dbManager.RefreshAllDatabases();
-                List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
-                if (result.IsValid)
-                {
-                    _dbManager.LoadAllDatabases();
-                    entries = _dbManager.GetAllEntries();
-                }
-                var toolResult = new ToolResult(result);
-                toolResult.ToolName = DatabaseManager.ToolName;
-                toolResult.MessageType = ValidationMessageType.ToolMessage;
-                toolResult.FunctionExecuted = arg.Action.ToString();
-                toolResult.Result = entries;
-                toolResult.Messages.Add(new ValidationMessage()
-                {
-                    Level = MessageLevel.Information,
-                    Message = "Grid loaded."
-                });
-                e.Result = toolResult;
+                e.Result = DownloadAndLoadDatabase();
             }
+            else if (arg.Action == DatabaseManagerBackgroundProgressAction.LoadTags)
+            {
+                e.Result = LoadTags();
+            }
+        }
+
+        private ToolResult DownloadAndLoadDatabase()
+        {
+            var result = _dbManager.RefreshAllDatabases();
+            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            if (result.IsValid)
+            {
+                _dbManager.LoadAllDatabases();
+                entries = _dbManager.GetAllEntries();
+            }
+            var toolResult = new ToolResult(result);
+            toolResult.ToolName = DatabaseManager.ToolName;
+            toolResult.MessageType = ValidationMessageType.ToolMessage;
+            toolResult.FunctionExecuted = DatabaseManagerBackgroundProgressAction.DownloadAndLoadDatabase.ToString();
+            toolResult.Result = entries;
+            toolResult.Messages.AddRange(_dbManager.GetDatabaseVersionMessages());
+            toolResult.Messages.Add(new ValidationMessage()
+            {
+                Level = MessageLevel.Information,
+                Message = "Grid loaded."
+            });
+            return toolResult;
+        }
+
+        private ToolResult LoadTags()
+        {
+            //TODO: Load the tags based off of the current filter
+            var tags = _dbManager.GetAllTags(_dbManager.Entries).OrderBy(c => c).ToList();
+            tags.Insert(0, "(Select Tag)");
+            var toolResult = new ToolResult();
+            toolResult.ToolName = DatabaseManager.ToolName;
+            toolResult.MessageType = ValidationMessageType.ToolMessage;
+            toolResult.FunctionExecuted = DatabaseManagerBackgroundProgressAction.LoadTags.ToString();
+            toolResult.Result = tags;
+            toolResult.Messages.Add(new ValidationMessage()
+            {
+                Level = MessageLevel.Information,
+                Message = "Tags loaded."
+            });
+            return toolResult;
         }
 
         public void LogToolValidationResult(string command, ValidationResult result)
@@ -227,6 +338,48 @@ namespace PinCab.Configurator
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+
+        private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RebindGridUsingFilter();
+        }
+
+        private void dateTimePickerBegin_ValueChanged(object sender, EventArgs e)
+        {
+            RebindGridUsingFilter();
+        }
+
+        private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
+        {
+            RebindGridUsingFilter();
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RebindGridUsingFilter();
+        }
+
+        private void cmbTags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTags.SelectedItem != null && cmbTags.SelectedItem.ToString() != "(Select Tag)")
+            {
+                string tag = cmbTags.SelectedItem.ToString();
+                TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter); //Pass in action on what to do if a tag is removed
+                tagwinforms.Init();
+                flowLayoutPanelTags.Controls.Add(tagwinforms);
+                RebindGridUsingFilter();
+            }
+        }
+
+        public List<string> GetAllSelectedTags()
+        {
+            var list = new List<string>();
+            foreach (var control in flowLayoutPanelTags.Controls)
+            {
+                list.Add((control as Label).Text);
+            }
+            return list;
         }
     }
 }

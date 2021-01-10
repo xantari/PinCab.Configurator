@@ -6,6 +6,7 @@ using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,6 +29,9 @@ namespace PinCab.Utils.Utils
         public VpUniverseDatabase VpUniverseDatabase { get; private set; }
         public IpdbDatabase IpdbDatabase { get; private set; }
 
+        public List<DatabaseBrowserEntry> Entries { get; private set; }
+
+
         public const string ToolName = "Database Manager";
 
         private List<string> _fileContentsArray { get; set; } = new List<string>();
@@ -44,6 +48,7 @@ namespace PinCab.Utils.Utils
         {
             _settings = _settingManager.LoadSettings();
             _reportProgress = reportProgress;
+            Entries = new List<DatabaseBrowserEntry>();
         }
 
         public ProgramSettings Settings { get { return _settings; } }
@@ -205,7 +210,7 @@ namespace PinCab.Utils.Utils
 
         public List<DatabaseBrowserEntry> GetAllEntries()
         {
-            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            var entries = new List<DatabaseBrowserEntry>();
             _reportProgress?.Invoke(10);
             entries.AddRange(GetEntrysByDatabase(DatabaseType.VPForums));
             _reportProgress?.Invoke(30);
@@ -215,6 +220,46 @@ namespace PinCab.Utils.Utils
             _reportProgress?.Invoke(70);
             entries.AddRange(GetEntrysByDatabase(DatabaseType.VPinball));
             _reportProgress?.Invoke(100);
+            Entries = entries;
+            return entries;
+        }
+
+        public List<ValidationMessage> GetDatabaseVersionMessages()
+        {
+            var entries = new List<ValidationMessage>();
+            if (VpforumDatabase != null)
+            {
+                entries.Add(new ValidationMessage()
+                {
+                    Level = MessageLevel.Information,
+                    Message = "VPForum Database Last Updated (UTC): " + VpforumDatabase.LastRefreshDateUtc + " Local: " + VpforumDatabase.LastRefreshDateUtc.ToLocalTime()
+                });
+            }
+            if (VpinballDatabase != null)
+            {
+                entries.Add(new ValidationMessage()
+                {
+                    Level = MessageLevel.Information,
+                    Message = "VPinball Database Last Updated (UTC): " + VpinballDatabase.LastRefreshDateUtc + " Local: " + VpinballDatabase.LastRefreshDateUtc.ToLocalTime()
+                });
+            }
+            if (VpsDatabase != null)
+            {
+                entries.Add(new ValidationMessage()
+                {
+                    Level = MessageLevel.Information,
+                    Message = "VPS Spreadsheet Database Last Updated (UTC): " + VpsDatabase.LastRefreshDateUtc + " Local: " + VpsDatabase.LastRefreshDateUtc.ToLocalTime()
+                });
+            }
+            if (VpUniverseDatabase != null)
+            {
+                entries.Add(new ValidationMessage()
+                {
+                    Level = MessageLevel.Information,
+                    Message = "VPUniverse Database Last Updated (UTC): " + VpUniverseDatabase.LastRefreshDateUtc + " Local: " + VpUniverseDatabase.LastRefreshDateUtc.ToLocalTime()
+                });
+            }
+
             return entries;
         }
 
@@ -276,6 +321,7 @@ namespace PinCab.Utils.Utils
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
                 if (relatedGame != null) //Create the reverse link to the game
                     entry.RelatedEntries.Add(relatedGame);
+                entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.MediaPackFiles)
@@ -284,6 +330,7 @@ namespace PinCab.Utils.Utils
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
                 if (relatedGame != null) //Create the reverse link to the game
                     entry.RelatedEntries.Add(relatedGame);
+                entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.RomFiles)
@@ -292,6 +339,7 @@ namespace PinCab.Utils.Utils
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
                 if (relatedGame != null) //Create the reverse link to the game
                     entry.RelatedEntries.Add(relatedGame);
+                entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.TopperFiles)
@@ -300,6 +348,7 @@ namespace PinCab.Utils.Utils
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
                 if (relatedGame != null) //Create the reverse link to the game
                     entry.RelatedEntries.Add(relatedGame);
+                entries.Add(entry);
             }
 
             foreach (var item in VpforumDatabase.WheelArtFiles)
@@ -308,12 +357,178 @@ namespace PinCab.Utils.Utils
                 var relatedGame = entries.FirstOrDefault(c => c.Type == DatabaseEntryType.Table && c.RelatedEntries.Any(g => g.Url == entry.Url));
                 if (relatedGame != null) //Create the reverse link to the game
                     entry.RelatedEntries.Add(relatedGame);
+                entries.Add(entry);
             }
 
             //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
             //area of the database
 
             return entries;
+        }
+
+        /// <summary>
+        /// Attempts to normalize some of the tags and variations of tags to limit the tag list... lots of work to do here
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        private string NormalizeTag(string tag)
+        {
+            var t = tag.ToLower();
+            if (t == "wheel" || t == "wheel image")
+                t = "Wheel";
+            else if (t == "4k" || t == "4k;")
+                t = "4K";
+            else if (t.Contains("alvin g"))
+                t = "Alvin G";
+            else if (t == "b2s" || t == "b2s backglass" || t == "backglass" || t == "db2s" || t == "db2sdt" || t == "direct2bs" ||
+            t == "b2s fullscreen table" || t == "b2b")
+                t = "B2S";
+            else if (t == "dof")
+                t = "DOF";
+            else if (t == "em" || t == "em alternate" || t == "em electro mechanical" || t == "em table" || t == "em tables"
+                || t == "ems" || t == "electro" || t == "electromechanical")
+                t = "EM (Electro Mechanical)";
+            else if (t == "dt")
+                t = "Desktop";
+            else if (t.Contains("data east") || t.Contains("dataeast"))
+                t = "Data East";
+            else if (t == "(bailey" || t == "bailey")
+                t = "Bailey";
+            else if (t == "scifi" || t == "sci-fi" || t == "science fiction")
+                t = "Sci-Fi";
+            else if (t == "fullscreen")
+                t = "Full Screen";
+            else if (t.Contains("gottieb") || t.Contains("gottlieb") || t.Contains("gotlieb"))
+                t = "Gottlieb";
+            else if (t.Contains("adventure"))
+                t = "Adventure";
+            else if (t.Contains("dancing"))
+                t = "Dancing";
+            else if (t.Contains("desktop"))
+                t = "Desktop";
+            else if (t.Contains("aircraft"))
+                t = "Aircraft";
+            else if (t.Contains("american history"))
+                t = "American History";
+            else if (t.Contains("american places"))
+                t = "American Places";
+            else if (t.Contains("american west"))
+                t = "American West";
+            else if (t.Contains("amusement park"))
+                t = "Amusement Park";
+            else if (t.Contains("batman"))
+                t = "Batman";
+            else if (t.Contains("bally"))
+                t = "Bally";
+            else if (t.Contains("fantasy"))
+                t = "Fantasy";
+            else if (t.Contains("adventure"))
+                t = "Adventure";
+            else if (t.Contains("billiards"))
+                t = "Billiards";
+            else if (t.Contains("physmod") || t == "vp9_physmod")
+                t = "Physmod";
+            else if (t.Contains("sports"))
+                t = "Sports";
+            else if (t == "ss" || t == "solid state" || t == "solid")
+                t = "SS (Solid State)";
+            else if (t.Contains("spinball"))
+                t = "Spinball";
+            else if (t.Contains("stern"))
+                t = "Stern";
+            else if (t.Contains("taito"))
+                t = "Taito";
+            else if (t == "rom")
+                t = "ROM";
+            else if (t == "sam")
+                t = "SAM";
+            else if (t == "dmd")
+                t = "DMD";
+            else if (t.Contains("original"))
+                t = "Original";
+            else if (t.Contains("williams") || t.Contains("willaims") || t.Contains("wiliiams"))
+                t = "Williams";
+            else if (t.Contains("widebody") || t.Contains("wide body"))
+                t = "Wide Body";
+            else if (t.Contains("zaccaria"))
+                t = "Zaccaria";
+            else if (t.Contains("atari"))
+                t = "atari";
+            else if (t.Contains("cartoon"))
+                t = "Cartoon";
+            else if (t.Contains("celebrities"))
+                t = "Celebrities";
+            else if (t.Contains("licensed theme"))
+                t = "Licensed Theme";
+            else if (t.Contains("licensed"))
+                t = "Licensed Theme";
+            else if (t == "fss")
+                t = "FSS";
+            else if (t == "ssf")
+                t = "SSF";
+            else if (t == "visual pinball vr" || t == "vpvr" || t == "vr room" || t == "vr game room" || t == "vr tables"
+                || t == "vpx vr"
+            )
+                t = "VR";
+            else if (t == "virtual pinball x" || t == "visual pinball 10" || t == "visual pinball x" || t == "vp 10" || t == "vpx"
+                || t == "vp8 to vpx conversion" || t == "vp8/vp9 to vpx conversion" || t == "vp9 to vpx conversion"
+                || t == "vpx 10.6" || t == "vp10" || t.Contains("vpx")
+            )
+                t = "VPX";
+            else if (t == "vtp 9.9.5" || t == "vp92" || t == "vp915" || t== "vpinmame 9 recreations" || t == "vpinmame 9.x recreations"
+                || t == "vp9 fs cabinet b2s table." || t == "vp9" || t == "vp 9" || t == "vp 9.x" || t == "visual pinball 9"
+                || t == "bs70 vp 9.x cabinet fs b2s" || t == "bs80 vp 9.x cabinet fs b2s" || t == "vp9.2"
+            )
+                t = "VP9";
+            else if (tag.StartsWith("@")) //Filter out @author tags (we have those in other fields)
+                return null;
+            else if (tag.IsNumeric() && tag.Length > 4) //Remove bad year tags
+                return null;
+            //If the first character is not upper case, 
+            //upper case it to standardize a lot of combinations of say "arabian" == "Arabian", "atari" == "Atari"
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            t = textInfo.ToTitleCase(t);
+            return t;
+        }
+
+
+        public HashSet<string> GetAllTags(List<DatabaseBrowserEntry> entries)
+        {
+            var tags = new HashSet<string>();
+            _reportProgress?.Invoke(50);
+            if (Entries == null)
+            {
+                Log.Warning("{tool}: Database not loaded yet. Load database using GetAllEntries()", ToolName);
+                return tags;
+            }
+            foreach (var entry in entries)
+            {
+                var entryTags = GetTags(entry);
+                foreach (var itm in entryTags)
+                    tags.Add(itm);
+            }
+            _reportProgress?.Invoke(100);
+            return tags;
+        }
+
+        private HashSet<string> GetTags(DatabaseBrowserEntry entry)
+        {
+            var tags = new HashSet<string>();
+            if (entry.Tags != null)
+            {
+                foreach (var tag in entry.Tags)
+                    tags.Add(tag);
+            }
+            if (entry.RelatedEntries != null)
+            {
+                foreach (var relatedEntry in entry.RelatedEntries)
+                {
+                    var relatedTags = GetTags(relatedEntry); //recursively traverse all entries
+                    foreach (var tag in relatedTags)
+                        tags.Add(tag);
+                }
+            }
+            return tags;
         }
 
         private DatabaseBrowserEntry GetVpGameEntry(VpGame file, DatabaseType dbType)
@@ -331,12 +546,22 @@ namespace PinCab.Utils.Utils
                 Version = file.Version
             };
             entry.Tags.AddRange(file.TableInfo.ConvertTableInfoToTags());
-            entry.Tags.AddRange(file.Tags);
-            if (file.Date.HasValue) //Start with date
+            foreach (var tag in file.Tags)
+            {
+                if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
+                    && !entry.Authors.ToLower().Contains(tag.ToLower()) //Exclude tags that are also in the author field
+                )
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        entry.Tags.Add(t);
+                }
+            }
+            if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                 entry.LastUpdated = file.Date.Value;
-            if (file.CreateDate.HasValue) //Start with create date
+            if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                 entry.LastUpdated = file.CreateDate.Value;
-            if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+            if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                 entry.LastUpdated = file.LastUpdatedDate.Value;
             if (!string.IsNullOrEmpty(file.Features))
                 entry.Description += "\r\n\r\n" + file.Features;
@@ -344,7 +569,15 @@ namespace PinCab.Utils.Utils
 
             List<string> TagsByIpdbNumber = new List<string>();
             if (entry.IpdbId.HasValue)
-                entry.Tags.AddRange(GetTagsByIpdbNumber(entry.IpdbId.Value));
+            {
+                var ipdbTags = GetTagsByIpdbNumber(entry.IpdbId.Value);
+                foreach (var tag in ipdbTags)
+                {
+                    var t = NormalizeTag(tag);
+                    if (!string.IsNullOrEmpty(t))
+                        entry.Tags.Add(t);
+                }
+            }
 
             entry.Tags = entry.Tags.NormalizeTagList();
 
@@ -468,11 +701,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Wheel");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -497,11 +730,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Topper");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -526,11 +759,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Sound File");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -558,11 +791,11 @@ namespace PinCab.Utils.Utils
                 if (file.AltColor || file.Color)
                     entry.Tags.Add("Color");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -587,11 +820,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Pup Pack");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -616,11 +849,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("POV");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -645,11 +878,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Pinsound");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -674,11 +907,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Media Pack");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -703,11 +936,11 @@ namespace PinCab.Utils.Utils
 
                 entry.Tags.Add("Backglass");
 
-                if (file.Date.HasValue) //Start with date
+                if (file.Date.HasValue && file.Date.Value.Year != 1) //Start with date
                     entry.LastUpdated = file.Date.Value;
-                if (file.CreateDate.HasValue) //Start with create date
+                if (file.CreateDate.HasValue && file.CreateDate.Value.Year != 1) //Start with create date
                     entry.LastUpdated = file.CreateDate.Value;
-                if (file.LastUpdatedDate.HasValue) //If last updated is populated move to that instead
+                if (file.LastUpdatedDate.HasValue && file.LastUpdatedDate.Value.Year != 1) //If last updated is populated move to that instead
                     entry.LastUpdated = file.LastUpdatedDate.Value;
 
                 return entry;
@@ -729,10 +962,10 @@ namespace PinCab.Utils.Utils
                         list.Add(entry.DateOfManufacture.Value.Year.ToString());
                     if (!string.IsNullOrEmpty(entry.TypeShortName))
                         list.Add(entry.TypeShortName);
-                    if (!string.IsNullOrEmpty(entry.Theme))
-                        list.Add(entry.Theme);
-                    if (!string.IsNullOrEmpty(entry.MPU))
-                        list.Add(entry.MPU);
+                    //if (!string.IsNullOrEmpty(entry.Theme))
+                    //    list.Add(entry.Theme);
+                    //if (!string.IsNullOrEmpty(entry.MPU))
+                    //    list.Add(entry.MPU);
                 }
             }
             return list;

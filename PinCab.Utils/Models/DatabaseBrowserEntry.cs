@@ -41,6 +41,14 @@ namespace PinCab.Utils.Models
         }
         public DatabaseType DatabaseType { get; set; }
 
+        public string DatabaseTagsString
+        {
+            get
+            {
+                return string.Join(", ", Tags.ToArray());
+            }
+        }
+
         public List<DatabaseBrowserEntry> RelatedEntries { get; set; }
     }
 }

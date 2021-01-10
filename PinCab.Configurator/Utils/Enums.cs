@@ -18,6 +18,8 @@ namespace PinCab.Configurator.Utils
     {
         DownloadDatabases,
         ProcessDatabase,
-        DownloadAndLoadDatabase
+        DownloadAndLoadDatabase,
+        LoadTags,
+        RunAllQueuedTasks
     }
 }

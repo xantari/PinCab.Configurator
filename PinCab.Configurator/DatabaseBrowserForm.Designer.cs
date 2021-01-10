@@ -29,45 +29,51 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilieisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panelFilterCriteria = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelTags = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDatabase = new System.Windows.Forms.Label();
+            this.cmbDatabase = new System.Windows.Forms.ComboBox();
+            this.cmbType = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
+            this.lblEndDate = new System.Windows.Forms.Label();
+            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
+            this.lblBeginDate = new System.Windows.Forms.Label();
+            this.cmbTags = new System.Windows.Forms.ComboBox();
             this.lblTags = new System.Windows.Forms.Label();
+            this.lblFilteredTags = new System.Windows.Forms.Label();
             this.dateTimePickerBegin = new System.Windows.Forms.DateTimePicker();
             this.lblInfo = new System.Windows.Forms.Label();
             this.lblRomSearch = new System.Windows.Forms.Label();
-            this.txtRomSearch = new System.Windows.Forms.TextBox();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.dataGridViewEntryList = new System.Windows.Forms.DataGridView();
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.IpdbInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseTagsString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IpdbId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatabaseTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbType = new System.Windows.Forms.ComboBox();
-            this.cmbDatabase = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).BeginInit();
@@ -75,6 +81,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.statusStripBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -126,79 +133,133 @@
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
-            // panel1
+            // panelFilterCriteria
             // 
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.cmbDatabase);
-            this.panel1.Controls.Add(this.cmbType);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblTags);
-            this.panel1.Controls.Add(this.dateTimePickerBegin);
-            this.panel1.Controls.Add(this.lblInfo);
-            this.panel1.Controls.Add(this.lblRomSearch);
-            this.panel1.Controls.Add(this.txtRomSearch);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1049, 90);
-            this.panel1.TabIndex = 1;
+            this.panelFilterCriteria.Controls.Add(this.flowLayoutPanelTags);
+            this.panelFilterCriteria.Controls.Add(this.lblDatabase);
+            this.panelFilterCriteria.Controls.Add(this.cmbDatabase);
+            this.panelFilterCriteria.Controls.Add(this.cmbType);
+            this.panelFilterCriteria.Controls.Add(this.lblType);
+            this.panelFilterCriteria.Controls.Add(this.lblEndDate);
+            this.panelFilterCriteria.Controls.Add(this.dateTimePickerEnd);
+            this.panelFilterCriteria.Controls.Add(this.lblBeginDate);
+            this.panelFilterCriteria.Controls.Add(this.cmbTags);
+            this.panelFilterCriteria.Controls.Add(this.lblTags);
+            this.panelFilterCriteria.Controls.Add(this.lblFilteredTags);
+            this.panelFilterCriteria.Controls.Add(this.dateTimePickerBegin);
+            this.panelFilterCriteria.Controls.Add(this.lblInfo);
+            this.panelFilterCriteria.Controls.Add(this.lblRomSearch);
+            this.panelFilterCriteria.Controls.Add(this.txtSearch);
+            this.panelFilterCriteria.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelFilterCriteria.Location = new System.Drawing.Point(0, 24);
+            this.panelFilterCriteria.Name = "panelFilterCriteria";
+            this.panelFilterCriteria.Size = new System.Drawing.Size(1049, 84);
+            this.panelFilterCriteria.TabIndex = 1;
             // 
-            // label3
+            // flowLayoutPanelTags
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(438, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "End Date";
+            this.flowLayoutPanelTags.Location = new System.Drawing.Point(331, 32);
+            this.flowLayoutPanelTags.Name = "flowLayoutPanelTags";
+            this.flowLayoutPanelTags.Size = new System.Drawing.Size(706, 46);
+            this.flowLayoutPanelTags.TabIndex = 14;
             // 
-            // dateTimePicker1
+            // lblDatabase
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(496, 6);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(101, 20);
-            this.dateTimePicker1.TabIndex = 8;
+            this.lblDatabase.AutoSize = true;
+            this.lblDatabase.Location = new System.Drawing.Point(3, 58);
+            this.lblDatabase.Name = "lblDatabase";
+            this.lblDatabase.Size = new System.Drawing.Size(56, 13);
+            this.lblDatabase.TabIndex = 13;
+            this.lblDatabase.Text = "Database:";
             // 
-            // label2
+            // cmbDatabase
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(265, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Begin Date";
+            this.cmbDatabase.FormattingEnabled = true;
+            this.cmbDatabase.Items.AddRange(new object[] {
+            "All",
+            "VPForums",
+            "VPinball",
+            "VPS Spreadsheet",
+            "VPUniverse"});
+            this.cmbDatabase.Location = new System.Drawing.Point(65, 55);
+            this.cmbDatabase.Name = "cmbDatabase";
+            this.cmbDatabase.Size = new System.Drawing.Size(144, 21);
+            this.cmbDatabase.TabIndex = 12;
+            this.cmbDatabase.Text = "All";
+            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
             // 
-            // comboBox1
+            // cmbType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(52, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(204, 21);
-            this.comboBox1.TabIndex = 6;
+            this.cmbType.FormattingEnabled = true;
+            this.cmbType.Location = new System.Drawing.Point(644, 6);
+            this.cmbType.Name = "cmbType";
+            this.cmbType.Size = new System.Drawing.Size(227, 21);
+            this.cmbType.TabIndex = 11;
+            this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
-            // label1
+            // lblType
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Tags:";
+            this.lblType.AutoSize = true;
+            this.lblType.Location = new System.Drawing.Point(604, 12);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(34, 13);
+            this.lblType.TabIndex = 10;
+            this.lblType.Text = "Type:";
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.AutoSize = true;
+            this.lblEndDate.Location = new System.Drawing.Point(438, 10);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(52, 13);
+            this.lblEndDate.TabIndex = 9;
+            this.lblEndDate.Text = "End Date";
+            // 
+            // dateTimePickerEnd
+            // 
+            this.dateTimePickerEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(496, 6);
+            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(101, 20);
+            this.dateTimePickerEnd.TabIndex = 8;
+            this.dateTimePickerEnd.ValueChanged += new System.EventHandler(this.dateTimePickerEnd_ValueChanged);
+            // 
+            // lblBeginDate
+            // 
+            this.lblBeginDate.AutoSize = true;
+            this.lblBeginDate.Location = new System.Drawing.Point(265, 10);
+            this.lblBeginDate.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.lblBeginDate.Name = "lblBeginDate";
+            this.lblBeginDate.Size = new System.Drawing.Size(60, 13);
+            this.lblBeginDate.TabIndex = 7;
+            this.lblBeginDate.Text = "Begin Date";
+            // 
+            // cmbTags
+            // 
+            this.cmbTags.FormattingEnabled = true;
+            this.cmbTags.Location = new System.Drawing.Point(52, 30);
+            this.cmbTags.Name = "cmbTags";
+            this.cmbTags.Size = new System.Drawing.Size(204, 21);
+            this.cmbTags.TabIndex = 6;
+            this.cmbTags.SelectedIndexChanged += new System.EventHandler(this.cmbTags_SelectedIndexChanged);
             // 
             // lblTags
             // 
             this.lblTags.AutoSize = true;
-            this.lblTags.Location = new System.Drawing.Point(262, 36);
+            this.lblTags.Location = new System.Drawing.Point(12, 33);
             this.lblTags.Name = "lblTags";
-            this.lblTags.Size = new System.Drawing.Size(71, 13);
-            this.lblTags.TabIndex = 4;
-            this.lblTags.Text = "Filtered Tags:";
+            this.lblTags.Size = new System.Drawing.Size(34, 13);
+            this.lblTags.TabIndex = 5;
+            this.lblTags.Text = "Tags:";
+            // 
+            // lblFilteredTags
+            // 
+            this.lblFilteredTags.AutoSize = true;
+            this.lblFilteredTags.Location = new System.Drawing.Point(262, 36);
+            this.lblFilteredTags.Name = "lblFilteredTags";
+            this.lblFilteredTags.Size = new System.Drawing.Size(71, 13);
+            this.lblFilteredTags.TabIndex = 4;
+            this.lblFilteredTags.Text = "Filtered Tags:";
             // 
             // dateTimePickerBegin
             // 
@@ -207,6 +268,7 @@
             this.dateTimePickerBegin.Name = "dateTimePickerBegin";
             this.dateTimePickerBegin.Size = new System.Drawing.Size(101, 20);
             this.dateTimePickerBegin.TabIndex = 3;
+            this.dateTimePickerBegin.ValueChanged += new System.EventHandler(this.dateTimePickerBegin_ValueChanged);
             // 
             // lblInfo
             // 
@@ -227,13 +289,13 @@
             this.lblRomSearch.TabIndex = 1;
             this.lblRomSearch.Text = "Search";
             // 
-            // txtRomSearch
+            // txtSearch
             // 
-            this.txtRomSearch.Location = new System.Drawing.Point(51, 3);
-            this.txtRomSearch.Name = "txtRomSearch";
-            this.txtRomSearch.Size = new System.Drawing.Size(205, 20);
-            this.txtRomSearch.TabIndex = 0;
-            this.txtRomSearch.TextChanged += new System.EventHandler(this.txtRomSearch_TextChanged);
+            this.txtSearch.Location = new System.Drawing.Point(51, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(205, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // dataGridViewEntryList
             // 
@@ -244,6 +306,7 @@
             this.dataGridViewEntryList.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridViewEntryList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.titleDataGridViewTextBoxColumn,
+            this.DatabaseTagsString,
             this.Url,
             this.IpdbId,
             this.Version,
@@ -256,7 +319,7 @@
             this.dataGridViewEntryList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEntryList.Name = "dataGridViewEntryList";
             this.dataGridViewEntryList.ReadOnly = true;
-            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 324);
+            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 288);
             this.dataGridViewEntryList.TabIndex = 2;
             this.dataGridViewEntryList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewEntryList_DataBindingComplete);
             // 
@@ -285,14 +348,6 @@
             // 
             this.vpinDatabaseSettingBindingSource.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
             // 
-            // progressBar
-            // 
-            this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar.Location = new System.Drawing.Point(0, 532);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(1049, 23);
-            this.progressBar.TabIndex = 3;
-            // 
             // txtLog
             // 
             this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -300,13 +355,13 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(1049, 90);
+            this.txtLog.Size = new System.Drawing.Size(1049, 133);
             this.txtLog.TabIndex = 4;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 114);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 108);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -317,8 +372,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtLog);
-            this.splitContainer1.Size = new System.Drawing.Size(1049, 418);
-            this.splitContainer1.SplitterDistance = 324;
+            this.splitContainer1.Size = new System.Drawing.Size(1049, 425);
+            this.splitContainer1.SplitterDistance = 288;
             this.splitContainer1.TabIndex = 5;
             // 
             // backgroundWorkerProgressBar
@@ -328,6 +383,36 @@
             this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
             this.backgroundWorkerProgressBar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerProgressBar_RunWorkerCompleted);
             // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel.Text = "Status Here";
+            // 
+            // toolStripStatusLabelSpacer
+            // 
+            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(865, 17);
+            this.toolStripStatusLabelSpacer.Spring = true;
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // statusStripBottom
+            // 
+            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel,
+            this.toolStripStatusLabelSpacer,
+            this.toolStripProgressBar});
+            this.statusStripBottom.Location = new System.Drawing.Point(0, 533);
+            this.statusStripBottom.Name = "statusStripBottom";
+            this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
+            this.statusStripBottom.TabIndex = 6;
+            this.statusStripBottom.Text = "statusStrip1";
+            // 
             // titleDataGridViewTextBoxColumn
             // 
             this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
@@ -336,6 +421,17 @@
             this.titleDataGridViewTextBoxColumn.ReadOnly = true;
             this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.titleDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // DatabaseTagsString
+            // 
+            this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DatabaseTagsString.HeaderText = "Tags";
+            this.DatabaseTagsString.Name = "DatabaseTagsString";
+            this.DatabaseTagsString.ReadOnly = true;
+            this.DatabaseTagsString.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DatabaseTagsString.Width = 37;
             // 
             // Url
             // 
@@ -385,56 +481,22 @@
             this.DatabaseTypeString.ReadOnly = true;
             this.DatabaseTypeString.Width = 47;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(604, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Type:";
-            // 
-            // cmbType
-            // 
-            this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(644, 6);
-            this.cmbType.Name = "cmbType";
-            this.cmbType.Size = new System.Drawing.Size(227, 21);
-            this.cmbType.TabIndex = 11;
-            // 
-            // cmbDatabase
-            // 
-            this.cmbDatabase.FormattingEnabled = true;
-            this.cmbDatabase.Location = new System.Drawing.Point(644, 33);
-            this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(144, 21);
-            this.cmbDatabase.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(582, 36);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Database:";
-            // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 555);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelFilterCriteria);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.statusStripBottom);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DatabaseBrowserForm";
             this.Text = "Database Browser";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelFilterCriteria.ResumeLayout(false);
+            this.panelFilterCriteria.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).EndInit();
@@ -443,6 +505,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.statusStripBottom.ResumeLayout(false);
+            this.statusStripBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,39 +517,44 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelFilterCriteria;
         private System.Windows.Forms.DataGridView dataGridViewEntryList;
         private System.Windows.Forms.BindingSource vpinDatabaseSettingBindingSource;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label lblRomSearch;
-        private System.Windows.Forms.TextBox txtRomSearch;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGridActions;
         private System.Windows.Forms.ToolStripMenuItem IpdbInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem goToUrlToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorkerProgressBar;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblBeginDate;
+        private System.Windows.Forms.ComboBox cmbTags;
         private System.Windows.Forms.Label lblTags;
+        private System.Windows.Forms.Label lblFilteredTags;
         private System.Windows.Forms.DateTimePicker dateTimePickerBegin;
         private System.Windows.Forms.ToolStripMenuItem utilieisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshDatabaseToolStripMenuItem;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label lblEndDate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerEnd;
+        private System.Windows.Forms.Label lblDatabase;
+        private System.Windows.Forms.ComboBox cmbDatabase;
+        private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpacer;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.StatusStrip statusStripBottom;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTags;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTagsString;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewTextBoxColumn IpdbId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Version;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeString;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTypeString;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbDatabase;
-        private System.Windows.Forms.ComboBox cmbType;
-        private System.Windows.Forms.Label label4;
     }
 }

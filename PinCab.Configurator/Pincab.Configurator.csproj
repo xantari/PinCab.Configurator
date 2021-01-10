@@ -103,6 +103,9 @@
     <Reference Include="EDIDParser, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EDIDParser.1.2.0.1\lib\net45\EDIDParser.dll</HintPath>
     </Reference>
+    <Reference Include="FluentDateTime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=6ccbc613702e6c71, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentDateTime.2.0.0\lib\netstandard2.0\FluentDateTime.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.VPinMAMELib">
       <HintPath>..\Vendor\Interop.VPinMAMELib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>

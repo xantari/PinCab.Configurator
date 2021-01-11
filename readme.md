@@ -61,7 +61,7 @@ Wiki here: https://github.com/xantari/PinCab.Configurator/wiki (Or click on Wiki
 
 # Instructions
 
-If you want to backup the display settings the key file is DisplaySettings.json in the application folder. This file is automatically created when you first setup your display configuration.
+If you want to backup the display settings the key file is PincabSettings.json in the application folder. This file is automatically created when you first setup your display configuration.
 
 Logging information is in the Log.txt file in the application root folder.
 

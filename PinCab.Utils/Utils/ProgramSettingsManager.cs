@@ -23,7 +23,7 @@ namespace PinCab.Utils.Utils
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
-                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\DisplaySettings.json";
+                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\PincabSettings.json";
             else
                 settingsFileNameAndPath = fileAndPathToSettingFile;
             if (File.Exists(settingsFileNameAndPath))
@@ -56,7 +56,7 @@ namespace PinCab.Utils.Utils
         {
             string settingsFileNameAndPath;
             if (fileAndPathToSettingFile == string.Empty)
-                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\DisplaySettings.json";
+                settingsFileNameAndPath = ApplicationHelpers.GetApplicationFolder() + "\\PincabSettings.json";
             else
                 settingsFileNameAndPath = fileAndPathToSettingFile;
 

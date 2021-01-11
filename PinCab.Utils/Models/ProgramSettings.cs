@@ -18,6 +18,13 @@ namespace PinCab.Utils.Models
             DisplaySettings = new List<DisplaySettings>();
             RecordTimeSeconds = 30;
             RecordFramerate = 30;
+            DatabaseUpdateRecheckMinutes = 60;
+            LastDatabaseRefreshTimeUtc = new DateTime(1900, 1, 1);
+            IPDBDatabaseUrl = "https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json";
+            VPForumsDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpforumsdatabase.json";
+            VPinballDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpinballdatabase.json";
+            VPUniverseDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpuniversedatabase.json";
+            VPSSpreadsheetUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpsdatabase.json";
         }
 
         public string FFMpegFullPath { get; set; }

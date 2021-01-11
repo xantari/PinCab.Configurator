@@ -1,4 +1,7 @@
-﻿using Serilog;
+﻿using PinCab.Utils;
+using PinCab.Utils.Models;
+using PinCab.Utils.Utils;
+using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
@@ -33,6 +36,18 @@ namespace PinCab.Configurator
 
             Log.Information("Application Started. Version: {version}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
+            MigrateFromPreviousVersion();
+
+            ProgramSettingsManager settingManager = new ProgramSettingsManager();
+            var settings = settingManager.LoadSettings();
+            if (settings == null)
+            {
+                string msg = "Settings file not found. Creating brand new file.";
+                Log.Information(msg);
+                settings = new ProgramSettings();
+                settingManager.SaveSettings(settings);
+            }
+
             if (args.Count() > 0)
             {
                 if (args.Contains("-screenreseditor"))
@@ -46,6 +61,18 @@ namespace PinCab.Configurator
             }
             else
                 Application.Run(new MainForm());
+        }
+
+        private static void MigrateFromPreviousVersion()
+        {
+            //1/11/2021 - MRO: Changed the primary settings config file name, migrate old name to new
+            var oldSettingsFileName = ApplicationHelpers.GetApplicationFolder() + "\\DisplaySettings.json";
+            var newSettingsFileName = ApplicationHelpers.GetApplicationFolder() + "\\PincabSettings.json";
+            if (File.Exists(oldSettingsFileName) && !File.Exists(newSettingsFileName))
+            {
+                File.Move(oldSettingsFileName, newSettingsFileName);
+                Log.Information("Migrated settings file from old name (DisplaySettings.json) to (PincabSettings.json)");
+            }
         }
 
         private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)

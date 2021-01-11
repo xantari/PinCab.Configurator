@@ -64,14 +64,6 @@ namespace PinCab.Configurator
         private void UpdateDisplayDetailsFromSettingsFile()
         {
             _settings = settingManager.LoadSettings();
-            if (_settings == null)
-            {
-                string msg = "Settings file not found. Creating brand new file.";
-                Log.Information(msg);
-                txtData.Text += msg + "\r\n";
-                _settings = new ProgramSettings();
-                settingManager.SaveSettings(_settings);
-            }
             foreach (var display in _settings?.DisplaySettings)
             {
                 var loadedDisplaySettingToUpdate = _displayDetails.GetByDisplayName(display.DisplayName);
@@ -82,8 +74,8 @@ namespace PinCab.Configurator
                 }
                 else
                 {
-                    Log.Information("Display: {display} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.", display.DisplayName);
-                    txtData.Text += $"Display: {display.DisplayName} not found. Unable to find settings file data to the display. You may need to manually edit the DisplaySettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.\r\n";
+                    Log.Information("Display: {display} not found. Unable to find settings file data to the display. You may need to manually edit the PincabSettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.", display.DisplayName);
+                    txtData.Text += $"Display: {display.DisplayName} not found. Unable to find settings file data to the display. You may need to manually edit the PincabSettings.json file to re-number your displays or reboot windows if you just installed graphics driver updates to restore the original display numbers.\r\n";
                 }
             }
         }

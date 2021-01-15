@@ -1,4 +1,4 @@
-# PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCabConfigurator)
+# PinCab Configurator [![Build status](https://ci.appveyor.com/api/projects/status/rdqo2s3b82l0gpe7?svg=true)](https://ci.appveyor.com/project/xantari/PinCabConfigurator) ![GitHub all releases](https://img.shields.io/github/downloads/xantari/pincab.configurator/total)
 
 This tool allows you to manage your games in any front end, verify your screen settings across all virtual pinball related programs and has other virtual pinball related helper tools.
 

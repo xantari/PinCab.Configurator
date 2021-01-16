@@ -17,6 +17,10 @@ Wiki here: https://github.com/xantari/PinCab.Configurator/wiki (Or click on Wiki
 
 .NET Framework 4.7.2 or higher
 
+# Downloads
+
+Click on the "releases" link on the right hand side of this page. Or [Click here](https://github.com/xantari/PinCab.Configurator/releases)
+
 # Features
 
 1. Reads Monitors EDID information to display manufacturer details such as Model / Serial number of connected displays

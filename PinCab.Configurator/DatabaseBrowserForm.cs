@@ -415,7 +415,10 @@ namespace PinCab.Configurator
 
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            if (e.ListChangedType != ListChangedType.Reset)
+            {
+                dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
             //dataGridViewEntryList.FastAutoSizeColumns();
             //var colSizes = WinformsExtensions.GetAutoSizeColumnsWidth(dataGridViewEntryList);
             //WinformsExtensions.SetAutoSizeColumnsWidth(dataGridViewEntryList, colSizes);
@@ -512,7 +515,7 @@ namespace PinCab.Configurator
 
         private void dataGridViewChildEntries_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            dataGridViewChildEntries.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
 
         private void dataGridViewChildEntries_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
@@ -566,7 +569,7 @@ namespace PinCab.Configurator
         {
             var entry = GetActiveRowEntry();
             //Now bind the child grid
-            bindingSourceChildEntries.DataSource = entry.RelatedEntries.ToSortableBindingList();
+            bindingSourceChildEntries.DataSource = entry?.RelatedEntries.ToSortableBindingList();
         }
 
         private void DatabaseBrowserForm_FormClosing(object sender, FormClosingEventArgs e)

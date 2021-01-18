@@ -613,8 +613,17 @@ namespace PinCab.Configurator
         private void validateallSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
-            //TODO: Fill this in
-            MessageBox.Show("Not implemented yet.");
+
+            ValidateMonitorConfiguration();
+            helper.ValidatePinballX();
+            helper.ValidateB2sSettings();
+            helper.ValidateFutureDmd();
+            helper.ValidateUltraDmdSettings();
+            helper.ValidateDmdDeviceIniSettings();
+            helper.ValidateVpinMameDefaultKey();
+            helper.ValidatePinupPlayerSettings();
+            helper.ValidatePinballYSettings();
+            helper.WritePRocSettings(); //We don't write to P-ROC at this time, just echo the settings
         }
 
         private void b2SScreenresEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -739,7 +748,7 @@ namespace PinCab.Configurator
         private void validatepROCSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             helper.ClearMessages();
-            helper.WritePRocSettings();
+            helper.WritePRocSettings(); //No validation available, we just write out the settings to apply to the text file
         }
 
         private void writepRocSettingsToolStripMenuItem_Click(object sender, EventArgs e)

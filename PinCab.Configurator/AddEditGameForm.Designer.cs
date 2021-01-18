@@ -56,7 +56,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnViewIpdb = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -82,9 +81,10 @@
             this.checkBox12 = new System.Windows.Forms.CheckBox();
             this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.lblGameDatabase = new System.Windows.Forms.Label();
-            this.lnkToGameDatabaseId = new System.Windows.Forms.Button();
             this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.btnGameUrl = new System.Windows.Forms.Button();
+            this.btnIpdbUrl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -314,15 +314,6 @@
             this.label11.TabIndex = 32;
             this.label11.Text = "Type";
             // 
-            // btnViewIpdb
-            // 
-            this.btnViewIpdb.Location = new System.Drawing.Point(167, 212);
-            this.btnViewIpdb.Name = "btnViewIpdb";
-            this.btnViewIpdb.Size = new System.Drawing.Size(91, 23);
-            this.btnViewIpdb.TabIndex = 34;
-            this.btnViewIpdb.Text = "View IPDB Site";
-            this.btnViewIpdb.UseVisualStyleBackColor = true;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -437,7 +428,7 @@
             // 
             // btnFillFromIpdb
             // 
-            this.btnFillFromIpdb.Location = new System.Drawing.Point(264, 212);
+            this.btnFillFromIpdb.Location = new System.Drawing.Point(199, 210);
             this.btnFillFromIpdb.Name = "btnFillFromIpdb";
             this.btnFillFromIpdb.Size = new System.Drawing.Size(98, 23);
             this.btnFillFromIpdb.TabIndex = 49;
@@ -549,27 +540,9 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(12, 428);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(99, 13);
+            this.label17.Size = new System.Drawing.Size(54, 13);
             this.label17.TabIndex = 60;
-            this.label17.Text = "Game Database Id:";
-            // 
-            // lblGameDatabase
-            // 
-            this.lblGameDatabase.AutoSize = true;
-            this.lblGameDatabase.Location = new System.Drawing.Point(118, 428);
-            this.lblGameDatabase.Name = "lblGameDatabase";
-            this.lblGameDatabase.Size = new System.Drawing.Size(25, 13);
-            this.lblGameDatabase.TabIndex = 61;
-            this.lblGameDatabase.Text = "ID#";
-            // 
-            // lnkToGameDatabaseId
-            // 
-            this.lnkToGameDatabaseId.Location = new System.Drawing.Point(179, 422);
-            this.lnkToGameDatabaseId.Name = "lnkToGameDatabaseId";
-            this.lnkToGameDatabaseId.Size = new System.Drawing.Size(150, 23);
-            this.lnkToGameDatabaseId.TabIndex = 62;
-            this.lnkToGameDatabaseId.Text = "Link to Game Database";
-            this.lnkToGameDatabaseId.UseVisualStyleBackColor = true;
+            this.label17.Text = "Game Url:";
             // 
             // textBox12
             // 
@@ -578,13 +551,45 @@
             this.textBox12.Size = new System.Drawing.Size(80, 20);
             this.textBox12.TabIndex = 43;
             // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(81, 425);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(366, 20);
+            this.textBox13.TabIndex = 61;
+            // 
+            // btnGameUrl
+            // 
+            this.btnGameUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnGameUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGameUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGameUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnGameUrl.Location = new System.Drawing.Point(453, 425);
+            this.btnGameUrl.Name = "btnGameUrl";
+            this.btnGameUrl.Size = new System.Drawing.Size(27, 23);
+            this.btnGameUrl.TabIndex = 62;
+            this.btnGameUrl.UseVisualStyleBackColor = true;
+            // 
+            // btnIpdbUrl
+            // 
+            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnIpdbUrl.Location = new System.Drawing.Point(167, 210);
+            this.btnIpdbUrl.Name = "btnIpdbUrl";
+            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnIpdbUrl.TabIndex = 63;
+            this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            // 
             // AddEditGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 583);
-            this.Controls.Add(this.lnkToGameDatabaseId);
-            this.Controls.Add(this.lblGameDatabase);
+            this.Controls.Add(this.btnIpdbUrl);
+            this.Controls.Add(this.btnGameUrl);
+            this.Controls.Add(this.textBox13);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.checkBox13);
             this.Controls.Add(this.checkBox12);
@@ -611,7 +616,6 @@
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.btnViewIpdb);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox6);
@@ -677,7 +681,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnViewIpdb;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox8;
@@ -703,8 +706,9 @@
         private System.Windows.Forms.CheckBox checkBox12;
         private System.Windows.Forms.CheckBox checkBox13;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label lblGameDatabase;
-        private System.Windows.Forms.Button lnkToGameDatabaseId;
         private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Button btnGameUrl;
+        private System.Windows.Forms.Button btnIpdbUrl;
     }
 }

@@ -360,7 +360,7 @@ namespace PinCab.Configurator.Utils
         {
             var util = new PinballFxUtil();
             var result = util.GetDisplayDetails(_displayDetails);
-            LogToolValidationResult("GetDisplayDetails", result);
+            LogToolValidationResult(PinballFxUtil.ToolName, result);
             _txtData.Text += $"{PinballFxUtil.ToolName}: Write command completed.\r\n";
             Log.Information($"{PinballFxUtil.ToolName}: Write command completed.");
         }
@@ -369,7 +369,7 @@ namespace PinCab.Configurator.Utils
         {
             var util = new ProcUtil();
             var result = util.GetDisplayDetails(_displayDetails);
-            LogToolValidationResult("GetDisplayDetails", result);
+            LogToolValidationResult(ProcUtil.ToolName, result);
             _txtData.Text += $"{ProcUtil.ToolName}: Write command completed.\r\n";
             Log.Information($"{ProcUtil.ToolName}: Write command completed.");
         }

@@ -54,7 +54,7 @@ namespace PinCab.Utils.ViewModels
         /// <summary>
         /// Linked VPin Game Database Id, for eventual game database for easy updates to tables
         /// </summary>
-        public int? VPinGameDatabaseId { get; set; }
+        //public int? VPinGameDatabaseId { get; set; }
 
         //Media Statuses of found media
         public MediaStatus BackglassStatus { get; set; }
@@ -72,5 +72,10 @@ namespace PinCab.Utils.ViewModels
         public bool HasTableAudio { get; set; }
 
         public List<MediaItem> MediaItems { get; set; }
+
+        public string TableFileUrl { get; set; }
+        public bool Favorite { get; set; }
+        public int TimesPlayed { get; set; }
+        public int SecondsPlayed { get; set; }
     }
 }

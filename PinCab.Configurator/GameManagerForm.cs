@@ -96,9 +96,24 @@ namespace PinCab.Configurator
             }
         }
 
+        private FrontEndGameViewModel GetActiveRow()
+        {
+            var data = dataGridViewGameList.DataSource as BindingSource;
+            return data.Current as FrontEndGameViewModel;
+        }
+
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                var mediaAuditForm = new AddEditGameForm(row, _manager);
+                var result = mediaAuditForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    RefreshGameGrid();
+                }
+            }
         }
 
         private void mediaAuditToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,7 +133,8 @@ namespace PinCab.Configurator
             {
                 var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
                 _fullGameListCache = _manager.GetGamesForFrontEndAndDatabase(frontEnd, cmbDatabase.SelectedItem.ToString());
-                dataGridViewGameList.DataSource = _fullGameListCache.ToSortableBindingList();
+                frontEndGameBindingSource.DataSource = _fullGameListCache.ToSortableBindingList();
+
                 if (frontEnd.System == FrontEndSystem.PinballX)
                 {
                     var system = _manager.PinballXSystems.FirstOrDefault(p => p.DatabaseFiles.Any(c => c.Contains(cmbDatabase.SelectedItem.ToString())));
@@ -127,7 +143,7 @@ namespace PinCab.Configurator
                     else
                         lblDatabaseStatus.Text = "Disabled";
                 }
-                
+
             }
         }
 
@@ -182,6 +198,22 @@ namespace PinCab.Configurator
         private void dataGridViewGameList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridViewGameList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        }
+
+        private void dataGridViewGameList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                var mediaAuditForm = new AddEditGameForm(row, _manager);
+                var result = mediaAuditForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    RefreshGameGrid();
+                }
+            }
         }
     }
 }

@@ -49,5 +49,12 @@ namespace PinCab.Utils
             }
             return sb.ToString();
         }
+
+        public static string IfEmptyThenNull(this string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return null;
+            return text;
+        }
     }
 }

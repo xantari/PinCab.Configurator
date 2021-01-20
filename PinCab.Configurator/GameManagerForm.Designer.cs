@@ -53,7 +53,6 @@ namespace PinCab.Configurator
             this.dateModifiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.romDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backglassStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dMDStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.realDMDColorStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +75,9 @@ namespace PinCab.Configurator
             this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.markMyVersionAsLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -96,9 +98,6 @@ namespace PinCab.Configurator
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.markMyVersionAsLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -156,7 +155,6 @@ namespace PinCab.Configurator
             this.dateModifiedDataGridViewTextBoxColumn,
             this.hasUpdatesAvailableDataGridViewCheckBoxColumn,
             this.romDataGridViewTextBoxColumn,
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn,
             this.backglassStatusDataGridViewTextBoxColumn,
             this.dMDStatusDataGridViewTextBoxColumn,
             this.realDMDColorStatusDataGridViewTextBoxColumn,
@@ -179,6 +177,7 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
             this.dataGridViewGameList.TabIndex = 2;
+            this.dataGridViewGameList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGameList_CellDoubleClick);
             this.dataGridViewGameList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewGameList_DataBindingComplete);
             // 
             // fileNameDataGridViewTextBoxColumn
@@ -349,15 +348,6 @@ namespace PinCab.Configurator
             this.romDataGridViewTextBoxColumn.ReadOnly = true;
             this.romDataGridViewTextBoxColumn.Width = 54;
             // 
-            // vPinGameDatabaseIdDataGridViewTextBoxColumn
-            // 
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.DataPropertyName = "VPinGameDatabaseId";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.HeaderText = "VPinGameDatabaseId";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Name = "vPinGameDatabaseIdDataGridViewTextBoxColumn";
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Visible = false;
-            this.vPinGameDatabaseIdDataGridViewTextBoxColumn.Width = 137;
-            // 
             // backglassStatusDataGridViewTextBoxColumn
             // 
             this.backglassStatusDataGridViewTextBoxColumn.DataPropertyName = "BackglassStatus";
@@ -477,7 +467,7 @@ namespace PinCab.Configurator
             this.showGamesWithUpdatesToolStripMenuItem,
             this.markMyVersionAsLatestToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 268);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 246);
             // 
             // editToolStripMenuItem
             // 
@@ -528,6 +518,24 @@ namespace PinCab.Configurator
             this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
             this.viewIPDBPageToolStripMenuItem.Click += new System.EventHandler(this.viewIPDBPageToolStripMenuItem_Click);
+            // 
+            // findGamesFromIPDBNotInMyDatabaseToolStripMenuItem
+            // 
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Name = "findGamesFromIPDBNotInMyDatabaseToolStripMenuItem";
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Text = "Find Games From IPDB Not in My Database";
+            // 
+            // showGamesWithUpdatesToolStripMenuItem
+            // 
+            this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
+            this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
+            // 
+            // markMyVersionAsLatestToolStripMenuItem
+            // 
+            this.markMyVersionAsLatestToolStripMenuItem.Name = "markMyVersionAsLatestToolStripMenuItem";
+            this.markMyVersionAsLatestToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.markMyVersionAsLatestToolStripMenuItem.Text = "Mark My Version as Latest";
             // 
             // frontEndGameBindingSource
             // 
@@ -694,7 +702,7 @@ namespace PinCab.Configurator
             // mediaAuditToolStripMenuItem
             // 
             this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.mediaAuditToolStripMenuItem.Text = "Media Audit";
             this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
             // 
@@ -704,24 +712,6 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
-            // findGamesFromIPDBNotInMyDatabaseToolStripMenuItem
-            // 
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Name = "findGamesFromIPDBNotInMyDatabaseToolStripMenuItem";
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Text = "Find Games From IPDB Not in My Database";
-            // 
-            // showGamesWithUpdatesToolStripMenuItem
-            // 
-            this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
-            this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
-            // 
-            // markMyVersionAsLatestToolStripMenuItem
-            // 
-            this.markMyVersionAsLatestToolStripMenuItem.Name = "markMyVersionAsLatestToolStripMenuItem";
-            this.markMyVersionAsLatestToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.markMyVersionAsLatestToolStripMenuItem.Text = "Mark My Version as Latest";
             // 
             // GameManagerForm
             // 
@@ -804,7 +794,6 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewTextBoxColumn dateModifiedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasUpdatesAvailableDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn romDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vPinGameDatabaseIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn backglassStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dMDStatusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn realDMDColorStatusDataGridViewTextBoxColumn;

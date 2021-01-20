@@ -33,8 +33,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.colorDialogDmdColor = new System.Windows.Forms.ColorDialog();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chkEnabled = new System.Windows.Forms.CheckBox();
+            this.txtAlternateExe = new System.Windows.Forms.TextBox();
             this.chkFavorite = new System.Windows.Forms.CheckBox();
             this.txtTableName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,47 +44,41 @@
             this.txtComment = new System.Windows.Forms.TextBox();
             this.txtManufacturer = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtYear = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtTheme = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtVersion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtIpdb = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.txtType = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.txtRom = new System.Windows.Forms.TextBox();
+            this.txtPlayCount = new System.Windows.Forms.TextBox();
+            this.txtSeconds = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.txtAdded = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.chkHideDmd = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.chkHideBackglass = new System.Windows.Forms.CheckBox();
+            this.chkHideTopper = new System.Windows.Forms.CheckBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.btnFillFromIpdb = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
-            this.checkBox12 = new System.Windows.Forms.CheckBox();
-            this.checkBox13 = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.txtModified = new System.Windows.Forms.TextBox();
+            this.txtGameUrl = new System.Windows.Forms.TextBox();
             this.btnGameUrl = new System.Windows.Forms.Button();
             this.btnIpdbUrl = new System.Windows.Forms.Button();
+            this.txtRating = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtPlayers = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -126,26 +120,27 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Alternate Exe";
             // 
-            // checkBox1
+            // chkEnabled
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(308, 52);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Table Enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkEnabled.AutoSize = true;
+            this.chkEnabled.Location = new System.Drawing.Point(308, 52);
+            this.chkEnabled.Name = "chkEnabled";
+            this.chkEnabled.Size = new System.Drawing.Size(95, 17);
+            this.chkEnabled.TabIndex = 11;
+            this.chkEnabled.Text = "Table Enabled";
+            this.chkEnabled.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtAlternateExe
             // 
-            this.textBox1.Location = new System.Drawing.Point(80, 344);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 20);
-            this.textBox1.TabIndex = 12;
+            this.txtAlternateExe.Location = new System.Drawing.Point(80, 344);
+            this.txtAlternateExe.Name = "txtAlternateExe";
+            this.txtAlternateExe.Size = new System.Drawing.Size(215, 20);
+            this.txtAlternateExe.TabIndex = 12;
             // 
             // chkFavorite
             // 
             this.chkFavorite.AutoSize = true;
+            this.chkFavorite.Enabled = false;
             this.chkFavorite.Location = new System.Drawing.Point(400, 52);
             this.chkFavorite.Name = "chkFavorite";
             this.chkFavorite.Size = new System.Drawing.Size(64, 17);
@@ -218,12 +213,12 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "Manufacturer";
             // 
-            // textBox2
+            // txtYear
             // 
-            this.textBox2.Location = new System.Drawing.Point(81, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(80, 20);
-            this.textBox2.TabIndex = 23;
+            this.txtYear.Location = new System.Drawing.Point(81, 106);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.Size = new System.Drawing.Size(80, 20);
+            this.txtYear.TabIndex = 23;
             // 
             // label6
             // 
@@ -234,12 +229,12 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Year";
             // 
-            // textBox3
+            // txtTheme
             // 
-            this.textBox3.Location = new System.Drawing.Point(81, 132);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(80, 20);
-            this.textBox3.TabIndex = 25;
+            this.txtTheme.Location = new System.Drawing.Point(81, 132);
+            this.txtTheme.Name = "txtTheme";
+            this.txtTheme.Size = new System.Drawing.Size(80, 20);
+            this.txtTheme.TabIndex = 25;
             // 
             // label7
             // 
@@ -250,12 +245,12 @@
             this.label7.TabIndex = 24;
             this.label7.Text = "Theme";
             // 
-            // textBox4
+            // txtAuthor
             // 
-            this.textBox4.Location = new System.Drawing.Point(80, 160);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(212, 20);
-            this.textBox4.TabIndex = 27;
+            this.txtAuthor.Location = new System.Drawing.Point(80, 160);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(212, 20);
+            this.txtAuthor.TabIndex = 27;
             // 
             // label8
             // 
@@ -266,12 +261,12 @@
             this.label8.TabIndex = 26;
             this.label8.Text = "Author";
             // 
-            // textBox5
+            // txtVersion
             // 
-            this.textBox5.Location = new System.Drawing.Point(81, 186);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(80, 20);
-            this.textBox5.TabIndex = 29;
+            this.txtVersion.Location = new System.Drawing.Point(81, 186);
+            this.txtVersion.Name = "txtVersion";
+            this.txtVersion.Size = new System.Drawing.Size(80, 20);
+            this.txtVersion.TabIndex = 29;
             // 
             // label9
             // 
@@ -282,12 +277,12 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Version";
             // 
-            // textBox6
+            // txtIpdb
             // 
-            this.textBox6.Location = new System.Drawing.Point(81, 212);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(80, 20);
-            this.textBox6.TabIndex = 31;
+            this.txtIpdb.Location = new System.Drawing.Point(81, 212);
+            this.txtIpdb.Name = "txtIpdb";
+            this.txtIpdb.Size = new System.Drawing.Size(80, 20);
+            this.txtIpdb.TabIndex = 31;
             // 
             // label10
             // 
@@ -298,12 +293,12 @@
             this.label10.TabIndex = 30;
             this.label10.Text = "IPDB #";
             // 
-            // textBox7
+            // txtType
             // 
-            this.textBox7.Location = new System.Drawing.Point(81, 245);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(80, 20);
-            this.textBox7.TabIndex = 33;
+            this.txtType.Location = new System.Drawing.Point(81, 245);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(80, 20);
+            this.txtType.TabIndex = 33;
             // 
             // label11
             // 
@@ -332,26 +327,28 @@
             this.label13.TabIndex = 36;
             this.label13.Text = "Play Count";
             // 
-            // textBox8
+            // txtRom
             // 
-            this.textBox8.Location = new System.Drawing.Point(81, 269);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(80, 20);
-            this.textBox8.TabIndex = 37;
+            this.txtRom.Location = new System.Drawing.Point(81, 269);
+            this.txtRom.Name = "txtRom";
+            this.txtRom.Size = new System.Drawing.Size(80, 20);
+            this.txtRom.TabIndex = 37;
             // 
-            // textBox9
+            // txtPlayCount
             // 
-            this.textBox9.Location = new System.Drawing.Point(81, 295);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(80, 20);
-            this.textBox9.TabIndex = 38;
+            this.txtPlayCount.Enabled = false;
+            this.txtPlayCount.Location = new System.Drawing.Point(81, 295);
+            this.txtPlayCount.Name = "txtPlayCount";
+            this.txtPlayCount.Size = new System.Drawing.Size(80, 20);
+            this.txtPlayCount.TabIndex = 38;
             // 
-            // textBox10
+            // txtSeconds
             // 
-            this.textBox10.Location = new System.Drawing.Point(231, 295);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(80, 20);
-            this.textBox10.TabIndex = 40;
+            this.txtSeconds.Enabled = false;
+            this.txtSeconds.Location = new System.Drawing.Point(231, 295);
+            this.txtSeconds.Name = "txtSeconds";
+            this.txtSeconds.Size = new System.Drawing.Size(80, 20);
+            this.txtSeconds.TabIndex = 40;
             // 
             // label14
             // 
@@ -371,17 +368,17 @@
             this.label15.TabIndex = 41;
             this.label15.Text = "Added";
             // 
-            // textBox11
+            // txtAdded
             // 
-            this.textBox11.Location = new System.Drawing.Point(80, 320);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(80, 20);
-            this.textBox11.TabIndex = 42;
+            this.txtAdded.Location = new System.Drawing.Point(80, 320);
+            this.txtAdded.Name = "txtAdded";
+            this.txtAdded.Size = new System.Drawing.Size(130, 20);
+            this.txtAdded.TabIndex = 42;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(178, 323);
+            this.label16.Location = new System.Drawing.Point(212, 323);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(47, 13);
             this.label16.TabIndex = 44;
@@ -397,25 +394,25 @@
             this.chkHideDmd.Text = "Hide DMD during game";
             this.chkHideDmd.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkHideBackglass
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 479);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(161, 17);
-            this.checkBox2.TabIndex = 46;
-            this.checkBox2.Text = "Hide Backglass during game";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkHideBackglass.AutoSize = true;
+            this.chkHideBackglass.Location = new System.Drawing.Point(12, 479);
+            this.chkHideBackglass.Name = "chkHideBackglass";
+            this.chkHideBackglass.Size = new System.Drawing.Size(161, 17);
+            this.chkHideBackglass.TabIndex = 46;
+            this.chkHideBackglass.Text = "Hide Backglass during game";
+            this.chkHideBackglass.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chkHideTopper
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 502);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(150, 17);
-            this.checkBox3.TabIndex = 47;
-            this.checkBox3.Text = "Hide Topper During Game";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkHideTopper.AutoSize = true;
+            this.chkHideTopper.Location = new System.Drawing.Point(12, 502);
+            this.chkHideTopper.Name = "chkHideTopper";
+            this.chkHideTopper.Size = new System.Drawing.Size(150, 17);
+            this.chkHideTopper.TabIndex = 47;
+            this.chkHideTopper.Text = "Hide Topper During Game";
+            this.chkHideTopper.UseVisualStyleBackColor = true;
             // 
             // btnSelectFile
             // 
@@ -435,106 +432,6 @@
             this.btnFillFromIpdb.Text = "Fill From IPDB";
             this.btnFillFromIpdb.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(212, 456);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(70, 17);
-            this.checkBox4.TabIndex = 50;
-            this.checkBox4.Text = "Fast Flips";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(212, 479);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(46, 17);
-            this.checkBox5.TabIndex = 51;
-            this.checkBox5.Text = "SSF";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(212, 502);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(59, 17);
-            this.checkBox6.TabIndex = 52;
-            this.checkBox6.Text = "P-ROC";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(288, 456);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(76, 17);
-            this.checkBox7.TabIndex = 53;
-            this.checkBox7.Text = "Ultra DMD";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(288, 479);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(74, 17);
-            this.checkBox8.TabIndex = 54;
-            this.checkBox8.Text = "PuP Pack";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(288, 502);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(41, 17);
-            this.checkBox9.TabIndex = 55;
-            this.checkBox9.Text = "VR";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            // 
-            // checkBox10
-            // 
-            this.checkBox10.AutoSize = true;
-            this.checkBox10.Location = new System.Drawing.Point(370, 456);
-            this.checkBox10.Name = "checkBox10";
-            this.checkBox10.Size = new System.Drawing.Size(54, 17);
-            this.checkBox10.TabIndex = 56;
-            this.checkBox10.Text = "Music";
-            this.checkBox10.UseVisualStyleBackColor = true;
-            // 
-            // checkBox11
-            // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(370, 479);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(46, 17);
-            this.checkBox11.TabIndex = 57;
-            this.checkBox11.Text = "FSS";
-            this.checkBox11.UseVisualStyleBackColor = true;
-            // 
-            // checkBox12
-            // 
-            this.checkBox12.AutoSize = true;
-            this.checkBox12.Location = new System.Drawing.Point(370, 502);
-            this.checkBox12.Name = "checkBox12";
-            this.checkBox12.Size = new System.Drawing.Size(39, 17);
-            this.checkBox12.TabIndex = 58;
-            this.checkBox12.Text = "4K";
-            this.checkBox12.UseVisualStyleBackColor = true;
-            // 
-            // checkBox13
-            // 
-            this.checkBox13.AutoSize = true;
-            this.checkBox13.Location = new System.Drawing.Point(430, 456);
-            this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(51, 17);
-            this.checkBox13.TabIndex = 59;
-            this.checkBox13.Text = "MOD";
-            this.checkBox13.UseVisualStyleBackColor = true;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -544,19 +441,19 @@
             this.label17.TabIndex = 60;
             this.label17.Text = "Game Url:";
             // 
-            // textBox12
+            // txtModified
             // 
-            this.textBox12.Location = new System.Drawing.Point(231, 321);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(80, 20);
-            this.textBox12.TabIndex = 43;
+            this.txtModified.Location = new System.Drawing.Point(265, 321);
+            this.txtModified.Name = "txtModified";
+            this.txtModified.Size = new System.Drawing.Size(130, 20);
+            this.txtModified.TabIndex = 43;
             // 
-            // textBox13
+            // txtGameUrl
             // 
-            this.textBox13.Location = new System.Drawing.Point(81, 425);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(366, 20);
-            this.textBox13.TabIndex = 61;
+            this.txtGameUrl.Location = new System.Drawing.Point(81, 425);
+            this.txtGameUrl.Name = "txtGameUrl";
+            this.txtGameUrl.Size = new System.Drawing.Size(366, 20);
+            this.txtGameUrl.TabIndex = 61;
             // 
             // btnGameUrl
             // 
@@ -582,51 +479,77 @@
             this.btnIpdbUrl.TabIndex = 63;
             this.btnIpdbUrl.UseVisualStyleBackColor = true;
             // 
+            // txtRating
+            // 
+            this.txtRating.Location = new System.Drawing.Point(215, 245);
+            this.txtRating.Name = "txtRating";
+            this.txtRating.Size = new System.Drawing.Size(80, 20);
+            this.txtRating.TabIndex = 65;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(178, 245);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(38, 13);
+            this.label18.TabIndex = 64;
+            this.label18.Text = "Rating";
+            // 
+            // txtPlayers
+            // 
+            this.txtPlayers.Location = new System.Drawing.Point(217, 269);
+            this.txtPlayers.Name = "txtPlayers";
+            this.txtPlayers.Size = new System.Drawing.Size(80, 20);
+            this.txtPlayers.TabIndex = 67;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(178, 269);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 13);
+            this.label19.TabIndex = 66;
+            this.label19.Text = "Players";
+            // 
             // AddEditGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 583);
+            this.Controls.Add(this.txtPlayers);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.txtRating);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.btnIpdbUrl);
             this.Controls.Add(this.btnGameUrl);
-            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.txtGameUrl);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.checkBox13);
-            this.Controls.Add(this.checkBox12);
-            this.Controls.Add(this.checkBox11);
-            this.Controls.Add(this.checkBox10);
-            this.Controls.Add(this.checkBox9);
-            this.Controls.Add(this.checkBox8);
-            this.Controls.Add(this.checkBox7);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox5);
-            this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.btnFillFromIpdb);
             this.Controls.Add(this.btnSelectFile);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.chkHideTopper);
+            this.Controls.Add(this.chkHideBackglass);
             this.Controls.Add(this.chkHideDmd);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.textBox12);
-            this.Controls.Add(this.textBox11);
+            this.Controls.Add(this.txtModified);
+            this.Controls.Add(this.txtAdded);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.txtSeconds);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txtPlayCount);
+            this.Controls.Add(this.txtRom);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.txtType);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txtIpdb);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtVersion);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtAuthor);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtTheme);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtYear);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtManufacturer);
             this.Controls.Add(this.label5);
@@ -637,8 +560,8 @@
             this.Controls.Add(this.txtTableName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkFavorite);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.txtAlternateExe);
+            this.Controls.Add(this.chkEnabled);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -658,8 +581,8 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ColorDialog colorDialogDmdColor;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox chkEnabled;
+        private System.Windows.Forms.TextBox txtAlternateExe;
         private System.Windows.Forms.CheckBox chkFavorite;
         private System.Windows.Forms.TextBox txtTableName;
         private System.Windows.Forms.Label label3;
@@ -669,46 +592,40 @@
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.TextBox txtManufacturer;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtYear;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtTheme;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtAuthor;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtVersion;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtIpdb;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox txtRom;
+        private System.Windows.Forms.TextBox txtPlayCount;
+        private System.Windows.Forms.TextBox txtSeconds;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox txtAdded;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox chkHideDmd;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox chkHideBackglass;
+        private System.Windows.Forms.CheckBox chkHideTopper;
         private System.Windows.Forms.Button btnSelectFile;
         private System.Windows.Forms.Button btnFillFromIpdb;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox10;
-        private System.Windows.Forms.CheckBox checkBox11;
-        private System.Windows.Forms.CheckBox checkBox12;
-        private System.Windows.Forms.CheckBox checkBox13;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox txtModified;
+        private System.Windows.Forms.TextBox txtGameUrl;
         private System.Windows.Forms.Button btnGameUrl;
         private System.Windows.Forms.Button btnIpdbUrl;
+        private System.Windows.Forms.TextBox txtRating;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtPlayers;
+        private System.Windows.Forms.Label label19;
     }
 }

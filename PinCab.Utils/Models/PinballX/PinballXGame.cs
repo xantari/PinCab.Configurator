@@ -62,7 +62,7 @@ namespace PinCab.Utils.Models.PinballX
         [XmlElement("rating")]
         public double Rating { get; set; }
 
-        [XmlElement("AlternateExe")]
+        [XmlElement("alternateexe")]
         public string AlternateExe { get; set; }
 
         [XmlElement("SendKeysOnStart")]
@@ -88,6 +88,12 @@ namespace PinCab.Utils.Models.PinballX
         //yyyy-MM-dd HH:mm:ss
         [XmlElement("datemodified")]
         public string DateModified { get; set; }
+
+        /// <summary>
+        /// For tracking when updates occur to this game, track the original table URL
+        /// </summary>
+        [XmlElement("tablefileurl")]
+        public string TableFileUrl { get; set; }
 
         // internal fields (not serialized)
         // ----------------------------------

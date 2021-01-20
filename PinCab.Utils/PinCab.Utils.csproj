@@ -142,6 +142,7 @@
     <Compile Include="Models\MediaAuditResult.cs" />
     <Compile Include="Models\MediaItem.cs" />
     <Compile Include="Models\DatabaseBrowserSettings.cs" />
+    <Compile Include="Models\PinballX\StatisticsData.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -19,10 +19,14 @@ namespace PinCab.Utils.Utils.PinballX
     {
         // dependencies
         private string _pinballXIni;
+        private string _pinballXStatisticsIni;
+        private IniData _statisticsData = null;
 
         public PinballXManager(string pinballXIni)
         {
             _pinballXIni = pinballXIni;
+            FileInfo info = new FileInfo(pinballXIni);
+            _pinballXStatisticsIni = info.DirectoryName.Replace("\\Config","") + "\\Databases\\statistics.ini";
         }
 
         public IniData ParseIni(string path)
@@ -80,6 +84,12 @@ namespace PinCab.Utils.Utils.PinballX
                 XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
                 ns.Add("", "");
                 var serializer = new XmlSerializer(typeof(PinballXMenu));
+                var fi = new FileInfo(databaseXmlFilePath);
+                if (!Directory.Exists(fi.DirectoryName))
+                {
+                    Log.Logger.Information("Directory didn't exist. Created it. Dir: {0}.", fi.DirectoryName);
+                    Directory.CreateDirectory(fi.DirectoryName);
+                }
                 using (var fs = new FileStream(databaseXmlFilePath, FileMode.Create))
                 {
                     using (var writer = XmlWriter.Create(fs, settings))
@@ -179,10 +189,46 @@ namespace PinCab.Utils.Utils.PinballX
             return system;
         }
 
-        public void SaveDatabase(PinballXSystem system, string databaseFile)
+        public void BackupDatabase(PinballXSystem system, string databaseFile)
+        {
+            var applicationBackupFolder = ApplicationHelpers.GetApplicationFolder() + "\\Backup\\PinballX";
+            FileInfo fileInfo = new FileInfo(databaseFile);
+            string backupDatabaseFileName = $"{applicationBackupFolder}\\{fileInfo.Directory.Name}\\{fileInfo.Name}_{DateTime.Now.ToString("yyyy-MM-dd_HHmmss")}";
+            if (system.DatabaseFiles.Contains(databaseFile))
+            {
+                var menu = new PinballXMenu();
+                menu.Games = system.Games[databaseFile];
+                MarshallXml(menu, backupDatabaseFileName);
+            }
+            else
+            {
+                Log.Information("Cannot find database file {0} to save in the database files collection for system: {1}.", databaseFile, system.Name);
+            }
+        }
+
+        public void AddOrUpdateGame(PinballXSystem system, string databaseFile, PinballXGame game)
+        {
+            game.System = system;
+            game.DatabaseFile = databaseFile;
+            var existingGame = system.Games[databaseFile].FirstOrDefault(p => p.FileName == game.FileName);
+            if (existingGame != null)
+                existingGame = game;
+            else
+                system.Games[databaseFile].Add(game);
+        }
+
+        public void DeleteGame(PinballXSystem system, string databaseFile, PinballXGame game)
+        {
+            system.Games[databaseFile].Remove(game);
+        }
+
+        public void SaveDatabase(PinballXSystem system, string databaseFile, bool backupDatabase)
         {
             if (system.DatabaseFiles.Contains(databaseFile))
             {
+                if (backupDatabase)
+                    BackupDatabase(system, databaseFile);
+
                 var menu = new PinballXMenu();
                 menu.Games = system.Games[databaseFile];
                 MarshallXml(menu, databaseFile);
@@ -190,6 +236,45 @@ namespace PinCab.Utils.Utils.PinballX
             else
             {
                 Log.Information("Cannot find database file {0} to save in the database files collection for system: {1}.", databaseFile, system.Name);
+            }
+        }
+
+        public StatisticsData GetStatisticsData(string systemName, string tableName)
+        {
+            var stats = new StatisticsData();
+
+            if (_statisticsData == null) //Load only one time
+                _statisticsData = ParseIni(_pinballXStatisticsIni);
+
+            string sSection = (systemName + "_" + tableName.Replace(" ", "_")).Replace("(", "").Replace(")", "").Replace("!", "").Replace(".", "").Replace("-", "").Replace("'", "");
+            if (_statisticsData != null)
+            {
+                if (_statisticsData.Sections.Any(p => p.SectionName == sSection))
+                {
+                    var section = _statisticsData.Sections[sSection];
+                    if (section.ContainsKey("timesplayed") && section["timesplayed"] != string.Empty)
+                    {
+                        stats.TimesPlayed = Convert.ToInt32(section["timesplayed"]);
+                    }
+                    if (section.ContainsKey("secondsplayed") && section["secondsplayed"] != string.Empty)
+                    {
+                        stats.SecondsPlayed = Convert.ToInt32(section["secondsplayed"]);
+                    }
+                    if (section.ContainsKey("favorite") && section["favorite"] != string.Empty)
+                    {
+                        stats.Favorite = Convert.ToBoolean(section["favorite"]);
+                    }
+                    if (section.ContainsKey("dateadded") && section["dateadded"] != string.Empty)
+                    {
+                        stats.DateAdded = Convert.ToDateTime(section["dateadded"]); //yyyy-MM-dd HH:mm:ss
+                    }
+                    return stats;
+                }
+                return null;
+            }
+            else
+            {
+                return null;
             }
         }
     }

@@ -65,6 +65,53 @@ namespace PinCab.Utils.Utils
             _settingManager.SaveSettings(settings);
         }
 
+        public void SaveGame(FrontEndGameViewModel game)
+        {
+            if (game.FrontEnd.System == FrontEndSystem.PinballX)
+            {
+                var system = _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(game.DatabaseFile));
+                var existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == game.FileName);
+                PinballXGame pbxGame = null;
+                if (existingGame != null)
+                    pbxGame = existingGame;
+                else
+                    pbxGame = new PinballXGame();
+
+                pbxGame = MapViewToGame(system, pbxGame, game);
+
+                _pinballXManager.AddOrUpdateGame(system, game.DatabaseFile, pbxGame);
+                _pinballXManager.SaveDatabase(system, game.DatabaseFile, true);
+            }
+        }
+
+        private PinballXGame MapViewToGame(PinballXSystem system, PinballXGame pbxGame, FrontEndGameViewModel game)
+        {
+            pbxGame.AlternateExe = game.AlternateExe;
+            pbxGame.Author = game.Author;
+            pbxGame.Comment = game.Comment;
+            pbxGame.DatabaseFile = game.DatabaseFile;
+            pbxGame.DateAdded = game.DateAdded.ToString("yyyy-MM-dd HH:mm:ss"); //yyyy-MM-dd HH:mm:ss
+            pbxGame.DateModified = game.DateModified.ToString("yyyy-MM-dd HH:mm:ss");
+            pbxGame.Description = game.Description;
+            pbxGame.Enabled = game.Enabled.ToString();
+            pbxGame.FileName = game.FileName;
+            pbxGame.HideBackglass = game.HideBackglass.ToString();
+            pbxGame.HideDmd = game.HideDmd.ToString();
+            pbxGame.HideTopper = game.HideTopper.ToString();
+            pbxGame.IPDBNumber = game.IPDBNumber;
+            pbxGame.Manufacturer = game.Manufacturer;
+            pbxGame.Players = game.Players;
+            pbxGame.Rating = game.Rating;
+            pbxGame.Rom = game.Rom;
+            pbxGame.System = system;
+            pbxGame.TableFileUrl = game.TableFileUrl;
+            pbxGame.Theme = game.Theme;
+            pbxGame.Type = game.Type;
+            pbxGame.Version = game.Version;
+            pbxGame.Year = game.Year;
+            return pbxGame;
+        }
+
         public List<FrontEndGameViewModel> GetGamesForFrontEndAndDatabase(FrontEnd frontEnd, string databaseFile)
         {
             var frontEndGames = new List<FrontEndGameViewModel>();
@@ -223,8 +270,18 @@ namespace PinCab.Utils.Utils
                             Type = game.Type,
                             Year = game.Year,
                             Version = game.Version,
-                            PopperGameId = null
+                            PopperGameId = null,
+                            TableFileUrl = game.TableFileUrl
                         };
+
+                        //Grab the table Statistics
+                        var stats = _pinballXManager.GetStatisticsData(system.StatsSectionName, game.FileName);
+                        if (stats != null)
+                        {
+                            frontEndGame.SecondsPlayed = stats.SecondsPlayed;
+                            frontEndGame.TimesPlayed = stats.TimesPlayed;
+                            frontEndGame.Favorite = stats.Favorite;
+                        }
 
                         //Load the Media Statuses for this game
                         LoadPinballXMediaStatus(system, frontEndGame, new SearchMode[] { SearchMode.ByFileNameExactMatch });

@@ -15,6 +15,10 @@ namespace PinCab.Utils.Models.PinballX
         public readonly string DefaultExecutableLabel = "<default>";
         // from pinballx.ini
         public string Name { get; set; }
+
+        public string StatsSectionName { get {
+                return Name.Replace(" ", "");
+        } }
         public bool Enabled { get; set; }
         public string WorkingPath { get; set; }
         public string TablePath { get; set; }
@@ -36,6 +40,9 @@ namespace PinCab.Utils.Models.PinballX
         public string PinballXIniFilePath { get; set; }
         public string PinballXFolder { get; set; }
         public Platform Type { get; set; }
+        /// <summary>
+        /// Games database, string is the database file string
+        /// </summary>
         public Dictionary<string, List<PinballXGame>> Games { get; } = new Dictionary<string, List<PinballXGame>>();
 
         public PinballXSystem(string pinballXIniFilePath)

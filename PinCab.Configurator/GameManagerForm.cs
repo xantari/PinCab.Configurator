@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,13 @@ namespace PinCab.Configurator
     {
         private readonly FrontEndManager _manager = new FrontEndManager();
         private List<FrontEndGameViewModel> _fullGameListCache { get; set; }
+        //private bool _loading = true;
         public GameManagerForm()
         {
             InitializeComponent();
 
             InitForm();
+            //_loading = false;
         }
 
         private void InitForm()
@@ -107,7 +110,7 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
-                var mediaAuditForm = new AddEditGameForm(row, _manager);
+                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
                 var result = mediaAuditForm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -125,6 +128,7 @@ namespace PinCab.Configurator
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshGameGrid();
+            LogGameDiscrepencies();
         }
 
         private void RefreshGameGrid()
@@ -143,7 +147,32 @@ namespace PinCab.Configurator
                     else
                         lblDatabaseStatus.Text = "Disabled";
                 }
+            }
+        }
 
+        private void AddOrUpdateLog(string text)
+        {
+            if (string.IsNullOrEmpty(txtLog.Text))
+                txtLog.Text = text;
+            else
+                txtLog.Text += "\r\n" + text;
+        }
+
+        private void LogGameDiscrepencies()
+        {
+            if (_fullGameListCache.Any(p => p.MissingTable))
+            {
+                AddOrUpdateLog("Missing tables have been found. Rows highlighted in RED with discrepencies.");
+            }
+        }
+
+        private void DisplayGameDiscrepencies()
+        {
+            foreach (DataGridViewRow row in dataGridViewGameList.Rows)
+            {
+                var model = row.DataBoundItem as FrontEndGameViewModel;
+                if (model.MissingTable)
+                    row.DefaultCellStyle.BackColor = Color.Red;
             }
         }
 
@@ -198,6 +227,7 @@ namespace PinCab.Configurator
         private void dataGridViewGameList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridViewGameList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            DisplayGameDiscrepencies();
         }
 
         private void dataGridViewGameList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -207,12 +237,61 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
-                var mediaAuditForm = new AddEditGameForm(row, _manager);
+                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
                 var result = mediaAuditForm.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     RefreshGameGrid();
                 }
+            }
+        }
+
+        private void deleteGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var deleteFromDatabase = MessageBox.Show($"Are you sure you want to delete the {dataGridViewGameList.SelectedRows.Count} selected items from the database?", "Are you sure?", MessageBoxButtons.YesNo);
+
+            List<FrontEndGameViewModel> selectedRowsToDelete = new List<FrontEndGameViewModel>();
+            foreach (DataGridViewRow selectedRow in dataGridViewGameList.SelectedRows)
+            {
+                selectedRowsToDelete.Add(selectedRow.DataBoundItem as FrontEndGameViewModel);
+            }
+
+            var removeTableFileList = selectedRowsToDelete.Where(p => !string.IsNullOrEmpty(p.FullPathToTable)).Select(p => p.FullPathToTable).ToList();
+            var removeB2sFileList = selectedRowsToDelete.Where(p => !string.IsNullOrEmpty(p.FullPathToB2s)).Select(p => p.FullPathToB2s).ToList();
+
+            DialogResult removeTableFiles = DialogResult.No;
+            DialogResult removeB2sFiles = DialogResult.No;
+            if (removeTableFileList.Count > 0)
+                removeTableFiles = MessageBox.Show($"Do want to delete the actual table files?\r\n {string.Join("\r\n",removeTableFileList)}", "Delete Table Files?", MessageBoxButtons.YesNo);
+            if (removeB2sFileList.Count > 0)
+                removeB2sFiles = MessageBox.Show($"Do want to delete the actual B2S files?\r\n {string.Join("\r\n", removeB2sFileList)}", "Delete B2S Files?", MessageBoxButtons.YesNo);
+
+            if (deleteFromDatabase == DialogResult.Yes)
+            {
+                if (dataGridViewGameList.SelectedRows.Count > 0)
+                {
+                    var databaseFile = string.Empty;
+                    foreach (DataGridViewRow selectedRow in dataGridViewGameList.SelectedRows)
+                    {
+                        var model = selectedRow.DataBoundItem as FrontEndGameViewModel;
+                        databaseFile = model.DatabaseFile;
+                        _manager.DeleteGame(model);
+                        _fullGameListCache.Remove(model);
+                    }
+                    var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
+                    _manager.SaveDatabase(frontEnd.System, databaseFile);
+                    RefreshGameGrid();
+                }
+            }
+            if (removeTableFiles == DialogResult.Yes)
+            {
+                foreach (var tableFilePathToDelete in removeTableFileList)
+                    File.Delete(tableFilePathToDelete);
+            }
+            if (removeB2sFiles == DialogResult.Yes)
+            {
+                foreach (var b2sFilePathToDelete in removeB2sFileList)
+                    File.Delete(b2sFilePathToDelete);
             }
         }
     }

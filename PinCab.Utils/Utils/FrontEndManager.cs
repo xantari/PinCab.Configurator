@@ -80,7 +80,26 @@ namespace PinCab.Utils.Utils
                 pbxGame = MapViewToGame(system, pbxGame, game);
 
                 _pinballXManager.AddOrUpdateGame(system, game.DatabaseFile, pbxGame);
-                _pinballXManager.SaveDatabase(system, game.DatabaseFile, true);
+                SaveDatabase(FrontEndSystem.PinballX, game.DatabaseFile);
+            }
+        }
+
+        public void DeleteGame(FrontEndGameViewModel game)
+        {
+            if (game.FrontEnd.System == FrontEndSystem.PinballX)
+            {
+                var system = _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(game.DatabaseFile));
+                var existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == game.FileName);
+                system.Games[game.DatabaseFile].Remove(existingGame);
+            }
+        }
+
+        public void SaveDatabase(FrontEndSystem frontEnd, string databaseFile)
+        {
+            if (frontEnd == FrontEndSystem.PinballX)
+            {
+                var system = _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Any(b => b.EndsWith(databaseFile)));
+                _pinballXManager.SaveDatabase(system, databaseFile, true);
             }
         }
 
@@ -131,21 +150,21 @@ namespace PinCab.Utils.Utils
                 if (frontEnd.System == FrontEndSystem.PinballX)
                 {
                     var games = new List<FrontEndGameViewModel>();
-                    foreach (var system in _pinballXSystems) 
+                    foreach (var system in _pinballXSystems)
                     {
-                        foreach(var database in system.DatabaseFiles)
+                        foreach (var database in system.DatabaseFiles)
                             games.AddRange(GetPinballXFrontEndGames(frontEnd, database));
                     }
                     //Now that we have all the games loaded and we have the statuses on all the media we can check into stranded media
                     //by parsing all the media folders and getting every file inside of it, and matching it up with the games.MediaItems files
                     //and if we have files that don't exist in the games.MediaItems list it is considered a stranded media item
                     List<string> allGameMedia = new List<string>();
-                    foreach(var game in games)
+                    foreach (var game in games)
                         allGameMedia.AddRange(game.MediaItems.Select(c => c.MediaFullPath));
 
                     var allMediaFiles = GetAllMediaItems(frontEnd);
 
-                    foreach(var media in allMediaFiles)
+                    foreach (var media in allMediaFiles)
                     {
                         if (!allGameMedia.Contains(media.MediaFullPath))
                             auditResults.Add(new MediaAuditResult() { FrontEnd = frontEnd, FullPathToFile = media.MediaFullPath, Status = MediaAuditStatus.UnusedMedia, MediaType = media.MediaType });
@@ -213,11 +232,11 @@ namespace PinCab.Utils.Utils
         private List<MediaItem> GetMediaItemsInDirectory(MediaCategory category, string directory)
         {
             var mediaItems = new List<MediaItem>();
-            
+
             if (Directory.Exists(directory))
             {
                 var filesInDirectory = Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories);
-                foreach(var filePath in filesInDirectory)
+                foreach (var filePath in filesInDirectory)
                 {
                     var mediaItem = new MediaItem() { Category = category, MediaFullPath = filePath };
                     var mimeType = MimeTypes.MimeTypeMap.GetMimeType(filePath);
@@ -271,7 +290,8 @@ namespace PinCab.Utils.Utils
                             Year = game.Year,
                             Version = game.Version,
                             PopperGameId = null,
-                            TableFileUrl = game.TableFileUrl
+                            TableFileUrl = game.TableFileUrl,
+                            PlatformType = system.Type
                         };
 
                         //Grab the table Statistics
@@ -283,6 +303,10 @@ namespace PinCab.Utils.Utils
                             frontEndGame.Favorite = stats.Favorite;
                         }
 
+                        //See if there are discrepencies in the entries, such as missing DirectB2S for .vpx / .vpt files
+                        //Or missing table 
+                        LoadPinballXAdditionalInfoAndDiscrepencies(system, frontEndGame);
+
                         //Load the Media Statuses for this game
                         LoadPinballXMediaStatus(system, frontEndGame, new SearchMode[] { SearchMode.ByFileNameExactMatch });
 
@@ -293,6 +317,44 @@ namespace PinCab.Utils.Utils
                 }
             }
             return frontEndGames;
+        }
+
+        private void LoadPinballXAdditionalInfoAndDiscrepencies(PinballXSystem system, FrontEndGameViewModel model)
+        {
+            //Find the detected game type
+            if (system.Type == Platform.VP)
+            {
+                //Populate the full file path to the game
+                if (File.Exists($"{system.TablePath}\\{model.FileName}.vpt"))
+                {
+                    model.FullPathToTable = $"{system.TablePath}\\{model.FileName}.vpt";
+                }
+                else if (File.Exists($"{system.TablePath}\\{model.FileName}.vpx"))
+                {
+                    model.FullPathToTable = $"{system.TablePath}\\{model.FileName}.vpx";
+                }
+
+                else
+                {
+                    //If it's a VPT or VPX, see if the directb2s is found and populate the file path to it as well
+                    if (File.Exists($"{system.TablePath}\\{model.FileName}.directb2s"))
+                    {
+                        model.FullPathToB2s = $"{system.TablePath}\\{model.FileName}.directb2s";
+                    }
+                }
+            }
+            else if (system.Type == Platform.FP) //Could be a .fpt future pinball file
+            {
+                //Populate the full file path to the game
+                if (File.Exists($"{system.TablePath}\\{model.FileName}.fpt"))
+                {
+                    model.FullPathToTable = $"{system.TablePath}\\{model.FileName}.fpt";
+                }
+            }
+
+            //If the file doesn't exist on the file system skip all these checks and mark it as a missing table entry
+            if (string.IsNullOrEmpty(model.FullPathToTable))
+                model.MissingTable = true;
         }
 
         private void LoadPinballXMediaStatus(PinballXSystem system, FrontEndGameViewModel model, SearchMode[] searchModes)

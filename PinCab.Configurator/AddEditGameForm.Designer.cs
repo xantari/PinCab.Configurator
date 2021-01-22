@@ -34,7 +34,6 @@
             this.colorDialogDmdColor = new System.Windows.Forms.ColorDialog();
             this.label2 = new System.Windows.Forms.Label();
             this.chkEnabled = new System.Windows.Forms.CheckBox();
-            this.txtAlternateExe = new System.Windows.Forms.TextBox();
             this.chkFavorite = new System.Windows.Forms.CheckBox();
             this.txtTableName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -79,6 +78,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.txtPlayers = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.cmbAlternateExe = new System.Windows.Forms.ComboBox();
+            this.btnDatabaseBrowser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -129,13 +130,6 @@
             this.chkEnabled.TabIndex = 11;
             this.chkEnabled.Text = "Table Enabled";
             this.chkEnabled.UseVisualStyleBackColor = true;
-            // 
-            // txtAlternateExe
-            // 
-            this.txtAlternateExe.Location = new System.Drawing.Point(80, 344);
-            this.txtAlternateExe.Name = "txtAlternateExe";
-            this.txtAlternateExe.Size = new System.Drawing.Size(215, 20);
-            this.txtAlternateExe.TabIndex = 12;
             // 
             // chkFavorite
             // 
@@ -422,6 +416,7 @@
             this.btnSelectFile.TabIndex = 48;
             this.btnSelectFile.Text = "Select File";
             this.btnSelectFile.UseVisualStyleBackColor = true;
+            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
             // 
             // btnFillFromIpdb
             // 
@@ -431,6 +426,7 @@
             this.btnFillFromIpdb.TabIndex = 49;
             this.btnFillFromIpdb.Text = "Fill From IPDB";
             this.btnFillFromIpdb.UseVisualStyleBackColor = true;
+            this.btnFillFromIpdb.Click += new System.EventHandler(this.btnFillFromIpdb_Click);
             // 
             // label17
             // 
@@ -466,6 +462,7 @@
             this.btnGameUrl.Size = new System.Drawing.Size(27, 23);
             this.btnGameUrl.TabIndex = 62;
             this.btnGameUrl.UseVisualStyleBackColor = true;
+            this.btnGameUrl.Click += new System.EventHandler(this.btnGameUrl_Click);
             // 
             // btnIpdbUrl
             // 
@@ -478,6 +475,7 @@
             this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
             this.btnIpdbUrl.TabIndex = 63;
             this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
             // 
             // txtRating
             // 
@@ -511,11 +509,31 @@
             this.label19.TabIndex = 66;
             this.label19.Text = "Players";
             // 
+            // cmbAlternateExe
+            // 
+            this.cmbAlternateExe.FormattingEnabled = true;
+            this.cmbAlternateExe.Location = new System.Drawing.Point(80, 347);
+            this.cmbAlternateExe.Name = "cmbAlternateExe";
+            this.cmbAlternateExe.Size = new System.Drawing.Size(367, 21);
+            this.cmbAlternateExe.TabIndex = 68;
+            // 
+            // btnDatabaseBrowser
+            // 
+            this.btnDatabaseBrowser.Location = new System.Drawing.Point(382, 15);
+            this.btnDatabaseBrowser.Name = "btnDatabaseBrowser";
+            this.btnDatabaseBrowser.Size = new System.Drawing.Size(107, 23);
+            this.btnDatabaseBrowser.TabIndex = 69;
+            this.btnDatabaseBrowser.Text = "Database Browser";
+            this.btnDatabaseBrowser.UseVisualStyleBackColor = true;
+            this.btnDatabaseBrowser.Click += new System.EventHandler(this.btnDatabaseBrowser_Click);
+            // 
             // AddEditGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 583);
+            this.ClientSize = new System.Drawing.Size(534, 583);
+            this.Controls.Add(this.btnDatabaseBrowser);
+            this.Controls.Add(this.cmbAlternateExe);
             this.Controls.Add(this.txtPlayers);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.txtRating);
@@ -560,13 +578,12 @@
             this.Controls.Add(this.txtTableName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkFavorite);
-            this.Controls.Add(this.txtAlternateExe);
             this.Controls.Add(this.chkEnabled);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(578, 622);
+            this.MinimumSize = new System.Drawing.Size(550, 622);
             this.Name = "AddEditGameForm";
             this.Text = "Edit Game";
             this.ResumeLayout(false);
@@ -582,7 +599,6 @@
         private System.Windows.Forms.ColorDialog colorDialogDmdColor;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkEnabled;
-        private System.Windows.Forms.TextBox txtAlternateExe;
         private System.Windows.Forms.CheckBox chkFavorite;
         private System.Windows.Forms.TextBox txtTableName;
         private System.Windows.Forms.Label label3;
@@ -627,5 +643,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtPlayers;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox cmbAlternateExe;
+        private System.Windows.Forms.Button btnDatabaseBrowser;
     }
 }

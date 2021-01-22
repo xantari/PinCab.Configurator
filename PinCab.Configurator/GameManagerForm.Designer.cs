@@ -77,7 +77,6 @@ namespace PinCab.Configurator
             this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.markMyVersionAsLatestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -98,6 +97,7 @@ namespace PinCab.Configurator
             this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -174,7 +174,7 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewGameList.Name = "dataGridViewGameList";
             this.dataGridViewGameList.ReadOnly = true;
-            this.dataGridViewGameList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridViewGameList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewGameList.Size = new System.Drawing.Size(955, 344);
             this.dataGridViewGameList.TabIndex = 2;
             this.dataGridViewGameList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGameList_CellDoubleClick);
@@ -464,10 +464,9 @@ namespace PinCab.Configurator
             this.launchGameToolStripMenuItem,
             this.viewIPDBPageToolStripMenuItem,
             this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem,
-            this.showGamesWithUpdatesToolStripMenuItem,
-            this.markMyVersionAsLatestToolStripMenuItem});
+            this.showGamesWithUpdatesToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 246);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 224);
             // 
             // editToolStripMenuItem
             // 
@@ -505,6 +504,7 @@ namespace PinCab.Configurator
             this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
             this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.deleteGameToolStripMenuItem.Text = "Delete Game";
+            this.deleteGameToolStripMenuItem.Click += new System.EventHandler(this.deleteGameToolStripMenuItem_Click);
             // 
             // launchGameToolStripMenuItem
             // 
@@ -530,12 +530,6 @@ namespace PinCab.Configurator
             this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
             this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
-            // 
-            // markMyVersionAsLatestToolStripMenuItem
-            // 
-            this.markMyVersionAsLatestToolStripMenuItem.Name = "markMyVersionAsLatestToolStripMenuItem";
-            this.markMyVersionAsLatestToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.markMyVersionAsLatestToolStripMenuItem.Text = "Mark My Version as Latest";
             // 
             // frontEndGameBindingSource
             // 
@@ -694,7 +688,8 @@ namespace PinCab.Configurator
             // utilitiesToolStripMenuItem
             // 
             this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mediaAuditToolStripMenuItem});
+            this.mediaAuditToolStripMenuItem,
+            this.massRecordToolStripMenuItem});
             this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
             this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilitiesToolStripMenuItem.Text = "Utilities";
@@ -702,7 +697,7 @@ namespace PinCab.Configurator
             // mediaAuditToolStripMenuItem
             // 
             this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.mediaAuditToolStripMenuItem.Text = "Media Audit";
             this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
             // 
@@ -712,6 +707,12 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // massRecordToolStripMenuItem
+            // 
+            this.massRecordToolStripMenuItem.Name = "massRecordToolStripMenuItem";
+            this.massRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.massRecordToolStripMenuItem.Text = "Mass Record";
             // 
             // GameManagerForm
             // 
@@ -811,6 +812,6 @@ namespace PinCab.Configurator
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem findGamesFromIPDBNotInMyDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showGamesWithUpdatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem markMyVersionAsLatestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem massRecordToolStripMenuItem;
     }
 }

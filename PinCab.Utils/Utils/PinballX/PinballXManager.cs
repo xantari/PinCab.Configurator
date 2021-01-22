@@ -1,6 +1,7 @@
 ﻿using IniParser;
 using IniParser.Model;
 using Newtonsoft.Json;
+using PinCab.Utils.Models;
 using PinCab.Utils.Models.PinballX;
 using Serilog;
 using System;

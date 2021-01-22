@@ -106,9 +106,9 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "ffmpeg.exe";
                 fileDialog.RestoreDirectory = true;
-                fileDialog.ShowDialog();
-
-                txtFFMpegFilePath.Text = fileDialog.FileName;
+                var result = fileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                    txtFFMpegFilePath.Text = fileDialog.FileName;
             }
         }
 

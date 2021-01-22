@@ -156,7 +156,7 @@
     <Compile Include="Models\PinballX\PinballXGame.cs" />
     <Compile Include="Models\PinballX\PinballXMenu.cs" />
     <Compile Include="Models\PinballX\PinballXSystem.cs" />
-    <Compile Include="Models\PinballX\Platform.cs" />
+    <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\ProgramSettings.cs" />
     <Compile Include="Utils\FrontEndManager.cs" />
     <Compile Include="Utils\PinballX\PinballXManager.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PinCab.Utils.Models.PinballX
+namespace PinCab.Utils.Models
 {
 	/// <summary>
 	/// Different types of systems.

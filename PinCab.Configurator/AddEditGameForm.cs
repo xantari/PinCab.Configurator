@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,15 @@ namespace PinCab.Configurator
     public partial class AddEditGameForm : Form
     {
         private FrontEndGameViewModel _setting { get; set; }
+        private string originalFileName { get; set; }
         private FrontEndManager _manager { get; set; }
-        public AddEditGameForm(FrontEndGameViewModel setting, FrontEndManager manager)
+        private string _databaseFile { get; set; }
+        public AddEditGameForm(FrontEndGameViewModel setting, string databaseFile, FrontEndManager manager)
         {
             InitializeComponent();
             _setting = setting;
             _manager = manager;
+            _databaseFile = databaseFile;
             LoadForm();
         }
 
@@ -44,7 +48,6 @@ namespace PinCab.Configurator
             txtSeconds.Text = _setting.SecondsPlayed.ToString();
             txtAdded.Text = _setting.DateAdded.ToString();
             txtModified.Text = _setting.DateModified.ToString();
-            txtAlternateExe.Text = _setting.AlternateExe;
             txtComment.Text = _setting.Comment;
             txtGameUrl.Text = _setting.TableFileUrl;
             chkHideBackglass.Checked = _setting.HideBackglass;
@@ -52,6 +55,17 @@ namespace PinCab.Configurator
             chkHideTopper.Checked = _setting.HideTopper;
             chkEnabled.Checked = _setting.Enabled;
             chkFavorite.Checked = _setting.Favorite;
+
+            //Load the alternate exe list
+            if (_setting.FrontEnd.System == FrontEndSystem.PinballX)
+            {
+                var system = _manager.PinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(_databaseFile));
+                cmbAlternateExe.Items.AddRange(system.Executables.ToArray());
+            }
+            if (string.IsNullOrEmpty(_setting.AlternateExe))
+                cmbAlternateExe.SelectedItem = "<default>";
+            else
+                cmbAlternateExe.SelectedItem = _setting.AlternateExe;
         }
 
         private FrontEndGameViewModel GetSettingFromControls()
@@ -84,8 +98,11 @@ namespace PinCab.Configurator
                 if (success)
                     _setting.DateModified = result;
             }
-                
-            _setting.AlternateExe = txtAlternateExe.Text.IfEmptyThenNull();
+
+            if (cmbAlternateExe.SelectedText == "<default>" || string.IsNullOrEmpty(cmbAlternateExe.SelectedText))
+                _setting.AlternateExe = null;
+            else
+                _setting.AlternateExe = cmbAlternateExe.SelectedText.IfEmptyThenNull();
             _setting.Comment = txtComment.Text.IfEmptyThenNull();
             _setting.TableFileUrl = txtGameUrl.Text.IfEmptyThenNull();
             _setting.HideBackglass = chkHideBackglass.Checked;
@@ -107,5 +124,45 @@ namespace PinCab.Configurator
             Close();
         }
 
+        private void btnSelectFile_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "All files (*.*)|*.*|VPX Files|*.vpx|FPT Files|*.fpx|VPT Files|*.vpt";
+                fileDialog.FilterIndex = 1;
+                fileDialog.RestoreDirectory = true;
+                var result = fileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    var fi = new FileInfo(fileDialog.FileName);
+                    var endIndex = fi.Name.LastIndexOf(fi.Extension);
+                    originalFileName = txtTableName.Text;
+                    txtTableName.Text = fi.Name.Substring(0, endIndex);
+                }
+            }
+        }
+
+        private void btnIpdbUrl_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtIpdb.Text))
+                System.Diagnostics.Process.Start("https://www.ipdb.org/machine.cgi?id=" + txtIpdb.Text);
+        }
+
+        private void btnFillFromIpdb_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGameUrl_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtGameUrl.Text))
+                System.Diagnostics.Process.Start(txtGameUrl.Text);
+        }
+
+        private void btnDatabaseBrowser_Click(object sender, EventArgs e)
+        {
+            var form = new DatabaseBrowserForm();
+            var result = form.ShowDialog();
+        }
     }
 }

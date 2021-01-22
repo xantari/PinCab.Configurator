@@ -77,5 +77,10 @@ namespace PinCab.Utils.ViewModels
         public bool Favorite { get; set; }
         public int TimesPlayed { get; set; }
         public int SecondsPlayed { get; set; }
+
+        public bool MissingTable { get; set; }
+        public Platform PlatformType { get; set; }
+        public string FullPathToTable { get; set; }
+        public string FullPathToB2s { get; set; }
     }
 }

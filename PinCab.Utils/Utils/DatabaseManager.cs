@@ -33,7 +33,6 @@ namespace PinCab.Utils.Utils
 
         public List<DatabaseBrowserEntry> Entries { get; private set; }
 
-
         public const string ToolName = "Database Manager";
 
         private List<string> _fileContentsArray { get; set; } = new List<string>();
@@ -44,7 +43,8 @@ namespace PinCab.Utils.Utils
         private string vpuDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\vpuniversedatabase.json";
         private string ipdbDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\ipdbdatabase.json";
         private string preprocessedDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\preprocesseddatabase.json";
-        private string tagDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\tagdatabase.json";
+        //TODO: For eventual caching of preprocessed database tags
+        //private string tagDatabasePath = ApplicationHelpers.GetApplicationFolder() + "\\Databases\\tagdatabase.json";
 
         private ReportProgressDelegate _reportProgress;
 
@@ -202,27 +202,52 @@ namespace PinCab.Utils.Utils
 
         public void LoadAllDatabases()
         {
+            LoadDatabase(DatabaseType.VPForums);
+            LoadDatabase(DatabaseType.VPSSpreadsheet);
+            LoadDatabase(DatabaseType.VPinball);
+            LoadDatabase(DatabaseType.VPUniverse);
+            LoadDatabase(DatabaseType.IPDB);
+        }
+
+        public void LoadDatabase(DatabaseType type)
+        {
             var appFolder = ApplicationHelpers.GetApplicationFolder();
-            if (File.Exists(vpfDatabasePath))
+            if (File.Exists(vpfDatabasePath) && type == DatabaseType.VPForums)
             {
                 VpforumDatabase = JsonConvert.DeserializeObject<VpForumsDatabase>(File.ReadAllText(vpfDatabasePath));
             }
-            if (File.Exists(vpsDatabasePath))
+            if (File.Exists(vpsDatabasePath) && type == DatabaseType.VPSSpreadsheet)
             {
                 VpsDatabase = JsonConvert.DeserializeObject<VpsSpreadsheetDatabase>(File.ReadAllText(vpsDatabasePath));
             }
-            if (File.Exists(vpDatabasePath))
+            if (File.Exists(vpDatabasePath) && type == DatabaseType.VPinball)
             {
                 VpinballDatabase = JsonConvert.DeserializeObject<VpinballDatabase>(File.ReadAllText(vpDatabasePath));
             }
-            if (File.Exists(vpuDatabasePath))
+            if (File.Exists(vpuDatabasePath) && type == DatabaseType.VPUniverse)
             {
                 VpUniverseDatabase = JsonConvert.DeserializeObject<VpUniverseDatabase>(File.ReadAllText(vpuDatabasePath));
             }
-            if (File.Exists(ipdbDatabasePath))
+            if (File.Exists(ipdbDatabasePath) && type == DatabaseType.IPDB)
             {
                 IpdbDatabase = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(ipdbDatabasePath));
             }
+        }
+
+        public bool DatabaseExists(DatabaseType type)
+        {
+            var appFolder = ApplicationHelpers.GetApplicationFolder();
+            if (File.Exists(vpfDatabasePath) && type == DatabaseType.VPForums)
+                return true;
+            if (File.Exists(vpsDatabasePath) && type == DatabaseType.VPSSpreadsheet)
+                return true;
+            if (File.Exists(vpDatabasePath) && type == DatabaseType.VPinball)
+                return true;
+            if (File.Exists(vpuDatabasePath) && type == DatabaseType.VPUniverse)
+                return true;
+            if (File.Exists(ipdbDatabasePath) && type == DatabaseType.IPDB)
+                return true;
+            return false;
         }
 
         public List<DatabaseBrowserEntry> GetAllEntries(bool forceReload)
@@ -628,7 +653,6 @@ namespace PinCab.Utils.Utils
             t = textInfo.ToTitleCase(t);
             return t;
         }
-
 
         public HashSet<string> GetAllTags(List<DatabaseBrowserEntry> entries, bool reportProgress = true)
         {

@@ -22,12 +22,16 @@ namespace PinCab.Configurator
         private string originalFileName { get; set; }
         private FrontEndManager _manager { get; set; }
         private string _databaseFile { get; set; }
-        public AddEditGameForm(FrontEndGameViewModel setting, string databaseFile, FrontEndManager manager)
+        private IpdbBrowserForm _ipdbForm = null;
+        public AddEditGameForm(FrontEndGameViewModel setting, string databaseFile, FrontEndManager manager, IpdbBrowserForm ipdbForm)
         {
             InitializeComponent();
             _setting = setting;
             _manager = manager;
             _databaseFile = databaseFile;
+            _ipdbForm = ipdbForm;
+            if (_ipdbForm == null)
+                _ipdbForm = new IpdbBrowserForm(txtTableName.Text, true);
             LoadForm();
         }
 
@@ -150,7 +154,21 @@ namespace PinCab.Configurator
 
         private void btnFillFromIpdb_Click(object sender, EventArgs e)
         {
-
+            _ipdbForm.SearchText(txtTableName.Text);
+            var result = _ipdbForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                //Fill the data
+                var ipdbEntry = _ipdbForm.GetActiveRowEntry();
+                if (_ipdbForm.chkOverrideDisplayName.Checked)
+                    txtDisplayName.Text = ipdbEntry.Title;
+                txtManufacturer.Text = ipdbEntry.ManufacturerShortName;
+                txtYear.Text = ipdbEntry.DateOfManufacture?.Year.ToString();
+                txtTheme.Text = ipdbEntry.Theme;
+                txtIpdb.Text = ipdbEntry.IpdbId.ToString();
+                txtType.Text = ipdbEntry.TypeShortName;
+                txtPlayers.Text = ipdbEntry.Players.ToString();
+            }
         }
 
         private void btnGameUrl_Click(object sender, EventArgs e)
@@ -162,6 +180,7 @@ namespace PinCab.Configurator
         private void btnDatabaseBrowser_Click(object sender, EventArgs e)
         {
             var form = new DatabaseBrowserForm();
+            form.SearchByText(txtDisplayName.Text, new DateTime(1900,1,1), DateTime.Today.AddDays(1), new List<string>());
             var result = form.ShowDialog(this);
         }
     }

@@ -22,6 +22,7 @@ namespace PinCab.Configurator
     {
         private readonly FrontEndManager _manager = new FrontEndManager();
         private List<FrontEndGameViewModel> _fullGameListCache { get; set; }
+        private IpdbBrowserForm _ipdbForm = new IpdbBrowserForm(string.Empty, true);
         //private bool _loading = true;
         public GameManagerForm()
         {
@@ -111,7 +112,7 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
-                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
+                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager, _ipdbForm);
                 var result = mediaAuditForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
@@ -238,7 +239,7 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
-                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
+                var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager, _ipdbForm);
                 var result = mediaAuditForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {

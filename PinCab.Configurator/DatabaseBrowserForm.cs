@@ -1,4 +1,5 @@
-﻿using FluentDateTime;
+﻿using DuoVia.FuzzyStrings;
+using FluentDateTime;
 using Newtonsoft.Json;
 using PinCab.Configurator.Models;
 using PinCab.Configurator.Utils;
@@ -28,6 +29,7 @@ namespace PinCab.Configurator
         private readonly DatabaseManager _dbManager = new DatabaseManager();
         private readonly DatabaseBrowserSettingsManager _settingManager = new DatabaseBrowserSettingsManager();
         //private BackgroundQueue _queue = new BackgroundQueue();
+        private bool _loading = true;
 
         public DatabaseBrowserForm()
         {
@@ -43,6 +45,7 @@ namespace PinCab.Configurator
             ConfigureFilters();
             ConfigureGrid();
             LoadDatabaseGrid();
+            _loading = false;
         }
 
         private void ConfigureFilters()
@@ -73,7 +76,7 @@ namespace PinCab.Configurator
                     cmbDatabase.SelectedItem = type;
             }
 
-            foreach(var tag in settings.TagFilter)
+            foreach (var tag in settings.TagFilter)
             {
                 TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter);
                 tagwinforms.Init();
@@ -146,14 +149,40 @@ namespace PinCab.Configurator
             Close();
         }
 
+        public void SearchByText(string text, DateTime startDate, DateTime endDate, List<string> tags, bool fuzzyMatch = true, string typeFilter = "All", string databaseFilter = "All")
+        {
+            _loading = true; //Don't cause excessive rebinds
+            dateTimePickerEnd.Value = endDate;
+            dateTimePickerBegin.Value = startDate;
+            ClearAllTags();
+            if (tags != null)
+            {
+                foreach (var tag in tags)
+                {
+                    TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter); //Pass in action on what to do if a tag is removed
+                    tagwinforms.Init();
+                    flowLayoutPanelTags.Controls.Add(tagwinforms);
+                }
+            }
+            cmbType.SelectedItem = typeFilter;
+            cmbDatabase.SelectedItem = databaseFilter;
+            chkFuzzyMatch.Checked = fuzzyMatch;
+            _loading = false;
+            txtSearch.Text = text;
+        }
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            RebindGridUsingFilter();
+            RebindGridUsingFilter(); //Don't filter by _loading here as this triggers the grid population
         }
 
         private List<DatabaseBrowserEntry> GetEntriesByFilterCriteria()
         {
-            var list = _dbManager.Entries.Where(p => p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
+            IEnumerable<DatabaseBrowserEntry> list;
+            if (chkFuzzyMatch.Checked)
+                list = _dbManager.Entries.Where(p => p.Title.FuzzyMatch(txtSearch.Text) > .5); //Search by text
+            else
+                list = _dbManager.Entries.Where(p => p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
             list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
                 && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
 
@@ -187,39 +216,27 @@ namespace PinCab.Configurator
             UpdateToolstripStatus();
         }
 
-        private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            int rowIndex = GetActiveRowIndex();
-            if (rowIndex == -1)
-            {
-                txtLog.Text = "Select a row or cell first.";
-                return;
-            }
-            //if (e.ClickedItem == editToolStripMenuItem)
-            //    ShowRomEditor();
-            //else if (e.ClickedItem == copySelectedCellValueToAllROMSToolStripMenuItem)
-            //    CopyCellDataToAllRoms();
-            //else if (e.ClickedItem == copySelectedRowDataToAllROMSToolStripMenuItem)
-            //    CopyRowDataToAllRoms();
-            //else if (e.ClickedItem == runROMUsingExternalDMDDeviceDMDExtToolStripMenuItem)
-            //    DisplayRomUsingPinMame(true);
-            //else if (e.ClickedItem == runROMUsingNativeVPinMameToolStripMenuItem)
-            //    DisplayRomUsingPinMame(false);
-            //else if (e.ClickedItem == stopRunningROMToolStripMenuItem)
-            //    StopRunningRom();
-        }
+        //private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        //{
+        //    int rowIndex = GetActiveRowIndex();
+        //    if (rowIndex == -1)
+        //    {
+        //        txtLog.Text = "Select a row or cell first.";
+        //        return;
+        //    }
+        //}
 
-        private int GetActiveRowIndex()
-        {
-            int rowIndex = -1;
-            //If the row is selected get that row index
-            if (dataGridViewEntryList.SelectedRows.Count > 0)
-                rowIndex = dataGridViewEntryList.SelectedRows[0].Index;
-            //if the cell is selected, get the row index from that instead
-            if (dataGridViewEntryList.SelectedCells.Count > 0 && rowIndex == -1)
-                rowIndex = dataGridViewEntryList.SelectedCells[0].RowIndex;
-            return rowIndex;
-        }
+        //private int GetActiveRowIndex()
+        //{
+        //    int rowIndex = -1;
+        //    //If the row is selected get that row index
+        //    if (dataGridViewEntryList.SelectedRows.Count > 0)
+        //        rowIndex = dataGridViewEntryList.SelectedRows[0].Index;
+        //    //if the cell is selected, get the row index from that instead
+        //    if (dataGridViewEntryList.SelectedCells.Count > 0 && rowIndex == -1)
+        //        rowIndex = dataGridViewEntryList.SelectedCells[0].RowIndex;
+        //    return rowIndex;
+        //}
 
         private DatabaseBrowserEntry GetActiveRowEntry()
         {
@@ -426,22 +443,26 @@ namespace PinCab.Configurator
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RebindGridUsingFilter();
+            if (!_loading)
+                RebindGridUsingFilter();
         }
 
         private void dateTimePickerBegin_ValueChanged(object sender, EventArgs e)
         {
-            RebindGridUsingFilter();
+            if (!_loading)
+                RebindGridUsingFilter();
         }
 
         private void dateTimePickerEnd_ValueChanged(object sender, EventArgs e)
         {
-            RebindGridUsingFilter();
+            if (!_loading)
+                RebindGridUsingFilter();
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RebindGridUsingFilter();
+            if (!_loading)
+                RebindGridUsingFilter();
         }
 
         private void cmbTags_SelectedIndexChanged(object sender, EventArgs e)
@@ -452,8 +473,14 @@ namespace PinCab.Configurator
                 TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter); //Pass in action on what to do if a tag is removed
                 tagwinforms.Init();
                 flowLayoutPanelTags.Controls.Add(tagwinforms);
-                RebindGridUsingFilter();
+                if (!_loading)
+                    RebindGridUsingFilter();
             }
+        }
+
+        private void ClearAllTags()
+        {
+            flowLayoutPanelTags.Controls.Clear();
         }
 
         public List<string> GetAllSelectedTags()
@@ -592,6 +619,12 @@ namespace PinCab.Configurator
             }
 
             _settingManager.SaveSettings(settings);
+        }
+
+        private void chkFuzzyMatch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_loading)
+                RebindGridUsingFilter();
         }
     }
 }

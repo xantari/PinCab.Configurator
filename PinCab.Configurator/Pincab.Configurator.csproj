@@ -151,6 +151,18 @@
     <Compile Include="AboutBoxForm.Designer.cs">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IpdbBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IpdbBrowserForm.Designer.cs">
+      <DependentUpon>IpdbBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MassRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MassRecordForm.Designer.cs">
+      <DependentUpon>MassRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediaAuditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +231,12 @@
     <Compile Include="Utils\FormHelper.cs" />
     <EmbeddedResource Include="AboutBoxForm.resx">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IpdbBrowserForm.resx">
+      <DependentUpon>IpdbBrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MassRecordForm.resx">
+      <DependentUpon>MassRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MediaAuditForm.resx">
       <DependentUpon>MediaAuditForm.cs</DependentUpon>

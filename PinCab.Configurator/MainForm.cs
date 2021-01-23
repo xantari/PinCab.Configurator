@@ -403,7 +403,7 @@ namespace PinCab.Configurator
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsForm form = new SettingsForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 _settings = settingManager.LoadSettings();
@@ -446,7 +446,7 @@ namespace PinCab.Configurator
                 fileDialog.FileName = Environment.MachineName + "_DisplayDetails.json";
                 fileDialog.RestoreDirectory = true;
 
-                if (fileDialog.ShowDialog() == DialogResult.OK)
+                if (fileDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     //Get the path of specified file
                     filePath = fileDialog.FileName;
@@ -629,7 +629,7 @@ namespace PinCab.Configurator
         private void b2SScreenresEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new ScreenResEditorForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
         }
 
         private void validateultraDMDRegistryKeyToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -707,7 +707,7 @@ namespace PinCab.Configurator
         private void pinMameROMBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new PinMameRomBrowserForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
         }
 
         private void validatepinupPlayerToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -760,7 +760,7 @@ namespace PinCab.Configurator
         private void gameManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new GameManagerForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 _settings = settingManager.LoadSettings();
@@ -779,7 +779,7 @@ namespace PinCab.Configurator
         private void databaseManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new DatabaseBrowserForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 _settings = settingManager.LoadSettings();

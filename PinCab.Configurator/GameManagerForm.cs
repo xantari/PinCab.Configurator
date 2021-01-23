@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -111,7 +112,7 @@ namespace PinCab.Configurator
             if (row != null)
             {
                 var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
-                var result = mediaAuditForm.ShowDialog();
+                var result = mediaAuditForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     RefreshGameGrid();
@@ -122,7 +123,7 @@ namespace PinCab.Configurator
         private void mediaAuditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var mediaAuditForm = new MediaAuditForm();
-            var result = mediaAuditForm.ShowDialog();
+            var result = mediaAuditForm.ShowDialog(this);
         }
 
         private void cmbDatabase_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,7 +211,7 @@ namespace PinCab.Configurator
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Game-Manager");
+            Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Game-Manager");
         }
 
         private void viewIPDBPageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -220,7 +221,7 @@ namespace PinCab.Configurator
                 var cell = dataGridViewGameList.SelectedCells[0];
                 var selectedRow = dataGridViewGameList.Rows[cell.RowIndex].DataBoundItem as FrontEndGameViewModel;
                 if (!string.IsNullOrEmpty(selectedRow.IPDBNumber))
-                    System.Diagnostics.Process.Start("https://www.ipdb.org/machine.cgi?id=" + selectedRow.IPDBNumber);
+                    Process.Start("https://www.ipdb.org/machine.cgi?id=" + selectedRow.IPDBNumber);
             }
         }
 
@@ -238,7 +239,7 @@ namespace PinCab.Configurator
             if (row != null)
             {
                 var mediaAuditForm = new AddEditGameForm(row, row.DatabaseFile, _manager);
-                var result = mediaAuditForm.ShowDialog();
+                var result = mediaAuditForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     RefreshGameGrid();
@@ -262,7 +263,7 @@ namespace PinCab.Configurator
             DialogResult removeTableFiles = DialogResult.No;
             DialogResult removeB2sFiles = DialogResult.No;
             if (removeTableFileList.Count > 0)
-                removeTableFiles = MessageBox.Show($"Do want to delete the actual table files?\r\n {string.Join("\r\n",removeTableFileList)}", "Delete Table Files?", MessageBoxButtons.YesNo);
+                removeTableFiles = MessageBox.Show($"Do want to delete the actual table files?\r\n {string.Join("\r\n", removeTableFileList)}", "Delete Table Files?", MessageBoxButtons.YesNo);
             if (removeB2sFileList.Count > 0)
                 removeB2sFiles = MessageBox.Show($"Do want to delete the actual B2S files?\r\n {string.Join("\r\n", removeB2sFileList)}", "Delete B2S Files?", MessageBoxButtons.YesNo);
 
@@ -292,6 +293,31 @@ namespace PinCab.Configurator
             {
                 foreach (var b2sFilePathToDelete in removeB2sFileList)
                     File.Delete(b2sFilePathToDelete);
+            }
+        }
+
+        private void massRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var mediaAuditForm = new MassRecordForm();
+            var result = mediaAuditForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                RefreshGameGrid();
+            }
+        }
+
+        private void refreshListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshGameGrid();
+        }
+
+        private void openMediaFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
+            if (frontEnd.System == FrontEndSystem.PinballX)
+            {
+                if (_manager.PinballXSystems.Count > 0)
+                    Process.Start(_manager.PinballXSystems[0].MediaPath);
             }
         }
     }

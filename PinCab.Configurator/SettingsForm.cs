@@ -106,7 +106,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "ffmpeg.exe";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                     txtFFMpegFilePath.Text = fileDialog.FileName;
             }
@@ -121,7 +121,7 @@ namespace PinCab.Configurator
         {
             using (FolderBrowserDialog fileDialog = new FolderBrowserDialog())
             {
-                fileDialog.ShowDialog();
+                fileDialog.ShowDialog(this);
 
                 txtTempRecordingPath.Text = fileDialog.SelectedPath;
             }
@@ -135,7 +135,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "settings.txt";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtPinballYLocation.Text = fileDialog.FileName;
@@ -150,7 +150,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "pinballx.ini";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtPinballXIniFilePath.Text = fileDialog.FileName;
@@ -165,7 +165,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "PUPDatabase.db";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtPinupPopperDbLocation.Text = fileDialog.FileName;
@@ -180,7 +180,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "Screenres.txt";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtB2SScreenresFilePath.Text = fileDialog.FileName;
@@ -195,7 +195,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "PinUpPlayer.ini";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtPinupPlayerFilePath.Text = fileDialog.FileName;
@@ -210,7 +210,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "FutureDMD.ini";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtFutureDMDFilePath.Text = fileDialog.FileName;
@@ -225,7 +225,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "*.ini";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtDMDDeviceIniFilePath.Text = fileDialog.FileName;
@@ -240,7 +240,7 @@ namespace PinCab.Configurator
                 fileDialog.FilterIndex = 1;
                 fileDialog.FileName = "user_settings.yaml";
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
 
                 if (result == DialogResult.OK)
                     txtPRocUserSettings.Text = fileDialog.FileName;

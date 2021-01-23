@@ -146,7 +146,7 @@ namespace PinCab.Configurator
 
         private void btnDmdColor_Click(object sender, EventArgs e)
         {
-            var result = colorDialogDmdColor.ShowDialog();
+            var result = colorDialogDmdColor.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 btnDmdColor.BackColor = colorDialogDmdColor.Color;

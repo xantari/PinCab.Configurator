@@ -131,7 +131,7 @@ namespace PinCab.Configurator
                 fileDialog.Filter = "All files (*.*)|*.*|VPX Files|*.vpx|FPT Files|*.fpx|VPT Files|*.vpt";
                 fileDialog.FilterIndex = 1;
                 fileDialog.RestoreDirectory = true;
-                var result = fileDialog.ShowDialog();
+                var result = fileDialog.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     var fi = new FileInfo(fileDialog.FileName);
@@ -162,7 +162,7 @@ namespace PinCab.Configurator
         private void btnDatabaseBrowser_Click(object sender, EventArgs e)
         {
             var form = new DatabaseBrowserForm();
-            var result = form.ShowDialog();
+            var result = form.ShowDialog(this);
         }
     }
 }

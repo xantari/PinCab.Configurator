@@ -194,7 +194,7 @@ namespace PinCab.Configurator
         {
             var rom = GetActiveRowRom();
             var editor = new PinMameRomSettingEditorForm(rom, _controller);
-            var result = editor.ShowDialog();
+            var result = editor.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 RefreshGrid();

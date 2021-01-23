@@ -80,6 +80,9 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="DuoVia.FuzzyStrings, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DuoVia.FuzzyStrings.2.1.0\lib\net462\DuoVia.FuzzyStrings.dll</HintPath>
+    </Reference>
     <Reference Include="EDIDParser, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EDIDParser.1.2.0.1\lib\net45\EDIDParser.dll</HintPath>
     </Reference>

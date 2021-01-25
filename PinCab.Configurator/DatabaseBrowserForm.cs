@@ -149,7 +149,7 @@ namespace PinCab.Configurator
             Close();
         }
 
-        public void SearchByText(string text, DateTime startDate, DateTime endDate, List<string> tags, bool fuzzyMatch = true, string typeFilter = "All", string databaseFilter = "All")
+        public void SearchByText(string text, DateTime startDate, DateTime endDate, List<string> tags, string typeFilter = "All", string databaseFilter = "All")
         {
             _loading = true; //Don't cause excessive rebinds
             dateTimePickerEnd.Value = endDate;
@@ -166,7 +166,6 @@ namespace PinCab.Configurator
             }
             cmbType.SelectedItem = typeFilter;
             cmbDatabase.SelectedItem = databaseFilter;
-            chkFuzzyMatch.Checked = fuzzyMatch;
             _loading = false;
             txtSearch.Text = text;
         }
@@ -179,10 +178,9 @@ namespace PinCab.Configurator
         private List<DatabaseBrowserEntry> GetEntriesByFilterCriteria()
         {
             IEnumerable<DatabaseBrowserEntry> list;
-            if (chkFuzzyMatch.Checked)
-                list = _dbManager.Entries.Where(p => p.Title.FuzzyMatch(txtSearch.Text) > .5); //Search by text
-            else
-                list = _dbManager.Entries.Where(p => p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
+            list = _dbManager.Entries.Where(p => (p.Title.FuzzyMatch(txtSearch.Text) > .5)
+            || p.Title.ToLower().Contains(txtSearch.Text.ToLower())
+            ); //Search by text
             list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
                 && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
 
@@ -208,12 +206,16 @@ namespace PinCab.Configurator
 
         private void RebindGridUsingFilter()
         {
+            //Stopwatch watch = new Stopwatch();
+            //watch.Start();
             var list = GetEntriesByFilterCriteria();
             vpinDatabaseSettingBindingSource.DataSource = list.ToSortableBindingList();
             var tags = _dbManager.GetAllTags(list.ToList(), false).OrderBy(c => c).ToList();
             tags.Insert(0, "(Select Tag)");
             cmbTags.DataSource = tags;
             UpdateToolstripStatus();
+            //watch.Stop();
+            //Debug.WriteLine("Rebind took: " + watch.Elapsed);
         }
 
         //private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -308,6 +310,14 @@ namespace PinCab.Configurator
                 var tags = result.Result as List<string>;
                 cmbTags.DataSource = tags;
             }
+            //else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.RebindDatabaseBrowserGrid.ToString())
+            //{
+            //    var list = vpinDatabaseSettingBindingSource.DataSource as SortableBindingList<DatabaseBrowserEntry>;
+            //    var tags = _dbManager.GetAllTags(list.ToList(), false).OrderBy(c => c).ToList();
+            //    tags.Insert(0, "(Select Tag)");
+            //    cmbTags.DataSource = tags;
+            //    UpdateToolstripStatus();
+            //}
             UpdateToolstripStatus();
         }
 
@@ -328,6 +338,27 @@ namespace PinCab.Configurator
             {
                 e.Result = LoadTags();
             }
+            //else if (arg.Action == DatabaseManagerBackgroundProgressAction.RebindDatabaseBrowserGrid)
+            //{
+            //    RebindGridUsingFilter();
+            //    var toolResult = new ToolResult()
+            //    {
+            //        IsValid = true,
+            //    };
+            //    toolResult.ToolName = DatabaseManager.ToolName;
+            //    toolResult.MessageType = ValidationMessageType.ToolMessage;
+            //    toolResult.FunctionExecuted = DatabaseManagerBackgroundProgressAction.RebindDatabaseBrowserGrid.ToString();
+            //    e.Result = toolResult;
+            //}
+        }
+
+        private BackgroundWorker CreateBackgroundWorker()
+        {
+            var bw = new BackgroundWorker();
+            bw.WorkerSupportsCancellation = true;
+            bw.DoWork += backgroundWorkerProgressBar_DoWork;
+            bw.RunWorkerCompleted += backgroundWorkerProgressBar_RunWorkerCompleted;
+            return bw;
         }
 
         private ToolResult DownloadAndLoadDatabase()

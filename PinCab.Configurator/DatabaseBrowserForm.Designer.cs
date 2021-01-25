@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +87,6 @@
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.chkFuzzyMatch = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
@@ -158,7 +157,6 @@
             // 
             // panelFilterCriteria
             // 
-            this.panelFilterCriteria.Controls.Add(this.chkFuzzyMatch);
             this.panelFilterCriteria.Controls.Add(this.flowLayoutPanelTags);
             this.panelFilterCriteria.Controls.Add(this.lblDatabase);
             this.panelFilterCriteria.Controls.Add(this.cmbDatabase);
@@ -362,8 +360,8 @@
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle5;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -530,8 +528,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -628,7 +626,7 @@
             // toolStripStatusLabelSpacer
             // 
             this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
-            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(865, 17);
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(834, 17);
             this.toolStripStatusLabelSpacer.Spring = true;
             // 
             // toolStripProgressBar
@@ -648,17 +646,6 @@
             this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
             this.statusStripBottom.TabIndex = 6;
             this.statusStripBottom.Text = "statusStrip1";
-            // 
-            // chkFuzzyMatch
-            // 
-            this.chkFuzzyMatch.AutoSize = true;
-            this.chkFuzzyMatch.Location = new System.Drawing.Point(216, 58);
-            this.chkFuzzyMatch.Name = "chkFuzzyMatch";
-            this.chkFuzzyMatch.Size = new System.Drawing.Size(86, 17);
-            this.chkFuzzyMatch.TabIndex = 15;
-            this.chkFuzzyMatch.Text = "Fuzzy Match";
-            this.chkFuzzyMatch.UseVisualStyleBackColor = true;
-            this.chkFuzzyMatch.CheckedChanged += new System.EventHandler(this.chkFuzzyMatch_CheckedChanged);
             // 
             // DatabaseBrowserForm
             // 
@@ -757,6 +744,5 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStripChildEntries;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildIpdb;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildUrl;
-        private System.Windows.Forms.CheckBox chkFuzzyMatch;
     }
 }

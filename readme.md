@@ -93,17 +93,6 @@ Logging information is in the Log.txt file in the application root folder.
 #### Database Browser
 ![Database Browser](https://github.com/xantari/PinCabScreenConfigurator/raw/master/Screenshots/DatabaseBrowserScreenshot.png "Database Browser")
 
-# TODO
-1. Add command line switch to actually run the FFMPeg commands to capture video and move the resulting videos to the correct location (depending on front end)
-2. Create help HTML pages and hookup to the program
-3. Add a feature that will compare your table list in PinballY / PinballX / Pinup Popper and show you missing and extra media (such as old outdated recordings from renamed tables, etc that don't match the tablename exactly)
-for things like Wheels / Backglass / Playfield / Launch Audio / Toppers / etc.  
-	a. Add function to rename a table, and have it rename all corresponding files (All media, Backglass directB2s file) so that when you name your tables with the version # of the table all the media comes along with it.  
-	b. Option to right click a missing media cell and it will automatically popup a browser to search for that media  
-	c. Hook into PuPmedia.php on VPinball.com to fetch media as well  
-	d. Hook into PinballX's (GameEx) media library (if you have defined your GameEx credentials)  
-	e. Maintain an install time of the table in a local database (extra fields in PinballY/PinballX XML, and already a field in PinUpPoppers Games table), so you can compare the last updated date/time stamp in the pinball game database to see if updates to a table are available.  
-
 # Thank you!
 Thanks go to [Soroush Falahati](https://github.com/falahati) for his excellent [WindowsDisplayApi](https://github.com/falahati/WindowsDisplayAPI) and [EDIDParser](https://github.com/falahati/EDIDParser) libraries!
 

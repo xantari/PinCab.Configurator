@@ -30,9 +30,10 @@ namespace PinCab.Configurator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ipdbDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelFilterCriteria = new System.Windows.Forms.Panel();
+            this.chkOverrideDisplayName = new System.Windows.Forms.CheckBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.splitContainerTopAndBottomGrids = new System.Windows.Forms.SplitContainer();
@@ -46,11 +47,12 @@ namespace PinCab.Configurator
             this.DatabaseTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewIpdb = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
-            this.chkOverrideDisplayName = new System.Windows.Forms.CheckBox();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Manufacturer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateOfManufacture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ipdbDatabaseSettingBindingSource)).BeginInit();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerTopAndBottomGrids)).BeginInit();
@@ -76,6 +78,16 @@ namespace PinCab.Configurator
             this.panelFilterCriteria.Name = "panelFilterCriteria";
             this.panelFilterCriteria.Size = new System.Drawing.Size(610, 32);
             this.panelFilterCriteria.TabIndex = 8;
+            // 
+            // chkOverrideDisplayName
+            // 
+            this.chkOverrideDisplayName.AutoSize = true;
+            this.chkOverrideDisplayName.Location = new System.Drawing.Point(262, 5);
+            this.chkOverrideDisplayName.Name = "chkOverrideDisplayName";
+            this.chkOverrideDisplayName.Size = new System.Drawing.Size(134, 17);
+            this.chkOverrideDisplayName.TabIndex = 2;
+            this.chkOverrideDisplayName.Text = "Override Display Name";
+            this.chkOverrideDisplayName.UseVisualStyleBackColor = true;
             // 
             // lblSearch
             // 
@@ -116,8 +128,8 @@ namespace PinCab.Configurator
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -200,7 +212,9 @@ namespace PinCab.Configurator
             this.dataGridViewIpdb.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridViewIpdb.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn1});
+            this.dataGridViewTextBoxColumn1,
+            this.Manufacturer,
+            this.DateOfManufacture});
             this.dataGridViewIpdb.DataSource = this.ipdbDatabaseSettingBindingSource;
             this.dataGridViewIpdb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewIpdb.Location = new System.Drawing.Point(0, 0);
@@ -210,23 +224,6 @@ namespace PinCab.Configurator
             this.dataGridViewIpdb.TabIndex = 3;
             this.dataGridViewIpdb.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewIpdb_CellDoubleClick);
             this.dataGridViewIpdb.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewIpdb_DataBindingComplete);
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "IpdbId";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ipdb";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 52;
             // 
             // btnCancel
             // 
@@ -250,15 +247,38 @@ namespace PinCab.Configurator
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            // chkOverrideDisplayName
+            // dataGridViewTextBoxColumn4
             // 
-            this.chkOverrideDisplayName.AutoSize = true;
-            this.chkOverrideDisplayName.Location = new System.Drawing.Point(262, 5);
-            this.chkOverrideDisplayName.Name = "chkOverrideDisplayName";
-            this.chkOverrideDisplayName.Size = new System.Drawing.Size(134, 17);
-            this.chkOverrideDisplayName.TabIndex = 2;
-            this.chkOverrideDisplayName.Text = "Override Display Name";
-            this.chkOverrideDisplayName.UseVisualStyleBackColor = true;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "IpdbId";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ipdb";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 52;
+            // 
+            // Manufacturer
+            // 
+            this.Manufacturer.DataPropertyName = "Manufacturer";
+            this.Manufacturer.HeaderText = "Manufacturer";
+            this.Manufacturer.Name = "Manufacturer";
+            this.Manufacturer.ReadOnly = true;
+            this.Manufacturer.Width = 95;
+            // 
+            // DateOfManufacture
+            // 
+            this.DateOfManufacture.DataPropertyName = "DateOfManufacture";
+            this.DateOfManufacture.HeaderText = "Date";
+            this.DateOfManufacture.Name = "DateOfManufacture";
+            this.DateOfManufacture.ReadOnly = true;
+            this.DateOfManufacture.Width = 55;
             // 
             // IpdbBrowserForm
             // 
@@ -300,10 +320,12 @@ namespace PinCab.Configurator
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTypeString;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridViewIpdb;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSelect;
         public System.Windows.Forms.CheckBox chkOverrideDisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Manufacturer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateOfManufacture;
     }
 }

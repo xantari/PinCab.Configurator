@@ -1,5 +1,6 @@
 ﻿using IniParser.Model;
 using PinCab.Utils.Utils.PinballX;
+using PinCab.Utils.ViewModels;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -64,11 +65,13 @@ namespace PinCab.Utils.Models.PinballX
             SetByData(data, platform);
         }
 
-        public List<string> GetDatabaseFilesWithoutDatabasePath()
+        public List<DatabaseFileViewModel> GetDatabaseFileViewModel()
         {
-            var list = new List<string>();
+            var list = new List<DatabaseFileViewModel>();
             foreach (var database in DatabaseFiles)
-                list.Add(database.Replace(DatabasePath.Replace(Name, string.Empty), string.Empty));
+            {
+                list.Add(new DatabaseFileViewModel() { DatabaseFile = database, DatabaseFilePathShort = database.Replace(DatabasePath.Replace(Name, string.Empty), string.Empty) });
+            }
             return list;
         }
 

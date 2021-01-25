@@ -3,6 +3,7 @@ using PinCab.Utils.Models;
 using PinCab.Utils.Models.PinballX;
 using PinCab.Utils.Utils;
 using PinCab.Utils.ViewModels;
+using PinCab.Utils.WinForms;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace PinCab.Configurator
             {
                 foreach (var itm in cmbDatabase.Items)
                 {
-                    if (itm.ToString() == _manager.Settings.LastSelectedDatabaseFile)
+                    if (((DatabaseFileViewModel)itm).DatabaseFilePathShort == _manager.Settings.LastSelectedDatabaseFile)
                         cmbDatabase.SelectedItem = itm;
                 }
             }
@@ -93,7 +94,7 @@ namespace PinCab.Configurator
                 if (frontEnd.System == FrontEndSystem.PinballX)
                 {
                     foreach (var system in _manager.PinballXSystems) //Get the short name of the database, not the full path
-                        cmbDatabase.Items.AddRange(system.GetDatabaseFilesWithoutDatabasePath().ToArray());
+                        cmbDatabase.Items.AddRange(system.GetDatabaseFileViewModel().ToArray());
                     txtLog.Text = string.Join("\r\n", _manager.GetFrontEndWarnings(frontEnd));
                 }
                 else
@@ -138,18 +139,49 @@ namespace PinCab.Configurator
             if (cmbDatabase.SelectedIndex >= 0)
             {
                 var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
-                _fullGameListCache = _manager.GetGamesForFrontEndAndDatabase(frontEnd, cmbDatabase.SelectedItem.ToString());
-                frontEndGameBindingSource.DataSource = _fullGameListCache.ToSortableBindingList();
+                var databaseItem = cmbDatabase.SelectedItem as DatabaseFileViewModel;
+                _fullGameListCache = _manager.GetGamesForFrontEndAndDatabase(frontEnd, databaseItem.DatabaseFilePathShort);
+                var list = GetSearchCriteria();
+                frontEndGameBindingSource.DataSource = list.ToSortableBindingList();
 
                 if (frontEnd.System == FrontEndSystem.PinballX)
                 {
-                    var system = _manager.PinballXSystems.FirstOrDefault(p => p.DatabaseFiles.Any(c => c.Contains(cmbDatabase.SelectedItem.ToString())));
+                    var system = _manager.PinballXSystems.FirstOrDefault(p => p.DatabaseFiles.Any(c => c.Contains(databaseItem.DatabaseFilePathShort)));
                     if (system.Enabled)
                         lblDatabaseStatus.Text = "Enabled";
                     else
                         lblDatabaseStatus.Text = "Disabled";
                 }
+                UpdateToolstripStatus();
             }
+        }
+
+        private List<FrontEndGameViewModel> GetSearchCriteria()
+        {
+            string searchText = txtSearch.Text.ToLower();
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                return _fullGameListCache.Where(p =>
+                    (!string.IsNullOrEmpty(p.Rom) && p.Rom.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Year) && p.Year.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.FileName) && p.FileName.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Description) && p.Description.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Comment) && p.Comment.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Author) && p.Author.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.AlternateExe) && p.AlternateExe.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Manufacturer) && p.Manufacturer.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Theme) && p.Theme.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Type) && p.Type.ToLower().Contains(searchText)) ||
+                    (!string.IsNullOrEmpty(p.Version) && p.Version.ToLower().Contains(searchText))
+                    ).ToList();
+            }
+            return _fullGameListCache;
+        }
+
+        private void UpdateToolstripStatus()
+        {
+            var entriesInGrid = frontEndGameBindingSource.DataSource as SortableBindingList<FrontEndGameViewModel>;
+            toolStripStatusLabel.Text = $"Total Database Entries: {_fullGameListCache.Count} Filtered: {entriesInGrid.Count}";
         }
 
         private void AddOrUpdateLog(string text)
@@ -187,27 +219,15 @@ namespace PinCab.Configurator
             }
             if (cmbDatabase.SelectedIndex >= 0)
             {
-                _manager.Settings.LastSelectedDatabaseFile = cmbDatabase.SelectedItem.ToString();
+                var databaseItem = cmbDatabase.SelectedItem as DatabaseFileViewModel;
+                _manager.Settings.LastSelectedDatabaseFile = databaseItem.DatabaseFilePathShort;
             }
             _manager.SaveSettings(_manager.Settings);
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = txtSearch.Text.ToLower();
-            dataGridViewGameList.DataSource = _fullGameListCache.Where(p =>
-                (!string.IsNullOrEmpty(p.Rom) && p.Rom.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Year) && p.Year.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.FileName) && p.FileName.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Description) && p.Description.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Comment) && p.Comment.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Author) && p.Author.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.AlternateExe) && p.AlternateExe.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Manufacturer) && p.Manufacturer.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Theme) && p.Theme.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Type) && p.Type.ToLower().Contains(searchText)) ||
-                (!string.IsNullOrEmpty(p.Version) && p.Version.ToLower().Contains(searchText))
-                ).ToSortableBindingList();
+            RefreshGameGrid();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -320,6 +340,26 @@ namespace PinCab.Configurator
                 if (_manager.PinballXSystems.Count > 0)
                     Process.Start(_manager.PinballXSystems[0].MediaPath);
             }
+        }
+
+        private void addGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var newGame = new FrontEndGameViewModel();
+            var frontEnd = cmbFrontEnd.SelectedItem as FrontEnd;
+            var databaseFile = cmbDatabase.SelectedItem as DatabaseFileViewModel;
+            newGame.FrontEnd = frontEnd;
+            newGame.DatabaseFile = databaseFile.DatabaseFile;
+            var mediaAuditForm = new AddEditGameForm(newGame, newGame.DatabaseFile, _manager, _ipdbForm);
+            var result = mediaAuditForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                RefreshGameGrid();
+            }
+        }
+
+        private void backgroundWorkerProgressBar_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            toolStripProgressBar.Value = e.ProgressPercentage;
         }
     }
 }

@@ -23,6 +23,7 @@ namespace PinCab.Configurator
         private FrontEndManager _manager { get; set; }
         private string _databaseFile { get; set; }
         private IpdbBrowserForm _ipdbForm = null;
+        private bool isNewEntry = false;
         public AddEditGameForm(FrontEndGameViewModel setting, string databaseFile, FrontEndManager manager, IpdbBrowserForm ipdbForm)
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace PinCab.Configurator
             _manager = manager;
             _databaseFile = databaseFile;
             _ipdbForm = ipdbForm;
+            if (string.IsNullOrEmpty(setting.Description))
+                isNewEntry = true;
             if (_ipdbForm == null)
                 _ipdbForm = new IpdbBrowserForm(txtTableName.Text, true);
             LoadForm();
@@ -124,6 +127,17 @@ namespace PinCab.Configurator
         private void btnSave_Click(object sender, EventArgs e)
         {
             var result = GetSettingFromControls();
+            if (string.IsNullOrEmpty(result.Description))
+            {
+                MessageBox.Show("Description is a required field");
+                return;
+            }
+            if (string.IsNullOrEmpty(result.FileName))
+            {
+                MessageBox.Show("File Name is a required field");
+                return;
+            }
+
             _manager.SaveGame(result);
             Close();
         }
@@ -134,6 +148,11 @@ namespace PinCab.Configurator
             {
                 fileDialog.Filter = "All files (*.*)|*.*|VPX Files|*.vpx|FPT Files|*.fpx|VPT Files|*.vpt";
                 fileDialog.FilterIndex = 1;
+                if (_setting.FrontEnd.System == FrontEndSystem.PinballX)
+                {
+                    var system = _manager.PinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(_databaseFile));
+                    fileDialog.InitialDirectory = system.TablePath;
+                }
                 fileDialog.RestoreDirectory = true;
                 var result = fileDialog.ShowDialog(this);
                 if (result == DialogResult.OK)
@@ -142,6 +161,11 @@ namespace PinCab.Configurator
                     var endIndex = fi.Name.LastIndexOf(fi.Extension);
                     originalFileName = txtTableName.Text;
                     txtTableName.Text = fi.Name.Substring(0, endIndex);
+                    if (isNewEntry)
+                    {
+                        txtModified.Text = fi.LastWriteTime.ToString();
+                        txtAdded.Text = fi.CreationTime.ToString();
+                    }
                 }
             }
         }
@@ -155,6 +179,8 @@ namespace PinCab.Configurator
         private void btnFillFromIpdb_Click(object sender, EventArgs e)
         {
             _ipdbForm.SearchText(txtTableName.Text);
+            if (isNewEntry)
+                _ipdbForm.chkOverrideDisplayName.Checked = true;
             var result = _ipdbForm.ShowDialog(this);
             if (result == DialogResult.OK)
             {

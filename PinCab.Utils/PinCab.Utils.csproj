@@ -155,6 +155,7 @@
     <Compile Include="Utils\DatabaseManager.cs" />
     <Compile Include="Utils\DatabaseBrowserSettingsManager.cs" />
     <Compile Include="Utils\WinApi.cs" />
+    <Compile Include="ViewModels\DatabaseFileViewModel.cs" />
     <Compile Include="ViewModels\FrontEndGameViewModel.cs" />
     <Compile Include="Models\PinballX\PinballXGame.cs" />
     <Compile Include="Models\PinballX\PinballXMenu.cs" />

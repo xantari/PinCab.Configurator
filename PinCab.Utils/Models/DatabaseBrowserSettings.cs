@@ -29,6 +29,8 @@ namespace PinCab.Utils.Models
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public string TypeFilter { get; set; }
+        public int WindowHeight { get; set; }
+        public int WindowWidth { get; set; }
         public List<string> TagFilter { get; set; }
         public string DatabaseFilter { get; set; }
         public List<int> DatabaseGridColumnWidths { get; set; }

@@ -1,9 +1,7 @@
 ﻿using DuoVia.FuzzyStrings;
 using FluentDateTime;
-using Newtonsoft.Json;
 using PinCab.Configurator.Models;
 using PinCab.Configurator.Utils;
-using PinCab.Utils;
 using PinCab.Utils.Extensions;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
@@ -14,12 +12,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PinCab.Configurator
@@ -30,10 +24,18 @@ namespace PinCab.Configurator
         private readonly DatabaseBrowserSettingsManager _settingManager = new DatabaseBrowserSettingsManager();
         //private BackgroundQueue _queue = new BackgroundQueue();
         private bool _loading = true;
+        private DatabaseBrowserSettings _settings { get; set; }
 
         public DatabaseBrowserForm()
         {
             InitializeComponent();
+
+            _settings = _settingManager.LoadSettings();
+            if (_settings == null) //Load the defaults and save to the filesystem
+            {
+                _settings = new DatabaseBrowserSettings();
+                _settingManager.SaveSettings(_settings);
+            }
 
             _dbManager = new DatabaseManager(backgroundWorkerProgressBar.ReportProgress);
 
@@ -50,33 +52,27 @@ namespace PinCab.Configurator
 
         private void ConfigureFilters()
         {
-            //TODO: Load from the last state (create a database form manager that persists filter selections to .json setting file)
-            var settings = _settingManager.LoadSettings();
-            if (settings == null) //Load the defaults and save to the filesystem
-            {
-                settings = new DatabaseBrowserSettings();
-                _settingManager.SaveSettings(settings);
-            }
-            dateTimePickerBegin.Value = settings.BeginDate.BeginningOfDay();
-            dateTimePickerEnd.Value = settings.EndDate.EndOfDay();
+            //Load from the last state (create a database form manager that persists filter selections to .json setting file)
+            dateTimePickerBegin.Value = _settings.BeginDate.BeginningOfDay();
+            dateTimePickerEnd.Value = _settings.EndDate.EndOfDay();
             var databaseTypeList = EnumExtensions.GetEnumDescriptionList<DatabaseEntryType>();
             databaseTypeList.Insert(0, "All");
             cmbType.DataSource = databaseTypeList;
-            txtSearch.Text = settings.SearchTerm;
+            txtSearch.Text = _settings.SearchTerm;
 
             foreach (string type in cmbType.Items)
             {
-                if (type == settings.TypeFilter)
+                if (type == _settings.TypeFilter)
                     cmbType.SelectedItem = type;
             }
 
             foreach (string type in cmbDatabase.Items)
             {
-                if (type == settings.DatabaseFilter)
+                if (type == _settings.DatabaseFilter)
                     cmbDatabase.SelectedItem = type;
             }
 
-            foreach (var tag in settings.TagFilter)
+            foreach (var tag in _settings.TagFilter)
             {
                 TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter);
                 tagwinforms.Init();
@@ -84,6 +80,30 @@ namespace PinCab.Configurator
             }
 
             flowLayoutPanelTags.Padding = new Padding(3, 3, 3, 3);
+
+            if (_settings.WindowHeight > 0 && _settings.WindowWidth > 0)
+            {
+                Height = _settings.WindowHeight;
+                Width = _settings.WindowWidth;
+            }
+        }
+
+        private void SetDatabaseGridWidths()
+        {
+            int count = 1;
+            foreach (var setting in _settings.DatabaseGridColumnWidths)
+            {
+                if (count <= dataGridViewEntryList.Columns.Count)
+                    dataGridViewEntryList.Columns[count - 1].Width = setting;
+                count++;
+            }
+            count = 1;
+            foreach (var setting in _settings.RelatedGridColumnWidths)
+            {
+                if (count <=  dataGridViewChildEntries.Columns.Count)
+                    dataGridViewChildEntries.Columns[count - 1].Width = setting;
+                count++;
+            }
         }
 
         private void LoadDatabaseGrid()
@@ -126,6 +146,8 @@ namespace PinCab.Configurator
                 column.Resizable = DataGridViewTriState.True;
             }
             dataGridViewChildEntries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+
+            SetDatabaseGridWidths();
             //Speed tweak testing
             //dataGridViewEntryList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             //dataGridViewEntryList.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
@@ -463,7 +485,9 @@ namespace PinCab.Configurator
 
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (e.ListChangedType != ListChangedType.Reset)
+            //Autosize the columns only if the user hasn't customized the grid settings or it saved the last
+            //grid column sizes after first run of the program
+            if (e.ListChangedType != ListChangedType.Reset && _settings.DatabaseGridColumnWidths.Count == 0)
             {
                 dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
@@ -648,6 +672,9 @@ namespace PinCab.Configurator
             {
                 settings.RelatedGridColumnWidths.Add(column.Width);
             }
+
+            settings.WindowHeight = Height;
+            settings.WindowWidth = Width;
 
             _settingManager.SaveSettings(settings);
         }

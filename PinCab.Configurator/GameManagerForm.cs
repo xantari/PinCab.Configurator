@@ -272,6 +272,9 @@ namespace PinCab.Configurator
         {
             var deleteFromDatabase = MessageBox.Show($"Are you sure you want to delete the {dataGridViewGameList.SelectedRows.Count} selected items from the database?", "Are you sure?", MessageBoxButtons.YesNo);
 
+            if (deleteFromDatabase == DialogResult.No)
+                return;
+
             List<FrontEndGameViewModel> selectedRowsToDelete = new List<FrontEndGameViewModel>();
             foreach (DataGridViewRow selectedRow in dataGridViewGameList.SelectedRows)
             {

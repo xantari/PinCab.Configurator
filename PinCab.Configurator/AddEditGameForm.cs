@@ -32,7 +32,9 @@ namespace PinCab.Configurator
             _databaseFile = databaseFile;
             _ipdbForm = ipdbForm;
             if (string.IsNullOrEmpty(setting.Description))
+            {
                 isNewEntry = true;
+            }
             if (_ipdbForm == null)
                 _ipdbForm = new IpdbBrowserForm(txtTableName.Text, true);
             LoadForm();
@@ -90,6 +92,7 @@ namespace PinCab.Configurator
             _setting.Players = txtPlayCount.Text.IfEmptyThenNull();
             _setting.TimesPlayed = Convert.ToInt32(txtPlayCount.Text);
             _setting.SecondsPlayed = Convert.ToInt32(txtSeconds.Text);
+            _setting.Enabled = chkEnabled.Checked;
             if (!string.IsNullOrEmpty(txtAdded.Text))
             {
                 DateTime result;
@@ -139,6 +142,7 @@ namespace PinCab.Configurator
             }
 
             _manager.SaveGame(result);
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -208,6 +212,27 @@ namespace PinCab.Configurator
             var form = new DatabaseBrowserForm();
             form.SearchByText(txtDisplayName.Text, new DateTime(1900,1,1), DateTime.Today.AddDays(1), new List<string>());
             var result = form.ShowDialog(this);
+        }
+
+        private void btnShowNew_Click(object sender, EventArgs e)
+        {
+            var addNewForm = new AddNewGameForm(_setting.FrontEnd, _setting.DatabaseFile, _manager);
+            var result = addNewForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                if (addNewForm.lstFiles.SelectedItem != null) //Can't select from an empty list
+                {
+                    var fi = new FileInfo(addNewForm.lstFiles.SelectedItem.ToString());
+                    var endIndex = fi.Name.LastIndexOf(fi.Extension);
+                    originalFileName = txtTableName.Text;
+                    txtTableName.Text = fi.Name.Substring(0, endIndex);
+                    if (isNewEntry)
+                    {
+                        txtModified.Text = fi.LastWriteTime.ToString();
+                        txtAdded.Text = fi.CreationTime.ToString();
+                    }
+                }
+            }
         }
     }
 }

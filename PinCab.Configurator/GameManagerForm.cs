@@ -361,5 +361,10 @@ namespace PinCab.Configurator
         {
             toolStripProgressBar.Value = e.ProgressPercentage;
         }
+
+        private void launchGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

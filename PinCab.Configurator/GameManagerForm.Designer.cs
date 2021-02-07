@@ -49,6 +49,7 @@ namespace PinCab.Configurator
             this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openMediaFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -68,6 +69,10 @@ namespace PinCab.Configurator
             this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.massRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,11 +104,6 @@ namespace PinCab.Configurator
             this.ManufacturerMediaStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.tableAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -112,8 +112,8 @@ namespace PinCab.Configurator
             this.contextMenuStripGridActions.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).BeginInit();
             this.statusStripBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -282,6 +282,7 @@ namespace PinCab.Configurator
             this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
             this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.launchGameToolStripMenuItem.Text = "Launch Game";
+            this.launchGameToolStripMenuItem.Click += new System.EventHandler(this.launchGameToolStripMenuItem_Click);
             // 
             // viewIPDBPageToolStripMenuItem
             // 
@@ -315,6 +316,12 @@ namespace PinCab.Configurator
             this.openMediaFolderToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.openMediaFolderToolStripMenuItem.Text = "Open Media Folder";
             this.openMediaFolderToolStripMenuItem.Click += new System.EventHandler(this.openMediaFolderToolStripMenuItem_Click);
+            // 
+            // tableAuditToolStripMenuItem
+            // 
+            this.tableAuditToolStripMenuItem.Name = "tableAuditToolStripMenuItem";
+            this.tableAuditToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.tableAuditToolStripMenuItem.Text = "Table Audit";
             // 
             // txtLog
             // 
@@ -490,6 +497,36 @@ namespace PinCab.Configurator
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // statusStripBottom
+            // 
+            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel,
+            this.toolStripStatusLabelSpacer,
+            this.toolStripProgressBar});
+            this.statusStripBottom.Location = new System.Drawing.Point(0, 531);
+            this.statusStripBottom.Name = "statusStripBottom";
+            this.statusStripBottom.Size = new System.Drawing.Size(955, 22);
+            this.statusStripBottom.TabIndex = 10;
+            this.statusStripBottom.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel.Text = "Status Here";
+            // 
+            // toolStripStatusLabelSpacer
+            // 
+            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(771, 17);
+            this.toolStripStatusLabelSpacer.Spring = true;
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // fileNameDataGridViewTextBoxColumn
             // 
@@ -735,42 +772,6 @@ namespace PinCab.Configurator
             // 
             this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
             // 
-            // statusStripBottom
-            // 
-            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel,
-            this.toolStripStatusLabelSpacer,
-            this.toolStripProgressBar});
-            this.statusStripBottom.Location = new System.Drawing.Point(0, 531);
-            this.statusStripBottom.Name = "statusStripBottom";
-            this.statusStripBottom.Size = new System.Drawing.Size(955, 22);
-            this.statusStripBottom.TabIndex = 10;
-            this.statusStripBottom.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusLabel.Text = "Status Here";
-            // 
-            // toolStripStatusLabelSpacer
-            // 
-            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
-            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(740, 17);
-            this.toolStripStatusLabelSpacer.Spring = true;
-            // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
-            // 
-            // tableAuditToolStripMenuItem
-            // 
-            this.tableAuditToolStripMenuItem.Name = "tableAuditToolStripMenuItem";
-            this.tableAuditToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.tableAuditToolStripMenuItem.Text = "Table Audit";
-            // 
             // GameManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -794,9 +795,9 @@ namespace PinCab.Configurator
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).EndInit();
             this.statusStripBottom.ResumeLayout(false);
             this.statusStripBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

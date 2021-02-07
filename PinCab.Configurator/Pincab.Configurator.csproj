@@ -154,6 +154,12 @@
     <Compile Include="AboutBoxForm.Designer.cs">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNewGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewGameForm.Designer.cs">
+      <DependentUpon>AddNewGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IpdbBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -234,6 +240,9 @@
     <Compile Include="Utils\FormHelper.cs" />
     <EmbeddedResource Include="AboutBoxForm.resx">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewGameForm.resx">
+      <DependentUpon>AddNewGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IpdbBrowserForm.resx">
       <DependentUpon>IpdbBrowserForm.cs</DependentUpon>

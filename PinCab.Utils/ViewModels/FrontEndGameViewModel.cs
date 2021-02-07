@@ -20,6 +20,7 @@ namespace PinCab.Utils.ViewModels
             TopperStatus = MediaStatus.NotFound;
             ManufacturerMediaStatus = MediaStatus.NotFound;
             MediaItems = new List<MediaItem>();
+            Enabled = true;
         }
 
         public FrontEnd FrontEnd { get; set; }

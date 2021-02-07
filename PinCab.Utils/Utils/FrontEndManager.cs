@@ -131,6 +131,15 @@ namespace PinCab.Utils.Utils
             return pbxGame;
         }
 
+        public PinballXSystem GetPinballXSystemByDatabaseFile(string fileName)
+        {
+            if (_pinballXSystems != null)
+            {
+                return _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Any(d => d == fileName));
+            }
+            return null;
+        }
+
         public List<FrontEndGameViewModel> GetGamesForFrontEndAndDatabase(FrontEnd frontEnd, string databaseFile)
         {
             var frontEndGames = new List<FrontEndGameViewModel>();

@@ -72,14 +72,15 @@
             this.label17 = new System.Windows.Forms.Label();
             this.txtModified = new System.Windows.Forms.TextBox();
             this.txtGameUrl = new System.Windows.Forms.TextBox();
-            this.btnGameUrl = new System.Windows.Forms.Button();
-            this.btnIpdbUrl = new System.Windows.Forms.Button();
             this.txtRating = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtPlayers = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.cmbAlternateExe = new System.Windows.Forms.ComboBox();
             this.btnDatabaseBrowser = new System.Windows.Forms.Button();
+            this.btnShowNew = new System.Windows.Forms.Button();
+            this.btnIpdbUrl = new System.Windows.Forms.Button();
+            this.btnGameUrl = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -92,7 +93,6 @@
             // 
             // btnSave
             // 
-            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSave.Location = new System.Drawing.Point(12, 550);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
@@ -410,7 +410,7 @@
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(301, 15);
+            this.btnSelectFile.Location = new System.Drawing.Point(381, 14);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(75, 23);
             this.btnSelectFile.TabIndex = 48;
@@ -450,32 +450,6 @@
             this.txtGameUrl.Name = "txtGameUrl";
             this.txtGameUrl.Size = new System.Drawing.Size(366, 20);
             this.txtGameUrl.TabIndex = 61;
-            // 
-            // btnGameUrl
-            // 
-            this.btnGameUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnGameUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGameUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGameUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnGameUrl.Location = new System.Drawing.Point(453, 425);
-            this.btnGameUrl.Name = "btnGameUrl";
-            this.btnGameUrl.Size = new System.Drawing.Size(27, 23);
-            this.btnGameUrl.TabIndex = 62;
-            this.btnGameUrl.UseVisualStyleBackColor = true;
-            this.btnGameUrl.Click += new System.EventHandler(this.btnGameUrl_Click);
-            // 
-            // btnIpdbUrl
-            // 
-            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnIpdbUrl.Location = new System.Drawing.Point(167, 210);
-            this.btnIpdbUrl.Name = "btnIpdbUrl";
-            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
-            this.btnIpdbUrl.TabIndex = 63;
-            this.btnIpdbUrl.UseVisualStyleBackColor = true;
-            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
             // 
             // txtRating
             // 
@@ -519,7 +493,7 @@
             // 
             // btnDatabaseBrowser
             // 
-            this.btnDatabaseBrowser.Location = new System.Drawing.Point(382, 15);
+            this.btnDatabaseBrowser.Location = new System.Drawing.Point(462, 14);
             this.btnDatabaseBrowser.Name = "btnDatabaseBrowser";
             this.btnDatabaseBrowser.Size = new System.Drawing.Size(107, 23);
             this.btnDatabaseBrowser.TabIndex = 69;
@@ -527,11 +501,48 @@
             this.btnDatabaseBrowser.UseVisualStyleBackColor = true;
             this.btnDatabaseBrowser.Click += new System.EventHandler(this.btnDatabaseBrowser_Click);
             // 
+            // btnShowNew
+            // 
+            this.btnShowNew.Location = new System.Drawing.Point(300, 14);
+            this.btnShowNew.Name = "btnShowNew";
+            this.btnShowNew.Size = new System.Drawing.Size(75, 23);
+            this.btnShowNew.TabIndex = 70;
+            this.btnShowNew.Text = "Add New";
+            this.btnShowNew.UseVisualStyleBackColor = true;
+            this.btnShowNew.Click += new System.EventHandler(this.btnShowNew_Click);
+            // 
+            // btnIpdbUrl
+            // 
+            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnIpdbUrl.Location = new System.Drawing.Point(167, 210);
+            this.btnIpdbUrl.Name = "btnIpdbUrl";
+            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnIpdbUrl.TabIndex = 63;
+            this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
+            // 
+            // btnGameUrl
+            // 
+            this.btnGameUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnGameUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGameUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGameUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnGameUrl.Location = new System.Drawing.Point(453, 425);
+            this.btnGameUrl.Name = "btnGameUrl";
+            this.btnGameUrl.Size = new System.Drawing.Size(27, 23);
+            this.btnGameUrl.TabIndex = 62;
+            this.btnGameUrl.UseVisualStyleBackColor = true;
+            this.btnGameUrl.Click += new System.EventHandler(this.btnGameUrl_Click);
+            // 
             // AddEditGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 583);
+            this.ClientSize = new System.Drawing.Size(581, 583);
+            this.Controls.Add(this.btnShowNew);
             this.Controls.Add(this.btnDatabaseBrowser);
             this.Controls.Add(this.cmbAlternateExe);
             this.Controls.Add(this.txtPlayers);
@@ -645,5 +656,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox cmbAlternateExe;
         private System.Windows.Forms.Button btnDatabaseBrowser;
+        private System.Windows.Forms.Button btnShowNew;
     }
 }

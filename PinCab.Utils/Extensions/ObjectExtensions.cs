@@ -9,6 +9,27 @@ namespace PinCab.Utils.Extensions
 {
     public static class ObjectExtensions
     {
+        /// <summary>
+        /// Returns true if current object is equal to any of the items in objs[] or false if there are no matches.  (Safe if the object this method extends is null) (Do not use in Linq to SQL queries.)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool In<T>(this T obj, params T[] objs)
+        {
+            if (objs == null)
+                return obj == null;
+
+            foreach (T o in objs)
+            {
+                if (obj == null && o == null)
+                    return true;
+                else if (obj?.Equals(o) == true)
+                    return true;
+            }
+            return false;
+        }
+
         public static Object GetPropValue(this Object obj, String name)
         {
             foreach (String part in name.Split('.'))

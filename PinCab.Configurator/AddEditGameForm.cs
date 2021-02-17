@@ -19,7 +19,7 @@ namespace PinCab.Configurator
     public partial class AddEditGameForm : Form
     {
         private FrontEndGameViewModel _setting { get; set; }
-        private string originalFileName { get; set; }
+        //private string originalFileName { get; set; }
         private FrontEndManager _manager { get; set; }
         private string _databaseFile { get; set; }
         private IpdbBrowserForm _ipdbForm = null;
@@ -141,7 +141,7 @@ namespace PinCab.Configurator
                 return;
             }
 
-            _manager.SaveGame(result);
+            _manager.SaveGame(result, null);
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -163,7 +163,7 @@ namespace PinCab.Configurator
                 {
                     var fi = new FileInfo(fileDialog.FileName);
                     var endIndex = fi.Name.LastIndexOf(fi.Extension);
-                    originalFileName = txtTableName.Text;
+                    //originalFileName = txtTableName.Text;
                     txtTableName.Text = fi.Name.Substring(0, endIndex);
                     if (isNewEntry)
                     {
@@ -210,27 +210,57 @@ namespace PinCab.Configurator
         private void btnDatabaseBrowser_Click(object sender, EventArgs e)
         {
             var form = new DatabaseBrowserForm();
-            form.SearchByText(txtDisplayName.Text, new DateTime(1900,1,1), DateTime.Today.AddDays(1), new List<string>());
+            form.SearchByText(txtDisplayName.Text, new DateTime(1900, 1, 1), DateTime.Today.AddDays(1), new List<string>());
             var result = form.ShowDialog(this);
         }
 
         private void btnShowNew_Click(object sender, EventArgs e)
         {
-            var addNewForm = new AddNewGameForm(_setting.FrontEnd, _setting.DatabaseFile, _manager);
-            var result = addNewForm.ShowDialog(this);
-            if (result == DialogResult.OK)
+            var selectedSystem = _manager.GetPinballXSystemByDatabaseFile(_databaseFile);
+
+            if (selectedSystem.Type == Platform.VP || selectedSystem.Type == Platform.FP)
             {
-                if (addNewForm.lstFiles.SelectedItem != null) //Can't select from an empty list
+                var addNewForm = new AddNewGameForm(_setting.FrontEnd, _setting.DatabaseFile, _manager);
+                var result = addNewForm.ShowDialog(this);
+                if (result == DialogResult.OK)
                 {
-                    var fi = new FileInfo(addNewForm.lstFiles.SelectedItem.ToString());
-                    var endIndex = fi.Name.LastIndexOf(fi.Extension);
-                    originalFileName = txtTableName.Text;
-                    txtTableName.Text = fi.Name.Substring(0, endIndex);
-                    if (isNewEntry)
+                    if (addNewForm.lstFiles.SelectedItem != null) //Can't select from an empty list
                     {
-                        txtModified.Text = fi.LastWriteTime.ToString();
-                        txtAdded.Text = fi.CreationTime.ToString();
+                        var fi = new FileInfo(addNewForm.lstFiles.SelectedItem.ToString());
+                        var endIndex = fi.Name.LastIndexOf(fi.Extension);
+                        //originalFileName = txtTableName.Text;
+                        txtTableName.Text = fi.Name.Substring(0, endIndex);
+                        if (isNewEntry)
+                        {
+                            txtModified.Text = fi.LastWriteTime.ToString();
+                            txtAdded.Text = fi.CreationTime.ToString();
+                        }
                     }
+                }
+            }
+            else
+                MessageBox.Show("Show New not available for systems other then Future Pinball and Virtual Pinball.");
+        }
+
+        private void txtTableName_Leave(object sender, EventArgs e)
+        {
+            if (!isNewEntry)
+            {
+                var newValue = txtTableName.Text;
+                var oldValue = _setting.FileName;
+
+                //See if the table name has changed. If so popup the window to aid the user in renaming media
+                //https://github.com/xantari/PinCab.Configurator/issues/11
+                if (newValue != oldValue)
+                {
+                    var renameForm = new RenameGameForm(_setting, txtTableName.Text, _manager);
+                    var result = renameForm.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        txtTableName.Text = _setting.FileName;
+                    }
+                    else
+                        txtTableName.Text = oldValue;
                 }
             }
         }

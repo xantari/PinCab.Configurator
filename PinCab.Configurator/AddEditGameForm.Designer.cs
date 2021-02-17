@@ -148,6 +148,7 @@
             this.txtTableName.Name = "txtTableName";
             this.txtTableName.Size = new System.Drawing.Size(215, 20);
             this.txtTableName.TabIndex = 15;
+            this.txtTableName.Leave += new System.EventHandler(this.txtTableName_Leave);
             // 
             // label3
             // 

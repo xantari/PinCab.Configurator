@@ -65,12 +65,17 @@ namespace PinCab.Utils.Utils
             _settingManager.SaveSettings(settings);
         }
 
-        public void SaveGame(FrontEndGameViewModel game)
+        public void SaveGame(FrontEndGameViewModel game, string oldGameName)
         {
             if (game.FrontEnd.System == FrontEndSystem.PinballX)
             {
                 var system = _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(game.DatabaseFile));
-                var existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == game.FileName);
+                PinballXGame existingGame = null;
+                if (!string.IsNullOrEmpty(oldGameName))
+                    existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == oldGameName);
+                else
+                    existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == game.FileName);
+
                 PinballXGame pbxGame = null;
                 if (existingGame != null)
                     pbxGame = existingGame;
@@ -131,11 +136,11 @@ namespace PinCab.Utils.Utils
             return pbxGame;
         }
 
-        public PinballXSystem GetPinballXSystemByDatabaseFile(string fileName)
+        public PinballXSystem GetPinballXSystemByDatabaseFile(string databaseFileName)
         {
             if (_pinballXSystems != null)
             {
-                return _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Any(d => d == fileName));
+                return _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Any(d => d == databaseFileName));
             }
             return null;
         }
@@ -273,54 +278,11 @@ namespace PinCab.Utils.Utils
                     var games = system.Games[fullDatabaseFile];
                     foreach (var game in games)
                     {
-                        var frontEndGame = new FrontEndGameViewModel()
-                        {
-                            AlternateExe = game.AlternateExe,
-                            Author = game.Author,
-                            Comment = game.Comment,
-                            DatabaseFile = game.DatabaseFile,
-                            DateAdded = Convert.ToDateTime(game.DateAdded),
-                            DateModified = Convert.ToDateTime(game.DateModified),
-                            Description = game.Description,
-                            Enabled = Convert.ToBoolean(game.Enabled),
-                            FileName = game.FileName,
-                            FrontEnd = frontEnd,
-                            HasUpdatesAvailable = false,
-                            HideBackglass = Convert.ToBoolean(game.HideBackglass),
-                            HideDmd = Convert.ToBoolean(game.HideDmd),
-                            HideTopper = Convert.ToBoolean(game.HideTopper),
-                            IPDBNumber = game.IPDBNumber,
-                            Manufacturer = game.Manufacturer,
-                            Players = game.Players,
-                            Rating = game.Rating,
-                            Rom = game.Rom,
-                            Theme = game.Theme,
-                            Type = game.Type,
-                            Year = game.Year,
-                            Version = game.Version,
-                            PopperGameId = null,
-                            TableFileUrl = game.TableFileUrl,
-                            PlatformType = system.Type
-                        };
-
-                        //Grab the table Statistics
-                        var stats = _pinballXManager.GetStatisticsData(system.StatsSectionName, game.FileName);
-                        if (stats != null)
-                        {
-                            frontEndGame.SecondsPlayed = stats.SecondsPlayed;
-                            frontEndGame.TimesPlayed = stats.TimesPlayed;
-                            frontEndGame.Favorite = stats.Favorite;
-                        }
-
-                        //See if there are discrepencies in the entries, such as missing DirectB2S for .vpx / .vpt files
-                        //Or missing table 
-                        LoadPinballXAdditionalInfoAndDiscrepencies(system, frontEndGame);
-
-                        //Load the Media Statuses for this game
-                        LoadPinballXMediaStatus(system, frontEndGame, new SearchMode[] { SearchMode.ByFileNameExactMatch });
-
-                        //TODO: cross reference DateAdded with last updated date from game database and flip the HasUpdatesAvailable flag
-
+                        var frontEndGame = new FrontEndGameViewModel();
+                        frontEndGame.FileName = game.FileName;
+                        frontEndGame.FrontEnd = frontEnd;
+                        frontEndGame.DatabaseFile = game.DatabaseFile;
+                        RefreshGameModel(frontEndGame, system);
                         frontEndGames.Add(frontEndGame);
                     }
                 }
@@ -328,8 +290,60 @@ namespace PinCab.Utils.Utils
             return frontEndGames;
         }
 
+        public void RefreshGameModel(FrontEndGameViewModel frontEndGame, PinballXSystem system)
+        {
+            var games = system.Games[frontEndGame.DatabaseFile];
+            var game = games.FirstOrDefault(c => c.FileName == frontEndGame.FileName);
+            frontEndGame.AlternateExe = game.AlternateExe;
+            frontEndGame.Author = game.Author;
+            frontEndGame.Comment = game.Comment;
+            frontEndGame.DatabaseFile = game.DatabaseFile;
+            frontEndGame.DateAdded = Convert.ToDateTime(game.DateAdded);
+            frontEndGame.DateModified = Convert.ToDateTime(game.DateModified);
+            frontEndGame.Description = game.Description;
+            frontEndGame.Enabled = Convert.ToBoolean(game.Enabled);
+            frontEndGame.FileName = game.FileName;
+            //frontEndGame.FrontEnd = frontEnd;
+            frontEndGame.HasUpdatesAvailable = false;
+            frontEndGame.HideBackglass = Convert.ToBoolean(game.HideBackglass);
+            frontEndGame.HideDmd = Convert.ToBoolean(game.HideDmd);
+            frontEndGame.HideTopper = Convert.ToBoolean(game.HideTopper);
+            frontEndGame.IPDBNumber = game.IPDBNumber;
+            frontEndGame.Manufacturer = game.Manufacturer;
+            frontEndGame.Players = game.Players;
+            frontEndGame.Rating = game.Rating;
+            frontEndGame.Rom = game.Rom;
+            frontEndGame.Theme = game.Theme;
+            frontEndGame.Type = game.Type;
+            frontEndGame.Year = game.Year;
+            frontEndGame.Version = game.Version;
+            frontEndGame.PopperGameId = null;
+            frontEndGame.TableFileUrl = game.TableFileUrl;
+            frontEndGame.PlatformType = system.Type;
+
+            //Grab the table Statistics
+            var stats = _pinballXManager.GetStatisticsData(system.StatsSectionName, game.FileName);
+            if (stats != null)
+            {
+                frontEndGame.SecondsPlayed = stats.SecondsPlayed;
+                frontEndGame.TimesPlayed = stats.TimesPlayed;
+                frontEndGame.Favorite = stats.Favorite;
+            }
+
+            //See if there are discrepencies in the entries, such as missing DirectB2S for .vpx / .vpt files
+            //Or missing table 
+            LoadPinballXAdditionalInfoAndDiscrepencies(system, frontEndGame);
+
+            //Load the Media Statuses for this game
+            LoadPinballXMediaStatus(system, frontEndGame, new SearchMode[] { SearchMode.ByFileNameExactMatch });
+
+            //TODO: cross reference DateAdded with last updated date from game database and flip the HasUpdatesAvailable flag
+
+        }
+
         private void LoadPinballXAdditionalInfoAndDiscrepencies(PinballXSystem system, FrontEndGameViewModel model)
         {
+            model.MissingTable = false;
             //Find the detected game type
             if (system.Type == Platform.VP)
             {
@@ -351,6 +365,9 @@ namespace PinCab.Utils.Utils
                         model.FullPathToB2s = $"{system.TablePath}\\{model.FileName}.directb2s";
                     }
                 }
+                //If the file doesn't exist on the file system skip all these checks and mark it as a missing table entry
+                if (string.IsNullOrEmpty(model.FullPathToTable))
+                    model.MissingTable = true;
             }
             else if (system.Type == Platform.FP) //Could be a .fpt future pinball file
             {
@@ -359,15 +376,15 @@ namespace PinCab.Utils.Utils
                 {
                     model.FullPathToTable = $"{system.TablePath}\\{model.FileName}.fpt";
                 }
+                //If the file doesn't exist on the file system skip all these checks and mark it as a missing table entry
+                if (string.IsNullOrEmpty(model.FullPathToTable))
+                    model.MissingTable = true;
             }
-
-            //If the file doesn't exist on the file system skip all these checks and mark it as a missing table entry
-            if (string.IsNullOrEmpty(model.FullPathToTable))
-                model.MissingTable = true;
         }
 
         private void LoadPinballXMediaStatus(PinballXSystem system, FrontEndGameViewModel model, SearchMode[] searchModes)
         {
+            model.MediaItems.Clear();
             var rootMediaPath = system.MediaPath.Replace(system.Name, string.Empty);
 
             List<string> wheelImages = new List<string>();
@@ -460,26 +477,40 @@ namespace PinCab.Utils.Utils
                 model.HasWheelImage = true;
                 model.MediaItems.AddRange(wheelImages.Select(c => new MediaItem() { Category = MediaCategory.Wheel, MediaFullPath = c, MediaType = MediaType.Image }));
             }
+            else
+                model.HasWheelImage = false;
+
             if (flyers.Count() > 0)
             {
                 model.HasFlyer = true;
                 model.MediaItems.AddRange(flyers.Select(c => new MediaItem() { Category = MediaCategory.Flyer, MediaFullPath = c, MediaType = MediaType.Image }));
             }
+            else
+                model.HasFlyer = false;
+
             if (instructionCards.Count() > 0)
             {
                 model.HasInstructionCard = true;
                 model.MediaItems.AddRange(instructionCards.Select(c => new MediaItem() { Category = MediaCategory.InstructionCard, MediaFullPath = c, MediaType = MediaType.Image }));
             }
+            else
+                model.HasInstructionCard = false;
+
             if (backglassImages.Count() > 0)
             {
                 model.BackglassStatus = MediaStatus.Image;
                 model.MediaItems.AddRange(backglassImages.Select(c => new MediaItem() { Category = MediaCategory.Backglass, MediaFullPath = c, MediaType = MediaType.Image }));
             }
+
             if (backglassVideos.Count() > 0)
             {
                 model.BackglassStatus = model.BackglassStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(backglassVideos.Select(c => new MediaItem() { Category = MediaCategory.Backglass, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (backglassVideos.Count() == 0 && backglassImages.Count() == 0)
+                model.BackglassStatus = MediaStatus.NotFound;
+
             if (dmdImages.Count() > 0)
             {
                 model.DMDStatus = MediaStatus.Image;
@@ -490,11 +521,18 @@ namespace PinCab.Utils.Utils
                 model.DMDStatus = model.DMDStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(dmdVideos.Select(c => new MediaItem() { Category = MediaCategory.DMD, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (dmdVideos.Count() == 0 && dmdImages.Count() == 0)
+                model.DMDStatus = MediaStatus.NotFound;
+
             if (launchAudios.Count() > 0)
             {
                 model.HasLaunchAudio = true;
                 model.MediaItems.AddRange(launchAudios.Select(c => new MediaItem() { Category = MediaCategory.Launch, MediaFullPath = c, MediaType = MediaType.Audio }));
             }
+            else
+                model.HasLaunchAudio = false;
+
             if (realDmdColorImages.Count() > 0)
             {
                 model.RealDMDColorStatus = MediaStatus.Image;
@@ -505,6 +543,10 @@ namespace PinCab.Utils.Utils
                 model.RealDMDColorStatus = model.RealDMDColorStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(realDmdColorVideos.Select(c => new MediaItem() { Category = MediaCategory.RealDmdColor, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (realDmdColorVideos.Count() == 0 && realDmdColorImages.Count() == 0)
+                model.RealDMDColorStatus = MediaStatus.NotFound;
+
             if (realDmdImages.Count() > 0)
             {
                 model.ReadDMDStatus = MediaStatus.Image;
@@ -515,11 +557,18 @@ namespace PinCab.Utils.Utils
                 model.ReadDMDStatus = model.ReadDMDStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(realDmdVideos.Select(c => new MediaItem() { Category = MediaCategory.RealDmd, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (realDmdVideos.Count() == 0 && realDmdImages.Count() == 0)
+                model.ReadDMDStatus = MediaStatus.NotFound;
+
             if (launchAudios.Count() > 0)
             {
                 model.HasTableAudio = true;
                 model.MediaItems.AddRange(launchAudios.Select(c => new MediaItem() { Category = MediaCategory.Launch, MediaFullPath = c, MediaType = MediaType.Audio }));
             }
+            else
+                model.HasTableAudio = false;
+
             if (tableImages.Count() > 0)
             {
                 model.TableStatus = MediaStatus.Image;
@@ -530,6 +579,10 @@ namespace PinCab.Utils.Utils
                 model.TableStatus = model.TableStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(tableVideos.Select(c => new MediaItem() { Category = MediaCategory.Table, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (tableVideos.Count() == 0 && tableImages.Count() == 0)
+                model.TableStatus = MediaStatus.NotFound;
+
             if (tableDesktopImages.Count() > 0)
             {
                 model.TableDesktopStatus = MediaStatus.Image;
@@ -540,6 +593,10 @@ namespace PinCab.Utils.Utils
                 model.TableDesktopStatus = model.TableDesktopStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(tableDesktopVideos.Select(c => new MediaItem() { Category = MediaCategory.TableDesktop, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (tableDesktopVideos.Count() == 0 && tableDesktopImages.Count() == 0)
+                model.TableDesktopStatus = MediaStatus.NotFound;
+
             if (topperImages.Count() > 0)
             {
                 model.TopperStatus = MediaStatus.Image;
@@ -550,6 +607,9 @@ namespace PinCab.Utils.Utils
                 model.TopperStatus = model.TopperStatus == MediaStatus.Image ? MediaStatus.ImageAndVideo : MediaStatus.Video;
                 model.MediaItems.AddRange(topperVideos.Select(c => new MediaItem() { Category = MediaCategory.Topper, MediaFullPath = c, MediaType = MediaType.Video }));
             }
+
+            if (topperVideos.Count() == 0 && topperImages.Count() == 0)
+                model.TopperStatus = MediaStatus.NotFound;
         }
 
         private List<string> GetMedia(string searchPath, string fileNameSearchText, bool searchSubDirectorys = false)

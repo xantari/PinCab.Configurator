@@ -283,13 +283,17 @@ namespace PinCab.Configurator
 
             var removeTableFileList = selectedRowsToDelete.Where(p => !string.IsNullOrEmpty(p.FullPathToTable)).Select(p => p.FullPathToTable).ToList();
             var removeB2sFileList = selectedRowsToDelete.Where(p => !string.IsNullOrEmpty(p.FullPathToB2s)).Select(p => p.FullPathToB2s).ToList();
+            var removeMediaFileList = selectedRowsToDelete.Where(p => p.MediaItems.Count() > 0).SelectMany(c => c.MediaItems).Select(c => c.MediaFullPath).ToList();
 
             DialogResult removeTableFiles = DialogResult.No;
             DialogResult removeB2sFiles = DialogResult.No;
+            DialogResult removeMediaFiles = DialogResult.No;
             if (removeTableFileList.Count > 0)
                 removeTableFiles = MessageBox.Show($"Do want to delete the actual table files?\r\n {string.Join("\r\n", removeTableFileList)}", "Delete Table Files?", MessageBoxButtons.YesNo);
             if (removeB2sFileList.Count > 0)
                 removeB2sFiles = MessageBox.Show($"Do want to delete the actual B2S files?\r\n {string.Join("\r\n", removeB2sFileList)}", "Delete B2S Files?", MessageBoxButtons.YesNo);
+            if (removeMediaFileList.Count > 0)
+                removeMediaFiles = MessageBox.Show($"Do want to delete the media files?\r\n {string.Join("\r\n", removeMediaFiles)}", "Delete Media Files?", MessageBoxButtons.YesNo);
 
             if (deleteFromDatabase == DialogResult.Yes)
             {
@@ -310,13 +314,18 @@ namespace PinCab.Configurator
             }
             if (removeTableFiles == DialogResult.Yes)
             {
-                foreach (var tableFilePathToDelete in removeTableFileList)
-                    File.Delete(tableFilePathToDelete);
+                foreach (var fileToDelete in removeTableFileList)
+                    File.Delete(fileToDelete);
             }
             if (removeB2sFiles == DialogResult.Yes)
             {
-                foreach (var b2sFilePathToDelete in removeB2sFileList)
-                    File.Delete(b2sFilePathToDelete);
+                foreach (var fileToDelete in removeB2sFileList)
+                    File.Delete(fileToDelete);
+            }
+            if (removeMediaFiles == DialogResult.Yes)
+            {
+                foreach (var fileToDelete in removeMediaFileList)
+                    File.Delete(fileToDelete);
             }
         }
 

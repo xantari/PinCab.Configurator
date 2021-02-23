@@ -43,13 +43,13 @@ namespace PinCab.Utils.Utils
             if (settings.IPDBDatabaseUrl == null)
                 settings.IPDBDatabaseUrl = "https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json";
             if (settings.VPForumsDatabaseUrl == null)
-                settings.VPForumsDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpforumsdatabase.json";
+                settings.VPForumsDatabaseUrl = "";
             if (settings.VPinballDatabaseUrl == null)
-                settings.VPinballDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpinballdatabase.json";
+                settings.VPinballDatabaseUrl = "";
             if (settings.VPSSpreadsheetUrl == null)
-                settings.VPSSpreadsheetUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpsdatabase.json";
+                settings.VPSSpreadsheetUrl = "";
             if (settings.VPUniverseDatabaseUrl == null)
-                settings.VPUniverseDatabaseUrl = "https://raw.githubusercontent.com/xantari/VirtualPinball.Databases/master/Databases/vpuniversedatabase.json";
+                settings.VPUniverseDatabaseUrl = "";
         }
 
         public void SaveSettings(ProgramSettings settings, string fileAndPathToSettingFile = "")

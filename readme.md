@@ -60,8 +60,7 @@ Click on the "releases" link on the right hand side of this page. Or [Click here
 25. Manual settings output info for Pinball FX2/FX3 (so you can just type the values into the program to match your DMD position)
 26. Pinball Y settings read/write/validation 
 27. P-Roc DMD Settings display 
-28. Database Manager that fetches data from the continously updated databases here: [Pinball Databases](https://github.com/xantari/VirtualPinball.Databases "Pinball Databases")
-29. Hooks into the continuously updated IPDB database here: [IPDB Database](https://github.com/xantari/Ipdb.Database "IPDB Database")
+28. Built in IPDB database lookup for fast information retrieval of IPDB data.
 
 # Instructions
 
@@ -106,3 +105,4 @@ Settings data appears to be encrypted. Unsure how to read/write to it.
 
 # Notes
 1. Compilation is done using Any CPU, with the Prefer 32-bit flag as it links itself to the 32-bit version of VPinMame for DMD preview
+2. As of 2/22/2021 I won't be publishing any databases. At some point I'll create a small editor form so users can create their own databases, but for now I'm pulling the databases I use to keep my pincab updated. The rationale behind this decision is that some site owners do not want their sites indexed like this. So I refer you to the Dux Retro spreadsheet or google/bing instead.

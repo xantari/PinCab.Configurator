@@ -154,30 +154,46 @@ namespace PinCab.Utils.Utils
 
             if (_settings.LastDatabaseRefreshTimeUtc < DateTime.UtcNow.AddMinutes(_settings.DatabaseUpdateRecheckMinutes * -1))
             {
+                bool success = false;
                 if (type == DatabaseType.VPForums)
                 {
-                    DownloadDatabase(type, _settings.VPForumsDatabaseUrl, vpfDatabasePath);
-                    result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPForumsDatabaseUrl} to {vpfDatabasePath}", MessageLevel.Information));
+                    success = DownloadDatabase(type, _settings.VPForumsDatabaseUrl, vpfDatabasePath);
+                    if (success)
+                        result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPForumsDatabaseUrl} to {vpfDatabasePath}", MessageLevel.Information));
+                    else
+                        result.Messages.Add(new ValidationMessage($"Unable to download {_settings.VPForumsDatabaseUrl} to {vpfDatabasePath}", MessageLevel.Error));
                 }
                 else if (type == DatabaseType.VPSSpreadsheet)
                 {
-                    DownloadDatabase(type, _settings.VPSSpreadsheetUrl, vpsDatabasePath);
-                    result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPSSpreadsheetUrl} to {vpsDatabasePath}", MessageLevel.Information));
+                    success = DownloadDatabase(type, _settings.VPSSpreadsheetUrl, vpsDatabasePath);
+                    if (success)
+                        result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPSSpreadsheetUrl} to {vpsDatabasePath}", MessageLevel.Information));
+                    else
+                        result.Messages.Add(new ValidationMessage($"Unable to download {_settings.VPSSpreadsheetUrl} to {vpsDatabasePath}", MessageLevel.Error));
                 }
                 else if (type == DatabaseType.VPinball)
                 {
-                    DownloadDatabase(type, _settings.VPinballDatabaseUrl, vpDatabasePath);
-                    result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPinballDatabaseUrl} to {vpDatabasePath}", MessageLevel.Information));
+                    success = DownloadDatabase(type, _settings.VPinballDatabaseUrl, vpDatabasePath);
+                    if (success)
+                        result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPinballDatabaseUrl} to {vpDatabasePath}", MessageLevel.Information));
+                    else
+                        result.Messages.Add(new ValidationMessage($"Unable to download {_settings.VPinballDatabaseUrl} to {vpDatabasePath}", MessageLevel.Information));
                 }
                 else if (type == DatabaseType.VPUniverse)
                 {
-                    DownloadDatabase(type, _settings.VPUniverseDatabaseUrl, vpuDatabasePath);
-                    result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPUniverseDatabaseUrl} to {vpuDatabasePath}", MessageLevel.Information));
+                    success = DownloadDatabase(type, _settings.VPUniverseDatabaseUrl, vpuDatabasePath);
+                    if (success)
+                        result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPUniverseDatabaseUrl} to {vpuDatabasePath}", MessageLevel.Information));
+                    else
+                        result.Messages.Add(new ValidationMessage($"Unable to download {_settings.VPUniverseDatabaseUrl} to {vpuDatabasePath}", MessageLevel.Error));
                 }
                 else if (type == DatabaseType.IPDB)
                 {
-                    DownloadDatabase(type, _settings.IPDBDatabaseUrl, ipdbDatabasePath);
-                    result.Messages.Add(new ValidationMessage($"Downloaded {_settings.IPDBDatabaseUrl} to {ipdbDatabasePath}", MessageLevel.Information));
+                    success = DownloadDatabase(type, _settings.IPDBDatabaseUrl, ipdbDatabasePath);
+                    if (success)
+                        result.Messages.Add(new ValidationMessage($"Downloaded {_settings.IPDBDatabaseUrl} to {ipdbDatabasePath}", MessageLevel.Information));
+                    else
+                        result.Messages.Add(new ValidationMessage($"Unable to download {_settings.IPDBDatabaseUrl} to {ipdbDatabasePath}", MessageLevel.Error));
                 }
                 result.Result = true; //Inidicate we downloaded something
             }
@@ -186,18 +202,27 @@ namespace PinCab.Utils.Utils
                 var nextRefreshTime = _settings.LastDatabaseRefreshTimeUtc.AddMinutes(_settings.DatabaseUpdateRecheckMinutes);
                 result.Messages.Add(new ValidationMessage($"Not at recheck minutes threshold. Next Refresh: {nextRefreshTime}. Database: {type}", MessageLevel.Information));
                 Log.Information("{toolname}: Not at recheck minutes threshold. Next Refresh: {date}.", ToolName, nextRefreshTime);
-                result.Result = false; //Inidicate we did NOT downloaded something
+                result.Result = false; //Indicate we did NOT downloaded something
             }
             return result;
         }
 
-        private void DownloadDatabase(DatabaseType type, string downloadUrl, string downloadPath)
+        private bool DownloadDatabase(DatabaseType type, string downloadUrl, string downloadPath)
         {
-            using (WebClient wc = new WebClient())
+            try
             {
-                //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                wc.DownloadFile(new Uri(downloadUrl), downloadPath);
+                using (WebClient wc = new WebClient())
+                {
+                    //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                    wc.DownloadFile(new Uri(downloadUrl), downloadPath);
+                }
+                return true;
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error downloading file: {file}", downloadUrl);
+            }
+            return false; //failure
         }
 
         public void LoadAllDatabases()
@@ -406,7 +431,7 @@ namespace PinCab.Utils.Utils
                 entries.Add(entry);
             }
 
-        
+
             //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
             //area of the database
 

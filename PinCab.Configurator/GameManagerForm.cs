@@ -374,9 +374,75 @@ namespace PinCab.Configurator
             toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
-        private void launchGameToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tableAuditToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void launchDirectlyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                //Get the selected database file so we know how to launch the game
+                var result = _manager.LaunchGame(row, LaunchType.LaunchGame);
+                if (!result.IsValid)
+                {
+                    LogToolValidationResult("Launch Directly", result);
+                }
+            }
+        }
+
+        private void launchInConfigModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                //Get the selected database file so we know how to launch the game
+                var result = _manager.LaunchGame(row, LaunchType.LaunchGameInConfigMode);
+                if (!result.IsValid)
+                {
+                    LogToolValidationResult("Launch In Config Mode", result);
+                }
+            }
+        }
+
+        //TODO: Indicate to user that pinballY and Pinup Popper don't support this feature
+        private void launchUsingFrontEndToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                //Get the selected database file so we know how to launch the game
+                var result = _manager.LaunchGame(row, LaunchType.LaunchGameUsingFrontEnd);
+                if (!result.IsValid)
+                {
+                    LogToolValidationResult("Launch Using Front End", result);
+                }
+            }
+        }
+
+        public void LogToolValidationResult(string command, ToolResult result)
+        {
+            var sb = new StringBuilder();
+            if (result?.Messages.Count() > 0)
+            {
+                sb.Append($"{command} messages: \r\n");
+                foreach (var message in result.Messages)
+                {
+                    if (message.Level == MessageLevel.Error)
+                        Log.Error("{command}: Error: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Warning)
+                        Log.Warning("{command}: Warning: {message}", command, message.Message);
+                    if (message.Level == MessageLevel.Information)
+                        Log.Information("{command}: Information: {message}", command, message.Message);
+                    sb.Append(message.Message + "\r\n");
+                }
+            }
+
+            txtLog.Text += sb.ToString();
+            txtLog.Select(txtLog.Text.Length, 0);
+            txtLog.ScrollToCaret();
         }
     }
 }

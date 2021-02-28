@@ -7,10 +7,12 @@ using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PinCab.Utils.Utils
 {
@@ -20,6 +22,7 @@ namespace PinCab.Utils.Utils
         private readonly ProgramSettingsManager _settingManager = new ProgramSettingsManager();
         private readonly PinballXManager _pinballXManager = null;
         private readonly List<PinballXSystem> _pinballXSystems = null;
+        private readonly string ToolName = "Front End Manager";
 
         public FrontEndManager()
         {
@@ -625,6 +628,126 @@ namespace PinCab.Utils.Utils
                 mediaFilesFound.AddRange(files.Where(p => Path.GetFileNameWithoutExtension(p) == fileNameSearchText));
             }
             return mediaFilesFound;
+        }
+
+        public ToolResult LaunchGame(FrontEndGameViewModel game, LaunchType launchType)
+        {
+            var result = new ToolResult();
+            if (game.FrontEnd.System == FrontEndSystem.PinballX)
+            {
+                Log.Information("{ToolName}: Pinball X System Launch command initiated. Launch Type: {type}", ToolName, launchType);
+                var system = _pinballXSystems.FirstOrDefault(c => c.DatabaseFiles.Contains(game.DatabaseFile));
+                var existingGame = system.Games[game.DatabaseFile].FirstOrDefault(c => c.FileName == game.FileName);
+
+                //Construct the full process launch command, taking into account if this game has an alternate .exe defined in the database
+                string launchCommand = string.Empty;
+                string args = string.Empty;
+                if (system.Type == Platform.VP || system.Type == Platform.FP)
+                {
+                    //The Visual Pinball parameters. The following tags are supported and will be replaced with values - [TABLEPATH], [TABLEFILE], [TABLEFILEWOEXT], [MANUFACTURER], [YEAR], [SYSTEM], [RATING], [DESCRIPTION].
+                    launchCommand = system.WorkingPath;
+                    if (!string.IsNullOrEmpty(existingGame.AlternateExe))
+                        launchCommand += "\\" + existingGame.AlternateExe;
+                    else
+                        launchCommand += "\\" + system.Executable;
+
+                    if (launchType == LaunchType.LaunchGame)
+                    {
+                        args += system.Parameters;
+                    }
+                    else if (launchType == LaunchType.LaunchGameInConfigMode && system.Type == Platform.VP) //put into table edit mode so we can send the F6 key to enter camera / light mode, no command line option for this :(
+                    {
+                        args += system.Parameters.Replace("-play", "-edit").Replace("/play", "/edit").Replace("\\play", "\\edit");
+                    }
+                    else if (launchType == LaunchType.LaunchGameInConfigMode && system.Type == Platform.FP) //put into table edit mode so we can send the F6 key to enter camera / light mode, no command line option for this :(
+                    {
+                        //args += system.Parameters.Replace("-play", "-open").Replace("/play", "/open").Replace("\\play", "\\open");
+                        //Remove the /play and /exit commands that are normally present so it only opens to the editor
+                        args += system.Parameters.Replace("/play", "").Replace("/exit", "").Replace("\\play", "").Replace("\\exit", "");
+                    }
+                    else if (launchType == LaunchType.LaunchGameUsingFrontEnd)
+                    {
+                        launchCommand = system.PinballXFolder + "\\PinballX.exe";
+                        args = "-launch \"[TABLEFILEWOEXT]\" \"[SYSTEM]\"";
+                    }
+                }
+                else //PinballFX, Custom, PinballArcade
+                {
+                    //The Pinball FX2 or Steam parameters. Use default for Steam. The following tags are supported and will be replaced with values - [TABLEPATH], [TABLEFILE], [TABLEFILEWOEXT], [MANUFACTURER], [YEAR], [SYSTEM], [RATING], [DESCRIPTION].
+                    //The Pinball Arcade or Steam parameters. Use default for Steam.The following tags are supported and will be replaced with values - [TABLEPATH], [TABLEFILE], [TABLEFILEWOEXT], [MANUFACTURER], [YEAR], [SYSTEM], [RATING], [DESCRIPTION].
+                    //The Other System parameters. The following tags are supported and will be replaced with values - [TABLEPATH], [TABLEFILE], [TABLEFILEWOEXT], [MANUFACTURER], [YEAR], [SYSTEM], [RATING], [DESCRIPTION].
+                    if (launchType == LaunchType.LaunchGameInConfigMode)
+                    {
+                        Log.Error("{toolname}: Launch game in configuration mode not valid for game type.", ToolName);
+                        return new ToolResult(ToolName, new ValidationResult()
+                        {
+                            IsValid = false,
+                            Messages = new List<ValidationMessage>() { new ValidationMessage("Launch game in configuration mode not valid for game type.", MessageLevel.Error) }
+                        });
+                    }
+                    launchCommand = system.WorkingPath;
+                    if (!string.IsNullOrEmpty(existingGame.AlternateExe))
+                        launchCommand += "\\" + existingGame.AlternateExe;
+                    else
+                        launchCommand += "\\" + system.Executable;
+
+                    if (launchType == LaunchType.LaunchGame)
+                    {
+                        args += system.Parameters;
+                    }
+                    else if (launchType == LaunchType.LaunchGameUsingFrontEnd)
+                    {
+                        launchCommand = system.PinballXFolder + "\\PinballX.exe";
+                        args = "-launch \"[TABLEFILEWOEXT]\" \"[SYSTEM]\"";
+                    }
+                }
+
+                //Replace the launch tokens
+                if (!string.IsNullOrEmpty(game.FullPathToTable))
+                {
+                    var fileInfo = new FileInfo(game.FullPathToTable);
+                    args = args.Replace("[TABLEFILE]", fileInfo.Name);
+                }
+                else //Not a path to a physical table, could be a partial fill in for a steam launch command for pinball fx3 for example
+                    args = args.Replace("[TABLEFILE]", existingGame.FileName);
+
+                if (system.TablePath != null)
+                    args = args.Replace("[TABLEPATH]", system.TablePath);
+
+                args = args.Replace("[TABLEFILEWOEXT]", existingGame.FileName);
+                if (!string.IsNullOrEmpty(existingGame.Manufacturer))
+                    args = args.Replace("[MANUFACTURER]", existingGame.Manufacturer);
+                if (!string.IsNullOrEmpty(existingGame.Year))
+                    args = args.Replace("[YEAR]", existingGame.Year);
+                if (!string.IsNullOrEmpty(existingGame?.System?.Name))
+                    args = args.Replace("[SYSTEM]", existingGame.System.Name);
+                args = args.Replace("[RATING]", existingGame.Rating.ToString());
+                if (!string.IsNullOrEmpty(existingGame.Description))
+                    args = args.Replace("[DESCRIPTION]", existingGame.Description);
+
+                var startInfo = new ProcessStartInfo(launchCommand, args);
+                startInfo.WorkingDirectory = system.WorkingPath;
+
+                //Check if UAC is enabled and pass in runas verb
+                if (RegistryUtil.CheckIfUacEnabled())
+                    startInfo.Verb = "runas";
+
+                Log.Information("{ToolName}: Starting Process: {process}, args: {args}, working directory: {workingdir}", ToolName, launchCommand, args, system.WorkingPath);
+                var process = Process.Start(startInfo);
+
+                if (launchType == LaunchType.LaunchGameInConfigMode && system.Type == Platform.VP)
+                {
+                    Log.Information("{ToolName}: Sending F6 key");
+                    process.WaitForInputIdle();
+                    WinApi.SetForegroundWindow(process.MainWindowHandle);
+                    SendKeys.SendWait("{F6}");
+                    Log.Information("{ToolName}: Finished sending F6 key", ToolName);
+                }
+
+            }
+            //Launch type of using front end is probably not applicable for PinballY and PinupPopper as I don't think they have any documented
+            //command line switches. TODO: Check PinballY source code, Pinup Popper is closed source and doesn't appear to have any command line options
+            return result;
         }
     }
 }

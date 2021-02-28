@@ -142,6 +142,7 @@
     <Compile Include="Extensions\EdidExtensions.cs" />
     <Compile Include="Models\DisplaySettings.cs" />
     <Compile Include="Models\FrontEnd.cs" />
+    <Compile Include="Models\LaunchType.cs" />
     <Compile Include="Models\MediaAuditResult.cs" />
     <Compile Include="Models\MediaItem.cs" />
     <Compile Include="Models\DatabaseBrowserSettings.cs" />

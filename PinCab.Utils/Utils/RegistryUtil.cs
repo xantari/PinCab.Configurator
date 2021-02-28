@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Microsoft.Win32;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,6 +56,30 @@ namespace PinCab.Utils.Utils
             {
                 Log.Error(ex, "Error during reg.exe export");
             }
+        }
+
+        /// <summary>
+        /// Check if user account control is enabled
+        /// https://documentation.solarwindsmsp.com/N-central/documentation/Content/Automation/Policies/Diagnostics/pol_UACEnabled_Check.htm
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckIfUacEnabled()
+        {
+            var key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System");
+            var keyVal = key.GetValue("EnableLUA")?.ToString();
+            key.Close();
+
+            if (!string.IsNullOrEmpty(keyVal) && keyVal != "0")
+                return true; //UAC enabled
+
+            var key2 = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System");
+            var keyVal2 = key.GetValue("ConsentPromptBehaviorAdmin")?.ToString();
+            key2.Close();
+
+            if (!string.IsNullOrEmpty(keyVal2) && keyVal2 != "0")
+                return true; //UAC enabled
+
+            return false;
         }
     }
 }

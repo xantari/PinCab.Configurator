@@ -148,11 +148,12 @@ namespace PinCab.Utils.Utils
             return result;
         }
 
-        public ToolResult DownloadDatabase(DatabaseType type)
+        public ToolResult DownloadDatabase(DatabaseType type, bool forceDownload = false)
         {
             var result = new ToolResult();
 
-            if (_settings.LastDatabaseRefreshTimeUtc < DateTime.UtcNow.AddMinutes(_settings.DatabaseUpdateRecheckMinutes * -1))
+            if (_settings.LastDatabaseRefreshTimeUtc < DateTime.UtcNow.AddMinutes(_settings.DatabaseUpdateRecheckMinutes * -1)
+                || forceDownload)
             {
                 bool success = false;
                 if (type == DatabaseType.VPForums)

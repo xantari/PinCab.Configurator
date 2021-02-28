@@ -1,6 +1,7 @@
 ﻿using DuoVia.FuzzyStrings;
 using Ipdb.Models;
 using PinCab.Utils.Extensions;
+using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.WinForms;
 using System;
@@ -30,9 +31,12 @@ namespace PinCab.Configurator
 
         private void LoadDatabase()
         {
-            if (!_dbManager.DatabaseExists(PinCab.Utils.Models.DatabaseType.IPDB))
-                _dbManager.DownloadDatabase(PinCab.Utils.Models.DatabaseType.IPDB);
-            _dbManager.LoadDatabase(PinCab.Utils.Models.DatabaseType.IPDB);
+            if (!_dbManager.DatabaseExists(DatabaseType.IPDB))
+            {
+                _dbManager.DownloadDatabase(DatabaseType.IPDB, true);
+            }
+                
+            _dbManager.LoadDatabase(DatabaseType.IPDB);
         }
 
         private void ConfigureGrid()

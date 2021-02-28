@@ -44,6 +44,9 @@ namespace PinCab.Configurator
             this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchDirectlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchInConfigModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchUsingFrontEndToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -279,10 +282,34 @@ namespace PinCab.Configurator
             // 
             // launchGameToolStripMenuItem
             // 
+            this.launchGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.launchDirectlyToolStripMenuItem,
+            this.launchInConfigModeToolStripMenuItem,
+            this.launchUsingFrontEndToolStripMenuItem});
             this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
             this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.launchGameToolStripMenuItem.Text = "Launch Game";
-            this.launchGameToolStripMenuItem.Click += new System.EventHandler(this.launchGameToolStripMenuItem_Click);
+            // 
+            // launchDirectlyToolStripMenuItem
+            // 
+            this.launchDirectlyToolStripMenuItem.Name = "launchDirectlyToolStripMenuItem";
+            this.launchDirectlyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchDirectlyToolStripMenuItem.Text = "Launch Directly";
+            this.launchDirectlyToolStripMenuItem.Click += new System.EventHandler(this.launchDirectlyToolStripMenuItem_Click);
+            // 
+            // launchInConfigModeToolStripMenuItem
+            // 
+            this.launchInConfigModeToolStripMenuItem.Name = "launchInConfigModeToolStripMenuItem";
+            this.launchInConfigModeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchInConfigModeToolStripMenuItem.Text = "Launch in Config Mode";
+            this.launchInConfigModeToolStripMenuItem.Click += new System.EventHandler(this.launchInConfigModeToolStripMenuItem_Click);
+            // 
+            // launchUsingFrontEndToolStripMenuItem
+            // 
+            this.launchUsingFrontEndToolStripMenuItem.Name = "launchUsingFrontEndToolStripMenuItem";
+            this.launchUsingFrontEndToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchUsingFrontEndToolStripMenuItem.Text = "Launch Using Front End";
+            this.launchUsingFrontEndToolStripMenuItem.Click += new System.EventHandler(this.launchUsingFrontEndToolStripMenuItem_Click);
             // 
             // viewIPDBPageToolStripMenuItem
             // 
@@ -322,6 +349,7 @@ namespace PinCab.Configurator
             this.tableAuditToolStripMenuItem.Name = "tableAuditToolStripMenuItem";
             this.tableAuditToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
             this.tableAuditToolStripMenuItem.Text = "Table Audit";
+            this.tableAuditToolStripMenuItem.Click += new System.EventHandler(this.tableAuditToolStripMenuItem_Click);
             // 
             // txtLog
             // 
@@ -870,7 +898,6 @@ namespace PinCab.Configurator
         private System.Windows.Forms.Label lblDatabaseStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem findGamesFromIPDBNotInMyDatabaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showGamesWithUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem massRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openMediaFolderToolStripMenuItem;
@@ -879,5 +906,9 @@ namespace PinCab.Configurator
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpacer;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ToolStripMenuItem tableAuditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showGamesWithUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchDirectlyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchInConfigModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchUsingFrontEndToolStripMenuItem;
     }
 }

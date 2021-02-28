@@ -657,6 +657,18 @@ namespace PinCab.Utils.Utils
                     }
                     else if (launchType == LaunchType.LaunchGameInConfigMode && system.Type == Platform.VP) //put into table edit mode so we can send the F6 key to enter camera / light mode, no command line option for this :(
                     {
+                        if (!string.IsNullOrEmpty(game.FullPathToTable))
+                        {
+                            var fileInfo = new FileInfo(game.FullPathToTable);
+                            if (fileInfo.Extension.Contains("vpt"))
+                            {
+                                return new ToolResult(ToolName, new ValidationResult()
+                                {
+                                    IsValid = false,
+                                    Messages = new List<ValidationMessage>() { new ValidationMessage("Launch game in configuration mode not valid for VPT files as the older versions of visual pinball didn't have that feature.", MessageLevel.Error) }
+                                });
+                            }
+                        }
                         args += system.Parameters.Replace("-play", "-edit").Replace("/play", "/edit").Replace("\\play", "\\edit");
                     }
                     else if (launchType == LaunchType.LaunchGameInConfigMode && system.Type == Platform.FP) //put into table edit mode so we can send the F6 key to enter camera / light mode, no command line option for this :(

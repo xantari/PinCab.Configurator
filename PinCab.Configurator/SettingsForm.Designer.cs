@@ -59,7 +59,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnPinballYFilePath = new System.Windows.Forms.Button();
             this.btnPinballXIniFilePath = new System.Windows.Forms.Button();
-            this.tabPageFFMpeg = new System.Windows.Forms.TabPage();
+            this.tabPageRecording = new System.Windows.Forms.TabPage();
+            this.txtOBSConfigPath = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnOBSConfigPath = new System.Windows.Forms.Button();
+            this.txtOBSPath = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.btnOBSPath = new System.Windows.Forms.Button();
+            this.numericStartRecordDelaySeconds = new System.Windows.Forms.NumericUpDown();
+            this.label21 = new System.Windows.Forms.Label();
             this.numericFramerate = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.txtTempRecordingPath = new System.Windows.Forms.TextBox();
@@ -92,23 +100,29 @@
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.tabPageAuthentication = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.txtGithubAccessToken = new System.Windows.Forms.TextBox();
             this.tbSettings.SuspendLayout();
             this.tabPagePinballProgramSettings.SuspendLayout();
             this.tabPageFrontEnd.SuspendLayout();
-            this.tabPageFFMpeg.SuspendLayout();
+            this.tabPageRecording.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStartRecordDelaySeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericFramerate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRecordTimeSeconds)).BeginInit();
             this.tabPageDatabases.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRecheckMinutes)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPageAuthentication.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSettings
             // 
             this.tbSettings.Controls.Add(this.tabPagePinballProgramSettings);
             this.tbSettings.Controls.Add(this.tabPageFrontEnd);
-            this.tbSettings.Controls.Add(this.tabPageFFMpeg);
+            this.tbSettings.Controls.Add(this.tabPageRecording);
             this.tbSettings.Controls.Add(this.tabPageDatabases);
+            this.tbSettings.Controls.Add(this.tabPageAuthentication);
             this.tbSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSettings.Location = new System.Drawing.Point(0, 0);
             this.tbSettings.Name = "tbSettings";
@@ -431,25 +445,127 @@
             this.btnPinballXIniFilePath.UseVisualStyleBackColor = true;
             this.btnPinballXIniFilePath.Click += new System.EventHandler(this.btnPinballXIniFilePath_Click);
             // 
-            // tabPageFFMpeg
+            // tabPageRecording
             // 
-            this.tabPageFFMpeg.Controls.Add(this.numericFramerate);
-            this.tabPageFFMpeg.Controls.Add(this.label4);
-            this.tabPageFFMpeg.Controls.Add(this.txtTempRecordingPath);
-            this.tabPageFFMpeg.Controls.Add(this.label3);
-            this.tabPageFFMpeg.Controls.Add(this.numericRecordTimeSeconds);
-            this.tabPageFFMpeg.Controls.Add(this.label2);
-            this.tabPageFFMpeg.Controls.Add(this.txtFFMpegFilePath);
-            this.tabPageFFMpeg.Controls.Add(this.label1);
-            this.tabPageFFMpeg.Controls.Add(this.btnTempRecordFilePath);
-            this.tabPageFFMpeg.Controls.Add(this.btnFFMpegFilePath);
-            this.tabPageFFMpeg.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFFMpeg.Name = "tabPageFFMpeg";
-            this.tabPageFFMpeg.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFFMpeg.Size = new System.Drawing.Size(674, 272);
-            this.tabPageFFMpeg.TabIndex = 1;
-            this.tabPageFFMpeg.Text = "FFMPEG";
-            this.tabPageFFMpeg.UseVisualStyleBackColor = true;
+            this.tabPageRecording.Controls.Add(this.txtOBSConfigPath);
+            this.tabPageRecording.Controls.Add(this.label23);
+            this.tabPageRecording.Controls.Add(this.btnOBSConfigPath);
+            this.tabPageRecording.Controls.Add(this.txtOBSPath);
+            this.tabPageRecording.Controls.Add(this.label22);
+            this.tabPageRecording.Controls.Add(this.btnOBSPath);
+            this.tabPageRecording.Controls.Add(this.numericStartRecordDelaySeconds);
+            this.tabPageRecording.Controls.Add(this.label21);
+            this.tabPageRecording.Controls.Add(this.numericFramerate);
+            this.tabPageRecording.Controls.Add(this.label4);
+            this.tabPageRecording.Controls.Add(this.txtTempRecordingPath);
+            this.tabPageRecording.Controls.Add(this.label3);
+            this.tabPageRecording.Controls.Add(this.numericRecordTimeSeconds);
+            this.tabPageRecording.Controls.Add(this.label2);
+            this.tabPageRecording.Controls.Add(this.txtFFMpegFilePath);
+            this.tabPageRecording.Controls.Add(this.label1);
+            this.tabPageRecording.Controls.Add(this.btnTempRecordFilePath);
+            this.tabPageRecording.Controls.Add(this.btnFFMpegFilePath);
+            this.tabPageRecording.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRecording.Name = "tabPageRecording";
+            this.tabPageRecording.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageRecording.Size = new System.Drawing.Size(674, 272);
+            this.tabPageRecording.TabIndex = 1;
+            this.tabPageRecording.Text = "Recording";
+            this.tabPageRecording.UseVisualStyleBackColor = true;
+            // 
+            // txtOBSConfigPath
+            // 
+            this.txtOBSConfigPath.Location = new System.Drawing.Point(100, 61);
+            this.txtOBSConfigPath.Name = "txtOBSConfigPath";
+            this.txtOBSConfigPath.Size = new System.Drawing.Size(459, 20);
+            this.txtOBSConfigPath.TabIndex = 26;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(8, 65);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(90, 13);
+            this.label23.TabIndex = 25;
+            this.label23.Text = "OBS Config Path:";
+            // 
+            // btnOBSConfigPath
+            // 
+            this.btnOBSConfigPath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnOBSConfigPath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOBSConfigPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOBSConfigPath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnOBSConfigPath.Location = new System.Drawing.Point(565, 60);
+            this.btnOBSConfigPath.Name = "btnOBSConfigPath";
+            this.btnOBSConfigPath.Size = new System.Drawing.Size(38, 23);
+            this.btnOBSConfigPath.TabIndex = 27;
+            this.btnOBSConfigPath.UseVisualStyleBackColor = true;
+            this.btnOBSConfigPath.Click += new System.EventHandler(this.btnOBSConfigPath_Click);
+            // 
+            // txtOBSPath
+            // 
+            this.txtOBSPath.Location = new System.Drawing.Point(100, 35);
+            this.txtOBSPath.Name = "txtOBSPath";
+            this.txtOBSPath.Size = new System.Drawing.Size(459, 20);
+            this.txtOBSPath.TabIndex = 23;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(46, 38);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(57, 13);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "OBS Path:";
+            // 
+            // btnOBSPath
+            // 
+            this.btnOBSPath.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnOBSPath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOBSPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOBSPath.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnOBSPath.Location = new System.Drawing.Point(565, 34);
+            this.btnOBSPath.Name = "btnOBSPath";
+            this.btnOBSPath.Size = new System.Drawing.Size(38, 23);
+            this.btnOBSPath.TabIndex = 24;
+            this.btnOBSPath.UseVisualStyleBackColor = true;
+            this.btnOBSPath.Click += new System.EventHandler(this.btnOBSPath_Click);
+            // 
+            // numericStartRecordDelaySeconds
+            // 
+            this.numericStartRecordDelaySeconds.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericStartRecordDelaySeconds.Location = new System.Drawing.Point(172, 92);
+            this.numericStartRecordDelaySeconds.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericStartRecordDelaySeconds.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericStartRecordDelaySeconds.Name = "numericStartRecordDelaySeconds";
+            this.numericStartRecordDelaySeconds.Size = new System.Drawing.Size(61, 20);
+            this.numericStartRecordDelaySeconds.TabIndex = 21;
+            this.numericStartRecordDelaySeconds.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(10, 94);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(156, 13);
+            this.label21.TabIndex = 20;
+            this.label21.Text = "Start Recording Delay Seconds";
             // 
             // numericFramerate
             // 
@@ -458,7 +574,7 @@
             0,
             0,
             0});
-            this.numericFramerate.Location = new System.Drawing.Point(78, 55);
+            this.numericFramerate.Location = new System.Drawing.Point(172, 144);
             this.numericFramerate.Maximum = new decimal(new int[] {
             60,
             0,
@@ -481,7 +597,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 55);
+            this.label4.Location = new System.Drawing.Point(104, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 18;
@@ -489,7 +605,7 @@
             // 
             // txtTempRecordingPath
             // 
-            this.txtTempRecordingPath.Location = new System.Drawing.Point(126, 78);
+            this.txtTempRecordingPath.Location = new System.Drawing.Point(126, 170);
             this.txtTempRecordingPath.Name = "txtTempRecordingPath";
             this.txtTempRecordingPath.Size = new System.Drawing.Size(433, 20);
             this.txtTempRecordingPath.TabIndex = 16;
@@ -497,7 +613,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 82);
+            this.label3.Location = new System.Drawing.Point(10, 174);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 13);
             this.label3.TabIndex = 15;
@@ -510,7 +626,7 @@
             0,
             0,
             0});
-            this.numericRecordTimeSeconds.Location = new System.Drawing.Point(126, 32);
+            this.numericRecordTimeSeconds.Location = new System.Drawing.Point(172, 118);
             this.numericRecordTimeSeconds.Maximum = new decimal(new int[] {
             200,
             0,
@@ -533,7 +649,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 34);
+            this.label2.Location = new System.Drawing.Point(53, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 13);
             this.label2.TabIndex = 11;
@@ -561,7 +677,7 @@
             this.btnTempRecordFilePath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnTempRecordFilePath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTempRecordFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnTempRecordFilePath.Location = new System.Drawing.Point(565, 77);
+            this.btnTempRecordFilePath.Location = new System.Drawing.Point(565, 170);
             this.btnTempRecordFilePath.Name = "btnTempRecordFilePath";
             this.btnTempRecordFilePath.Size = new System.Drawing.Size(38, 23);
             this.btnTempRecordFilePath.TabIndex = 17;
@@ -827,6 +943,33 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // tabPageAuthentication
+            // 
+            this.tabPageAuthentication.Controls.Add(this.txtGithubAccessToken);
+            this.tabPageAuthentication.Controls.Add(this.label24);
+            this.tabPageAuthentication.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAuthentication.Name = "tabPageAuthentication";
+            this.tabPageAuthentication.Size = new System.Drawing.Size(674, 272);
+            this.tabPageAuthentication.TabIndex = 4;
+            this.tabPageAuthentication.Text = "Authentication";
+            this.tabPageAuthentication.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(9, 14);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(113, 13);
+            this.label24.TabIndex = 0;
+            this.label24.Text = "Github Access Token:";
+            // 
+            // txtGithubAccessToken
+            // 
+            this.txtGithubAccessToken.Location = new System.Drawing.Point(128, 11);
+            this.txtGithubAccessToken.Name = "txtGithubAccessToken";
+            this.txtGithubAccessToken.Size = new System.Drawing.Size(359, 20);
+            this.txtGithubAccessToken.TabIndex = 1;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -847,14 +990,17 @@
             this.tabPagePinballProgramSettings.PerformLayout();
             this.tabPageFrontEnd.ResumeLayout(false);
             this.tabPageFrontEnd.PerformLayout();
-            this.tabPageFFMpeg.ResumeLayout(false);
-            this.tabPageFFMpeg.PerformLayout();
+            this.tabPageRecording.ResumeLayout(false);
+            this.tabPageRecording.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStartRecordDelaySeconds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericFramerate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRecordTimeSeconds)).EndInit();
             this.tabPageDatabases.ResumeLayout(false);
             this.tabPageDatabases.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRecheckMinutes)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabPageAuthentication.ResumeLayout(false);
+            this.tabPageAuthentication.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -863,7 +1009,7 @@
         private System.Windows.Forms.TabControl tbSettings;
         private System.Windows.Forms.TabPage tabPagePinballProgramSettings;
         private System.Windows.Forms.TabPage tabPageFrontEnd;
-        private System.Windows.Forms.TabPage tabPageFFMpeg;
+        private System.Windows.Forms.TabPage tabPageRecording;
         private System.Windows.Forms.Button btnFFMpegFilePath;
         private System.Windows.Forms.TextBox txtFFMpegFilePath;
         private System.Windows.Forms.Label label1;
@@ -924,5 +1070,16 @@
         private System.Windows.Forms.Button btnIpdbUrl;
         private System.Windows.Forms.TextBox txtIpdbUrl;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txtOBSPath;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnOBSPath;
+        private System.Windows.Forms.NumericUpDown numericStartRecordDelaySeconds;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtOBSConfigPath;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Button btnOBSConfigPath;
+        private System.Windows.Forms.TabPage tabPageAuthentication;
+        private System.Windows.Forms.TextBox txtGithubAccessToken;
+        private System.Windows.Forms.Label label24;
     }
 }

@@ -331,11 +331,12 @@ namespace PinCab.Configurator
 
         private void massRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var mediaAuditForm = new MassRecordForm();
+            var mediaAuditForm = new RecordForm();
             var result = mediaAuditForm.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                RefreshGameGrid();
+                _manager.LoadSettings(); //Reload the settings as they may have changed something in the record form
+                RefreshGameGrid(); //Refresh media statuses
             }
         }
 

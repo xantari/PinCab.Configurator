@@ -365,6 +365,7 @@
             // 
             // txtAdded
             // 
+            this.txtAdded.Enabled = false;
             this.txtAdded.Location = new System.Drawing.Point(80, 320);
             this.txtAdded.Name = "txtAdded";
             this.txtAdded.Size = new System.Drawing.Size(130, 20);
@@ -440,6 +441,7 @@
             // 
             // txtModified
             // 
+            this.txtModified.Enabled = false;
             this.txtModified.Location = new System.Drawing.Point(265, 321);
             this.txtModified.Name = "txtModified";
             this.txtModified.Size = new System.Drawing.Size(130, 20);

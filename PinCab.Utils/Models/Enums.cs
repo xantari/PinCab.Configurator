@@ -58,13 +58,16 @@ namespace PinCab.Utils.Models
         Flyer,
         InstructionCard,
         Backglass,
+        Apron,
         DMD,
         Launch, //Launch image/video
         RealDmdColor,
         RealDmd,
         Table,
         TableDesktop,
-        Topper
+        Topper,
+        Manufacturer, //Manufacturer media
+        Other
     }
 
     public enum MediaAuditStatus

@@ -571,7 +571,8 @@
             "DMD",
             "Backglass",
             "Topper",
-            "Apron"});
+            "Apron",
+            "Full DMD"});
             this.cmbRegionLabel.Location = new System.Drawing.Point(96, 134);
             this.cmbRegionLabel.MaxDropDownItems = 10;
             this.cmbRegionLabel.Name = "cmbRegionLabel";

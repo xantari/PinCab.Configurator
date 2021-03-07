@@ -21,10 +21,10 @@ namespace PinCab.Configurator
     public partial class DatabaseBrowserForm : Form
     {
         private readonly DatabaseManager _dbManager = new DatabaseManager();
-        private readonly DatabaseBrowserSettingsManager _settingManager = new DatabaseBrowserSettingsManager();
+        private readonly ProgramSettingsManager _settingManager = new ProgramSettingsManager();
         //private BackgroundQueue _queue = new BackgroundQueue();
         private bool _loading = true;
-        private DatabaseBrowserSettings _settings { get; set; }
+        private ProgramSettings _settings { get; set; }
 
         public DatabaseBrowserForm()
         {
@@ -33,7 +33,7 @@ namespace PinCab.Configurator
             _settings = _settingManager.LoadSettings();
             if (_settings == null) //Load the defaults and save to the filesystem
             {
-                _settings = new DatabaseBrowserSettings();
+                _settings = new ProgramSettings();
                 _settingManager.SaveSettings(_settings);
             }
 
@@ -53,26 +53,26 @@ namespace PinCab.Configurator
         private void ConfigureFilters()
         {
             //Load from the last state (create a database form manager that persists filter selections to .json setting file)
-            dateTimePickerBegin.Value = _settings.BeginDate.BeginningOfDay();
-            dateTimePickerEnd.Value = _settings.EndDate.EndOfDay();
+            dateTimePickerBegin.Value = _settings.DatabaseBrowserSettings.BeginDate.BeginningOfDay();
+            dateTimePickerEnd.Value = _settings.DatabaseBrowserSettings.EndDate.EndOfDay();
             var databaseTypeList = EnumExtensions.GetEnumDescriptionList<DatabaseEntryType>();
             databaseTypeList.Insert(0, "All");
             cmbType.DataSource = databaseTypeList;
-            txtSearch.Text = _settings.SearchTerm;
+            txtSearch.Text = _settings.DatabaseBrowserSettings.SearchTerm;
 
             foreach (string type in cmbType.Items)
             {
-                if (type == _settings.TypeFilter)
+                if (type == _settings.DatabaseBrowserSettings.TypeFilter)
                     cmbType.SelectedItem = type;
             }
 
             foreach (string type in cmbDatabase.Items)
             {
-                if (type == _settings.DatabaseFilter)
+                if (type == _settings.DatabaseBrowserSettings.DatabaseFilter)
                     cmbDatabase.SelectedItem = type;
             }
 
-            foreach (var tag in _settings.TagFilter)
+            foreach (var tag in _settings.DatabaseBrowserSettings.TagFilter)
             {
                 TagObject tagwinforms = new TagObject(tag, RebindGridUsingFilter);
                 tagwinforms.Init();
@@ -81,24 +81,24 @@ namespace PinCab.Configurator
 
             flowLayoutPanelTags.Padding = new Padding(3, 3, 3, 3);
 
-            if (_settings.WindowHeight > 0 && _settings.WindowWidth > 0)
+            if (_settings.DatabaseBrowserSettings.WindowHeight > 0 && _settings.DatabaseBrowserSettings.WindowWidth > 0)
             {
-                Height = _settings.WindowHeight;
-                Width = _settings.WindowWidth;
+                Height = _settings.DatabaseBrowserSettings.WindowHeight;
+                Width = _settings.DatabaseBrowserSettings.WindowWidth;
             }
         }
 
         private void SetDatabaseGridWidths()
         {
             int count = 1;
-            foreach (var setting in _settings.DatabaseGridColumnWidths)
+            foreach (var setting in _settings.DatabaseBrowserSettings.DatabaseGridColumnWidths)
             {
                 if (count <= dataGridViewEntryList.Columns.Count)
                     dataGridViewEntryList.Columns[count - 1].Width = setting;
                 count++;
             }
             count = 1;
-            foreach (var setting in _settings.RelatedGridColumnWidths)
+            foreach (var setting in _settings.DatabaseBrowserSettings.RelatedGridColumnWidths)
             {
                 if (count <=  dataGridViewChildEntries.Columns.Count)
                     dataGridViewChildEntries.Columns[count - 1].Width = setting;
@@ -239,28 +239,6 @@ namespace PinCab.Configurator
             //watch.Stop();
             //Debug.WriteLine("Rebind took: " + watch.Elapsed);
         }
-
-        //private void contextMenuStripGridActions_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        //{
-        //    int rowIndex = GetActiveRowIndex();
-        //    if (rowIndex == -1)
-        //    {
-        //        txtLog.Text = "Select a row or cell first.";
-        //        return;
-        //    }
-        //}
-
-        //private int GetActiveRowIndex()
-        //{
-        //    int rowIndex = -1;
-        //    //If the row is selected get that row index
-        //    if (dataGridViewEntryList.SelectedRows.Count > 0)
-        //        rowIndex = dataGridViewEntryList.SelectedRows[0].Index;
-        //    //if the cell is selected, get the row index from that instead
-        //    if (dataGridViewEntryList.SelectedCells.Count > 0 && rowIndex == -1)
-        //        rowIndex = dataGridViewEntryList.SelectedCells[0].RowIndex;
-        //    return rowIndex;
-        //}
 
         private DatabaseBrowserEntry GetActiveRowEntry()
         {
@@ -487,7 +465,7 @@ namespace PinCab.Configurator
         {
             //Autosize the columns only if the user hasn't customized the grid settings or it saved the last
             //grid column sizes after first run of the program
-            if (e.ListChangedType != ListChangedType.Reset && _settings.DatabaseGridColumnWidths.Count == 0)
+            if (e.ListChangedType != ListChangedType.Reset && _settings.DatabaseBrowserSettings.DatabaseGridColumnWidths.Count == 0)
             {
                 dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
@@ -676,7 +654,9 @@ namespace PinCab.Configurator
             settings.WindowHeight = Height;
             settings.WindowWidth = Width;
 
-            _settingManager.SaveSettings(settings);
+            _settings.DatabaseBrowserSettings = settings;
+
+            _settingManager.SaveSettings(_settings);
         }
 
         private void chkFuzzyMatch_CheckedChanged(object sender, EventArgs e)

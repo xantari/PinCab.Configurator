@@ -18,7 +18,7 @@ namespace PinCab.Utils.Utils
 {
     public class FrontEndManager
     {
-        private readonly ProgramSettings _settings = new ProgramSettings();
+        private ProgramSettings _settings = new ProgramSettings();
         private readonly ProgramSettingsManager _settingManager = new ProgramSettingsManager();
         private readonly PinballXManager _pinballXManager = null;
         private readonly List<PinballXSystem> _pinballXSystems = null;
@@ -26,7 +26,7 @@ namespace PinCab.Utils.Utils
 
         public FrontEndManager()
         {
-            _settings = _settingManager.LoadSettings();
+            LoadSettings();
 
             if (_settings.PinballXExists())
             {
@@ -66,6 +66,16 @@ namespace PinCab.Utils.Utils
         public void SaveSettings(ProgramSettings settings)
         {
             _settingManager.SaveSettings(settings);
+        }
+
+        public void LoadSettings()
+        {
+            _settings = _settingManager.LoadSettings();
+            if (_settings == null) //Load the defaults and save to the filesystem
+            {
+                _settings = new ProgramSettings();
+                _settingManager.SaveSettings(_settings);
+            }
         }
 
         public void SaveGame(FrontEndGameViewModel game, string oldGameName)
@@ -393,6 +403,8 @@ namespace PinCab.Utils.Utils
             List<string> wheelImages = new List<string>();
             List<string> flyers = new List<string>();
             List<string> instructionCards = new List<string>();
+            List<string> manufacturerLogos = new List<string>();
+            List<string> apronImages = new List<string>(); //For pinballx these are really the same things as instruction cards
             List<string> backglassImages = new List<string>();
             List<string> backglassVideos = new List<string>();
             List<string> dmdImages = new List<string>();
@@ -412,7 +424,9 @@ namespace PinCab.Utils.Utils
 
             string wheelPath = system.MediaPath + "\\Wheel Images";
             string flyerPath = rootMediaPath + "Flyer Images";
-            string instructionCardpath = rootMediaPath + "Instruction Cards";
+            string instructionCardPath = rootMediaPath + "Instruction Cards";
+            string manufacturerLogosPath = rootMediaPath + "Company Logos";
+            string apronPath = rootMediaPath + "Instruction Cards"; //Pinball X uses the instruction cards folder for aprons
             string backglassImagePath = system.MediaPath + "\\Backglass Images";
             string backglassVideoPath = system.MediaPath + "\\Backglass Videos";
             string dmdImagePath = system.MediaPath + "\\DMD Images";
@@ -430,11 +444,15 @@ namespace PinCab.Utils.Utils
             string topperImagePath = system.MediaPath + "\\Topper Images";
             string topperVideoPath = system.MediaPath + "\\Topper Videos";
 
+            if (!string.IsNullOrEmpty(model.Manufacturer))
+                manufacturerLogos.AddRange(GetMedia(manufacturerLogosPath, model.Manufacturer, false));
+
             if (searchModes.Contains(SearchMode.ByFileNameExactMatch))
             {
                 wheelImages.AddRange(GetMedia(wheelPath, model.FileName));
                 flyers.AddRange(GetMedia(flyerPath, model.FileName, true));
-                instructionCards.AddRange(GetMedia(instructionCardpath, model.FileName, true));
+                instructionCards.AddRange(GetMedia(instructionCardPath, model.FileName, true));
+                apronImages.AddRange(GetMedia(apronPath, model.FileName, true));
                 backglassImages.AddRange(GetMedia(backglassImagePath, model.FileName));
                 backglassVideos.AddRange(GetMedia(backglassVideoPath, model.FileName));
                 dmdImages.AddRange(GetMedia(dmdImagePath, model.FileName));
@@ -456,7 +474,8 @@ namespace PinCab.Utils.Utils
             {
                 wheelImages.AddRange(GetMedia(wheelPath, model.Description));
                 flyers.AddRange(GetMedia(flyerPath, model.Description, true));
-                instructionCards.AddRange(GetMedia(instructionCardpath, model.Description, true));
+                instructionCards.AddRange(GetMedia(instructionCardPath, model.Description, true));
+                apronImages.AddRange(GetMedia(apronPath, model.Description, true));
                 backglassImages.AddRange(GetMedia(backglassImagePath, model.Description));
                 backglassVideos.AddRange(GetMedia(backglassVideoPath, model.Description));
                 dmdImages.AddRange(GetMedia(dmdImagePath, model.Description));
@@ -498,6 +517,24 @@ namespace PinCab.Utils.Utils
             }
             else
                 model.HasInstructionCard = false;
+
+            if (apronImages.Count() > 0)
+            {
+                model.ApronMediaStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(apronImages.Select(c => new MediaItem() { Category = MediaCategory.Apron, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
+
+            if (apronImages.Count() == 0) // && backglassImages.Count() == 0)
+                model.ApronMediaStatus = MediaStatus.NotFound;
+
+            if (manufacturerLogos.Count() > 0)
+            {
+                model.ManufacturerMediaStatus = MediaStatus.Image;
+                model.MediaItems.AddRange(manufacturerLogos.Select(c => new MediaItem() { Category = MediaCategory.Manufacturer, MediaFullPath = c, MediaType = MediaType.Image }));
+            }
+                
+            if (manufacturerLogos.Count() == 0) // && backglassImages.Count() == 0)
+                model.ManufacturerMediaStatus = MediaStatus.NotFound;
 
             if (backglassImages.Count() > 0)
             {

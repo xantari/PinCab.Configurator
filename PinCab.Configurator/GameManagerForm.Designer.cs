@@ -32,50 +32,6 @@ namespace PinCab.Configurator
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridViewGameList = new System.Windows.Forms.DataGridView();
-            this.HasInstructionCard = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.HasFlyer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.HasLaunchAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.HasTableAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recordMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.previewMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.launchDirectlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.launchInConfigModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.launchUsingFrontEndToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openMediaFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtLog = new System.Windows.Forms.TextBox();
-            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblDatabaseStatus = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbDatabase = new System.Windows.Forms.ComboBox();
-            this.lblDatabase = new System.Windows.Forms.Label();
-            this.cmbFrontEnd = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.massRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.fileNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.manufacturerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,17 +62,61 @@ namespace PinCab.Configurator
             this.topperStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ManufacturerMediaStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasWheelImageDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasInstructionCard = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasFlyer = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasLaunchAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.HasTableAudio = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previewMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchDirectlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchInConfigModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchUsingFrontEndToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewIPDBPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGamesWithUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openMediaFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.frontEndGameBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblDatabaseStatus = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbDatabase = new System.Windows.Forms.ComboBox();
+            this.lblDatabase = new System.Windows.Forms.Label();
+            this.cmbFrontEnd = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.utilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediaAuditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGameList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStripBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -189,372 +189,6 @@ namespace PinCab.Configurator
             this.dataGridViewGameList.TabIndex = 2;
             this.dataGridViewGameList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewGameList_CellDoubleClick);
             this.dataGridViewGameList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewGameList_DataBindingComplete);
-            // 
-            // HasInstructionCard
-            // 
-            this.HasInstructionCard.DataPropertyName = "HasInstructionCard";
-            this.HasInstructionCard.HeaderText = "Instruction Card";
-            this.HasInstructionCard.Name = "HasInstructionCard";
-            this.HasInstructionCard.ReadOnly = true;
-            this.HasInstructionCard.Width = 87;
-            // 
-            // HasFlyer
-            // 
-            this.HasFlyer.DataPropertyName = "HasFlyer";
-            this.HasFlyer.HeaderText = "Flyer";
-            this.HasFlyer.Name = "HasFlyer";
-            this.HasFlyer.ReadOnly = true;
-            this.HasFlyer.Width = 35;
-            // 
-            // HasLaunchAudio
-            // 
-            this.HasLaunchAudio.DataPropertyName = "HasLaunchAudio";
-            this.HasLaunchAudio.HeaderText = "Launch Audio";
-            this.HasLaunchAudio.Name = "HasLaunchAudio";
-            this.HasLaunchAudio.ReadOnly = true;
-            this.HasLaunchAudio.Width = 79;
-            // 
-            // HasTableAudio
-            // 
-            this.HasTableAudio.DataPropertyName = "HasTableAudio";
-            this.HasTableAudio.HeaderText = "Table Audio Media";
-            this.HasTableAudio.Name = "HasTableAudio";
-            this.HasTableAudio.ReadOnly = true;
-            this.HasTableAudio.Width = 102;
-            // 
-            // contextMenuStripGridActions
-            // 
-            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.findMediaToolStripMenuItem,
-            this.recordMediaToolStripMenuItem,
-            this.previewMediaToolStripMenuItem,
-            this.addGameToolStripMenuItem,
-            this.deleteGameToolStripMenuItem,
-            this.launchGameToolStripMenuItem,
-            this.viewIPDBPageToolStripMenuItem,
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem,
-            this.showGamesWithUpdatesToolStripMenuItem,
-            this.refreshListToolStripMenuItem,
-            this.openMediaFolderToolStripMenuItem,
-            this.tableAuditToolStripMenuItem});
-            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 312);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // findMediaToolStripMenuItem
-            // 
-            this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
-            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.findMediaToolStripMenuItem.Text = "Find Media";
-            // 
-            // recordMediaToolStripMenuItem
-            // 
-            this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
-            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.recordMediaToolStripMenuItem.Text = "Record Media";
-            // 
-            // previewMediaToolStripMenuItem
-            // 
-            this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
-            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.previewMediaToolStripMenuItem.Text = "Preview Media";
-            // 
-            // addGameToolStripMenuItem
-            // 
-            this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
-            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.addGameToolStripMenuItem.Text = "Add Game";
-            this.addGameToolStripMenuItem.Click += new System.EventHandler(this.addGameToolStripMenuItem_Click);
-            // 
-            // deleteGameToolStripMenuItem
-            // 
-            this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
-            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.deleteGameToolStripMenuItem.Text = "Delete Game";
-            this.deleteGameToolStripMenuItem.Click += new System.EventHandler(this.deleteGameToolStripMenuItem_Click);
-            // 
-            // launchGameToolStripMenuItem
-            // 
-            this.launchGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.launchDirectlyToolStripMenuItem,
-            this.launchInConfigModeToolStripMenuItem,
-            this.launchUsingFrontEndToolStripMenuItem});
-            this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
-            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.launchGameToolStripMenuItem.Text = "Launch Game";
-            // 
-            // launchDirectlyToolStripMenuItem
-            // 
-            this.launchDirectlyToolStripMenuItem.Name = "launchDirectlyToolStripMenuItem";
-            this.launchDirectlyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.launchDirectlyToolStripMenuItem.Text = "Launch Directly";
-            this.launchDirectlyToolStripMenuItem.Click += new System.EventHandler(this.launchDirectlyToolStripMenuItem_Click);
-            // 
-            // launchInConfigModeToolStripMenuItem
-            // 
-            this.launchInConfigModeToolStripMenuItem.Name = "launchInConfigModeToolStripMenuItem";
-            this.launchInConfigModeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.launchInConfigModeToolStripMenuItem.Text = "Launch in Config Mode";
-            this.launchInConfigModeToolStripMenuItem.Click += new System.EventHandler(this.launchInConfigModeToolStripMenuItem_Click);
-            // 
-            // launchUsingFrontEndToolStripMenuItem
-            // 
-            this.launchUsingFrontEndToolStripMenuItem.Name = "launchUsingFrontEndToolStripMenuItem";
-            this.launchUsingFrontEndToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.launchUsingFrontEndToolStripMenuItem.Text = "Launch Using Front End";
-            this.launchUsingFrontEndToolStripMenuItem.Click += new System.EventHandler(this.launchUsingFrontEndToolStripMenuItem_Click);
-            // 
-            // viewIPDBPageToolStripMenuItem
-            // 
-            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
-            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
-            this.viewIPDBPageToolStripMenuItem.Click += new System.EventHandler(this.viewIPDBPageToolStripMenuItem_Click);
-            // 
-            // findGamesFromIPDBNotInMyDatabaseToolStripMenuItem
-            // 
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Name = "findGamesFromIPDBNotInMyDatabaseToolStripMenuItem";
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Text = "Find Games From IPDB Not in My Database";
-            // 
-            // showGamesWithUpdatesToolStripMenuItem
-            // 
-            this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
-            this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
-            // 
-            // refreshListToolStripMenuItem
-            // 
-            this.refreshListToolStripMenuItem.Name = "refreshListToolStripMenuItem";
-            this.refreshListToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.refreshListToolStripMenuItem.Text = "Refresh List";
-            this.refreshListToolStripMenuItem.Click += new System.EventHandler(this.refreshListToolStripMenuItem_Click);
-            // 
-            // openMediaFolderToolStripMenuItem
-            // 
-            this.openMediaFolderToolStripMenuItem.Name = "openMediaFolderToolStripMenuItem";
-            this.openMediaFolderToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.openMediaFolderToolStripMenuItem.Text = "Open Media Folder";
-            this.openMediaFolderToolStripMenuItem.Click += new System.EventHandler(this.openMediaFolderToolStripMenuItem_Click);
-            // 
-            // tableAuditToolStripMenuItem
-            // 
-            this.tableAuditToolStripMenuItem.Name = "tableAuditToolStripMenuItem";
-            this.tableAuditToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
-            this.tableAuditToolStripMenuItem.Text = "Table Audit";
-            this.tableAuditToolStripMenuItem.Click += new System.EventHandler(this.tableAuditToolStripMenuItem_Click);
-            // 
-            // txtLog
-            // 
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Location = new System.Drawing.Point(0, 0);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(955, 102);
-            this.txtLog.TabIndex = 4;
-            // 
-            // backgroundWorkerProgressBar
-            // 
-            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
-            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.lblDatabaseStatus);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.cmbDatabase);
-            this.panel1.Controls.Add(this.lblDatabase);
-            this.panel1.Controls.Add(this.cmbFrontEnd);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lblInfo);
-            this.panel1.Controls.Add(this.lblSearch);
-            this.panel1.Controls.Add(this.txtSearch);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(955, 62);
-            this.panel1.TabIndex = 7;
-            // 
-            // lblDatabaseStatus
-            // 
-            this.lblDatabaseStatus.AutoSize = true;
-            this.lblDatabaseStatus.Location = new System.Drawing.Point(542, 7);
-            this.lblDatabaseStatus.Name = "lblDatabaseStatus";
-            this.lblDatabaseStatus.Size = new System.Drawing.Size(92, 13);
-            this.lblDatabaseStatus.TabIndex = 8;
-            this.lblDatabaseStatus.Text = "Enabled/Disabled";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(506, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Status:";
-            // 
-            // cmbDatabase
-            // 
-            this.cmbDatabase.DisplayMember = "DatabaseFilePathShort";
-            this.cmbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDatabase.FormattingEnabled = true;
-            this.cmbDatabase.Location = new System.Drawing.Point(236, 4);
-            this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(264, 21);
-            this.cmbDatabase.TabIndex = 6;
-            this.cmbDatabase.ValueMember = "DatabaseFilePathShort";
-            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
-            // 
-            // lblDatabase
-            // 
-            this.lblDatabase.AutoSize = true;
-            this.lblDatabase.Location = new System.Drawing.Point(176, 6);
-            this.lblDatabase.Name = "lblDatabase";
-            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
-            this.lblDatabase.TabIndex = 5;
-            this.lblDatabase.Text = "Database";
-            // 
-            // cmbFrontEnd
-            // 
-            this.cmbFrontEnd.DisplayMember = "Name";
-            this.cmbFrontEnd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFrontEnd.FormattingEnabled = true;
-            this.cmbFrontEnd.Location = new System.Drawing.Point(63, 4);
-            this.cmbFrontEnd.Name = "cmbFrontEnd";
-            this.cmbFrontEnd.Size = new System.Drawing.Size(107, 21);
-            this.cmbFrontEnd.TabIndex = 4;
-            this.cmbFrontEnd.ValueMember = "System";
-            this.cmbFrontEnd.SelectedIndexChanged += new System.EventHandler(this.cmbFrontEnd_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Front End";
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(783, 6);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(160, 13);
-            this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "Right Click Cell or Row for Menu";
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(3, 33);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(41, 13);
-            this.lblSearch.TabIndex = 1;
-            this.lblSearch.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(63, 30);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(107, 20);
-            this.txtSearch.TabIndex = 0;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.utilitiesToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(955, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // utilitiesToolStripMenuItem
-            // 
-            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mediaAuditToolStripMenuItem,
-            this.massRecordToolStripMenuItem});
-            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
-            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.utilitiesToolStripMenuItem.Text = "Utilities";
-            // 
-            // mediaAuditToolStripMenuItem
-            // 
-            this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
-            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.mediaAuditToolStripMenuItem.Text = "Media Audit";
-            this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
-            // 
-            // massRecordToolStripMenuItem
-            // 
-            this.massRecordToolStripMenuItem.Name = "massRecordToolStripMenuItem";
-            this.massRecordToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.massRecordToolStripMenuItem.Text = "Mass Record";
-            this.massRecordToolStripMenuItem.Click += new System.EventHandler(this.massRecordToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
-            // statusStripBottom
-            // 
-            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel,
-            this.toolStripStatusLabelSpacer,
-            this.toolStripProgressBar});
-            this.statusStripBottom.Location = new System.Drawing.Point(0, 531);
-            this.statusStripBottom.Name = "statusStripBottom";
-            this.statusStripBottom.Size = new System.Drawing.Size(955, 22);
-            this.statusStripBottom.TabIndex = 10;
-            this.statusStripBottom.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel
-            // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
-            this.toolStripStatusLabel.Text = "Status Here";
-            // 
-            // toolStripStatusLabelSpacer
-            // 
-            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
-            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(771, 17);
-            this.toolStripStatusLabelSpacer.Spring = true;
-            // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // fileNameDataGridViewTextBoxColumn
             // 
@@ -796,9 +430,375 @@ namespace PinCab.Configurator
             this.hasWheelImageDataGridViewCheckBoxColumn.ReadOnly = true;
             this.hasWheelImageDataGridViewCheckBoxColumn.Width = 76;
             // 
+            // HasInstructionCard
+            // 
+            this.HasInstructionCard.DataPropertyName = "HasInstructionCard";
+            this.HasInstructionCard.HeaderText = "Instruction Card";
+            this.HasInstructionCard.Name = "HasInstructionCard";
+            this.HasInstructionCard.ReadOnly = true;
+            this.HasInstructionCard.Width = 87;
+            // 
+            // HasFlyer
+            // 
+            this.HasFlyer.DataPropertyName = "HasFlyer";
+            this.HasFlyer.HeaderText = "Flyer";
+            this.HasFlyer.Name = "HasFlyer";
+            this.HasFlyer.ReadOnly = true;
+            this.HasFlyer.Width = 35;
+            // 
+            // HasLaunchAudio
+            // 
+            this.HasLaunchAudio.DataPropertyName = "HasLaunchAudio";
+            this.HasLaunchAudio.HeaderText = "Launch Audio";
+            this.HasLaunchAudio.Name = "HasLaunchAudio";
+            this.HasLaunchAudio.ReadOnly = true;
+            this.HasLaunchAudio.Width = 79;
+            // 
+            // HasTableAudio
+            // 
+            this.HasTableAudio.DataPropertyName = "HasTableAudio";
+            this.HasTableAudio.HeaderText = "Table Audio Media";
+            this.HasTableAudio.Name = "HasTableAudio";
+            this.HasTableAudio.ReadOnly = true;
+            this.HasTableAudio.Width = 102;
+            // 
+            // contextMenuStripGridActions
+            // 
+            this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.findMediaToolStripMenuItem,
+            this.recordMediaToolStripMenuItem,
+            this.previewMediaToolStripMenuItem,
+            this.addGameToolStripMenuItem,
+            this.deleteGameToolStripMenuItem,
+            this.launchGameToolStripMenuItem,
+            this.viewIPDBPageToolStripMenuItem,
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem,
+            this.showGamesWithUpdatesToolStripMenuItem,
+            this.refreshListToolStripMenuItem,
+            this.openMediaFolderToolStripMenuItem,
+            this.tableAuditToolStripMenuItem});
+            this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(303, 290);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // findMediaToolStripMenuItem
+            // 
+            this.findMediaToolStripMenuItem.Name = "findMediaToolStripMenuItem";
+            this.findMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.findMediaToolStripMenuItem.Text = "Find Media";
+            // 
+            // recordMediaToolStripMenuItem
+            // 
+            this.recordMediaToolStripMenuItem.Name = "recordMediaToolStripMenuItem";
+            this.recordMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.recordMediaToolStripMenuItem.Text = "Record Media";
+            // 
+            // previewMediaToolStripMenuItem
+            // 
+            this.previewMediaToolStripMenuItem.Name = "previewMediaToolStripMenuItem";
+            this.previewMediaToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.previewMediaToolStripMenuItem.Text = "Preview Media";
+            // 
+            // addGameToolStripMenuItem
+            // 
+            this.addGameToolStripMenuItem.Name = "addGameToolStripMenuItem";
+            this.addGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.addGameToolStripMenuItem.Text = "Add Game";
+            this.addGameToolStripMenuItem.Click += new System.EventHandler(this.addGameToolStripMenuItem_Click);
+            // 
+            // deleteGameToolStripMenuItem
+            // 
+            this.deleteGameToolStripMenuItem.Name = "deleteGameToolStripMenuItem";
+            this.deleteGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.deleteGameToolStripMenuItem.Text = "Delete Game";
+            this.deleteGameToolStripMenuItem.Click += new System.EventHandler(this.deleteGameToolStripMenuItem_Click);
+            // 
+            // launchGameToolStripMenuItem
+            // 
+            this.launchGameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.launchDirectlyToolStripMenuItem,
+            this.launchInConfigModeToolStripMenuItem,
+            this.launchUsingFrontEndToolStripMenuItem});
+            this.launchGameToolStripMenuItem.Name = "launchGameToolStripMenuItem";
+            this.launchGameToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.launchGameToolStripMenuItem.Text = "Launch Game";
+            // 
+            // launchDirectlyToolStripMenuItem
+            // 
+            this.launchDirectlyToolStripMenuItem.Name = "launchDirectlyToolStripMenuItem";
+            this.launchDirectlyToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchDirectlyToolStripMenuItem.Text = "Launch Directly";
+            this.launchDirectlyToolStripMenuItem.Click += new System.EventHandler(this.launchDirectlyToolStripMenuItem_Click);
+            // 
+            // launchInConfigModeToolStripMenuItem
+            // 
+            this.launchInConfigModeToolStripMenuItem.Name = "launchInConfigModeToolStripMenuItem";
+            this.launchInConfigModeToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchInConfigModeToolStripMenuItem.Text = "Launch in Config Mode";
+            this.launchInConfigModeToolStripMenuItem.Click += new System.EventHandler(this.launchInConfigModeToolStripMenuItem_Click);
+            // 
+            // launchUsingFrontEndToolStripMenuItem
+            // 
+            this.launchUsingFrontEndToolStripMenuItem.Name = "launchUsingFrontEndToolStripMenuItem";
+            this.launchUsingFrontEndToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.launchUsingFrontEndToolStripMenuItem.Text = "Launch Using Front End";
+            this.launchUsingFrontEndToolStripMenuItem.Click += new System.EventHandler(this.launchUsingFrontEndToolStripMenuItem_Click);
+            // 
+            // viewIPDBPageToolStripMenuItem
+            // 
+            this.viewIPDBPageToolStripMenuItem.Name = "viewIPDBPageToolStripMenuItem";
+            this.viewIPDBPageToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.viewIPDBPageToolStripMenuItem.Text = "View IPDB Page";
+            this.viewIPDBPageToolStripMenuItem.Click += new System.EventHandler(this.viewIPDBPageToolStripMenuItem_Click);
+            // 
+            // findGamesFromIPDBNotInMyDatabaseToolStripMenuItem
+            // 
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Name = "findGamesFromIPDBNotInMyDatabaseToolStripMenuItem";
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.findGamesFromIPDBNotInMyDatabaseToolStripMenuItem.Text = "Find Games From IPDB Not in My Database";
+            // 
+            // showGamesWithUpdatesToolStripMenuItem
+            // 
+            this.showGamesWithUpdatesToolStripMenuItem.Name = "showGamesWithUpdatesToolStripMenuItem";
+            this.showGamesWithUpdatesToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.showGamesWithUpdatesToolStripMenuItem.Text = "Show Games With Updates";
+            // 
+            // refreshListToolStripMenuItem
+            // 
+            this.refreshListToolStripMenuItem.Name = "refreshListToolStripMenuItem";
+            this.refreshListToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.refreshListToolStripMenuItem.Text = "Refresh List";
+            this.refreshListToolStripMenuItem.Click += new System.EventHandler(this.refreshListToolStripMenuItem_Click);
+            // 
+            // openMediaFolderToolStripMenuItem
+            // 
+            this.openMediaFolderToolStripMenuItem.Name = "openMediaFolderToolStripMenuItem";
+            this.openMediaFolderToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.openMediaFolderToolStripMenuItem.Text = "Open Media Folder";
+            this.openMediaFolderToolStripMenuItem.Click += new System.EventHandler(this.openMediaFolderToolStripMenuItem_Click);
+            // 
+            // tableAuditToolStripMenuItem
+            // 
+            this.tableAuditToolStripMenuItem.Name = "tableAuditToolStripMenuItem";
+            this.tableAuditToolStripMenuItem.Size = new System.Drawing.Size(302, 22);
+            this.tableAuditToolStripMenuItem.Text = "Table Audit";
+            this.tableAuditToolStripMenuItem.Click += new System.EventHandler(this.tableAuditToolStripMenuItem_Click);
+            // 
             // frontEndGameBindingSource
             // 
             this.frontEndGameBindingSource.DataSource = typeof(PinCab.Utils.ViewModels.FrontEndGameViewModel);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLog.Location = new System.Drawing.Point(0, 0);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Size = new System.Drawing.Size(955, 102);
+            this.txtLog.TabIndex = 4;
+            // 
+            // backgroundWorkerProgressBar
+            // 
+            this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
+            this.backgroundWorkerProgressBar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerProgressBar_ProgressChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblDatabaseStatus);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cmbDatabase);
+            this.panel1.Controls.Add(this.lblDatabase);
+            this.panel1.Controls.Add(this.cmbFrontEnd);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lblInfo);
+            this.panel1.Controls.Add(this.lblSearch);
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(955, 62);
+            this.panel1.TabIndex = 7;
+            // 
+            // lblDatabaseStatus
+            // 
+            this.lblDatabaseStatus.AutoSize = true;
+            this.lblDatabaseStatus.Location = new System.Drawing.Point(542, 7);
+            this.lblDatabaseStatus.Name = "lblDatabaseStatus";
+            this.lblDatabaseStatus.Size = new System.Drawing.Size(92, 13);
+            this.lblDatabaseStatus.TabIndex = 8;
+            this.lblDatabaseStatus.Text = "Enabled/Disabled";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(506, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Status:";
+            // 
+            // cmbDatabase
+            // 
+            this.cmbDatabase.DisplayMember = "DatabaseFilePathShort";
+            this.cmbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDatabase.FormattingEnabled = true;
+            this.cmbDatabase.Location = new System.Drawing.Point(236, 4);
+            this.cmbDatabase.Name = "cmbDatabase";
+            this.cmbDatabase.Size = new System.Drawing.Size(264, 21);
+            this.cmbDatabase.TabIndex = 6;
+            this.cmbDatabase.ValueMember = "DatabaseFilePathShort";
+            this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
+            // 
+            // lblDatabase
+            // 
+            this.lblDatabase.AutoSize = true;
+            this.lblDatabase.Location = new System.Drawing.Point(176, 6);
+            this.lblDatabase.Name = "lblDatabase";
+            this.lblDatabase.Size = new System.Drawing.Size(53, 13);
+            this.lblDatabase.TabIndex = 5;
+            this.lblDatabase.Text = "Database";
+            // 
+            // cmbFrontEnd
+            // 
+            this.cmbFrontEnd.DisplayMember = "Name";
+            this.cmbFrontEnd.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFrontEnd.FormattingEnabled = true;
+            this.cmbFrontEnd.Location = new System.Drawing.Point(63, 4);
+            this.cmbFrontEnd.Name = "cmbFrontEnd";
+            this.cmbFrontEnd.Size = new System.Drawing.Size(107, 21);
+            this.cmbFrontEnd.TabIndex = 4;
+            this.cmbFrontEnd.ValueMember = "System";
+            this.cmbFrontEnd.SelectedIndexChanged += new System.EventHandler(this.cmbFrontEnd_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Front End";
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(783, 6);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(160, 13);
+            this.lblInfo.TabIndex = 2;
+            this.lblInfo.Text = "Right Click Cell or Row for Menu";
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(3, 33);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(63, 30);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(107, 20);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.utilitiesToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(955, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // utilitiesToolStripMenuItem
+            // 
+            this.utilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mediaAuditToolStripMenuItem,
+            this.massRecordToolStripMenuItem});
+            this.utilitiesToolStripMenuItem.Name = "utilitiesToolStripMenuItem";
+            this.utilitiesToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.utilitiesToolStripMenuItem.Text = "Utilities";
+            // 
+            // mediaAuditToolStripMenuItem
+            // 
+            this.mediaAuditToolStripMenuItem.Name = "mediaAuditToolStripMenuItem";
+            this.mediaAuditToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.mediaAuditToolStripMenuItem.Text = "Media Audit";
+            this.mediaAuditToolStripMenuItem.Click += new System.EventHandler(this.mediaAuditToolStripMenuItem_Click);
+            // 
+            // massRecordToolStripMenuItem
+            // 
+            this.massRecordToolStripMenuItem.Name = "massRecordToolStripMenuItem";
+            this.massRecordToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.massRecordToolStripMenuItem.Text = "Mass Record";
+            this.massRecordToolStripMenuItem.Click += new System.EventHandler(this.massRecordToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // statusStripBottom
+            // 
+            this.statusStripBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel,
+            this.toolStripStatusLabelSpacer,
+            this.toolStripProgressBar});
+            this.statusStripBottom.Location = new System.Drawing.Point(0, 531);
+            this.statusStripBottom.Name = "statusStripBottom";
+            this.statusStripBottom.Size = new System.Drawing.Size(955, 22);
+            this.statusStripBottom.TabIndex = 10;
+            this.statusStripBottom.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(67, 17);
+            this.toolStripStatusLabel.Text = "Status Here";
+            // 
+            // toolStripStatusLabelSpacer
+            // 
+            this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(740, 17);
+            this.toolStripStatusLabelSpacer.Spring = true;
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // GameManagerForm
             // 
@@ -819,13 +819,13 @@ namespace PinCab.Configurator
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGameList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStripBottom.ResumeLayout(false);
             this.statusStripBottom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frontEndGameBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

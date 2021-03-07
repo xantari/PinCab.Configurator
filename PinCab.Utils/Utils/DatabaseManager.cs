@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -158,7 +159,7 @@ namespace PinCab.Utils.Utils
                 bool success = false;
                 if (type == DatabaseType.VPForums)
                 {
-                    success = DownloadDatabase(type, _settings.VPForumsDatabaseUrl, vpfDatabasePath);
+                    success = DownloadDatabase(type, _settings.VPForumsDatabaseUrl, vpfDatabasePath, _settings.AuthenticationSettings.GithubAccessToken);
                     if (success)
                         result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPForumsDatabaseUrl} to {vpfDatabasePath}", MessageLevel.Information));
                     else
@@ -166,7 +167,7 @@ namespace PinCab.Utils.Utils
                 }
                 else if (type == DatabaseType.VPSSpreadsheet)
                 {
-                    success = DownloadDatabase(type, _settings.VPSSpreadsheetUrl, vpsDatabasePath);
+                    success = DownloadDatabase(type, _settings.VPSSpreadsheetUrl, vpsDatabasePath, _settings.AuthenticationSettings.GithubAccessToken);
                     if (success)
                         result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPSSpreadsheetUrl} to {vpsDatabasePath}", MessageLevel.Information));
                     else
@@ -174,7 +175,7 @@ namespace PinCab.Utils.Utils
                 }
                 else if (type == DatabaseType.VPinball)
                 {
-                    success = DownloadDatabase(type, _settings.VPinballDatabaseUrl, vpDatabasePath);
+                    success = DownloadDatabase(type, _settings.VPinballDatabaseUrl, vpDatabasePath, _settings.AuthenticationSettings.GithubAccessToken);
                     if (success)
                         result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPinballDatabaseUrl} to {vpDatabasePath}", MessageLevel.Information));
                     else
@@ -182,7 +183,7 @@ namespace PinCab.Utils.Utils
                 }
                 else if (type == DatabaseType.VPUniverse)
                 {
-                    success = DownloadDatabase(type, _settings.VPUniverseDatabaseUrl, vpuDatabasePath);
+                    success = DownloadDatabase(type, _settings.VPUniverseDatabaseUrl, vpuDatabasePath, _settings.AuthenticationSettings.GithubAccessToken);
                     if (success)
                         result.Messages.Add(new ValidationMessage($"Downloaded {_settings.VPUniverseDatabaseUrl} to {vpuDatabasePath}", MessageLevel.Information));
                     else
@@ -190,7 +191,7 @@ namespace PinCab.Utils.Utils
                 }
                 else if (type == DatabaseType.IPDB)
                 {
-                    success = DownloadDatabase(type, _settings.IPDBDatabaseUrl, ipdbDatabasePath);
+                    success = DownloadDatabase(type, _settings.IPDBDatabaseUrl, ipdbDatabasePath, _settings.AuthenticationSettings.GithubAccessToken);
                     if (success)
                         result.Messages.Add(new ValidationMessage($"Downloaded {_settings.IPDBDatabaseUrl} to {ipdbDatabasePath}", MessageLevel.Information));
                     else
@@ -208,14 +209,19 @@ namespace PinCab.Utils.Utils
             return result;
         }
 
-        private bool DownloadDatabase(DatabaseType type, string downloadUrl, string downloadPath)
+        private bool DownloadDatabase(DatabaseType type, string downloadUrl, string downloadPath, string accessToken)
         {
             try
             {
                 using (WebClient wc = new WebClient())
                 {
+                    if (downloadUrl.ToLower().Contains("github") && !string.IsNullOrEmpty(accessToken))
+                    {
+                        wc.Headers.Add("Authorization", "token " + accessToken);
+                    }
                     //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                    wc.DownloadFile(new Uri(downloadUrl), downloadPath);
+                    var url = new Uri(downloadUrl);
+                    wc.DownloadFile(url, downloadPath);
                 }
                 return true;
             }
@@ -432,7 +438,6 @@ namespace PinCab.Utils.Utils
                 entries.Add(entry);
             }
 
-
             //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
             //area of the database
 
@@ -528,6 +533,19 @@ namespace PinCab.Utils.Utils
         private List<DatabaseBrowserEntry> GetVpinballEntries()
         {
             List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            //var results = VpinballDatabase.Files.Select(c => c.Categories).Distinct();
+            //var distinctList = new List<string>();
+            //foreach(var result in results)
+            //{
+            //    foreach(var itm in result)
+            //    {
+            //        if (!distinctList.Contains(itm))
+            //            distinctList.Add(itm);
+            //    }
+            //}
+
+            //var list = string.Join("\r\n", distinctList);
+
             foreach (var file in VpinballDatabase.Files)
             {
                 var entry = GetVpinballFile(file);
@@ -731,10 +749,30 @@ namespace PinCab.Utils.Utils
                 Description = file.Description,
                 IpdbId = file.IpdbNumber,
                 Title = file.Title,
-                Type = DatabaseEntryType.Table,
+                Type = DatabaseEntryType.Unknown,
                 Url = file.Url,
                 Version = file.Version
             };
+
+            //Find the VPUniverse Category to map to
+            if (file.Category.ToLower().Contains("b2s"))
+                entry.Type = DatabaseEntryType.Backglass;
+            else if (file.Category.ToLower().Contains("pinmame") || file.Category.ToLower().Contains("colorizations") ||
+                file.Category.ToLower().Contains("color rom")) //PinMAME Roms, SAM - Color ROM Patches, Pin2DMD Colorizations - Virtual Pinball
+                entry.Type = DatabaseEntryType.ROM;
+            else if (file.Category.ToLower().Contains("wheel images"))
+                entry.Type = DatabaseEntryType.Wheel;
+            else if (file.Category.ToLower().Contains("tables") || file.Category.ToLower().Contains("vr conversion"))
+                entry.Type = DatabaseEntryType.Table;
+            else if (file.Category.ToLower().Contains("topper"))
+                entry.Type = DatabaseEntryType.Topper;
+
+            if (file.Category.ToLower().Contains("colorizations") || file.Category.ToLower().Contains("color rom"))
+                entry.Tags.Add("Color");
+
+            if (file.Category.Contains("VR"))
+                entry.Tags.Add("VR");
+
             foreach (var tag in file.Tags)
             {
                 if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title
@@ -769,10 +807,48 @@ namespace PinCab.Utils.Utils
                 Description = file.Description,
                 IpdbId = file.IpdbNumber,
                 Title = file.Title,
-                Type = DatabaseEntryType.Table,
+                Type = DatabaseEntryType.Unknown,
                 Url = file.Url,
                 Version = file.Version,
             };
+
+            if (file.Categories.Any(c => c.ToLower().Contains("backglass")) ||
+                file.Categories.Any(c => c.ToLower().Contains("directb2s")) ||
+                file.Categories.Any(c => c.ToLower().Contains("db2s")))
+                entry.Type = DatabaseEntryType.Backglass;
+            else if (file.Categories.Any(c => c.ToLower().Contains("altsound")))
+                entry.Type = DatabaseEntryType.Pinsound;
+            else if (file.Categories.Any(c => c.ToLower().Contains("roms")))
+                entry.Type = DatabaseEntryType.ROM;
+            else if (file.Categories.Any(c => c.ToLower().Contains("audio files")) ||
+                file.Categories.Any(c => c.ToLower().Contains("dmd videos")) ||
+                file.Categories.Any(c => c.ToLower().Contains("dmd underlays")) ||
+                file.Categories.Any(c => c.ToLower().Contains("art")) ||
+                file.Categories.Any(c => c.ToLower().Contains("loading animation")) ||
+                file.Categories.Any(c => c.ToLower().Contains("popper themes")) ||
+                file.Categories.Any(c => c.ToLower().Contains("popper media packs")) ||
+                file.Categories.Any(c => c.ToLower().Contains("playfield videos")) ||
+                file.Categories.Any(c => c.ToLower().Contains("table audio")) ||
+                file.Categories.Any(c => c.ToLower().Contains("wallpaper")) ||
+                file.Categories.Any(c => c.ToLower().Contains("front end"))
+                )
+                entry.Type = DatabaseEntryType.OtherFrontEndMedia;
+            else if (file.Categories.Any(c => c.ToLower().Contains("wheel")))
+                entry.Type = DatabaseEntryType.Wheel;
+            else if (file.Categories.Any(c => c.ToLower().Contains("pov")))
+                entry.Type = DatabaseEntryType.POV;
+            else if (file.Categories.Any(c => c.ToLower().Contains("pup-pack")))
+                entry.Type = DatabaseEntryType.PupPack;
+            else if (file.Categories.Any(c => c.ToLower().Contains("table")))
+                entry.Type = DatabaseEntryType.Table;
+            else if (file.Categories.Any(c => c.ToLower().Contains("flyer")))
+                entry.Type = DatabaseEntryType.Flyer;
+            else if (file.Categories.Any(c => c.ToLower().Contains("topper")))
+                entry.Type = DatabaseEntryType.Topper;
+
+            if (file.Categories.Any(c => c.Contains("VR")))
+                entry.Tags.Add("VR");
+
             foreach (var tag in file.Tags)
             {
                 if (!entry.Title.ToLower().Contains(tag.ToLower()) //Exclude tags that are part of the title

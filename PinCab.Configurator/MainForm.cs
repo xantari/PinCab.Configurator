@@ -127,20 +127,26 @@ namespace PinCab.Configurator
                 return;
             }
 
-            if (string.IsNullOrEmpty(_settings.FFMpegFullPath))
+            if (string.IsNullOrEmpty(_settings.RecordingSettings.FFMpegPath))
             {
                 txtData.Text += "FFMpeg path not defined.\r\n";
                 return;
             }
 
-            if (string.IsNullOrEmpty(_settings.RecordingTempFolderPath))
+            if (_settings.RecordingSettings.RecordTimeStartupDelaySeconds <= 0)
+            {
+                txtData.Text += "Record Time startup delay unrealistic, set a time > 0..\r\n";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_settings.RecordingSettings.RecordingTempFolderPath))
             {
                 txtData.Text += "Recording temp folder path not defined.\r\n";
                 return;
             }
 
-            var commands = _displayDetails.GetFfMpegCommandsForAllMonitors(_settings.RecordFramerate, new TimeSpan(0, 0, _settings.RecordTimeSeconds),
-                _settings.RecordingTempFolderPath, _settings.FFMpegFullPath);
+            var commands = _displayDetails.GetFfMpegCommandsForAllMonitors(_settings.RecordingSettings.RecordFramerate, new TimeSpan(0, 0, _settings.RecordingSettings.RecordTimeSeconds),
+                _settings.RecordingSettings.RecordingTempFolderPath, _settings.RecordingSettings.FFMpegPath);
             txtData.Text += " FFMpeg Command: \r\n" + string.Join("\r\n\r\n", commands.ToArray());
         }
 

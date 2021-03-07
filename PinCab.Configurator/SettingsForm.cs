@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PinCab.Utils.Models;
+using System.IO;
 
 namespace PinCab.Configurator
 {
@@ -41,10 +42,13 @@ namespace PinCab.Configurator
 
             if (settings != null)
             {
-                txtFFMpegFilePath.Text = settings.FFMpegFullPath;
-                txtTempRecordingPath.Text = settings.RecordingTempFolderPath;
-                numericRecordTimeSeconds.Value = settings.RecordTimeSeconds >= 5 ? settings.RecordTimeSeconds : 5;
-                numericFramerate.Value = settings.RecordFramerate >= 15 ? settings.RecordFramerate : 15;
+                txtFFMpegFilePath.Text = settings.RecordingSettings.FFMpegPath;
+                txtOBSPath.Text = settings.RecordingSettings.ObsFullPath;
+                txtOBSConfigPath.Text = settings.RecordingSettings.ObsConfigPath;
+                numericStartRecordDelaySeconds.Value = settings.RecordingSettings.RecordTimeStartupDelaySeconds >= 5 ? settings.RecordingSettings.RecordTimeStartupDelaySeconds : 5;
+                txtTempRecordingPath.Text = settings.RecordingSettings.RecordingTempFolderPath;
+                numericRecordTimeSeconds.Value = settings.RecordingSettings.RecordTimeSeconds >= 5 ? settings.RecordingSettings.RecordTimeSeconds : 5;
+                numericFramerate.Value = settings.RecordingSettings.RecordFramerate >= 15 ? settings.RecordingSettings.RecordFramerate : 15;
                 txtPinballXIniFilePath.Text = settings.PinballXIniPath;
                 txtPinballYLocation.Text = settings.PinballYSettingsPath;
                 txtPinupPopperDbLocation.Text = settings.PinupPopperSqlLiteDbPath;
@@ -59,6 +63,7 @@ namespace PinCab.Configurator
                 txtVPinballUrl.Text = settings.VPinballDatabaseUrl;
                 txtVpUniverseUrl.Text = settings.VPUniverseDatabaseUrl;
                 txtVpsSpreadsheetUrl.Text = settings.VPSSpreadsheetUrl;
+                txtGithubAccessToken.Text = settings.AuthenticationSettings.GithubAccessToken;
 
                 lblVPinMameFound.Text = vpinMame.KeyExists().ToString();
                 lblUltraDMDFound.Text = ultraDmd.KeyExists().ToString();
@@ -70,10 +75,13 @@ namespace PinCab.Configurator
             var settings = _settingManager.LoadSettings();
             if (settings == null)
                 settings = new ProgramSettings();
-            settings.FFMpegFullPath = txtFFMpegFilePath.Text;
-            settings.RecordingTempFolderPath = txtTempRecordingPath.Text;
-            settings.RecordFramerate = Convert.ToInt32(numericFramerate.Value);
-            settings.RecordTimeSeconds = Convert.ToInt32(numericRecordTimeSeconds.Value);
+            settings.RecordingSettings.FFMpegPath = txtFFMpegFilePath.Text;
+            settings.RecordingSettings.ObsFullPath = txtOBSPath.Text;
+            settings.RecordingSettings.ObsConfigPath = txtOBSConfigPath.Text;
+            settings.RecordingSettings.RecordTimeStartupDelaySeconds = Convert.ToInt32(numericStartRecordDelaySeconds.Value);
+            settings.RecordingSettings.RecordingTempFolderPath = txtTempRecordingPath.Text;
+            settings.RecordingSettings.RecordFramerate = Convert.ToInt32(numericFramerate.Value);
+            settings.RecordingSettings.RecordTimeSeconds = Convert.ToInt32(numericRecordTimeSeconds.Value);
             settings.PinupPopperSqlLiteDbPath = txtPinupPopperDbLocation.Text;
             settings.PinballXIniPath = txtPinballXIniFilePath.Text;
             settings.PinballYSettingsPath = txtPinballYLocation.Text;
@@ -88,6 +96,7 @@ namespace PinCab.Configurator
             settings.VPinballDatabaseUrl = txtVPinballUrl.Text;
             settings.VPUniverseDatabaseUrl = txtVpUniverseUrl.Text;
             settings.VPSSpreadsheetUrl = txtVpsSpreadsheetUrl.Text;
+            settings.AuthenticationSettings.GithubAccessToken = txtGithubAccessToken.Text;
 
             _settingManager.SaveSettings(settings);
             this.Close();
@@ -280,6 +289,38 @@ namespace PinCab.Configurator
         private void btnVpsSpreadsheetUrl_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(txtVpsSpreadsheetUrl.Text);
+        }
+
+        private void btnOBSPath_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "EXE Files|*.exe|All files (*.*)|*.*";
+                fileDialog.FilterIndex = 1;
+                fileDialog.FileName = "obs64.exe";
+                fileDialog.RestoreDirectory = true;
+                var result = fileDialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                    txtOBSPath.Text = fileDialog.FileName;
+            }
+        }
+
+        private void btnOBSConfigPath_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fileDialog = new FolderBrowserDialog())
+            {
+                //typically C:\Users\{profilename}\AppData\Roaming\obs-studio
+                var env = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                fileDialog.RootFolder = Environment.SpecialFolder.ApplicationData;
+                fileDialog.ShowNewFolderButton = false;
+                var expectedPath = $"{env}\\obs-studio";
+                if (Directory.Exists(expectedPath))
+                    fileDialog.SelectedPath = expectedPath;
+                //$"{env}\\obs-studio";
+                var result = fileDialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                    txtOBSConfigPath.Text = fileDialog.SelectedPath;
+            }
         }
     }
 }

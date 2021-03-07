@@ -137,6 +137,8 @@
     <Compile Include="Extensions\ValidationExtensions.cs" />
     <Compile Include="Models\B2sIni.cs" />
     <Compile Include="Models\DatabaseBrowserEntry.cs" />
+    <Compile Include="Models\AuthenticationSettings.cs" />
+    <Compile Include="Models\RecordingSettings.cs" />
     <Compile Include="Models\DisplayDetail.cs" />
     <Compile Include="Extensions\DisplayDetailsExtensions.cs" />
     <Compile Include="Extensions\EdidExtensions.cs" />
@@ -154,7 +156,6 @@
     </Compile>
     <Compile Include="Utils\BackgroundQueue.cs" />
     <Compile Include="Utils\DatabaseManager.cs" />
-    <Compile Include="Utils\DatabaseBrowserSettingsManager.cs" />
     <Compile Include="Utils\WinApi.cs" />
     <Compile Include="ViewModels\DatabaseFileViewModel.cs" />
     <Compile Include="ViewModels\FrontEndGameViewModel.cs" />

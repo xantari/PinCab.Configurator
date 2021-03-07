@@ -19,6 +19,7 @@ namespace PinCab.Utils.ViewModels
             TableDesktopStatus = MediaStatus.NotFound;
             TopperStatus = MediaStatus.NotFound;
             ManufacturerMediaStatus = MediaStatus.NotFound;
+            ApronMediaStatus = MediaStatus.NotFound;
             MediaItems = new List<MediaItem>();
             Enabled = true;
         }
@@ -66,6 +67,7 @@ namespace PinCab.Utils.ViewModels
         public MediaStatus TableDesktopStatus { get; set; }
         public MediaStatus TopperStatus { get; set; }
         public MediaStatus ManufacturerMediaStatus { get; set; }
+        public MediaStatus ApronMediaStatus { get; set; }
         public bool HasLaunchAudio { get; set; }
         public bool HasFlyer { get; set; }
         public bool HasInstructionCard { get; set; }

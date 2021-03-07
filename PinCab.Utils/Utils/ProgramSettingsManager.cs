@@ -50,6 +50,12 @@ namespace PinCab.Utils.Utils
                 settings.VPSSpreadsheetUrl = "";
             if (settings.VPUniverseDatabaseUrl == null)
                 settings.VPUniverseDatabaseUrl = "";
+            if (settings.DatabaseBrowserSettings == null)
+                settings.DatabaseBrowserSettings = new DatabaseBrowserSettings();
+            if (settings.RecordingSettings == null)
+                settings.RecordingSettings = new RecordingSettings();
+            if (settings.AuthenticationSettings == null)
+                settings.AuthenticationSettings = new AuthenticationSettings();
         }
 
         public void SaveSettings(ProgramSettings settings, string fileAndPathToSettingFile = "")

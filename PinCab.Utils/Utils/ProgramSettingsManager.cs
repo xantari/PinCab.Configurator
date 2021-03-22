@@ -40,22 +40,23 @@ namespace PinCab.Utils.Utils
         {
             if (settings.DatabaseUpdateRecheckMinutes == 0)
                 settings.DatabaseUpdateRecheckMinutes = 60;
-            if (settings.IPDBDatabaseUrl == null)
-                settings.IPDBDatabaseUrl = "https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json";
-            if (settings.VPForumsDatabaseUrl == null)
-                settings.VPForumsDatabaseUrl = "";
-            if (settings.VPinballDatabaseUrl == null)
-                settings.VPinballDatabaseUrl = "";
-            if (settings.VPSSpreadsheetUrl == null)
-                settings.VPSSpreadsheetUrl = "";
-            if (settings.VPUniverseDatabaseUrl == null)
-                settings.VPUniverseDatabaseUrl = "";
             if (settings.DatabaseBrowserSettings == null)
                 settings.DatabaseBrowserSettings = new DatabaseBrowserSettings();
             if (settings.RecordingSettings == null)
                 settings.RecordingSettings = new RecordingSettings();
-            if (settings.AuthenticationSettings == null)
-                settings.AuthenticationSettings = new AuthenticationSettings();
+            if (settings.Databases == null)
+                settings.Databases = new List<ContentDatabase>();
+
+            if (settings.Databases.Count == 0)
+            {
+                var ipdbDatabase = new ContentDatabase()
+                {
+                    Url = "https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json",
+                    Name = "IPDB Database",
+                    Type = DatabaseType.IPDB
+                };
+                settings.Databases.Add(ipdbDatabase);
+            }
         }
 
         public void SaveSettings(ProgramSettings settings, string fileAndPathToSettingFile = "")

@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PinCab.Utils.Models;
 using System.IO;
+using PinCab.Utils.Extensions;
+using PinCab.Utils.WinForms;
 
 namespace PinCab.Configurator
 {
@@ -40,6 +42,9 @@ namespace PinCab.Configurator
         {
             var settings = _settingManager.LoadSettings();
 
+            //List<DatabaseType> databaseTypes = Enum.GetValues(typeof(DatabaseType)).Cast<DatabaseType>().ToList();
+            cmbContentDatabaseType.DataSource = EnumExtensions.GetEnumDescriptionList<DatabaseType>();
+
             if (settings != null)
             {
                 txtFFMpegFilePath.Text = settings.RecordingSettings.FFMpegPath;
@@ -58,12 +63,8 @@ namespace PinCab.Configurator
                 txtDMDDeviceIniFilePath.Text = settings.DMDDeviceIniPath;
                 txtPRocUserSettings.Text = settings.PRocUserSettingsPath;
                 numericRecheckMinutes.Value = settings.DatabaseUpdateRecheckMinutes;
-                txtIpdbUrl.Text = settings.IPDBDatabaseUrl;
-                txtVpForumsUrl.Text = settings.VPForumsDatabaseUrl;
-                txtVPinballUrl.Text = settings.VPinballDatabaseUrl;
-                txtVpUniverseUrl.Text = settings.VPUniverseDatabaseUrl;
-                txtVpsSpreadsheetUrl.Text = settings.VPSSpreadsheetUrl;
-                txtGithubAccessToken.Text = settings.AuthenticationSettings.GithubAccessToken;
+
+                contentDatabaseBindingSource.DataSource = settings.Databases.ToSortableBindingList<ContentDatabase>();
 
                 lblVPinMameFound.Text = vpinMame.KeyExists().ToString();
                 lblUltraDMDFound.Text = ultraDmd.KeyExists().ToString();
@@ -91,12 +92,8 @@ namespace PinCab.Configurator
             settings.DMDDeviceIniPath = txtDMDDeviceIniFilePath.Text;
             settings.PRocUserSettingsPath = txtPRocUserSettings.Text;
             settings.DatabaseUpdateRecheckMinutes = Convert.ToInt32(numericRecheckMinutes.Value);
-            settings.IPDBDatabaseUrl = txtIpdbUrl.Text;
-            settings.VPForumsDatabaseUrl = txtVpForumsUrl.Text;
-            settings.VPinballDatabaseUrl = txtVPinballUrl.Text;
-            settings.VPUniverseDatabaseUrl = txtVpUniverseUrl.Text;
-            settings.VPSSpreadsheetUrl = txtVpsSpreadsheetUrl.Text;
-            settings.AuthenticationSettings.GithubAccessToken = txtGithubAccessToken.Text;
+
+            settings.Databases = (contentDatabaseBindingSource.DataSource as SortableBindingList<ContentDatabase>).ToList();
 
             _settingManager.SaveSettings(settings);
             this.Close();
@@ -266,29 +263,9 @@ namespace PinCab.Configurator
             System.Diagnostics.Process.Start("https://github.com/xantari/PinCab.Configurator/wiki/Settings");
         }
 
-        private void btnIpdbUrl_Click(object sender, EventArgs e)
+        private void btnContentDatabaseUrl_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(txtIpdbUrl.Text);
-        }
-
-        private void btnVpForumsUrl_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(txtVpForumsUrl.Text);
-        }
-
-        private void btnVpinballUrl_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(txtVPinballUrl.Text);
-        }
-
-        private void btnVpUniverseUrl_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(txtVpUniverseUrl.Text);
-        }
-
-        private void btnVpsSpreadsheetUrl_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(txtVpsSpreadsheetUrl.Text);
+            System.Diagnostics.Process.Start(txtContentDatabaseUrl.Text);
         }
 
         private void btnOBSPath_Click(object sender, EventArgs e)
@@ -322,5 +299,64 @@ namespace PinCab.Configurator
                     txtOBSConfigPath.Text = fileDialog.SelectedPath;
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtContentDatabaseName.Text))
+            {
+                MessageBox.Show("You must enter a content database name.");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtContentDatabaseUrl.Text))
+            {
+                MessageBox.Show("You must enter a content database url.");
+                return;
+            }
+            var currentDatabases = contentDatabaseBindingSource.DataSource as SortableBindingList<ContentDatabase>;
+            var db = currentDatabases.FirstOrDefault(c => c.Name == txtContentDatabaseName.Text);
+            bool isNewEntry = false;
+            if (db == null) //new entry
+            {
+                db = new ContentDatabase();
+                isNewEntry = true;
+            }
+
+            db.AccessToken = txtContentDatabaseAccessToken.Text;
+            db.Name = txtContentDatabaseName.Text;
+            var databaseType = cmbContentDatabaseType.SelectedItem.ToString().GetValueFromDescription<DatabaseType>();
+            db.Type = databaseType;
+            db.Url = txtContentDatabaseUrl.Text;
+
+            var savedRowName = txtContentDatabaseName.Text;
+
+            if (isNewEntry)
+                currentDatabases.Add(db);
+            //contentDatabaseBindingSource.DataSource = currentDatabases;
+            //foreach (DataGridViewRow row in gvContentDatabases.Rows)
+            //{
+            //    var rowData = row.DataBoundItem as ContentDatabase;
+            //    if (rowData.Name == savedRowName)
+            //    {
+            //        //gvContentDatabases.Rows[row.Index].Selected = true;
+            //        gvContentDatabases.CurrentCell = gvContentDatabases[0, row.Index];
+            //    }
+            //}
+        }
+
+        private void gvContentDatabases_SelectionChanged(object sender, EventArgs e)
+        {
+            var data = contentDatabaseBindingSource.Current as ContentDatabase;
+            txtContentDatabaseAccessToken.Text = data.AccessToken;
+            txtContentDatabaseName.Text = data.Name;
+            txtContentDatabaseUrl.Text = data.Url;
+            cmbContentDatabaseType.SelectedItem = data.Type.GetDescriptionAttr();
+        }
+
+        //private void gvContentDatabases_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        //{
+        //    gvContentDatabases.ClearSelection();
+        //    gvContentDatabases.Rows[e.RowIndex].Selected = true;
+        //    gvContentDatabases.CurrentCell = gvContentDatabases[0, e.RowIndex];
+        //}
     }
 }

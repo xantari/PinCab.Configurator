@@ -9,6 +9,15 @@ namespace PinCab.Utils.Extensions
 {
     public static class ObjectExtensions
     {
+        public static bool IsNull(this DateTime? date)
+        {
+            if (date.HasValue == false)
+                return true;
+            if (date.Value.Year == 1)
+                return true;
+            return false;
+        }
+
         /// <summary>
         /// Returns true if current object is equal to any of the items in objs[] or false if there are no matches.  (Safe if the object this method extends is null) (Do not use in Linq to SQL queries.)
         /// </summary>

@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using VirtualPinball.Database.Models;
 
 namespace PinCab.Configurator
 {
@@ -55,10 +56,17 @@ namespace PinCab.Configurator
             //Load from the last state (create a database form manager that persists filter selections to .json setting file)
             dateTimePickerBegin.Value = _settings.DatabaseBrowserSettings.BeginDate.BeginningOfDay();
             dateTimePickerEnd.Value = _settings.DatabaseBrowserSettings.EndDate.EndOfDay();
-            var databaseTypeList = EnumExtensions.GetEnumDescriptionList<DatabaseEntryType>();
+            var databaseTypeList = EnumExtensions.GetEnumDescriptionList<MajorCategory>();
             databaseTypeList.Insert(0, "All");
             cmbType.DataSource = databaseTypeList;
             txtSearch.Text = _settings.DatabaseBrowserSettings.SearchTerm;
+
+            //Load the database list
+            var databaseNames = _settings.Databases
+                .Where(c => c.Type == DatabaseType.PinballDatabase)
+                .OrderBy(c => c.Name).Select(c => c.Name).ToList();
+            databaseNames.Insert(0, "All");
+            cmbDatabase.DataSource = databaseNames;
 
             foreach (string type in cmbType.Items)
             {
@@ -201,14 +209,14 @@ namespace PinCab.Configurator
         {
             IEnumerable<DatabaseBrowserEntry> list;
             list = _dbManager.Entries.Where(p => (p.Title.FuzzyMatch(txtSearch.Text) > .5)
-            || p.Title.ToLower().Contains(txtSearch.Text.ToLower())
-            ); //Search by text
+            || p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
+
             list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
                 && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
 
             if (cmbType.SelectedValue != null && cmbType.SelectedValue.ToString() != "All")
             {
-                DatabaseEntryType type = cmbType.SelectedValue.ToString().GetValueFromDescription<DatabaseEntryType>();
+                MajorCategory type = cmbType.SelectedValue.ToString().GetValueFromDescription<MajorCategory>();
                 list = list.Where(p => p.Type == type);
             }
             if (cmbDatabase.SelectedItem != null && cmbDatabase.SelectedItem.ToString() != "All")

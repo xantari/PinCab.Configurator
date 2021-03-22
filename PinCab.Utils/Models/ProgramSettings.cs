@@ -18,14 +18,9 @@ namespace PinCab.Utils.Models
             DisplaySettings = new List<DisplaySettings>();
             DatabaseUpdateRecheckMinutes = 60;
             LastDatabaseRefreshTimeUtc = new DateTime(1900, 1, 1);
-            IPDBDatabaseUrl = "https://raw.githubusercontent.com/xantari/Ipdb.Database/master/Ipdb.Database/Database/ipdbdatabase.json";
-            VPForumsDatabaseUrl = "";
-            VPinballDatabaseUrl = "";
-            VPUniverseDatabaseUrl = "";
-            VPSSpreadsheetUrl = "";
             DatabaseBrowserSettings = new DatabaseBrowserSettings();
             RecordingSettings = new RecordingSettings();
-            AuthenticationSettings = new AuthenticationSettings();
+            Databases = new List<ContentDatabase>();
         }
 
         public string PinupPopperSqlLiteDbPath { get; set; }
@@ -43,16 +38,11 @@ namespace PinCab.Utils.Models
         public string LastSelectedDatabaseFile { get; set; }
 
         public int DatabaseUpdateRecheckMinutes { get; set; }
-        public string IPDBDatabaseUrl { get; set; }
-        public string VPForumsDatabaseUrl { get; set; }
-        public string VPinballDatabaseUrl { get; set; }
-        public string VPUniverseDatabaseUrl { get; set; }
-        public string VPSSpreadsheetUrl { get; set; }
         public DateTime LastDatabaseRefreshTimeUtc { get; set; }
 
         public DatabaseBrowserSettings DatabaseBrowserSettings { get; set; }
         public RecordingSettings RecordingSettings { get; set; }
-        public AuthenticationSettings AuthenticationSettings { get; set; }
+        public List<ContentDatabase> Databases { get; set; }
 
         public bool PinupPopperExists()
         {

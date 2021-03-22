@@ -31,12 +31,13 @@ namespace PinCab.Configurator
 
         private void LoadDatabase()
         {
-            if (!_dbManager.DatabaseExists(DatabaseType.IPDB))
+            var ipdbDatabase = _dbManager.GetIpdbContentDatabase();
+            if (!_dbManager.DatabaseExistsOnFilesystem(ipdbDatabase))
             {
-                _dbManager.DownloadDatabase(DatabaseType.IPDB, true);
+                _dbManager.DownloadDatabase(ipdbDatabase, true);
             }
                 
-            _dbManager.LoadDatabase(DatabaseType.IPDB);
+            _dbManager.LoadDatabase(ipdbDatabase);
         }
 
         private void ConfigureGrid()

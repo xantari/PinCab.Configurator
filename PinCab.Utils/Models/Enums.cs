@@ -20,7 +20,8 @@ namespace PinCab.Utils.Models
         DMD,
         Topper,
         Apron,
-        Backglass
+        Backglass,
+        FullDmd
     }
 
     public enum MediaStatus
@@ -78,45 +79,53 @@ namespace PinCab.Utils.Models
         UnusedMedia
     }
 
-    public enum DatabaseEntryType
-    {
-        [Description("Unknown")]
-        Unknown,
-        [Description("Wheel")]
-        Wheel,
-        [Description("Flyer")]
-        Flyer,
-        [Description("Instruction Card")]
-        InstructionCard,
-        [Description("Backglass")]
-        Backglass,
-        [Description("Other Front End Media")]
-        OtherFrontEndMedia,
-        [Description("Table")]
-        Table,
-        [Description("Topper")]
-        Topper,
-        [Description("ROM")]
-        ROM,
-        [Description("Pinsound / Alt Sound")]
-        Pinsound,
-        [Description("POV File")]
-        POV,
-        [Description("Pup Pack")]
-        PupPack
-    }
-
     public enum DatabaseType
     {
-        [Description("VPS Spreadsheet")]
-        VPSSpreadsheet,
-        [Description("VP Forums")]
-        VPForums,
-        [Description("VP Universe")]
-        VPUniverse,
-        [Description("VPinball")]
-        VPinball,
+        [Description("Pinball Database")]
+        PinballDatabase,
         [Description("IPDB")]
         IPDB
+    }
+
+    public enum FrontEndSystem
+    {
+        [Description("Pinball X")]
+        PinballX,
+        [Description("Pinball Y")]
+        PinballY,
+        [Description("Pinup Popper")]
+        PinupPopper
+    }
+
+    public enum LaunchType
+    {
+        LaunchGame,
+        LaunchGameInConfigMode,
+        LaunchGameUsingFrontEnd
+    }
+
+    /// <summary>
+    /// Different types of systems.
+    /// </summary>
+    public enum Platform
+    {
+        Undefined,
+        /// <summary>
+        /// Visual Pinball
+        /// </summary>
+        VP,
+
+        /// <summary>
+        /// Future Pinball
+        /// </summary>
+        FP,
+        PinballFX2,
+        PinballFX3,
+        PinballArcade,
+
+        /// <summary>
+        /// Anything else
+        /// </summary>
+        Custom
     }
 }

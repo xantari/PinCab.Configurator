@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualPinball.Database.Models;
 
 namespace PinCab.Utils.Models
 {
@@ -15,6 +16,7 @@ namespace PinCab.Utils.Models
             RelatedEntries = new List<DatabaseBrowserEntry>();
             Tags = new List<string>();
         }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ChangeLog { get; set; }
@@ -23,6 +25,7 @@ namespace PinCab.Utils.Models
         public string Url { get; set; }
         public int? IpdbId { get; set; }
         public string Version { get; set; }
+        public string DatabaseName { get; set; }
         public DateTime LastUpdated { get; set; }
 
         public string TypeString
@@ -32,7 +35,7 @@ namespace PinCab.Utils.Models
                 return Type.GetEnumDescription();
             }
         }
-        public DatabaseEntryType Type { get; set; }
+        public MajorCategory Type { get; set; }
         public string DatabaseTypeString
         {
             get

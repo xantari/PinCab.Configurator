@@ -19,14 +19,4 @@ namespace PinCab.Utils.Models
             return Name;
         }
     }
-
-    public enum FrontEndSystem
-    {
-        [Description("Pinball X")]
-        PinballX,
-        [Description("Pinball Y")]
-        PinballY,
-        [Description("Pinup Popper")]
-        PinupPopper
-    }
 }

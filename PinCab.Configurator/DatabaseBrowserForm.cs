@@ -221,8 +221,7 @@ namespace PinCab.Configurator
             }
             if (cmbDatabase.SelectedItem != null && cmbDatabase.SelectedItem.ToString() != "All")
             {
-                DatabaseType type = cmbDatabase.SelectedItem.ToString().GetValueFromDescription<DatabaseType>();
-                list = list.Where(p => p.DatabaseType == type);
+                list = list.Where(p => p.DatabaseName == cmbDatabase.SelectedItem.ToString());
             }
             var tags = GetAllSelectedTags();
             if (tags != null && tags.Count > 0)

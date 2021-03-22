@@ -17,7 +17,7 @@ namespace PinCab.Utils.Extensions
                 if (!string.IsNullOrEmpty(info.Manufacturer))
                     list.Add(info.Manufacturer);
                 if (info.Players.HasValue)
-                    list.Add(info.Players.Value == 1 ? "1 Player" : "{info.Players.Value} Players");
+                    list.Add(info.Players.Value == 1 ? "1 Player" : $"{info.Players.Value} Players");
                 if (!string.IsNullOrEmpty(info.Theme))
                     list.Add(info.Theme);
                 if (info.Year.HasValue)

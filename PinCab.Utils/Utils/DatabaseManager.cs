@@ -154,7 +154,7 @@ namespace PinCab.Utils.Utils
         public void LoadAllDatabases()
         {
             Databases = new Dictionary<string, PinballDatabase>();
-            foreach(var database in _settings.Databases)
+            foreach (var database in _settings.Databases)
                 LoadDatabase(database);
         }
 
@@ -266,7 +266,7 @@ namespace PinCab.Utils.Utils
             else if (IsValid(database) && !forceReload)
             {
                 var loadedEntries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
-                return loadedEntries.Where(p => p.DatabaseType == DatabaseType.PinballDatabase 
+                return loadedEntries.Where(p => p.DatabaseType == DatabaseType.PinballDatabase
                     && p.DatabaseName == database.Name).ToList();
             }
             return null;
@@ -278,13 +278,23 @@ namespace PinCab.Utils.Utils
             foreach (var databaseEntry in Databases[database.Name].Entries)
             {
                 var entry = GetDatabaseBrowserEntry(database, databaseEntry);
-                entries.Add(entry);
+                if (IsValidBrowserEntry(entry))
+                    entries.Add(entry);
+                else
+                    Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
             }
 
             //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
             //area of the database
 
             return entries;
+        }
+
+        private bool IsValidBrowserEntry(DatabaseBrowserEntry entry)
+        {
+            if (string.IsNullOrWhiteSpace(entry.Url))
+                return false;
+            return true;
         }
 
         public HashSet<string> GetAllTags(List<DatabaseBrowserEntry> entries, bool reportProgress = true)
@@ -334,9 +344,9 @@ namespace PinCab.Utils.Utils
             {
                 Id = file.Id,
                 Authors = file.Authors,
-                ChangeLog = file.ChangeLog,
+                ChangeLog = string.IsNullOrEmpty(file.ChangeLog) ? string.Empty : file.ChangeLog,
                 DatabaseType = DatabaseType.PinballDatabase,
-                Description = file.Description,
+                Description = string.IsNullOrEmpty(file.Description) ? string.Empty : file.Description,
                 IpdbId = file.IpdbNumber,
                 Title = file.Title,
                 Type = file.MajorCategory,
@@ -346,6 +356,14 @@ namespace PinCab.Utils.Utils
                 DatabaseName = database.Name,
                 LastUpdated = file.LastModifiedDateUtc.HasValue ? file.LastModifiedDateUtc.Value : new DateTime(1900, 1, 1),
             };
+
+            if (string.IsNullOrEmpty(file.Title) && !string.IsNullOrEmpty(file.FileName))
+            {
+                entry.Title = file.FileName;
+            }
+
+            if (string.IsNullOrEmpty(entry.Title))
+                entry.Title = string.Empty;
 
             if (!string.IsNullOrEmpty(file.ChangeLog))
                 entry.Description += "\r\n\r\nChange Log:\r\n" + file.ChangeLog;

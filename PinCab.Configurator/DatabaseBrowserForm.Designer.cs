@@ -54,14 +54,6 @@
             this.lblRomSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.dataGridViewEntryList = new System.Windows.Forms.DataGridView();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseTagsString = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IpdbId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatabaseTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.IpdbInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,14 +62,6 @@
             this.splitContainerGridAndLog = new System.Windows.Forms.SplitContainer();
             this.splitContainerTopAndBottomGrids = new System.Windows.Forms.SplitContainer();
             this.dataGridViewChildEntries = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripChildEntries = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemChildIpdb = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemChildUrl = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +71,22 @@
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseTagsString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IpdbId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Version = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatabaseTypeString = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
@@ -342,74 +342,6 @@
             this.dataGridViewEntryList.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewEntryList_RowContextMenuStripNeeded);
             this.dataGridViewEntryList.SelectionChanged += new System.EventHandler(this.dataGridViewEntryList_SelectionChanged);
             // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.titleDataGridViewTextBoxColumn.Width = 52;
-            // 
-            // DatabaseTagsString
-            // 
-            this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DatabaseTagsString.HeaderText = "Tags";
-            this.DatabaseTagsString.Name = "DatabaseTagsString";
-            this.DatabaseTagsString.ReadOnly = true;
-            this.DatabaseTagsString.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DatabaseTagsString.Width = 37;
-            // 
-            // Url
-            // 
-            this.Url.DataPropertyName = "Url";
-            this.Url.HeaderText = "Url";
-            this.Url.Name = "Url";
-            this.Url.ReadOnly = true;
-            this.Url.Width = 45;
-            // 
-            // IpdbId
-            // 
-            this.IpdbId.DataPropertyName = "IpdbId";
-            this.IpdbId.HeaderText = "Ipdb";
-            this.IpdbId.Name = "IpdbId";
-            this.IpdbId.ReadOnly = true;
-            this.IpdbId.Width = 53;
-            // 
-            // Version
-            // 
-            this.Version.DataPropertyName = "Version";
-            this.Version.HeaderText = "Version";
-            this.Version.Name = "Version";
-            this.Version.ReadOnly = true;
-            this.Version.Width = 67;
-            // 
-            // LastUpdated
-            // 
-            this.LastUpdated.DataPropertyName = "LastUpdated";
-            this.LastUpdated.HeaderText = "Updated";
-            this.LastUpdated.Name = "LastUpdated";
-            this.LastUpdated.ReadOnly = true;
-            this.LastUpdated.Width = 73;
-            // 
-            // TypeString
-            // 
-            this.TypeString.DataPropertyName = "TypeString";
-            this.TypeString.HeaderText = "Type";
-            this.TypeString.Name = "TypeString";
-            this.TypeString.ReadOnly = true;
-            this.TypeString.Width = 56;
-            // 
-            // DatabaseTypeString
-            // 
-            this.DatabaseTypeString.DataPropertyName = "DatabaseTypeString";
-            this.DatabaseTypeString.HeaderText = "DB";
-            this.DatabaseTypeString.Name = "DatabaseTypeString";
-            this.DatabaseTypeString.ReadOnly = true;
-            this.DatabaseTypeString.Width = 47;
-            // 
             // contextMenuStripGridActions
             // 
             this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -510,74 +442,6 @@
             this.dataGridViewChildEntries.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewChildEntries_DataBindingComplete);
             this.dataGridViewChildEntries.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewChildEntries_RowContextMenuStripNeeded);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 52;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn2.Width = 37;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Url";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Url";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 45;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "IpdbId";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Ipdb";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 53;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Version";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Version";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "LastUpdated";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Updated";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 73;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "TypeString";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Type";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 56;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "DatabaseTypeString";
-            this.dataGridViewTextBoxColumn8.HeaderText = "DB";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 47;
-            // 
             // contextMenuStripChildEntries
             // 
             this.contextMenuStripChildEntries.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -640,6 +504,142 @@
             this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
             this.statusStripBottom.TabIndex = 6;
             this.statusStripBottom.Text = "statusStrip1";
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titleDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // DatabaseTagsString
+            // 
+            this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DatabaseTagsString.HeaderText = "Tags";
+            this.DatabaseTagsString.Name = "DatabaseTagsString";
+            this.DatabaseTagsString.ReadOnly = true;
+            this.DatabaseTagsString.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DatabaseTagsString.Width = 37;
+            // 
+            // Url
+            // 
+            this.Url.DataPropertyName = "Url";
+            this.Url.HeaderText = "Url";
+            this.Url.Name = "Url";
+            this.Url.ReadOnly = true;
+            this.Url.Width = 45;
+            // 
+            // IpdbId
+            // 
+            this.IpdbId.DataPropertyName = "IpdbId";
+            this.IpdbId.HeaderText = "Ipdb";
+            this.IpdbId.Name = "IpdbId";
+            this.IpdbId.ReadOnly = true;
+            this.IpdbId.Width = 53;
+            // 
+            // Version
+            // 
+            this.Version.DataPropertyName = "Version";
+            this.Version.HeaderText = "Version";
+            this.Version.Name = "Version";
+            this.Version.ReadOnly = true;
+            this.Version.Width = 67;
+            // 
+            // LastUpdated
+            // 
+            this.LastUpdated.DataPropertyName = "LastUpdated";
+            this.LastUpdated.HeaderText = "Updated";
+            this.LastUpdated.Name = "LastUpdated";
+            this.LastUpdated.ReadOnly = true;
+            this.LastUpdated.Width = 73;
+            // 
+            // TypeString
+            // 
+            this.TypeString.DataPropertyName = "TypeString";
+            this.TypeString.HeaderText = "Type";
+            this.TypeString.Name = "TypeString";
+            this.TypeString.ReadOnly = true;
+            this.TypeString.Width = 56;
+            // 
+            // DatabaseTypeString
+            // 
+            this.DatabaseTypeString.DataPropertyName = "DatabaseName";
+            this.DatabaseTypeString.HeaderText = "DB";
+            this.DatabaseTypeString.Name = "DatabaseTypeString";
+            this.DatabaseTypeString.ReadOnly = true;
+            this.DatabaseTypeString.Width = 47;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 52;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn2.Width = 37;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Url";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Url";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 45;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "IpdbId";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ipdb";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 53;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Version";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Version";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "LastUpdated";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Updated";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "TypeString";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Type";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 56;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "DatabaseName";
+            this.dataGridViewTextBoxColumn8.HeaderText = "DB";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.Width = 47;
             // 
             // DatabaseBrowserForm
             // 
@@ -716,6 +716,12 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.StatusStrip statusStripBottom;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTags;
+        private System.Windows.Forms.SplitContainer splitContainerTopAndBottomGrids;
+        private System.Windows.Forms.DataGridView dataGridViewChildEntries;
+        private System.Windows.Forms.BindingSource bindingSourceChildEntries;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripChildEntries;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildIpdb;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildUrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTagsString;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
@@ -724,8 +730,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdated;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeString;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatabaseTypeString;
-        private System.Windows.Forms.SplitContainer splitContainerTopAndBottomGrids;
-        private System.Windows.Forms.DataGridView dataGridViewChildEntries;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -734,9 +738,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.BindingSource bindingSourceChildEntries;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripChildEntries;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildIpdb;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemChildUrl;
     }
 }

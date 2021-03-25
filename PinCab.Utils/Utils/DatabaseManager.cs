@@ -272,9 +272,9 @@ namespace PinCab.Utils.Utils
             return null;
         }
 
-        private List<DatabaseBrowserEntry> GetDatabaseBrowserEntries(ContentDatabase database)
+        private HashSet<DatabaseBrowserEntry> GetDatabaseBrowserEntries(ContentDatabase database)
         {
-            List<DatabaseBrowserEntry> entries = new List<DatabaseBrowserEntry>();
+            HashSet<DatabaseBrowserEntry> entries = new HashSet<DatabaseBrowserEntry>();
             foreach (var databaseEntry in Databases[database.Name].Entries)
             {
                 var entry = GetDatabaseBrowserEntry(database, databaseEntry);
@@ -282,6 +282,20 @@ namespace PinCab.Utils.Utils
                     entries.Add(entry);
                 else
                     Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
+
+                //Add the related entries
+                foreach(var relatedEntry in databaseEntry.RelatedEntries)
+                {
+                    var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
+                    var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
+                    if (IsValidBrowserEntry(newEntry))
+                    {
+                        entry.RelatedEntries.Add(newEntry);
+                        entry.Tags.UnionWith(newEntry.Tags);
+                    }
+                    else
+                        Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
+                }
             }
 
             //Rescan the related entries and fill in missing tags that we were able to find for the URL in a different
@@ -311,7 +325,8 @@ namespace PinCab.Utils.Utils
             {
                 var entryTags = GetTags(entry);
                 foreach (var itm in entryTags)
-                    tags.Add(itm);
+                    if (itm != null)
+                        tags.Add(itm);
             }
             if (reportProgress)
                 _reportProgress?.Invoke(100);
@@ -352,7 +367,7 @@ namespace PinCab.Utils.Utils
                 Type = file.MajorCategory,
                 Url = file.Url,
                 Version = file.Version,
-                Tags = file.Tags,
+                Tags = file.Tags.ToHashSet<string>(),
                 DatabaseName = database.Name,
                 LastUpdated = file.LastModifiedDateUtc.HasValue ? file.LastModifiedDateUtc.Value : new DateTime(1900, 1, 1),
             };
@@ -372,11 +387,11 @@ namespace PinCab.Utils.Utils
                 entry.Description += "\r\n\r\nFeatures:\r\n" + file.Features;
 
             var tableInfoTags = file.ConvertTableInfoToTags();
-            entry.Tags.AddRange(tableInfoTags);
+            entry.Tags.UnionWith(tableInfoTags);
 
             List<string> TagsByIpdbNumber = GetIpdbTags(entry);
-            entry.Tags.AddRange(TagsByIpdbNumber);
-            entry.Tags = entry.Tags.NormalizeTagList();
+            entry.Tags.UnionWith(TagsByIpdbNumber);
+            //entry.Tags = entry.Tags.NormalizeTagList();
 
             return entry;
         }

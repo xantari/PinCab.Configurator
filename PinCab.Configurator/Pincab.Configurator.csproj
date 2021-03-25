@@ -154,6 +154,12 @@
     <Compile Include="AboutBoxForm.Designer.cs">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditDatabaseEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditDatabaseEntryForm.Designer.cs">
+      <DependentUpon>EditDatabaseEntryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RenameGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     <Compile Include="Utils\FormHelper.cs" />
     <EmbeddedResource Include="AboutBoxForm.resx">
       <DependentUpon>AboutBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditDatabaseEntryForm.resx">
+      <DependentUpon>EditDatabaseEntryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RenameGameForm.resx">
       <DependentUpon>RenameGameForm.cs</DependentUpon>

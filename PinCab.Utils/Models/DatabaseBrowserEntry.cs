@@ -13,15 +13,15 @@ namespace PinCab.Utils.Models
     {
         public DatabaseBrowserEntry()
         {
-            RelatedEntries = new List<DatabaseBrowserEntry>();
-            Tags = new List<string>();
+            RelatedEntries = new HashSet<DatabaseBrowserEntry>();
+            Tags = new HashSet<string>();
         }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ChangeLog { get; set; }
         public string Authors { get; set; }
-        public List<string> Tags { get; set; }
+        public HashSet<string> Tags { get; set; }
         public string Url { get; set; }
         public int? IpdbId { get; set; }
         public string Version { get; set; }
@@ -53,7 +53,7 @@ namespace PinCab.Utils.Models
             }
         }
 
-        public List<DatabaseBrowserEntry> RelatedEntries { get; set; }
+        public HashSet<DatabaseBrowserEntry> RelatedEntries { get; set; }
 
         public Uri GetUri()
         {

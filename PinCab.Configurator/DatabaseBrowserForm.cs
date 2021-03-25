@@ -207,9 +207,12 @@ namespace PinCab.Configurator
 
         private List<DatabaseBrowserEntry> GetEntriesByFilterCriteria()
         {
+            string searchTerm = txtSearch.Text.ToLower();
             IEnumerable<DatabaseBrowserEntry> list;
-            list = _dbManager.Entries.Where(p => (p.Title.FuzzyMatch(txtSearch.Text) > .5)
-            || p.Title.ToLower().Contains(txtSearch.Text.ToLower())); //Search by text
+            list = _dbManager.Entries.Where(p => //(p.Title.FuzzyMatch(txtSearch.Text) > .1)
+            p.Title.ToLower().Contains(searchTerm)
+            || p.Description.ToLower().Contains(searchTerm)
+            ); //Search by text
 
             list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
                 && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
@@ -670,6 +673,17 @@ namespace PinCab.Configurator
         {
             if (!_loading)
                 RebindGridUsingFilter();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the source database entry
+
+            //Load the form
+
+            //Upon Successful response update the entry
+
+            //Save the pre-processed database again
         }
     }
 }

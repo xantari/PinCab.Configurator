@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PinCab.Utils.WinForms.TabOrder;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -20,6 +21,7 @@ namespace PinCab.Configurator
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         #region Assembly Attribute Accessors

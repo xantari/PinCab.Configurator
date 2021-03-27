@@ -37,8 +37,6 @@
             this.lblLocalTime = new System.Windows.Forms.Label();
             this.cmbDatabase = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
-            this.btnIpdbUrl = new System.Windows.Forms.Button();
-            this.btnUrl = new System.Windows.Forms.Button();
             this.btnAddTag = new System.Windows.Forms.Button();
             this.txtTag = new System.Windows.Forms.TextBox();
             this.lblTags = new System.Windows.Forms.Label();
@@ -88,6 +86,16 @@
             this.label24 = new System.Windows.Forms.Label();
             this.btnAddRelatedEntry = new System.Windows.Forms.Button();
             this.dataGridViewRelatedEntries = new System.Windows.Forms.DataGridView();
+            this.label21 = new System.Windows.Forms.Label();
+            this.dataGridViewScreenshotUrls = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.dataGridViewAdditionalUrls = new System.Windows.Forms.DataGridView();
+            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblReadableFileSize = new System.Windows.Forms.Label();
+            this.btnIpdbUrl = new System.Windows.Forms.Button();
+            this.btnUrl = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.majorCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,14 +116,6 @@
             this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastModifiedDateUtcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.databaseEntryBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label21 = new System.Windows.Forms.Label();
-            this.dataGridViewScreenshotUrls = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.dataGridViewAdditionalUrls = new System.Windows.Forms.DataGridView();
-            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblReadableFileSize = new System.Windows.Forms.Label();
             this.tabControlGeneral.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRating)).BeginInit();
@@ -125,9 +125,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPlayers)).BeginInit();
             this.tabPageAdditionalInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRelatedEntries)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -259,37 +259,11 @@
             this.label22.TabIndex = 174;
             this.label22.Text = "Database";
             // 
-            // btnIpdbUrl
-            // 
-            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnIpdbUrl.Location = new System.Drawing.Point(160, 453);
-            this.btnIpdbUrl.Name = "btnIpdbUrl";
-            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
-            this.btnIpdbUrl.TabIndex = 173;
-            this.btnIpdbUrl.UseVisualStyleBackColor = true;
-            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
-            // 
-            // btnUrl
-            // 
-            this.btnUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnUrl.Location = new System.Drawing.Point(499, 83);
-            this.btnUrl.Name = "btnUrl";
-            this.btnUrl.Size = new System.Drawing.Size(26, 23);
-            this.btnUrl.TabIndex = 172;
-            this.btnUrl.UseVisualStyleBackColor = true;
-            this.btnUrl.Click += new System.EventHandler(this.btnUrl_Click);
-            // 
             // btnAddTag
             // 
-            this.btnAddTag.Location = new System.Drawing.Point(279, 559);
+            this.btnAddTag.Location = new System.Drawing.Point(279, 561);
             this.btnAddTag.Name = "btnAddTag";
-            this.btnAddTag.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTag.Size = new System.Drawing.Size(75, 22);
             this.btnAddTag.TabIndex = 171;
             this.btnAddTag.Text = "Add Tag";
             this.btnAddTag.UseVisualStyleBackColor = true;
@@ -320,6 +294,7 @@
             // 
             // btnFillFromIpdb
             // 
+            this.btnFillFromIpdb.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnFillFromIpdb.Location = new System.Drawing.Point(192, 453);
             this.btnFillFromIpdb.Name = "btnFillFromIpdb";
             this.btnFillFromIpdb.Size = new System.Drawing.Size(98, 23);
@@ -761,162 +736,6 @@
             this.dataGridViewRelatedEntries.Size = new System.Drawing.Size(576, 238);
             this.dataGridViewRelatedEntries.TabIndex = 136;
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 41;
-            // 
-            // majorCategoryDataGridViewTextBoxColumn
-            // 
-            this.majorCategoryDataGridViewTextBoxColumn.DataPropertyName = "MajorCategory";
-            this.majorCategoryDataGridViewTextBoxColumn.HeaderText = "Major Category";
-            this.majorCategoryDataGridViewTextBoxColumn.Name = "majorCategoryDataGridViewTextBoxColumn";
-            this.majorCategoryDataGridViewTextBoxColumn.ReadOnly = true;
-            this.majorCategoryDataGridViewTextBoxColumn.Width = 95;
-            // 
-            // urlDataGridViewTextBoxColumn
-            // 
-            this.urlDataGridViewTextBoxColumn.DataPropertyName = "Url";
-            this.urlDataGridViewTextBoxColumn.HeaderText = "Url";
-            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
-            this.urlDataGridViewTextBoxColumn.ReadOnly = true;
-            this.urlDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 52;
-            // 
-            // fileNameDataGridViewTextBoxColumn
-            // 
-            this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
-            this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
-            this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
-            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fileNameDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // changeLogDataGridViewTextBoxColumn
-            // 
-            this.changeLogDataGridViewTextBoxColumn.DataPropertyName = "ChangeLog";
-            this.changeLogDataGridViewTextBoxColumn.HeaderText = "ChangeLog";
-            this.changeLogDataGridViewTextBoxColumn.Name = "changeLogDataGridViewTextBoxColumn";
-            this.changeLogDataGridViewTextBoxColumn.ReadOnly = true;
-            this.changeLogDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // authorsDataGridViewTextBoxColumn
-            // 
-            this.authorsDataGridViewTextBoxColumn.DataPropertyName = "Authors";
-            this.authorsDataGridViewTextBoxColumn.HeaderText = "Authors";
-            this.authorsDataGridViewTextBoxColumn.Name = "authorsDataGridViewTextBoxColumn";
-            this.authorsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.authorsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // versionDataGridViewTextBoxColumn
-            // 
-            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
-            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
-            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
-            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.versionDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // featuresDataGridViewTextBoxColumn
-            // 
-            this.featuresDataGridViewTextBoxColumn.DataPropertyName = "Features";
-            this.featuresDataGridViewTextBoxColumn.HeaderText = "Features";
-            this.featuresDataGridViewTextBoxColumn.Name = "featuresDataGridViewTextBoxColumn";
-            this.featuresDataGridViewTextBoxColumn.ReadOnly = true;
-            this.featuresDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // manufacturerDataGridViewTextBoxColumn
-            // 
-            this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
-            this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
-            this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
-            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.manufacturerDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // yearDataGridViewTextBoxColumn
-            // 
-            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
-            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
-            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
-            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
-            this.yearDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // playersDataGridViewTextBoxColumn
-            // 
-            this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
-            this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
-            this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
-            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
-            this.playersDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // themeDataGridViewTextBoxColumn
-            // 
-            this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
-            this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
-            this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
-            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.themeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // ipdbNumberDataGridViewTextBoxColumn
-            // 
-            this.ipdbNumberDataGridViewTextBoxColumn.DataPropertyName = "IpdbNumber";
-            this.ipdbNumberDataGridViewTextBoxColumn.HeaderText = "IpdbNumber";
-            this.ipdbNumberDataGridViewTextBoxColumn.Name = "ipdbNumberDataGridViewTextBoxColumn";
-            this.ipdbNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ipdbNumberDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // fileSizeBytesDataGridViewTextBoxColumn
-            // 
-            this.fileSizeBytesDataGridViewTextBoxColumn.DataPropertyName = "FileSizeBytes";
-            this.fileSizeBytesDataGridViewTextBoxColumn.HeaderText = "FileSizeBytes";
-            this.fileSizeBytesDataGridViewTextBoxColumn.Name = "fileSizeBytesDataGridViewTextBoxColumn";
-            this.fileSizeBytesDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fileSizeBytesDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // downloadCountDataGridViewTextBoxColumn
-            // 
-            this.downloadCountDataGridViewTextBoxColumn.DataPropertyName = "DownloadCount";
-            this.downloadCountDataGridViewTextBoxColumn.HeaderText = "DownloadCount";
-            this.downloadCountDataGridViewTextBoxColumn.Name = "downloadCountDataGridViewTextBoxColumn";
-            this.downloadCountDataGridViewTextBoxColumn.ReadOnly = true;
-            this.downloadCountDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // ratingDataGridViewTextBoxColumn
-            // 
-            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
-            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
-            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ratingDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // lastModifiedDateUtcDataGridViewTextBoxColumn
-            // 
-            this.lastModifiedDateUtcDataGridViewTextBoxColumn.DataPropertyName = "LastModifiedDateUtc";
-            this.lastModifiedDateUtcDataGridViewTextBoxColumn.HeaderText = "LastModifiedDateUtc";
-            this.lastModifiedDateUtcDataGridViewTextBoxColumn.Name = "lastModifiedDateUtcDataGridViewTextBoxColumn";
-            this.lastModifiedDateUtcDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lastModifiedDateUtcDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // databaseEntryBindingSource
-            // 
-            this.databaseEntryBindingSource.DataSource = typeof(VirtualPinball.Database.Models.DatabaseEntry);
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -996,6 +815,205 @@
             this.lblReadableFileSize.TabIndex = 178;
             this.lblReadableFileSize.Text = "(Readable Filesize)";
             // 
+            // btnIpdbUrl
+            // 
+            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIpdbUrl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnIpdbUrl.Location = new System.Drawing.Point(160, 453);
+            this.btnIpdbUrl.Name = "btnIpdbUrl";
+            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnIpdbUrl.TabIndex = 173;
+            this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
+            // 
+            // btnUrl
+            // 
+            this.btnUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnUrl.Location = new System.Drawing.Point(499, 83);
+            this.btnUrl.Name = "btnUrl";
+            this.btnUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnUrl.TabIndex = 172;
+            this.btnUrl.UseVisualStyleBackColor = true;
+            this.btnUrl.Click += new System.EventHandler(this.btnUrl_Click);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 41;
+            // 
+            // majorCategoryDataGridViewTextBoxColumn
+            // 
+            this.majorCategoryDataGridViewTextBoxColumn.DataPropertyName = "MajorCategory";
+            this.majorCategoryDataGridViewTextBoxColumn.HeaderText = "Major Category";
+            this.majorCategoryDataGridViewTextBoxColumn.Name = "majorCategoryDataGridViewTextBoxColumn";
+            this.majorCategoryDataGridViewTextBoxColumn.ReadOnly = true;
+            this.majorCategoryDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // urlDataGridViewTextBoxColumn
+            // 
+            this.urlDataGridViewTextBoxColumn.DataPropertyName = "Url";
+            this.urlDataGridViewTextBoxColumn.HeaderText = "Url";
+            this.urlDataGridViewTextBoxColumn.Name = "urlDataGridViewTextBoxColumn";
+            this.urlDataGridViewTextBoxColumn.ReadOnly = true;
+            this.urlDataGridViewTextBoxColumn.Visible = false;
+            this.urlDataGridViewTextBoxColumn.Width = 45;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // fileNameDataGridViewTextBoxColumn
+            // 
+            this.fileNameDataGridViewTextBoxColumn.DataPropertyName = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.HeaderText = "FileName";
+            this.fileNameDataGridViewTextBoxColumn.Name = "fileNameDataGridViewTextBoxColumn";
+            this.fileNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fileNameDataGridViewTextBoxColumn.Visible = false;
+            this.fileNameDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Visible = false;
+            this.descriptionDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // changeLogDataGridViewTextBoxColumn
+            // 
+            this.changeLogDataGridViewTextBoxColumn.DataPropertyName = "ChangeLog";
+            this.changeLogDataGridViewTextBoxColumn.HeaderText = "ChangeLog";
+            this.changeLogDataGridViewTextBoxColumn.Name = "changeLogDataGridViewTextBoxColumn";
+            this.changeLogDataGridViewTextBoxColumn.ReadOnly = true;
+            this.changeLogDataGridViewTextBoxColumn.Visible = false;
+            this.changeLogDataGridViewTextBoxColumn.Width = 87;
+            // 
+            // authorsDataGridViewTextBoxColumn
+            // 
+            this.authorsDataGridViewTextBoxColumn.DataPropertyName = "Authors";
+            this.authorsDataGridViewTextBoxColumn.HeaderText = "Authors";
+            this.authorsDataGridViewTextBoxColumn.Name = "authorsDataGridViewTextBoxColumn";
+            this.authorsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.authorsDataGridViewTextBoxColumn.Visible = false;
+            this.authorsDataGridViewTextBoxColumn.Width = 68;
+            // 
+            // versionDataGridViewTextBoxColumn
+            // 
+            this.versionDataGridViewTextBoxColumn.DataPropertyName = "Version";
+            this.versionDataGridViewTextBoxColumn.HeaderText = "Version";
+            this.versionDataGridViewTextBoxColumn.Name = "versionDataGridViewTextBoxColumn";
+            this.versionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.versionDataGridViewTextBoxColumn.Visible = false;
+            this.versionDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // featuresDataGridViewTextBoxColumn
+            // 
+            this.featuresDataGridViewTextBoxColumn.DataPropertyName = "Features";
+            this.featuresDataGridViewTextBoxColumn.HeaderText = "Features";
+            this.featuresDataGridViewTextBoxColumn.Name = "featuresDataGridViewTextBoxColumn";
+            this.featuresDataGridViewTextBoxColumn.ReadOnly = true;
+            this.featuresDataGridViewTextBoxColumn.Visible = false;
+            this.featuresDataGridViewTextBoxColumn.Width = 73;
+            // 
+            // manufacturerDataGridViewTextBoxColumn
+            // 
+            this.manufacturerDataGridViewTextBoxColumn.DataPropertyName = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.HeaderText = "Manufacturer";
+            this.manufacturerDataGridViewTextBoxColumn.Name = "manufacturerDataGridViewTextBoxColumn";
+            this.manufacturerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.manufacturerDataGridViewTextBoxColumn.Visible = false;
+            this.manufacturerDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // yearDataGridViewTextBoxColumn
+            // 
+            this.yearDataGridViewTextBoxColumn.DataPropertyName = "Year";
+            this.yearDataGridViewTextBoxColumn.HeaderText = "Year";
+            this.yearDataGridViewTextBoxColumn.Name = "yearDataGridViewTextBoxColumn";
+            this.yearDataGridViewTextBoxColumn.ReadOnly = true;
+            this.yearDataGridViewTextBoxColumn.Visible = false;
+            this.yearDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // playersDataGridViewTextBoxColumn
+            // 
+            this.playersDataGridViewTextBoxColumn.DataPropertyName = "Players";
+            this.playersDataGridViewTextBoxColumn.HeaderText = "Players";
+            this.playersDataGridViewTextBoxColumn.Name = "playersDataGridViewTextBoxColumn";
+            this.playersDataGridViewTextBoxColumn.ReadOnly = true;
+            this.playersDataGridViewTextBoxColumn.Visible = false;
+            this.playersDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // themeDataGridViewTextBoxColumn
+            // 
+            this.themeDataGridViewTextBoxColumn.DataPropertyName = "Theme";
+            this.themeDataGridViewTextBoxColumn.HeaderText = "Theme";
+            this.themeDataGridViewTextBoxColumn.Name = "themeDataGridViewTextBoxColumn";
+            this.themeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.themeDataGridViewTextBoxColumn.Visible = false;
+            this.themeDataGridViewTextBoxColumn.Width = 65;
+            // 
+            // ipdbNumberDataGridViewTextBoxColumn
+            // 
+            this.ipdbNumberDataGridViewTextBoxColumn.DataPropertyName = "IpdbNumber";
+            this.ipdbNumberDataGridViewTextBoxColumn.HeaderText = "IpdbNumber";
+            this.ipdbNumberDataGridViewTextBoxColumn.Name = "ipdbNumberDataGridViewTextBoxColumn";
+            this.ipdbNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ipdbNumberDataGridViewTextBoxColumn.Visible = false;
+            this.ipdbNumberDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // fileSizeBytesDataGridViewTextBoxColumn
+            // 
+            this.fileSizeBytesDataGridViewTextBoxColumn.DataPropertyName = "FileSizeBytes";
+            this.fileSizeBytesDataGridViewTextBoxColumn.HeaderText = "FileSizeBytes";
+            this.fileSizeBytesDataGridViewTextBoxColumn.Name = "fileSizeBytesDataGridViewTextBoxColumn";
+            this.fileSizeBytesDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fileSizeBytesDataGridViewTextBoxColumn.Visible = false;
+            this.fileSizeBytesDataGridViewTextBoxColumn.Width = 94;
+            // 
+            // downloadCountDataGridViewTextBoxColumn
+            // 
+            this.downloadCountDataGridViewTextBoxColumn.DataPropertyName = "DownloadCount";
+            this.downloadCountDataGridViewTextBoxColumn.HeaderText = "DownloadCount";
+            this.downloadCountDataGridViewTextBoxColumn.Name = "downloadCountDataGridViewTextBoxColumn";
+            this.downloadCountDataGridViewTextBoxColumn.ReadOnly = true;
+            this.downloadCountDataGridViewTextBoxColumn.Visible = false;
+            this.downloadCountDataGridViewTextBoxColumn.Width = 108;
+            // 
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Visible = false;
+            this.ratingDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // lastModifiedDateUtcDataGridViewTextBoxColumn
+            // 
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.DataPropertyName = "LastModifiedDateUtc";
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.HeaderText = "LastModifiedDateUtc";
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.Name = "lastModifiedDateUtcDataGridViewTextBoxColumn";
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.Visible = false;
+            this.lastModifiedDateUtcDataGridViewTextBoxColumn.Width = 132;
+            // 
+            // databaseEntryBindingSource
+            // 
+            this.databaseEntryBindingSource.DataSource = typeof(VirtualPinball.Database.Models.DatabaseEntry);
+            // 
             // EditDatabaseEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1018,9 +1036,9 @@
             this.tabPageAdditionalInfo.ResumeLayout(false);
             this.tabPageAdditionalInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRelatedEntries)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

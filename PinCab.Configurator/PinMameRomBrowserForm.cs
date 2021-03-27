@@ -5,6 +5,7 @@ using PinCab.Utils.Extensions;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.WinForms;
+using PinCab.Utils.WinForms.TabOrder;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace PinCab.Configurator
 
             ConfigureGrid();
             LoadRomList();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadRomList()

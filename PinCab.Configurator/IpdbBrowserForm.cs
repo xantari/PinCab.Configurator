@@ -4,6 +4,7 @@ using PinCab.Utils.Extensions;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.WinForms;
+using PinCab.Utils.WinForms.TabOrder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace PinCab.Configurator
             LoadDatabase();
             SearchGrid(startText);
             _hideForm = hideForm;
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadDatabase()

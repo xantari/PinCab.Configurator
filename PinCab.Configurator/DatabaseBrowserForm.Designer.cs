@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utilieisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveDatabasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelFilterCriteria = new System.Windows.Forms.Panel();
             this.flowLayoutPanelTags = new System.Windows.Forms.FlowLayoutPanel();
@@ -90,7 +92,7 @@
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.menuStrip1.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
@@ -109,17 +111,18 @@
             this.statusStripBottom.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStripMain
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.utilieisToolStripMenuItem,
+            this.saveDatabasesToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1049, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(1049, 24);
+            this.menuStripMain.TabIndex = 0;
+            this.menuStripMain.Text = "menuStripMain";
             // 
             // fileToolStripMenuItem
             // 
@@ -139,7 +142,8 @@
             // utilieisToolStripMenuItem
             // 
             this.utilieisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshDatabaseToolStripMenuItem});
+            this.refreshDatabaseToolStripMenuItem,
+            this.addDatabaseToolStripMenuItem});
             this.utilieisToolStripMenuItem.Name = "utilieisToolStripMenuItem";
             this.utilieisToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilieisToolStripMenuItem.Text = "Utilities";
@@ -147,9 +151,23 @@
             // refreshDatabaseToolStripMenuItem
             // 
             this.refreshDatabaseToolStripMenuItem.Name = "refreshDatabaseToolStripMenuItem";
-            this.refreshDatabaseToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.refreshDatabaseToolStripMenuItem.Text = "Refresh Database";
+            this.refreshDatabaseToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.refreshDatabaseToolStripMenuItem.Text = "Refresh / Re-download All Databases";
             this.refreshDatabaseToolStripMenuItem.Click += new System.EventHandler(this.refreshDatabaseToolStripMenuItem_Click);
+            // 
+            // addDatabaseToolStripMenuItem
+            // 
+            this.addDatabaseToolStripMenuItem.Name = "addDatabaseToolStripMenuItem";
+            this.addDatabaseToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.addDatabaseToolStripMenuItem.Text = "Add Database";
+            this.addDatabaseToolStripMenuItem.Click += new System.EventHandler(this.addDatabaseToolStripMenuItem_Click);
+            // 
+            // saveDatabasesToolStripMenuItem
+            // 
+            this.saveDatabasesToolStripMenuItem.Name = "saveDatabasesToolStripMenuItem";
+            this.saveDatabasesToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.saveDatabasesToolStripMenuItem.Text = "Save Databases";
+            this.saveDatabasesToolStripMenuItem.Click += new System.EventHandler(this.saveDatabasesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -357,8 +375,8 @@
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle3;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -549,8 +567,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -675,14 +693,14 @@
             this.ClientSize = new System.Drawing.Size(1049, 555);
             this.Controls.Add(this.splitContainerGridAndLog);
             this.Controls.Add(this.panelFilterCriteria);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStripMain);
             this.Controls.Add(this.statusStripBottom);
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStripMain;
             this.Name = "DatabaseBrowserForm";
             this.Text = "Database Browser";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DatabaseBrowserForm_FormClosing);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
             this.panelFilterCriteria.ResumeLayout(false);
             this.panelFilterCriteria.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).EndInit();
@@ -709,7 +727,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStripMain;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Panel panelFilterCriteria;
@@ -768,5 +786,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveDatabasesToolStripMenuItem;
     }
 }

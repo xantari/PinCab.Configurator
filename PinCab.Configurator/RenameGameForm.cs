@@ -2,6 +2,7 @@
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.ViewModels;
+using PinCab.Utils.WinForms.TabOrder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace PinCab.Configurator
             _setting = setting;
             _newName = newName;
             LoadData();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadData()

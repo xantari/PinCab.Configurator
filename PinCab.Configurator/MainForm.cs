@@ -13,6 +13,7 @@ using WindowsDisplayAPI;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils.PinballY;
 using PinCab.Utils.Utils;
+using PinCab.Utils.WinForms.TabOrder;
 
 namespace PinCab.Configurator
 {
@@ -59,6 +60,7 @@ namespace PinCab.Configurator
             //var displays = new ScreenDetails().GetDisplays();
             //panelMonitorDrawing.Refresh();
             ValidateMonitorConfiguration();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void UpdateDisplayDetailsFromSettingsFile()

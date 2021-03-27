@@ -14,6 +14,7 @@ using PinCab.Utils.Models;
 using System.IO;
 using PinCab.Utils.Extensions;
 using PinCab.Utils.WinForms;
+using PinCab.Utils.WinForms.TabOrder;
 
 namespace PinCab.Configurator
 {
@@ -36,6 +37,7 @@ namespace PinCab.Configurator
 
             //this.toolTip1.SetToolTip(this.btnFFMPegHelp, "Location of the ffmpeg.exe file if you wish to use the screen recording feature of this program.");
             //this.toolTip1.SetToolTip(this.btnRecordTimeSecondsHelp, "Number of seconds to record the video. 5 Second increments up to 200 seconds. Minimum 5 seconds.");
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.DownFirst);
         }
 
         private void SettingsForm_Load(object sender, EventArgs e)

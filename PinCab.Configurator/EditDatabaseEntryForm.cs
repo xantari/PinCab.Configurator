@@ -4,6 +4,7 @@ using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.ViewModels;
 using PinCab.Utils.WinForms;
+using PinCab.Utils.WinForms.TabOrder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,12 +27,14 @@ namespace PinCab.Configurator
         private IpdbBrowserForm _ipdbForm = null;
         private bool isNewEntry = false;
         private DatabaseEntry _dbEntry { get; set; }
+        private string _currentDatabase { get; set; }
         public EditDatabaseEntryForm(string databaseName, DatabaseBrowserEntry entry, DatabaseManager manager, IpdbBrowserForm ipdbForm)
         {
             InitializeComponent();
             _manager = manager;
             _ipdbForm = ipdbForm;
             _entry = entry;
+            _currentDatabase = databaseName;
             DialogResult = DialogResult.None;
             if (entry == null)
             {
@@ -39,7 +42,7 @@ namespace PinCab.Configurator
                 _entry = new DatabaseBrowserEntry();
                 _dbEntry = new DatabaseEntry();
                 _dbEntry.Id = 1;
-                if (manager.Databases[databaseName].Entries.Count > 0)
+                if (manager.Databases[databaseName] != null && manager.Databases[databaseName].Entries.Count > 0)
                     _dbEntry.Id = manager.Databases[databaseName].Entries.Max(c => c.Id) + 1;
             }
             else
@@ -47,6 +50,7 @@ namespace PinCab.Configurator
                 _dbEntry = manager.Databases[entry.DatabaseName].Entries.First(c => c.Id == entry.Id);
             }
             LoadForm();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadForm()
@@ -58,12 +62,12 @@ namespace PinCab.Configurator
 
             foreach (string databaseName in cmbDatabase.Items)
             {
-                if (databaseName == _entry.DatabaseName)
+                if (databaseName == _currentDatabase)
                     cmbDatabase.SelectedItem = databaseName;
             }
 
-            if (!isNewEntry)
-                cmbDatabase.Enabled = false; //Do not allow saving an entry accross databases
+            //if (!isNewEntry)
+           cmbDatabase.Enabled = false; //Do not allow saving an entry accross databases, 3/27/2021 - Always set to readonly as we are always adding/editing based off of a specific database
 
             var categoryList = EnumExtensions.GetEnumDescriptionList<MajorCategory>();
             cmbCategory.DataSource = categoryList;
@@ -97,11 +101,14 @@ namespace PinCab.Configurator
             numericRating.Value = _dbEntry.Rating.HasValue ? _dbEntry.Rating.Value : 0;
             dateTimeModified.Value = _dbEntry.LastModifiedDateUtc.HasValue ? _dbEntry.LastModifiedDateUtc.Value : DateTime.UtcNow;
 
-            foreach (var tag in _dbEntry.Tags)
+            if (_dbEntry.Tags != null)
             {
-                TagObject tagwinforms = new TagObject(tag, null);
-                tagwinforms.Init();
-                flowLayoutPanelTags.Controls.Add(tagwinforms);
+                foreach (var tag in _dbEntry.Tags)
+                {
+                    TagObject tagwinforms = new TagObject(tag, null);
+                    tagwinforms.Init();
+                    flowLayoutPanelTags.Controls.Add(tagwinforms);
+                }
             }
 
             flowLayoutPanelTags.Padding = new Padding(3, 3, 3, 3);

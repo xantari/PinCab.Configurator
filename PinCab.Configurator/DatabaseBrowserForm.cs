@@ -6,6 +6,7 @@ using PinCab.Utils.Extensions;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.WinForms;
+using PinCab.Utils.WinForms.TabOrder;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace PinCab.Configurator
         private ProgramSettings _settings { get; set; }
 
         private bool notifiedOfSaveWarning = false;
+        private bool notifiedOfNewRowMissing = false;
+        private bool notifiedOfLike = false;
 
         public DatabaseBrowserForm()
         {
@@ -52,10 +55,32 @@ namespace PinCab.Configurator
             ConfigureGrid();
             LoadDatabaseGrid();
             _loading = false;
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
+        }
+
+        private void EnableContextMenus(bool enabled)
+        {
+            foreach (ToolStripItem itm in contextMenuStripGridActions.Items)
+            {
+                itm.Enabled = enabled;
+            }
+
+            foreach (ToolStripItem itm in contextMenuStripChildEntries.Items)
+            {
+                itm.Enabled = enabled;
+            }
+
+            saveDatabasesToolStripMenuItem.Enabled = enabled;
+            refreshDatabaseToolStripMenuItem.Enabled = enabled;
+            addDatabaseToolStripMenuItem.Enabled = enabled;
+            fileToolStripMenuItem.Enabled = enabled;
+            this.ControlBox = enabled;
         }
 
         private void ConfigureFilters()
         {
+            EnableContextMenus(false);          
+
             //Load from the last state (create a database form manager that persists filter selections to .json setting file)
             dateTimePickerBegin.Value = _settings.DatabaseBrowserSettings.BeginDate.BeginningOfDay();
             dateTimePickerEnd.Value = _settings.DatabaseBrowserSettings.EndDate.EndOfDay();
@@ -211,11 +236,19 @@ namespace PinCab.Configurator
         private List<DatabaseBrowserEntry> GetEntriesByFilterCriteria()
         {
             string searchTerm = txtSearch.Text.ToLower();
-            IEnumerable<DatabaseBrowserEntry> list;
-            list = _dbManager.Entries.Where(p => //(p.Title.FuzzyMatch(txtSearch.Text) > .1)
-            p.Title.ToLower().Contains(searchTerm)
-            || p.Description.ToLower().Contains(searchTerm)
-            ); //Search by text
+            IEnumerable<DatabaseBrowserEntry> list = _dbManager.Entries;
+            if (cmbDatabase.SelectedItem != null && cmbDatabase.SelectedItem.ToString() != "All")
+            {
+                list = list.Where(p => p.DatabaseName == cmbDatabase.SelectedItem.ToString());
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                list = list.Where(p => //(p.Title.FuzzyMatch(txtSearch.Text) > .1)
+                    p.Title.ToLower().Contains(searchTerm)
+                    || p.Description.ToLower().Contains(searchTerm)
+                    ); //Search by text
+            }
 
             list = list.Where(p => p.LastUpdated <= dateTimePickerEnd.Value.EndOfDay()
                 && p.LastUpdated >= dateTimePickerBegin.Value.BeginningOfDay());
@@ -224,10 +257,6 @@ namespace PinCab.Configurator
             {
                 MajorCategory type = cmbType.SelectedValue.ToString().GetValueFromDescription<MajorCategory>();
                 list = list.Where(p => p.Type == type);
-            }
-            if (cmbDatabase.SelectedItem != null && cmbDatabase.SelectedItem.ToString() != "All")
-            {
-                list = list.Where(p => p.DatabaseName == cmbDatabase.SelectedItem.ToString());
             }
             var tags = GetAllSelectedTags();
             if (tags != null && tags.Count > 0)
@@ -322,6 +351,8 @@ namespace PinCab.Configurator
             {
                 var tags = result.Result as List<string>;
                 cmbTags.DataSource = tags;
+                EnableContextMenus(true);
+                
             }
             //else if (result.FunctionExecuted == DatabaseManagerBackgroundProgressAction.RebindDatabaseBrowserGrid.ToString())
             //{
@@ -469,9 +500,13 @@ namespace PinCab.Configurator
 
         private void refreshDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Fake the system out by rolling back to a point where it thinks my local database is stale.
-            _dbManager.Settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow.AddDays(-365);
-            LoadDatabaseGrid();
+            var response = MessageBox.Show("Any unsaved database entries will be overwritten. You should click Save Databases if you added or edited any entries as those entries only get written to a temporary location and that temporary location will get overwritten if you do not save your database first.", "Are you sure?", MessageBoxButtons.YesNo);
+            if (response == DialogResult.Yes)
+            {
+                //Fake the system out by rolling back to a point where it thinks my local database is stale.
+                _dbManager.Settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow.AddMinutes((_settings.DatabaseUpdateRecheckMinutes + 1) * -1);
+                LoadDatabaseGrid();
+            }
         }
 
         private void dataGridViewEntryList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -572,8 +607,18 @@ namespace PinCab.Configurator
             {
                 if (!string.IsNullOrEmpty(row.Url))
                 {
+                    NotifyToLikeAndComment();
                     Process.Start(row.Url);
                 }
+            }
+        }
+
+        private void NotifyToLikeAndComment()
+        {
+            if (!notifiedOfLike)
+            {
+                MessageBox.Show("Remember to thank the authors and star the download before downloading the content!", "Thank the authors!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                notifiedOfLike = true;
             }
         }
 
@@ -636,6 +681,7 @@ namespace PinCab.Configurator
             {
                 if (!string.IsNullOrEmpty(row.Url))
                 {
+                    NotifyToLikeAndComment();
                     Process.Start(row.Url);
                 }
             }
@@ -695,14 +741,14 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
-                var entryForm = new EditDatabaseEntryForm(cmbDatabase.SelectedItem.ToString(), row, _dbManager, _ipdbForm);
+                var entryForm = new EditDatabaseEntryForm(row.DatabaseName, row, _dbManager, _ipdbForm);
                 var result = entryForm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     //Reload the settings incase a new database was added
                     _settings = _settingManager.LoadSettings();
 
-                    var contentDatabase = _settings.Databases.First(c => c.Name == cmbDatabase.SelectedItem.ToString());
+                    var contentDatabase = _settings.Databases.First(c => c.Name == row.DatabaseName);
 
                     var dbFile = entryForm.GetUpdatedDatabaseEntry();
                     dbFile = _dbManager.SanitizeEntry(dbFile);
@@ -710,18 +756,20 @@ namespace PinCab.Configurator
                     //var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
 
                     //Save the entry to the corresponding _dbManager.Databases (this happens automatically as we update the reference to it)
-                    //var test = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()].Entries.Where(c => c.Id == dbFile.Id);
+                    //var test = _dbManager.Databases[ row.DatabaseName].Entries.Where(c => c.Id == dbFile.Id);
                     var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
-                    var databaseToSave = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()];
+                    var databaseToSave = _dbManager.Databases[row.DatabaseName];
                     _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
 
                     //Save the pre-processed database to the file system
-                    var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id);
+                    var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id && c.DatabaseName == row.DatabaseName);
                     _dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, existingEntry);
                     _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
 
                     //Refresh grid (will do that automatically)
                     NotifyUserOfSaveWarning();
+                    dataGridViewEntryList.Refresh();
+                    dataGridViewChildEntries.Refresh();
                 }
             }
         }
@@ -731,23 +779,38 @@ namespace PinCab.Configurator
             if (!notifiedOfSaveWarning)
             {
                 MessageBox.Show("Notice: Your entry has been saved to a temporary location. \r\n\r\n" +
-                    "You must sync your changes before the entry is permanently  saved.\r\n\r\n" +
-                    "If you fail to sync your changes and exist the program your changes could get overwritten by the scheduled refresh interval.\r\n\r\n" +
-                    "If you don't want this to happen you can set the refresh interval to a very large value and always do manual refreshes or just remember to sync your changes before exiting the database browser.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "You must save your database before the entry is permanently  saved.\r\n\r\n" +
+                    "If you fail to save your database your changes and exit the program your changes could get overwritten by the scheduled refresh interval.\r\n\r\n" +
+                    "If you don't want this to happen you can set the refresh interval to a very large value and always do manual refreshes or just remember to save your database before exiting the database browser.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 notifiedOfSaveWarning = true;
             }
         }
 
         private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var entryForm = new EditDatabaseEntryForm(cmbDatabase.SelectedItem.ToString(), null, _dbManager, _ipdbForm);
+            string database = cmbDatabase.SelectedItem.ToString();
+            if (database == "All")
+            {
+                //Try determine the specific database by setting it to the row they have currently selected.
+                var row = GetActiveRow();
+                if (row == null) //If no rows, force user to switch to a specific database
+                {
+                    MessageBox.Show("Unable to determine database you want to add to. Switch to a specific database.");
+                    return;
+                }
+                else
+                {
+                    database = row.DatabaseName;
+                }
+            }
+            var entryForm = new EditDatabaseEntryForm(database, null, _dbManager, _ipdbForm);
             var result = entryForm.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 //Reload the settings incase a new database was added
                 _settings = _settingManager.LoadSettings();
 
-                var contentDatabase = _settings.Databases.First(c => c.Name == cmbDatabase.SelectedItem.ToString());
+                var contentDatabase = _settings.Databases.First(c => c.Name == database);
 
                 var dbFile = entryForm.GetUpdatedDatabaseEntry();
                 dbFile = _dbManager.SanitizeEntry(dbFile);
@@ -755,10 +818,18 @@ namespace PinCab.Configurator
                 //var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
 
                 //Save tne entry to the corresponding _dbManager.Databases (this happens automatically as we update the reference to it)
-                //var test = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()].Entries.Where(c => c.Id == dbFile.Id);
+                //var test = _dbManager.Databases[database].Entries.Where(c => c.Id == dbFile.Id);
                 var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
-                var databaseToSave = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()];
+                var databaseToSave = _dbManager.Databases[database];
+                if (databaseToSave == null) //Brand new database
+                {
+                    databaseToSave = new PinballDatabase();
+                    databaseToSave.LastRefreshDateUtc = DateTime.UtcNow;
+                    databaseToSave.DatabaseFormatVersion = 1;
+                    _dbManager.Databases[database] = databaseToSave;
+                }
                 databaseToSave.Entries.Add(dbFile);
+                //Sync to the working path
                 _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
 
                 //Save the pre-processed database to the file system
@@ -771,6 +842,12 @@ namespace PinCab.Configurator
                 //Refresh grid
                 RebindGridUsingFilter();
                 NotifyUserOfSaveWarning();
+
+                if (!notifiedOfNewRowMissing)
+                {
+                    MessageBox.Show("Notice: If you do not see your new entry, check your filter criteria such as Dates, categorys, etc.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    notifiedOfNewRowMissing = true;
+                }
             }
         }
 
@@ -793,6 +870,46 @@ namespace PinCab.Configurator
 
                 NotifyUserOfSaveWarning();
             }
+        }
+
+        private void addDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var entryForm = new AddDatabaseForm();
+            var result = entryForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                //Reload the settings incase a new database was added
+                _settings = _settingManager.LoadSettings();
+
+                var newEntry = entryForm.GetContentDatabaseFromForm();
+
+                //Refresh the database drop down
+                var currentSelectedItem = cmbDatabase.SelectedItem.ToString();
+                //Load the database list
+                var databaseNames = _settings.Databases
+                    .Where(c => c.Type == DatabaseType.PinballDatabase)
+                    .OrderBy(c => c.Name).Select(c => c.Name).ToList();
+                databaseNames.Insert(0, "All");
+                cmbDatabase.DataSource = databaseNames;
+
+                foreach (string type in cmbDatabase.Items)
+                {
+                    if (type == currentSelectedItem)
+                        cmbDatabase.SelectedItem = type;
+                }
+
+                _dbManager.Databases.Add(newEntry.Name, null);
+            }
+        }
+
+        private void saveDatabasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var entryForm = new SaveDatabaseForm(_settings, _dbManager);
+            var result = entryForm.ShowDialog(this);
+            //if (result == DialogResult.OK)
+            //{
+
+            //}
         }
     }
 }

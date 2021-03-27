@@ -106,6 +106,8 @@ namespace PinCab.Utils.Utils
 
         public void SanitizeAllDatabaseEntries(PinballDatabase database)
         {
+            if (database == null)
+                return;
             foreach (var file in database.Entries)
                 SanitizeEntry(file);
         }
@@ -171,25 +173,31 @@ namespace PinCab.Utils.Utils
         private bool DownloadDatabaseToFilesystem(ContentDatabase database, string downloadPath)
         {
             //If it's not a url, just consider it already downloaded
-            if (File.Exists(database.Url))
-                return true;
-            try
+            if (File.Exists(database.Url)) //Local file system database
             {
-                using (WebClient wc = new WebClient())
-                {
-                    if (database.Url.ToLower().Contains("github") && !string.IsNullOrEmpty(database.AccessToken))
-                    {
-                        wc.Headers.Add("Authorization", "token " + database.AccessToken);
-                    }
-                    //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
-                    var url = new Uri(database.Url);
-                    wc.DownloadFile(url, downloadPath);
-                }
+                File.Copy(database.Url, downloadPath, true);
                 return true;
             }
-            catch (Exception ex)
+            else //Web URL content database
             {
-                Log.Error(ex, "Error downloading file: {file}", database.Url);
+                try
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        if (database.Url.ToLower().Contains("github") && !string.IsNullOrEmpty(database.AccessToken))
+                        {
+                            wc.Headers.Add("Authorization", "token " + database.AccessToken);
+                        }
+                        //wc.DownloadProgressChanged += wc_DownloadProgressChanged;
+                        var url = new Uri(database.Url);
+                        wc.DownloadFile(url, downloadPath);
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Error downloading file: {file}", database.Url);
+                }
             }
             return false; //failure
         }
@@ -305,11 +313,22 @@ namespace PinCab.Utils.Utils
             {
                 foreach (var db in Databases)
                 {
-                    entries.Add(new ValidationMessage()
+                    if (db.Value == null) //Brand new database
                     {
-                        Level = MessageLevel.Information,
-                        Message = db.Key + " Database Last Updated (UTC): " + db.Value.LastRefreshDateUtc + " Local: " + db.Value.LastRefreshDateUtc.ToLocalTime()
-                    });
+                        entries.Add(new ValidationMessage()
+                        {
+                            Level = MessageLevel.Information,
+                            Message = db.Key + " New database detected. No entries yet."
+                        });
+                    }
+                    else 
+                    {
+                        entries.Add(new ValidationMessage()
+                        {
+                            Level = MessageLevel.Information,
+                            Message = db.Key + " Database Last Updated (UTC): " + db.Value.LastRefreshDateUtc + " Local: " + db.Value.LastRefreshDateUtc.ToLocalTime()
+                        });
+                    }
                 }
             }
 
@@ -349,28 +368,31 @@ namespace PinCab.Utils.Utils
         private HashSet<DatabaseBrowserEntry> GetDatabaseBrowserEntries(ContentDatabase database)
         {
             HashSet<DatabaseBrowserEntry> entries = new HashSet<DatabaseBrowserEntry>();
-            foreach (var databaseEntry in Databases[database.Name].Entries)
+            if (Databases[database.Name] != null)
             {
-                var entry = GetDatabaseBrowserEntry(database, databaseEntry);
-                if (IsValidBrowserEntry(entry))
-                    entries.Add(entry);
-                else
-                    Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
-
-                //Add the related entries
-                if (databaseEntry.RelatedEntries != null)
+                foreach (var databaseEntry in Databases[database.Name].Entries)
                 {
-                    foreach (var relatedEntry in databaseEntry.RelatedEntries)
+                    var entry = GetDatabaseBrowserEntry(database, databaseEntry);
+                    if (IsValidBrowserEntry(entry))
+                        entries.Add(entry);
+                    else
+                        Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
+
+                    //Add the related entries
+                    if (databaseEntry.RelatedEntries != null)
                     {
-                        var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
-                        var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
-                        if (IsValidBrowserEntry(newEntry))
+                        foreach (var relatedEntry in databaseEntry.RelatedEntries)
                         {
-                            entry.RelatedEntries.Add(newEntry);
-                            entry.Tags.UnionWith(newEntry.Tags);
+                            var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
+                            var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
+                            if (IsValidBrowserEntry(newEntry))
+                            {
+                                entry.RelatedEntries.Add(newEntry);
+                                entry.Tags.UnionWith(newEntry.Tags);
+                            }
+                            else
+                                Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
                         }
-                        else
-                            Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
                     }
                 }
             }

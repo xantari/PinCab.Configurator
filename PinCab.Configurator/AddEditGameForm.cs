@@ -3,6 +3,7 @@ using PinCab.Utils.Extensions;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
 using PinCab.Utils.ViewModels;
+using PinCab.Utils.WinForms.TabOrder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,7 @@ namespace PinCab.Configurator
             if (_ipdbForm == null)
                 _ipdbForm = new IpdbBrowserForm(txtTableName.Text, true);
             LoadForm();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadForm()

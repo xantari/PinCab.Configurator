@@ -3,6 +3,7 @@ using PinCab.Utils.Models;
 using PinCab.Utils.Models.PinballX;
 using PinCab.Utils.Utils;
 using PinCab.Utils.ViewModels;
+using PinCab.Utils.WinForms.TabOrder;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace PinCab.Configurator
             InitializeComponent();
 
             InitForm();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void InitForm()

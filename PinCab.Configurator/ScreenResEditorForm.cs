@@ -1,6 +1,7 @@
 ﻿using PinCab.Utils;
 using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
+using PinCab.Utils.WinForms.TabOrder;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace PinCab.Configurator
         public ScreenResEditorForm()
         {
             InitializeComponent();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
 
             _settings = _settingsManager.LoadSettings();
             LoadDisplayDetails();

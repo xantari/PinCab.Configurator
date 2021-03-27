@@ -16,11 +16,11 @@ namespace PinCab.Utils.Extensions
             {
                 if (!string.IsNullOrEmpty(info.Manufacturer))
                     list.Add(info.Manufacturer);
-                if (info.Players.HasValue)
+                if (info.Players.HasValue && info.Players.Value > 0)
                     list.Add(info.Players.Value == 1 ? "1 Player" : $"{info.Players.Value} Players");
                 if (!string.IsNullOrEmpty(info.Theme))
                     list.Add(info.Theme);
-                if (info.Year.HasValue)
+                if (info.Year.HasValue && info.Year.Value > 0)
                     list.Add(info.Year.Value.ToString());
             }
             return list;

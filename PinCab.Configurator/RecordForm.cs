@@ -1,5 +1,6 @@
 ﻿using PinCab.Utils.Models;
 using PinCab.Utils.Utils;
+using PinCab.Utils.WinForms.TabOrder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,7 @@ namespace PinCab.Configurator
             }
             ConfigureGrid();
             LoadDefaultsFromSavedSettings();
+            (new TabOrderManager(this)).SetTabOrder(TabOrderManager.TabScheme.AcrossFirst);
         }
 
         private void LoadDefaultsFromSavedSettings()

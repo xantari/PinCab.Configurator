@@ -173,6 +173,7 @@ namespace PinCab.Configurator
             this.Controls.Add(this.label14);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
+            this.MinimumSize = new System.Drawing.Size(604, 191);
             this.Name = "AddDatabaseForm";
             this.Text = "Add Database";
             this.ResumeLayout(false);

@@ -352,6 +352,18 @@ namespace PinCab.Configurator
             cmbContentDatabaseType.SelectedItem = data.Type.GetDescriptionAttr();
         }
 
+        private void btnFilePathDatabaseBrowser_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Filter = "JSON Files|*.json|All files (*.*)|*.*";
+                fileDialog.RestoreDirectory = true;
+                var result = fileDialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                    txtContentDatabaseUrl.Text = fileDialog.FileName;
+            }
+        }
+
         //private void gvContentDatabases_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         //{
         //    gvContentDatabases.ClearSelection();

@@ -126,7 +126,9 @@
       <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
@@ -313,6 +315,7 @@
     <None Include="Properties\DataSources\Ipdb.Models.IpdbResult.datasource" />
     <None Include="Properties\DataSources\PinCab.Utils.Models.ContentDatabase.datasource" />
     <None Include="Properties\DataSources\PinCab.Utils.Models.DatabaseBrowserEntry.datasource" />
+    <None Include="Properties\DataSources\VirtualPinball.Database.Models.DatabaseEntry.datasource" />
     <None Include="Resources\FolderOpened_75x.png" />
     <None Include="Resources\BrowserLink_75x.png" />
     <Content Include="ScreenresEditor.bat">

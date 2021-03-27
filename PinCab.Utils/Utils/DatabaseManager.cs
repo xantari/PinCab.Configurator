@@ -40,6 +40,8 @@ namespace PinCab.Utils.Utils
         private ReportProgressDelegate _reportProgress;
         public ProgramSettings Settings { get { return _settings; } }
 
+        public string PreprocessedDatabasePath { get { return preprocessedDatabasePath; } }
+
         public DatabaseManager(ReportProgressDelegate reportProgress = null)
         {
             _settings = _settingManager.LoadSettings();
@@ -69,7 +71,7 @@ namespace PinCab.Utils.Utils
         {
             foreach (var database in _settings.Databases)
             {
-                if (!DatabaseExistsOnFilesystem(database)) //Force a refersh if one or more of the databases disappeared from the file system
+                if (!DatabaseWorkFileExistsOnFilesystem(database)) //Force a refersh if one or more of the databases disappeared from the file system
                 {
                     _settings.LastDatabaseRefreshTimeUtc = DateTime.UtcNow.AddMinutes((_settings.DatabaseUpdateRecheckMinutes * -1) - 1);
                 }
@@ -102,6 +104,44 @@ namespace PinCab.Utils.Utils
             return result;
         }
 
+        public void SanitizeAllDatabaseEntries(PinballDatabase database)
+        {
+            foreach (var file in database.Entries)
+                SanitizeEntry(file);
+        }
+
+        public DatabaseEntry SanitizeEntry(DatabaseEntry entry)
+        {
+            if (entry.ScreenshotUrls?.Count == 0)
+                entry.ScreenshotUrls = null;
+            if (entry.RelatedEntries?.Count == 0)
+                entry.RelatedEntries = null;
+            if (entry.Tags?.Count == 0)
+                entry.Tags = null;
+            if (entry.AdditionalInfoUrls?.Count == 0)
+                entry.AdditionalInfoUrls = null;
+            if (entry.RelatedEntries != null)
+                entry.RelatedEntries = entry.RelatedEntries.Distinct().OrderBy(c => c).ToList();
+
+            if (string.IsNullOrEmpty(entry.Version))
+                entry.Version = null;
+            if (string.IsNullOrEmpty(entry.Manufacturer))
+                entry.Manufacturer = null;
+            if (string.IsNullOrEmpty(entry.Authors))
+                entry.Authors = null;
+            if (string.IsNullOrEmpty(entry.Features))
+                entry.Features = null;
+            if (string.IsNullOrEmpty(entry.Theme))
+                entry.Theme = null;
+            if (string.IsNullOrEmpty(entry.Url))
+                entry.Url = null;
+            if (string.IsNullOrEmpty(entry.ChangeLog))
+                entry.ChangeLog = null;
+            if (string.IsNullOrEmpty(entry.Description))
+                entry.Description = null;
+            return entry;
+        }
+
         public ToolResult DownloadDatabase(ContentDatabase database, bool forceDownload = false)
         {
             var result = new ToolResult();
@@ -110,11 +150,11 @@ namespace PinCab.Utils.Utils
                 DateTime.UtcNow.AddMinutes(_settings.DatabaseUpdateRecheckMinutes * -1)
                 || forceDownload)
             {
-                bool success = DownloadDatabaseToFilesystem(database, GetFilesystemPath(database));
+                bool success = DownloadDatabaseToFilesystem(database, GetFilesystemWorkPath(database));
                 if (success)
-                    result.Messages.Add(new ValidationMessage($"Downloaded {database.Url} to {GetFilesystemPath(database)}", MessageLevel.Information));
+                    result.Messages.Add(new ValidationMessage($"Downloaded {database.Url} to {GetFilesystemWorkPath(database)}", MessageLevel.Information));
                 else
-                    result.Messages.Add(new ValidationMessage($"Unable to download {database.Url} to {GetFilesystemPath(database)}", MessageLevel.Error));
+                    result.Messages.Add(new ValidationMessage($"Unable to download {database.Url} to {GetFilesystemWorkPath(database)}", MessageLevel.Error));
 
                 result.Result = true; //Inidicate we downloaded something
             }
@@ -130,6 +170,9 @@ namespace PinCab.Utils.Utils
 
         private bool DownloadDatabaseToFilesystem(ContentDatabase database, string downloadPath)
         {
+            //If it's not a url, just consider it already downloaded
+            if (File.Exists(database.Url))
+                return true;
             try
             {
                 using (WebClient wc = new WebClient())
@@ -160,35 +203,66 @@ namespace PinCab.Utils.Utils
 
         public void LoadDatabase(ContentDatabase database)
         {
-            if (File.Exists(GetFilesystemPath(database)) && database.Type == DatabaseType.PinballDatabase)
+            if (File.Exists(GetFilesystemWorkPath(database)) && database.Type == DatabaseType.PinballDatabase)
             {
-                var db = JsonConvert.DeserializeObject<PinballDatabase>(File.ReadAllText(GetFilesystemPath(database)));
+                var db = JsonConvert.DeserializeObject<PinballDatabase>(File.ReadAllText(GetFilesystemWorkPath(database)), GetJsonSerilizerSettings());
+                SanitizeAllDatabaseEntries(db);
                 Databases.Add(database.Name, db);
             }
-            else if (File.Exists(GetFilesystemPath(database)) && database.Type == DatabaseType.IPDB)
+            else if (File.Exists(GetFilesystemWorkPath(database)) && database.Type == DatabaseType.IPDB)
             {
-                IpdbDatabase = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(GetFilesystemPath(database)));
+                IpdbDatabase = JsonConvert.DeserializeObject<IpdbDatabase>(File.ReadAllText(GetFilesystemWorkPath(database)), GetJsonSerilizerSettings());
             }
         }
 
-        public bool DatabaseExistsOnFilesystem(ContentDatabase database)
+        /// <summary>
+        /// Checks if the mirrored database exists on the file system. We download from a URL first. 
+        /// Then save to local databases folder.
+        /// If it's a pointer to a local file already, we still mirror the file and end up updated it in both the mirroed location
+        /// and the official location
+        /// </summary>
+        /// <param name="database"></param>
+        /// <returns></returns>
+        public bool DatabaseWorkFileExistsOnFilesystem(ContentDatabase database)
         {
             if (!string.IsNullOrEmpty(database.Url))
             {
-                var uri = new Uri(database.Url);
-                var fullFilePath = $"{databaseFolder}\\{uri.Segments.Last()}";
+                string fullFilePath = $"{databaseFolder}\\{database.Name}.json";
                 if (File.Exists(fullFilePath))
                     return true;
+                //if (File.Exists(database.Url)) //If this is a local file system path instead of a url get the file path
+                //{
+                //    var fi = new FileInfo(database.Url);
+                //    fullFilePath = $"{databaseFolder}\\{fi.Name}";
+                //    if (File.Exists(fullFilePath))
+                //        return true;
+                //}
+                //else //Url based paths
+                //{
+                //    var uri = new Uri(database.Url);
+                //    fullFilePath = $"{databaseFolder}\\{uri.Segments.Last()}";
+                //    if (File.Exists(fullFilePath))
+                //        return true;
+                //}
             }
             return false;
         }
 
-        public string GetFilesystemPath(ContentDatabase database)
+        public string GetFilesystemWorkPath(ContentDatabase database)
         {
             if (!string.IsNullOrEmpty(database.Url))
             {
-                var uri = new Uri(database.Url);
-                return $"{databaseFolder}\\{uri.Segments.Last()}";
+                return $"{databaseFolder}\\{database.Name}.json";
+                //if (File.Exists(database.Url)) //If this is a local file system path instead of a url get the file path
+                //{
+                //    var fi = new FileInfo(database.Url);
+                //    return $"{databaseFolder}\\{fi.Name}";
+                //}
+                //else //Url based path
+                //{
+                //    var uri = new Uri(database.Url);
+                //    return $"{databaseFolder}\\{uri.Segments.Last()}";
+                //}
             }
             return null;
         }
@@ -215,7 +289,7 @@ namespace PinCab.Utils.Utils
             else
             {
                 _reportProgress?.Invoke(10);
-                entries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
+                entries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath), GetJsonSerilizerSettings());
                 Entries = entries;
                 Log.Information("{toolname}: Loaded preprocessed database.", ToolName, preprocessedDatabasePath);
                 _reportProgress?.Invoke(100);
@@ -265,7 +339,7 @@ namespace PinCab.Utils.Utils
             //database (reached refresh timeframe or the preprocessed database doesn't exist yet)
             else if (IsValid(database) && !forceReload)
             {
-                var loadedEntries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath));
+                var loadedEntries = JsonConvert.DeserializeObject<List<DatabaseBrowserEntry>>(File.ReadAllText(preprocessedDatabasePath), GetJsonSerilizerSettings());
                 return loadedEntries.Where(p => p.DatabaseType == DatabaseType.PinballDatabase
                     && p.DatabaseName == database.Name).ToList();
             }
@@ -284,17 +358,20 @@ namespace PinCab.Utils.Utils
                     Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
 
                 //Add the related entries
-                foreach(var relatedEntry in databaseEntry.RelatedEntries)
+                if (databaseEntry.RelatedEntries != null)
                 {
-                    var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
-                    var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
-                    if (IsValidBrowserEntry(newEntry))
+                    foreach (var relatedEntry in databaseEntry.RelatedEntries)
                     {
-                        entry.RelatedEntries.Add(newEntry);
-                        entry.Tags.UnionWith(newEntry.Tags);
+                        var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
+                        var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
+                        if (IsValidBrowserEntry(newEntry))
+                        {
+                            entry.RelatedEntries.Add(newEntry);
+                            entry.Tags.UnionWith(newEntry.Tags);
+                        }
+                        else
+                            Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
                     }
-                    else
-                        Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
                 }
             }
 
@@ -353,24 +430,28 @@ namespace PinCab.Utils.Utils
             return tags;
         }
 
-        private DatabaseBrowserEntry GetDatabaseBrowserEntry(ContentDatabase database, DatabaseEntry file)
+        public DatabaseBrowserEntry GetDatabaseBrowserEntry(ContentDatabase database, DatabaseEntry file)
         {
-            var entry = new DatabaseBrowserEntry()
-            {
-                Id = file.Id,
-                Authors = file.Authors,
-                ChangeLog = string.IsNullOrEmpty(file.ChangeLog) ? string.Empty : file.ChangeLog,
-                DatabaseType = DatabaseType.PinballDatabase,
-                Description = string.IsNullOrEmpty(file.Description) ? string.Empty : file.Description,
-                IpdbId = file.IpdbNumber,
-                Title = file.Title,
-                Type = file.MajorCategory,
-                Url = file.Url,
-                Version = file.Version,
-                Tags = file.Tags.ToHashSet<string>(),
-                DatabaseName = database.Name,
-                LastUpdated = file.LastModifiedDateUtc.HasValue ? file.LastModifiedDateUtc.Value : new DateTime(1900, 1, 1),
-            };
+            var entry = new DatabaseBrowserEntry();
+            entry = MapDatabaseEntryToBrowserEntry(database, file, entry);
+            return entry;
+        }
+
+        public DatabaseBrowserEntry MapDatabaseEntryToBrowserEntry(ContentDatabase database, DatabaseEntry file, DatabaseBrowserEntry entry)
+        {
+            entry.Id = file.Id;
+            entry.Authors = file.Authors;
+            entry.ChangeLog = string.IsNullOrEmpty(file.ChangeLog) ? string.Empty : file.ChangeLog;
+            entry.DatabaseType = DatabaseType.PinballDatabase;
+            entry.Description = string.IsNullOrEmpty(file.Description) ? string.Empty : file.Description;
+            entry.IpdbId = file.IpdbNumber;
+            entry.Title = file.Title;
+            entry.Type = file.MajorCategory;
+            entry.Url = file.Url;
+            entry.Version = file.Version;
+            entry.Tags = file.Tags?.ToHashSet<string>();
+            entry.DatabaseName = database.Name;
+            entry.LastUpdated = file.LastModifiedDateUtc.HasValue ? file.LastModifiedDateUtc.Value : new DateTime(1900, 1, 1);
 
             if (string.IsNullOrEmpty(file.Title) && !string.IsNullOrEmpty(file.FileName))
             {
@@ -387,12 +468,13 @@ namespace PinCab.Utils.Utils
                 entry.Description += "\r\n\r\nFeatures:\r\n" + file.Features;
 
             var tableInfoTags = file.ConvertTableInfoToTags();
+            if (entry.Tags == null)
+                entry.Tags = new HashSet<string>();
             entry.Tags.UnionWith(tableInfoTags);
 
             List<string> TagsByIpdbNumber = GetIpdbTags(entry);
             entry.Tags.UnionWith(TagsByIpdbNumber);
             //entry.Tags = entry.Tags.NormalizeTagList();
-
             return entry;
         }
 
@@ -437,11 +519,11 @@ namespace PinCab.Utils.Utils
             using (StreamWriter sw = new StreamWriter(fileAndPathToDatabase, false))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                GetJsonSerilizerSettings().Serialize(writer, database);
+                GetJsonSerilizer().Serialize(writer, database);
             }
         }
 
-        private JsonSerializer GetJsonSerilizerSettings()
+        private JsonSerializer GetJsonSerilizer()
         {
             JsonSerializer serializer = new JsonSerializer();
             serializer.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
@@ -449,6 +531,15 @@ namespace PinCab.Utils.Utils
             //serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             serializer.Formatting = Formatting.Indented;
             return serializer;
+        }
+
+        private JsonSerializerSettings GetJsonSerilizerSettings()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+            return settings;
         }
     }
 }

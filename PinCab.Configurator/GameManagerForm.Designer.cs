@@ -723,7 +723,7 @@ namespace PinCab.Configurator
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(955, 24);
             this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Text = "menuStripGameManager";
             // 
             // fileToolStripMenuItem
             // 
@@ -791,7 +791,7 @@ namespace PinCab.Configurator
             // toolStripStatusLabelSpacer
             // 
             this.toolStripStatusLabelSpacer.Name = "toolStripStatusLabelSpacer";
-            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(740, 17);
+            this.toolStripStatusLabelSpacer.Size = new System.Drawing.Size(771, 17);
             this.toolStripStatusLabelSpacer.Spring = true;
             // 
             // toolStripProgressBar

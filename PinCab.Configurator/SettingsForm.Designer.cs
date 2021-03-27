@@ -103,6 +103,7 @@
             this.btnB2SScreenresFilePath = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tbSettings = new System.Windows.Forms.TabControl();
+            this.btnFilePathDatabaseBrowser = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabPageDatabases.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvContentDatabases)).BeginInit();
@@ -162,6 +163,7 @@
             // 
             // tabPageDatabases
             // 
+            this.tabPageDatabases.Controls.Add(this.btnFilePathDatabaseBrowser);
             this.tabPageDatabases.Controls.Add(this.label19);
             this.tabPageDatabases.Controls.Add(this.gvContentDatabases);
             this.tabPageDatabases.Controls.Add(this.cmbContentDatabaseType);
@@ -364,11 +366,11 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(64, 221);
+            this.label14.Location = new System.Drawing.Point(31, 221);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(23, 13);
+            this.label14.Size = new System.Drawing.Size(56, 13);
             this.label14.TabIndex = 52;
-            this.label14.Text = "Url:";
+            this.label14.Text = "Url / Path:";
             // 
             // tabPageRecording
             // 
@@ -950,6 +952,19 @@
             this.tbSettings.Size = new System.Drawing.Size(682, 363);
             this.tbSettings.TabIndex = 7;
             // 
+            // btnFilePathDatabaseBrowser
+            // 
+            this.btnFilePathDatabaseBrowser.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnFilePathDatabaseBrowser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFilePathDatabaseBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilePathDatabaseBrowser.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFilePathDatabaseBrowser.Location = new System.Drawing.Point(532, 215);
+            this.btnFilePathDatabaseBrowser.Name = "btnFilePathDatabaseBrowser";
+            this.btnFilePathDatabaseBrowser.Size = new System.Drawing.Size(38, 23);
+            this.btnFilePathDatabaseBrowser.TabIndex = 66;
+            this.btnFilePathDatabaseBrowser.UseVisualStyleBackColor = true;
+            this.btnFilePathDatabaseBrowser.Click += new System.EventHandler(this.btnFilePathDatabaseBrowser_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1060,5 +1075,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn urlDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn accessTokenDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnFilePathDatabaseBrowser;
     }
 }

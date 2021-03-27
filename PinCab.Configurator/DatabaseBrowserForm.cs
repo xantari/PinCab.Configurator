@@ -23,9 +23,12 @@ namespace PinCab.Configurator
     {
         private readonly DatabaseManager _dbManager = new DatabaseManager();
         private readonly ProgramSettingsManager _settingManager = new ProgramSettingsManager();
-        //private BackgroundQueue _queue = new BackgroundQueue();
+        private IpdbBrowserForm _ipdbForm = new IpdbBrowserForm(string.Empty, true);
+
         private bool _loading = true;
         private ProgramSettings _settings { get; set; }
+
+        private bool notifiedOfSaveWarning = false;
 
         public DatabaseBrowserForm()
         {
@@ -56,9 +59,9 @@ namespace PinCab.Configurator
             //Load from the last state (create a database form manager that persists filter selections to .json setting file)
             dateTimePickerBegin.Value = _settings.DatabaseBrowserSettings.BeginDate.BeginningOfDay();
             dateTimePickerEnd.Value = _settings.DatabaseBrowserSettings.EndDate.EndOfDay();
-            var databaseTypeList = EnumExtensions.GetEnumDescriptionList<MajorCategory>();
-            databaseTypeList.Insert(0, "All");
-            cmbType.DataSource = databaseTypeList;
+            var categoryList = EnumExtensions.GetEnumDescriptionList<MajorCategory>();
+            categoryList.Insert(0, "All");
+            cmbType.DataSource = categoryList;
             txtSearch.Text = _settings.DatabaseBrowserSettings.SearchTerm;
 
             //Load the database list
@@ -108,7 +111,7 @@ namespace PinCab.Configurator
             count = 1;
             foreach (var setting in _settings.DatabaseBrowserSettings.RelatedGridColumnWidths)
             {
-                if (count <=  dataGridViewChildEntries.Columns.Count)
+                if (count <= dataGridViewChildEntries.Columns.Count)
                     dataGridViewChildEntries.Columns[count - 1].Width = setting;
                 count++;
             }
@@ -585,7 +588,10 @@ namespace PinCab.Configurator
 
         private void dataGridViewChildEntries_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dataGridViewChildEntries.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            if (e.ListChangedType != ListChangedType.Reset && _settings.DatabaseBrowserSettings.RelatedGridColumnWidths.Count == 0)
+            {
+                dataGridViewEntryList.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
         }
 
         private void dataGridViewChildEntries_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
@@ -652,10 +658,13 @@ namespace PinCab.Configurator
             settings.DatabaseFilter = cmbDatabase.SelectedItem.ToString();
             settings.TagFilter = GetAllSelectedTags();
 
+            settings.DatabaseGridColumnWidths = new List<int>();
             foreach (DataGridViewColumn column in dataGridViewEntryList.Columns)
             {
                 settings.DatabaseGridColumnWidths.Add(column.Width);
             }
+
+            settings.RelatedGridColumnWidths = new List<int>();
             foreach (DataGridViewColumn column in dataGridViewChildEntries.Columns)
             {
                 settings.RelatedGridColumnWidths.Add(column.Width);
@@ -675,15 +684,115 @@ namespace PinCab.Configurator
                 RebindGridUsingFilter();
         }
 
+        private DatabaseBrowserEntry GetActiveRow()
+        {
+            var data = dataGridViewEntryList.DataSource as BindingSource;
+            return data.Current as DatabaseBrowserEntry;
+        }
+
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Get the source database entry
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                var entryForm = new EditDatabaseEntryForm(cmbDatabase.SelectedItem.ToString(), row, _dbManager, _ipdbForm);
+                var result = entryForm.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    //Reload the settings incase a new database was added
+                    _settings = _settingManager.LoadSettings();
 
-            //Load the form
+                    var contentDatabase = _settings.Databases.First(c => c.Name == cmbDatabase.SelectedItem.ToString());
 
-            //Upon Successful response update the entry
+                    var dbFile = entryForm.GetUpdatedDatabaseEntry();
+                    dbFile = _dbManager.SanitizeEntry(dbFile);
+                    //Upon Successful response update the entries list (_dbManager.Entires)
+                    //var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
 
-            //Save the pre-processed database again
+                    //Save the entry to the corresponding _dbManager.Databases (this happens automatically as we update the reference to it)
+                    //var test = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()].Entries.Where(c => c.Id == dbFile.Id);
+                    var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
+                    var databaseToSave = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()];
+                    _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
+
+                    //Save the pre-processed database to the file system
+                    var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id);
+                    _dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, existingEntry);
+                    _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
+
+                    //Refresh grid (will do that automatically)
+                    NotifyUserOfSaveWarning();
+                }
+            }
+        }
+
+        public void NotifyUserOfSaveWarning()
+        {
+            if (!notifiedOfSaveWarning)
+            {
+                MessageBox.Show("Notice: Your entry has been saved to a temporary location. \r\n\r\n" +
+                    "You must sync your changes before the entry is permanently  saved.\r\n\r\n" +
+                    "If you fail to sync your changes and exist the program your changes could get overwritten by the scheduled refresh interval.\r\n\r\n" +
+                    "If you don't want this to happen you can set the refresh interval to a very large value and always do manual refreshes or just remember to sync your changes before exiting the database browser.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                notifiedOfSaveWarning = true;
+            }
+        }
+
+        private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var entryForm = new EditDatabaseEntryForm(cmbDatabase.SelectedItem.ToString(), null, _dbManager, _ipdbForm);
+            var result = entryForm.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                //Reload the settings incase a new database was added
+                _settings = _settingManager.LoadSettings();
+
+                var contentDatabase = _settings.Databases.First(c => c.Name == cmbDatabase.SelectedItem.ToString());
+
+                var dbFile = entryForm.GetUpdatedDatabaseEntry();
+                dbFile = _dbManager.SanitizeEntry(dbFile);
+                //Upon Successful response update the entries list (_dbManager.Entires)
+                //var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
+
+                //Save tne entry to the corresponding _dbManager.Databases (this happens automatically as we update the reference to it)
+                //var test = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()].Entries.Where(c => c.Id == dbFile.Id);
+                var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
+                var databaseToSave = _dbManager.Databases[cmbDatabase.SelectedItem.ToString()];
+                databaseToSave.Entries.Add(dbFile);
+                _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
+
+                //Save the pre-processed database to the file system
+                //var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id);
+                var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
+                _dbManager.Entries.Add(updatedDatabaseEntry);
+                //_dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, updatedDatabaseEntry);
+                _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
+
+                //Refresh grid
+                RebindGridUsingFilter();
+                NotifyUserOfSaveWarning();
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                //Scan the database it's attached to to see how many related entries need to be removed
+
+                //Prompt to user indicating how many other entries will be cleaned up
+
+                //Remove the entry from _dbManager.Databases
+
+                //Remove the entry from _dbManager.Entries
+
+                //Save the actual database .json
+
+                //Save the pre-processed database to the file system
+
+                NotifyUserOfSaveWarning();
+            }
         }
     }
 }

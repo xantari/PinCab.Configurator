@@ -32,7 +32,7 @@ namespace PinCab.Configurator
         private void LoadDatabase()
         {
             var ipdbDatabase = _dbManager.GetIpdbContentDatabase();
-            if (!_dbManager.DatabaseExistsOnFilesystem(ipdbDatabase))
+            if (!_dbManager.DatabaseWorkFileExistsOnFilesystem(ipdbDatabase))
             {
                 _dbManager.DownloadDatabase(ipdbDatabase, true);
             }

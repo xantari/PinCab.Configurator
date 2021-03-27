@@ -65,6 +65,9 @@
             this.contextMenuStripGridActions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.IpdbInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.splitContainerGridAndLog = new System.Windows.Forms.SplitContainer();
@@ -87,8 +90,6 @@
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
@@ -201,7 +202,7 @@
             this.cmbDatabase.FormattingEnabled = true;
             this.cmbDatabase.Location = new System.Drawing.Point(65, 55);
             this.cmbDatabase.Name = "cmbDatabase";
-            this.cmbDatabase.Size = new System.Drawing.Size(144, 21);
+            this.cmbDatabase.Size = new System.Drawing.Size(191, 21);
             this.cmbDatabase.TabIndex = 12;
             this.cmbDatabase.Text = "All";
             this.cmbDatabase.SelectedIndexChanged += new System.EventHandler(this.cmbDatabase_SelectedIndexChanged);
@@ -417,24 +418,46 @@
             this.contextMenuStripGridActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.IpdbInfoToolStripMenuItem,
             this.goToUrlToolStripMenuItem,
+            this.addNewToolStripMenuItem,
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(181, 114);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(128, 114);
             // 
             // IpdbInfoToolStripMenuItem
             // 
             this.IpdbInfoToolStripMenuItem.Name = "IpdbInfoToolStripMenuItem";
-            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.IpdbInfoToolStripMenuItem.Text = "IPDB Info";
             this.IpdbInfoToolStripMenuItem.Click += new System.EventHandler(this.IpdbInfoToolStripMenuItem_Click);
             // 
             // goToUrlToolStripMenuItem
             // 
             this.goToUrlToolStripMenuItem.Name = "goToUrlToolStripMenuItem";
-            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.goToUrlToolStripMenuItem.Text = "Go to URL";
             this.goToUrlToolStripMenuItem.Click += new System.EventHandler(this.goToUrlToolStripMenuItem_Click);
+            // 
+            // addNewToolStripMenuItem
+            // 
+            this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.addNewToolStripMenuItem.Text = "Add New";
+            this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // vpinDatabaseSettingBindingSource
             // 
@@ -645,19 +668,6 @@
             this.statusStripBottom.TabIndex = 6;
             this.statusStripBottom.Text = "statusStrip1";
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -757,5 +767,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
     }
 }

@@ -282,6 +282,14 @@ namespace PinCab.Configurator
                 }
             }
 
+            //Ensure the url being added isn't already in the database
+            if (_manager.Databases[_databaseName] != null && !string.IsNullOrEmpty(txtUrl.Text)) //Not a brand new entry in a new database
+            {
+                bool alreadyExists = _manager.Databases[_databaseName].Entries.Any(c => c.Url.ToLower() == txtUrl.Text.Trim().ToLower());
+                if (alreadyExists)
+                    issues.Add("Url already exists on another entry.");
+            }
+
             if (issues.Count > 0)
                 MessageBox.Show(string.Join("\r\n", issues), "Issues List");
             return (issues.Count == 0); //True if 0 (no issues), false if >= 1 issues

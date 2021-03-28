@@ -901,18 +901,38 @@ namespace PinCab.Configurator
             if (row != null)
             {
                 //Scan the database it's attached to to see how many related entries need to be removed
+                var numRelatedEntriesToBeRemoved = _dbManager.Databases[row.DatabaseName].Entries
+                    .Count(c => c.RelatedEntries != null && c.RelatedEntries.Any(b => b == row.Id));
 
                 //Prompt to user indicating how many other entries will be cleaned up
+                var deleteFromDatabase = MessageBox.Show($"Are you sure you want to delete: {row.Title}?  {numRelatedEntriesToBeRemoved} related entries will also be removed?", "Are you sure?", MessageBoxButtons.YesNo);
+
+                if (deleteFromDatabase == DialogResult.No)
+                    return;
 
                 //Remove the entry from _dbManager.Databases
+                foreach (var entry in _dbManager.Databases[row.DatabaseName].Entries.Where(c => c.RelatedEntries != null && c.RelatedEntries.Any(b => b == row.Id)))
+                {
+                    entry.RelatedEntries.Remove(row.Id);
+                }
+                var entryToRemove = _dbManager.Databases[row.DatabaseName].Entries.First(c => c.Id == row.Id);
+                _dbManager.Databases[row.DatabaseName].Entries.Remove(entryToRemove);
+                var contentDatabase = _settings.Databases.First(c => c.Name == row.DatabaseName);
+                var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
+                _dbManager.Databases[row.DatabaseName].LastUpdateDateUtc = DateTime.UtcNow;
+                _dbManager.SaveDatabaseCache<PinballDatabase>(_dbManager.Databases[row.DatabaseName], databasePath); //Save the actual database .json file
 
                 //Remove the entry from _dbManager.Entries
+                foreach (var entry in _dbManager.Entries.Where(c => c.RelatedEntries != null && c.RelatedEntries.Any(b => b.Id == row.Id) && c.DatabaseName == row.DatabaseName))
+                {
+                    entry.RelatedEntries.RemoveWhere(c => c.Id == row.Id);
+                }
+                var entryToRemove2 = _dbManager.Entries.First(c => c.Id == row.Id && c.DatabaseName == row.DatabaseName);
+                _dbManager.Entries.Remove(entryToRemove2);
 
-                //Save the actual database .json
+                _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
 
-                //Save the pre-processed database to the file system
-                //databaseToSave.LastUpdateDateUtc = DateTime.UtcNow;
-
+                RebindGridUsingFilter();
                 NotifyUserOfSaveWarning();
             }
         }
@@ -950,11 +970,7 @@ namespace PinCab.Configurator
         private void saveDatabasesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var entryForm = new SaveDatabaseForm(_settings, _dbManager);
-            var result = entryForm.ShowDialog(this);
-            //if (result == DialogResult.OK)
-            //{
-
-            //}
+            entryForm.ShowDialog(this);
         }
 
         private void dataGridViewEntryList_CurrentCellChanged(object sender, EventArgs e)

@@ -441,40 +441,43 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(128, 114);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(181, 136);
             // 
             // IpdbInfoToolStripMenuItem
             // 
             this.IpdbInfoToolStripMenuItem.Name = "IpdbInfoToolStripMenuItem";
-            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.IpdbInfoToolStripMenuItem.Text = "IPDB Info";
             this.IpdbInfoToolStripMenuItem.Click += new System.EventHandler(this.IpdbInfoToolStripMenuItem_Click);
             // 
             // goToUrlToolStripMenuItem
             // 
             this.goToUrlToolStripMenuItem.Name = "goToUrlToolStripMenuItem";
-            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.goToUrlToolStripMenuItem.Text = "Go to URL";
             this.goToUrlToolStripMenuItem.Click += new System.EventHandler(this.goToUrlToolStripMenuItem_Click);
             // 
             // addNewToolStripMenuItem
             // 
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.addNewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addNewToolStripMenuItem.Text = "Add New";
             this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.editToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 

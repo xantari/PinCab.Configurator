@@ -1,1 +1,1 @@
-Pincab.Configurator.exe -gamemanager
+start Pincab.Configurator.exe -gamemanager

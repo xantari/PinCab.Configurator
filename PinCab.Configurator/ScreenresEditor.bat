@@ -1,1 +1,1 @@
-Pincab.Configurator.exe -screenreseditor
+start Pincab.Configurator.exe -screenreseditor

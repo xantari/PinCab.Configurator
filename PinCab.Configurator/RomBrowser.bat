@@ -1,1 +1,1 @@
-Pincab.Configurator.exe -rombrowser
+start Pincab.Configurator.exe -rombrowser

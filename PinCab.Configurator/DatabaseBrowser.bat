@@ -1,1 +1,1 @@
-Pincab.Configurator.exe -databasebrowser
+start Pincab.Configurator.exe -databasebrowser

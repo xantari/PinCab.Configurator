@@ -773,6 +773,16 @@ namespace PinCab.Configurator
                     var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id && c.DatabaseName == row.DatabaseName);
                     _dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, existingEntry);
                     _dbManager.MapRelatedEntries(existingEntry, contentDatabase, dbFile);
+
+                    //It could be we updated the title or some other bit of info about this item, therefore go through
+                    //all other related entries in the database cache and update them
+                    var relatedEntriesToUpdate = _dbManager.Entries.Where(c => c.RelatedEntries.Any(g => g.Id == dbFile.Id));
+                    foreach(var relatedEntry in relatedEntriesToUpdate)
+                    {
+                        var entryToUpdate = relatedEntry.RelatedEntries.First(c => c.Id == dbFile.Id);
+                        _dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, entryToUpdate);
+                    }
+
                     _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
 
                     //Refresh grid (will do that automatically)

@@ -597,7 +597,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(550, 622);
+            this.MinimumSize = new System.Drawing.Size(597, 622);
             this.Name = "AddEditGameForm";
             this.Text = "Edit Game";
             this.ResumeLayout(false);

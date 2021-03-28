@@ -326,7 +326,7 @@ namespace PinCab.Utils.Utils
                         entries.Add(new ValidationMessage()
                         {
                             Level = MessageLevel.Information,
-                            Message = db.Key + " Database Last Updated (UTC): " + db.Value.LastRefreshDateUtc + " Local: " + db.Value.LastRefreshDateUtc.ToLocalTime()
+                            Message = db.Key + " Database Last Updated (UTC): " + db.Value.LastUpdateDateUtc + " Local: " + db.Value.LastUpdateDateUtc.ToLocalTime()
                         });
                     }
                 }
@@ -378,22 +378,7 @@ namespace PinCab.Utils.Utils
                     else
                         Log.Information("{tool}: Skipped adding {entry} because it didn't pass the data check.", ToolName, entry.Title);
 
-                    //Add the related entries
-                    if (databaseEntry.RelatedEntries != null)
-                    {
-                        foreach (var relatedEntry in databaseEntry.RelatedEntries)
-                        {
-                            var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
-                            var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
-                            if (IsValidBrowserEntry(newEntry))
-                            {
-                                entry.RelatedEntries.Add(newEntry);
-                                entry.Tags.UnionWith(newEntry.Tags);
-                            }
-                            else
-                                Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
-                        }
-                    }
+                    MapRelatedEntries(entry, database, databaseEntry);
                 }
             }
 
@@ -401,6 +386,29 @@ namespace PinCab.Utils.Utils
             //area of the database
 
             return entries;
+        }
+
+        public void MapRelatedEntries(DatabaseBrowserEntry browserEntry, ContentDatabase database, DatabaseEntry databaseEntry)
+        {
+            //Add the related entries
+            if (databaseEntry.RelatedEntries != null)
+            {
+                if (browserEntry.RelatedEntries == null)
+                    browserEntry.RelatedEntries = new HashSet<DatabaseBrowserEntry>();
+                browserEntry.RelatedEntries.Clear();
+                foreach (var relatedEntry in databaseEntry.RelatedEntries)
+                {
+                    var relatedContentEntry = Databases[database.Name].Entries.FirstOrDefault(c => c.Id == relatedEntry);
+                    var newEntry = GetDatabaseBrowserEntry(database, relatedContentEntry);
+                    if (IsValidBrowserEntry(newEntry))
+                    {
+                        browserEntry.RelatedEntries.Add(newEntry);
+                        browserEntry.Tags.UnionWith(newEntry.Tags);
+                    }
+                    else
+                        Log.Information("{tool}: Skipped related entry adding {entry} because it didn't pass the data check.", ToolName, relatedContentEntry.Title);
+                }
+            }
         }
 
         private bool IsValidBrowserEntry(DatabaseBrowserEntry entry)

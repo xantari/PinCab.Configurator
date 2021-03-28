@@ -34,6 +34,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabPageDatabases = new System.Windows.Forms.TabPage();
+            this.btnFilePathDatabaseBrowser = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.gvContentDatabases = new System.Windows.Forms.DataGridView();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,7 +104,6 @@
             this.btnB2SScreenresFilePath = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.tbSettings = new System.Windows.Forms.TabControl();
-            this.btnFilePathDatabaseBrowser = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabPageDatabases.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvContentDatabases)).BeginInit();
@@ -185,6 +185,19 @@
             this.tabPageDatabases.TabIndex = 3;
             this.tabPageDatabases.Text = "Databases";
             this.tabPageDatabases.UseVisualStyleBackColor = true;
+            // 
+            // btnFilePathDatabaseBrowser
+            // 
+            this.btnFilePathDatabaseBrowser.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
+            this.btnFilePathDatabaseBrowser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFilePathDatabaseBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFilePathDatabaseBrowser.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFilePathDatabaseBrowser.Location = new System.Drawing.Point(532, 215);
+            this.btnFilePathDatabaseBrowser.Name = "btnFilePathDatabaseBrowser";
+            this.btnFilePathDatabaseBrowser.Size = new System.Drawing.Size(38, 23);
+            this.btnFilePathDatabaseBrowser.TabIndex = 66;
+            this.btnFilePathDatabaseBrowser.UseVisualStyleBackColor = true;
+            this.btnFilePathDatabaseBrowser.Click += new System.EventHandler(this.btnFilePathDatabaseBrowser_Click);
             // 
             // label19
             // 
@@ -952,19 +965,6 @@
             this.tbSettings.Size = new System.Drawing.Size(682, 363);
             this.tbSettings.TabIndex = 7;
             // 
-            // btnFilePathDatabaseBrowser
-            // 
-            this.btnFilePathDatabaseBrowser.BackgroundImage = global::PinCab.Configurator.Properties.Resources.FolderOpened_75x;
-            this.btnFilePathDatabaseBrowser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFilePathDatabaseBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFilePathDatabaseBrowser.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnFilePathDatabaseBrowser.Location = new System.Drawing.Point(532, 215);
-            this.btnFilePathDatabaseBrowser.Name = "btnFilePathDatabaseBrowser";
-            this.btnFilePathDatabaseBrowser.Size = new System.Drawing.Size(38, 23);
-            this.btnFilePathDatabaseBrowser.TabIndex = 66;
-            this.btnFilePathDatabaseBrowser.UseVisualStyleBackColor = true;
-            this.btnFilePathDatabaseBrowser.Click += new System.EventHandler(this.btnFilePathDatabaseBrowser_Click);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -975,6 +975,7 @@
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(698, 402);
             this.Name = "SettingsForm";
             this.Text = "Settings";
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.SettingsForm_HelpButtonClicked);

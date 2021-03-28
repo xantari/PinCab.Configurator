@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -356,9 +356,10 @@
             this.dataGridViewEntryList.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEntryList.Name = "dataGridViewEntryList";
             this.dataGridViewEntryList.ReadOnly = true;
-            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 187);
+            this.dataGridViewEntryList.Size = new System.Drawing.Size(1049, 236);
             this.dataGridViewEntryList.TabIndex = 2;
             this.dataGridViewEntryList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEntryList_CellDoubleClick);
+            this.dataGridViewEntryList.CurrentCellChanged += new System.EventHandler(this.dataGridViewEntryList_CurrentCellChanged);
             this.dataGridViewEntryList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewEntryList_DataBindingComplete);
             this.dataGridViewEntryList.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewEntryList_RowContextMenuStripNeeded);
             this.dataGridViewEntryList.SelectionChanged += new System.EventHandler(this.dataGridViewEntryList_SelectionChanged);
@@ -375,8 +376,8 @@
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DatabaseTagsString.DefaultCellStyle = dataGridViewCellStyle1;
             this.DatabaseTagsString.HeaderText = "Tags";
             this.DatabaseTagsString.Name = "DatabaseTagsString";
             this.DatabaseTagsString.ReadOnly = true;
@@ -488,7 +489,7 @@
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(1049, 87);
+            this.txtLog.Size = new System.Drawing.Size(1049, 82);
             this.txtLog.TabIndex = 4;
             // 
             // splitContainerGridAndLog
@@ -505,8 +506,8 @@
             // splitContainerGridAndLog.Panel2
             // 
             this.splitContainerGridAndLog.Panel2.Controls.Add(this.txtLog);
-            this.splitContainerGridAndLog.Size = new System.Drawing.Size(1049, 425);
-            this.splitContainerGridAndLog.SplitterDistance = 334;
+            this.splitContainerGridAndLog.Size = new System.Drawing.Size(1049, 482);
+            this.splitContainerGridAndLog.SplitterDistance = 396;
             this.splitContainerGridAndLog.TabIndex = 5;
             // 
             // splitContainerTopAndBottomGrids
@@ -523,8 +524,8 @@
             // splitContainerTopAndBottomGrids.Panel2
             // 
             this.splitContainerTopAndBottomGrids.Panel2.Controls.Add(this.dataGridViewChildEntries);
-            this.splitContainerTopAndBottomGrids.Size = new System.Drawing.Size(1049, 334);
-            this.splitContainerTopAndBottomGrids.SplitterDistance = 187;
+            this.splitContainerTopAndBottomGrids.Size = new System.Drawing.Size(1049, 396);
+            this.splitContainerTopAndBottomGrids.SplitterDistance = 236;
             this.splitContainerTopAndBottomGrids.TabIndex = 3;
             // 
             // dataGridViewChildEntries
@@ -549,7 +550,7 @@
             this.dataGridViewChildEntries.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewChildEntries.Name = "dataGridViewChildEntries";
             this.dataGridViewChildEntries.ReadOnly = true;
-            this.dataGridViewChildEntries.Size = new System.Drawing.Size(1049, 143);
+            this.dataGridViewChildEntries.Size = new System.Drawing.Size(1049, 156);
             this.dataGridViewChildEntries.TabIndex = 3;
             this.dataGridViewChildEntries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewChildEntries_CellDoubleClick);
             this.dataGridViewChildEntries.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewChildEntries_DataBindingComplete);
@@ -567,8 +568,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "DatabaseTagsString";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn2.HeaderText = "Tags";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -680,7 +681,7 @@
             this.toolStripStatusLabel,
             this.toolStripStatusLabelSpacer,
             this.toolStripProgressBar});
-            this.statusStripBottom.Location = new System.Drawing.Point(0, 533);
+            this.statusStripBottom.Location = new System.Drawing.Point(0, 590);
             this.statusStripBottom.Name = "statusStripBottom";
             this.statusStripBottom.Size = new System.Drawing.Size(1049, 22);
             this.statusStripBottom.TabIndex = 6;
@@ -690,12 +691,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 555);
+            this.ClientSize = new System.Drawing.Size(1049, 612);
             this.Controls.Add(this.splitContainerGridAndLog);
             this.Controls.Add(this.panelFilterCriteria);
             this.Controls.Add(this.menuStripMain);
             this.Controls.Add(this.statusStripBottom);
             this.MainMenuStrip = this.menuStripMain;
+            this.MinimumSize = new System.Drawing.Size(1065, 651);
             this.Name = "DatabaseBrowserForm";
             this.Text = "Database Browser";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DatabaseBrowserForm_FormClosing);

@@ -245,8 +245,10 @@ namespace PinCab.Configurator
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 list = list.Where(p => //(p.Title.FuzzyMatch(txtSearch.Text) > .1)
-                    p.Title.ToLower().Contains(searchTerm)
-                    || p.Description.ToLower().Contains(searchTerm)
+                     (p.Title != null && p.Title.ToLower().Contains(searchTerm))
+                    || (p.Description != null && p.Description.ToLower().Contains(searchTerm))
+                    || (p.IpdbId != null && p.IpdbId.ToString() == searchTerm)
+                    || (p.DatabaseTagsString != null && p.DatabaseTagsString.ToLower().Contains(searchTerm))
                     ); //Search by text
             }
 
@@ -696,30 +698,33 @@ namespace PinCab.Configurator
 
         private void DatabaseBrowserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var settings = new DatabaseBrowserSettings();
-            settings.BeginDate = dateTimePickerBegin.Value;
-            settings.EndDate = dateTimePickerEnd.Value;
-            settings.SearchTerm = txtSearch.Text;
-            settings.TypeFilter = cmbType.SelectedItem.ToString();
-            settings.DatabaseFilter = cmbDatabase.SelectedItem.ToString();
-            settings.TagFilter = GetAllSelectedTags();
+            //Reload the settings, if another window updated them (such as the AddRelatedDatabaseEntryForm)
+            _settings = _settingManager.LoadSettings(); 
+            
+            if (_settings.DatabaseBrowserSettings == null)
+                _settings.DatabaseBrowserSettings = new DatabaseBrowserSettings();
 
-            settings.DatabaseGridColumnWidths = new List<int>();
+            _settings.DatabaseBrowserSettings.BeginDate = dateTimePickerBegin.Value;
+            _settings.DatabaseBrowserSettings.EndDate = dateTimePickerEnd.Value;
+            _settings.DatabaseBrowserSettings.SearchTerm = txtSearch.Text;
+            _settings.DatabaseBrowserSettings.TypeFilter = cmbType.SelectedItem.ToString();
+            _settings.DatabaseBrowserSettings.DatabaseFilter = cmbDatabase.SelectedItem.ToString();
+            _settings.DatabaseBrowserSettings.TagFilter = GetAllSelectedTags();
+
+            _settings.DatabaseBrowserSettings.DatabaseGridColumnWidths = new List<int>();
             foreach (DataGridViewColumn column in dataGridViewEntryList.Columns)
             {
-                settings.DatabaseGridColumnWidths.Add(column.Width);
+                _settings.DatabaseBrowserSettings.DatabaseGridColumnWidths.Add(column.Width);
             }
 
-            settings.RelatedGridColumnWidths = new List<int>();
+            _settings.DatabaseBrowserSettings.RelatedGridColumnWidths = new List<int>();
             foreach (DataGridViewColumn column in dataGridViewChildEntries.Columns)
             {
-                settings.RelatedGridColumnWidths.Add(column.Width);
+                _settings.DatabaseBrowserSettings.RelatedGridColumnWidths.Add(column.Width);
             }
 
-            settings.WindowHeight = Height;
-            settings.WindowWidth = Width;
-
-            _settings.DatabaseBrowserSettings = settings;
+            _settings.DatabaseBrowserSettings.WindowHeight = Height;
+            _settings.DatabaseBrowserSettings.WindowWidth = Width;
 
             _settingManager.SaveSettings(_settings);
         }
@@ -741,6 +746,8 @@ namespace PinCab.Configurator
             var row = GetActiveRow();
             if (row != null)
             {
+                var data = dataGridViewEntryList.DataSource as BindingSource;
+                var rowIndex = data.IndexOf(data.Current);
                 var entryForm = new EditDatabaseEntryForm(row.DatabaseName, row, _dbManager, _ipdbForm);
                 var result = entryForm.ShowDialog(this);
                 if (result == DialogResult.OK)
@@ -759,18 +766,33 @@ namespace PinCab.Configurator
                     //var test = _dbManager.Databases[ row.DatabaseName].Entries.Where(c => c.Id == dbFile.Id);
                     var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
                     var databaseToSave = _dbManager.Databases[row.DatabaseName];
+                    databaseToSave.LastUpdateDateUtc = DateTime.UtcNow;
                     _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
 
                     //Save the pre-processed database to the file system
                     var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id && c.DatabaseName == row.DatabaseName);
                     _dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, existingEntry);
+                    _dbManager.MapRelatedEntries(existingEntry, contentDatabase, dbFile);
                     _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
 
                     //Refresh grid (will do that automatically)
                     NotifyUserOfSaveWarning();
+                    UnselectAllRows(dataGridViewEntryList);
+                    dataGridViewEntryList.CurrentCell = dataGridViewEntryList.Rows[rowIndex].Cells[0];
+                    dataGridViewEntryList.Rows[rowIndex].Selected = true;
                     dataGridViewEntryList.Refresh();
                     dataGridViewChildEntries.Refresh();
                 }
+            }
+        }
+
+        private void UnselectAllRows(DataGridView gv)
+        {
+            foreach (DataGridViewRow row in gv.Rows)
+            {
+                row.Selected = false;
+                foreach (DataGridViewCell cell in row.Cells)
+                    cell.Selected = false;
             }
         }
 
@@ -824,10 +846,10 @@ namespace PinCab.Configurator
                 if (databaseToSave == null) //Brand new database
                 {
                     databaseToSave = new PinballDatabase();
-                    databaseToSave.LastRefreshDateUtc = DateTime.UtcNow;
                     databaseToSave.DatabaseFormatVersion = 1;
                     _dbManager.Databases[database] = databaseToSave;
                 }
+                databaseToSave.LastUpdateDateUtc = DateTime.UtcNow;
                 databaseToSave.Entries.Add(dbFile);
                 //Sync to the working path
                 _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
@@ -835,6 +857,7 @@ namespace PinCab.Configurator
                 //Save the pre-processed database to the file system
                 //var existingEntry = _dbManager.Entries.FirstOrDefault(c => c.Id == dbFile.Id);
                 var updatedDatabaseEntry = _dbManager.GetDatabaseBrowserEntry(contentDatabase, entryForm.GetUpdatedDatabaseEntry());
+                _dbManager.MapRelatedEntries(updatedDatabaseEntry, contentDatabase, dbFile);
                 _dbManager.Entries.Add(updatedDatabaseEntry);
                 //_dbManager.MapDatabaseEntryToBrowserEntry(contentDatabase, dbFile, updatedDatabaseEntry);
                 _dbManager.SaveDatabaseCache<List<DatabaseBrowserEntry>>(_dbManager.Entries, _dbManager.PreprocessedDatabasePath);
@@ -842,6 +865,17 @@ namespace PinCab.Configurator
                 //Refresh grid
                 RebindGridUsingFilter();
                 NotifyUserOfSaveWarning();
+
+                //Find row to select
+                //UnselectAllRows(dataGridViewEntryList);
+                foreach (DataGridViewRow row in dataGridViewEntryList.Rows)
+                {
+                    var dbEntry = row.DataBoundItem as DatabaseBrowserEntry;
+                    if (dbEntry.Id == dbFile.Id)
+                    {
+                        dataGridViewEntryList.CurrentCell = row.Cells[0];
+                    }
+                }
 
                 if (!notifiedOfNewRowMissing)
                 {
@@ -867,6 +901,7 @@ namespace PinCab.Configurator
                 //Save the actual database .json
 
                 //Save the pre-processed database to the file system
+                //databaseToSave.LastUpdateDateUtc = DateTime.UtcNow;
 
                 NotifyUserOfSaveWarning();
             }
@@ -910,6 +945,13 @@ namespace PinCab.Configurator
             //{
 
             //}
+        }
+
+        private void dataGridViewEntryList_CurrentCellChanged(object sender, EventArgs e)
+        {
+            var entry = GetActiveRowEntry();
+            //Now bind the child grid
+            bindingSourceChildEntries.DataSource = entry?.RelatedEntries.ToSortableBindingList();
         }
     }
 }

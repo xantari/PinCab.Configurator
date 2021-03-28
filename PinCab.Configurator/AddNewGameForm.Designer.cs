@@ -74,6 +74,7 @@ namespace PinCab.Configurator
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lstFiles);
+            this.MinimumSize = new System.Drawing.Size(471, 298);
             this.Name = "AddNewGameForm";
             this.Text = "Add New Game";
             this.ResumeLayout(false);

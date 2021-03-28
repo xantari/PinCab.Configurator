@@ -27,15 +27,19 @@ namespace PinCab.Configurator
         private IpdbBrowserForm _ipdbForm = null;
         private bool isNewEntry = false;
         private DatabaseEntry _dbEntry { get; set; }
-        private string _currentDatabase { get; set; }
+        private string _databaseName { get; set; }
+        private ProgramSettingsManager _settingsManager = new ProgramSettingsManager();
+        private ProgramSettings _settings;
+
         public EditDatabaseEntryForm(string databaseName, DatabaseBrowserEntry entry, DatabaseManager manager, IpdbBrowserForm ipdbForm)
         {
             InitializeComponent();
             _manager = manager;
             _ipdbForm = ipdbForm;
             _entry = entry;
-            _currentDatabase = databaseName;
+            _databaseName = databaseName;
             DialogResult = DialogResult.None;
+            _settings = _settingsManager.LoadSettings();
             if (entry == null)
             {
                 isNewEntry = true;
@@ -55,6 +59,12 @@ namespace PinCab.Configurator
 
         private void LoadForm()
         {
+            if (_settings.DatabaseBrowserSettings?.AddEditWindowHeight > 0 && _settings.DatabaseBrowserSettings?.AddEditWindowWidth > 0)
+            {
+                this.Height = _settings.DatabaseBrowserSettings.AddEditWindowHeight;
+                this.Width = _settings.DatabaseBrowserSettings.AddEditWindowWidth;
+            }
+
             //Load the database list
             var databaseNames = _manager.Databases
                 .OrderBy(c => c.Key).Select(c => c.Key).ToList();
@@ -62,7 +72,7 @@ namespace PinCab.Configurator
 
             foreach (string databaseName in cmbDatabase.Items)
             {
-                if (databaseName == _currentDatabase)
+                if (databaseName == _databaseName)
                     cmbDatabase.SelectedItem = databaseName;
             }
 
@@ -101,6 +111,8 @@ namespace PinCab.Configurator
             numericRating.Value = _dbEntry.Rating.HasValue ? _dbEntry.Rating.Value : 0;
             dateTimeModified.Value = _dbEntry.LastModifiedDateUtc.HasValue ? _dbEntry.LastModifiedDateUtc.Value : DateTime.UtcNow;
 
+            lblReadableFileSize.Text = Convert.ToInt64(numericFileBytes.Value).FileSizeHumanReadable();
+
             if (_dbEntry.Tags != null)
             {
                 foreach (var tag in _dbEntry.Tags)
@@ -128,6 +140,11 @@ namespace PinCab.Configurator
                 }
             }
 
+            RefreashRelatedDatabaseEntries();
+        }
+
+        private void RefreashRelatedDatabaseEntries()
+        {
             var relatedEntries = new List<DatabaseEntry>();
             if (_dbEntry.RelatedEntries != null)
             {
@@ -354,6 +371,37 @@ namespace PinCab.Configurator
         private void numericFileBytes_ValueChanged(object sender, EventArgs e)
         {
             lblReadableFileSize.Text = Convert.ToInt64(numericFileBytes.Value).FileSizeHumanReadable();
+        }
+
+        private void btnAddRelatedEntry_Click(object sender, EventArgs e)
+        {
+            var form = new AddRelatedDatabaseEntryForm(_dbEntry.Id, _databaseName, txtTitle.Text, _manager);
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                var relatedEntry = form.GetActiveRowEntry();
+                if (relatedEntry != null)
+                {
+                    if (_dbEntry.RelatedEntries == null)
+                        _dbEntry.RelatedEntries = new List<int>();
+
+                    if (!_dbEntry.RelatedEntries.Contains(relatedEntry.Id)) //Ensure it doesn't already exist
+                    {
+                        _dbEntry.RelatedEntries.Add(relatedEntry.Id);
+                        RefreashRelatedDatabaseEntries();
+                    }
+                }
+            }
+        }
+
+        private void EditDatabaseEntryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Reload the settings, if another window updated them (such as the AddRelatedDatabaseEntryForm)
+            _settings = _settingsManager.LoadSettings();
+            _settings.DatabaseBrowserSettings.AddEditWindowHeight = this.Height;
+            _settings.DatabaseBrowserSettings.AddEditWindowWidth = this.Width;
+
+            _settingsManager.SaveSettings(_settings);
         }
     }
 }

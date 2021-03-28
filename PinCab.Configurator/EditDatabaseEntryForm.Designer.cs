@@ -33,10 +33,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.tabControlGeneral = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.lblReadableFileSize = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.lblLocalTime = new System.Windows.Forms.Label();
             this.cmbDatabase = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.btnIpdbUrl = new System.Windows.Forms.Button();
+            this.btnUrl = new System.Windows.Forms.Button();
             this.btnAddTag = new System.Windows.Forms.Button();
             this.txtTag = new System.Windows.Forms.TextBox();
             this.lblTags = new System.Windows.Forms.Label();
@@ -86,16 +89,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.btnAddRelatedEntry = new System.Windows.Forms.Button();
             this.dataGridViewRelatedEntries = new System.Windows.Forms.DataGridView();
-            this.label21 = new System.Windows.Forms.Label();
-            this.dataGridViewScreenshotUrls = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.dataGridViewAdditionalUrls = new System.Windows.Forms.DataGridView();
-            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblReadableFileSize = new System.Windows.Forms.Label();
-            this.btnIpdbUrl = new System.Windows.Forms.Button();
-            this.btnUrl = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.majorCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.urlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,6 +109,13 @@
             this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastModifiedDateUtcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.databaseEntryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label21 = new System.Windows.Forms.Label();
+            this.dataGridViewScreenshotUrls = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.dataGridViewAdditionalUrls = new System.Windows.Forms.DataGridView();
+            this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlGeneral.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRating)).BeginInit();
@@ -125,9 +125,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPlayers)).BeginInit();
             this.tabPageAdditionalInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRelatedEntries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -224,6 +224,15 @@
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
             // 
+            // lblReadableFileSize
+            // 
+            this.lblReadableFileSize.AutoSize = true;
+            this.lblReadableFileSize.Location = new System.Drawing.Point(203, 480);
+            this.lblReadableFileSize.Name = "lblReadableFileSize";
+            this.lblReadableFileSize.Size = new System.Drawing.Size(96, 13);
+            this.lblReadableFileSize.TabIndex = 178;
+            this.lblReadableFileSize.Text = "(Readable Filesize)";
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
@@ -258,6 +267,33 @@
             this.label22.Size = new System.Drawing.Size(53, 13);
             this.label22.TabIndex = 174;
             this.label22.Text = "Database";
+            // 
+            // btnIpdbUrl
+            // 
+            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnIpdbUrl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnIpdbUrl.Location = new System.Drawing.Point(160, 453);
+            this.btnIpdbUrl.Name = "btnIpdbUrl";
+            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnIpdbUrl.TabIndex = 173;
+            this.btnIpdbUrl.UseVisualStyleBackColor = true;
+            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
+            // 
+            // btnUrl
+            // 
+            this.btnUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
+            this.btnUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUrl.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnUrl.Location = new System.Drawing.Point(499, 83);
+            this.btnUrl.Name = "btnUrl";
+            this.btnUrl.Size = new System.Drawing.Size(26, 23);
+            this.btnUrl.TabIndex = 172;
+            this.btnUrl.UseVisualStyleBackColor = true;
+            this.btnUrl.Click += new System.EventHandler(this.btnUrl_Click);
             // 
             // btnAddTag
             // 
@@ -700,6 +736,7 @@
             this.btnAddRelatedEntry.TabIndex = 137;
             this.btnAddRelatedEntry.Text = "Add Related Entry";
             this.btnAddRelatedEntry.UseVisualStyleBackColor = true;
+            this.btnAddRelatedEntry.Click += new System.EventHandler(this.btnAddRelatedEntry_Click);
             // 
             // dataGridViewRelatedEntries
             // 
@@ -735,112 +772,6 @@
             this.dataGridViewRelatedEntries.ReadOnly = true;
             this.dataGridViewRelatedEntries.Size = new System.Drawing.Size(576, 238);
             this.dataGridViewRelatedEntries.TabIndex = 136;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 266);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(79, 13);
-            this.label21.TabIndex = 135;
-            this.label21.Text = "Related Entries";
-            // 
-            // dataGridViewScreenshotUrls
-            // 
-            this.dataGridViewScreenshotUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewScreenshotUrls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewScreenshotUrls.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridViewScreenshotUrls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewScreenshotUrls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1});
-            this.dataGridViewScreenshotUrls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridViewScreenshotUrls.Location = new System.Drawing.Point(9, 152);
-            this.dataGridViewScreenshotUrls.Name = "dataGridViewScreenshotUrls";
-            this.dataGridViewScreenshotUrls.Size = new System.Drawing.Size(575, 100);
-            this.dataGridViewScreenshotUrls.TabIndex = 134;
-            this.dataGridViewScreenshotUrls.DoubleClick += new System.EventHandler(this.dataGridViewScreenshotUrls_DoubleClick);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Url";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 45;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(8, 136);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(82, 13);
-            this.label20.TabIndex = 133;
-            this.label20.Text = "Screenshot Urls";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(8, 16);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(129, 13);
-            this.label19.TabIndex = 132;
-            this.label19.Text = "Additional Information Urls";
-            // 
-            // dataGridViewAdditionalUrls
-            // 
-            this.dataGridViewAdditionalUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewAdditionalUrls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewAdditionalUrls.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dataGridViewAdditionalUrls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAdditionalUrls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Url});
-            this.dataGridViewAdditionalUrls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridViewAdditionalUrls.Location = new System.Drawing.Point(11, 32);
-            this.dataGridViewAdditionalUrls.Name = "dataGridViewAdditionalUrls";
-            this.dataGridViewAdditionalUrls.Size = new System.Drawing.Size(573, 100);
-            this.dataGridViewAdditionalUrls.TabIndex = 131;
-            // 
-            // Url
-            // 
-            this.Url.HeaderText = "Url";
-            this.Url.Name = "Url";
-            this.Url.Width = 45;
-            // 
-            // lblReadableFileSize
-            // 
-            this.lblReadableFileSize.AutoSize = true;
-            this.lblReadableFileSize.Location = new System.Drawing.Point(203, 480);
-            this.lblReadableFileSize.Name = "lblReadableFileSize";
-            this.lblReadableFileSize.Size = new System.Drawing.Size(96, 13);
-            this.lblReadableFileSize.TabIndex = 178;
-            this.lblReadableFileSize.Text = "(Readable Filesize)";
-            // 
-            // btnIpdbUrl
-            // 
-            this.btnIpdbUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnIpdbUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnIpdbUrl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnIpdbUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIpdbUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnIpdbUrl.Location = new System.Drawing.Point(160, 453);
-            this.btnIpdbUrl.Name = "btnIpdbUrl";
-            this.btnIpdbUrl.Size = new System.Drawing.Size(26, 23);
-            this.btnIpdbUrl.TabIndex = 173;
-            this.btnIpdbUrl.UseVisualStyleBackColor = true;
-            this.btnIpdbUrl.Click += new System.EventHandler(this.btnIpdbUrl_Click);
-            // 
-            // btnUrl
-            // 
-            this.btnUrl.BackgroundImage = global::PinCab.Configurator.Properties.Resources.BrowserLink_75x;
-            this.btnUrl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUrl.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnUrl.Location = new System.Drawing.Point(499, 83);
-            this.btnUrl.Name = "btnUrl";
-            this.btnUrl.Size = new System.Drawing.Size(26, 23);
-            this.btnUrl.TabIndex = 172;
-            this.btnUrl.UseVisualStyleBackColor = true;
-            this.btnUrl.Click += new System.EventHandler(this.btnUrl_Click);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -1014,6 +945,76 @@
             // 
             this.databaseEntryBindingSource.DataSource = typeof(VirtualPinball.Database.Models.DatabaseEntry);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(11, 266);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(79, 13);
+            this.label21.TabIndex = 135;
+            this.label21.Text = "Related Entries";
+            // 
+            // dataGridViewScreenshotUrls
+            // 
+            this.dataGridViewScreenshotUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewScreenshotUrls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewScreenshotUrls.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewScreenshotUrls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScreenshotUrls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dataGridViewScreenshotUrls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewScreenshotUrls.Location = new System.Drawing.Point(9, 152);
+            this.dataGridViewScreenshotUrls.Name = "dataGridViewScreenshotUrls";
+            this.dataGridViewScreenshotUrls.Size = new System.Drawing.Size(575, 100);
+            this.dataGridViewScreenshotUrls.TabIndex = 134;
+            this.dataGridViewScreenshotUrls.DoubleClick += new System.EventHandler(this.dataGridViewScreenshotUrls_DoubleClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Url";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 45;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(8, 136);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(82, 13);
+            this.label20.TabIndex = 133;
+            this.label20.Text = "Screenshot Urls";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 16);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(129, 13);
+            this.label19.TabIndex = 132;
+            this.label19.Text = "Additional Information Urls";
+            // 
+            // dataGridViewAdditionalUrls
+            // 
+            this.dataGridViewAdditionalUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewAdditionalUrls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewAdditionalUrls.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewAdditionalUrls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAdditionalUrls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Url});
+            this.dataGridViewAdditionalUrls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewAdditionalUrls.Location = new System.Drawing.Point(11, 32);
+            this.dataGridViewAdditionalUrls.Name = "dataGridViewAdditionalUrls";
+            this.dataGridViewAdditionalUrls.Size = new System.Drawing.Size(573, 100);
+            this.dataGridViewAdditionalUrls.TabIndex = 131;
+            // 
+            // Url
+            // 
+            this.Url.HeaderText = "Url";
+            this.Url.Name = "Url";
+            this.Url.Width = 45;
+            // 
             // EditDatabaseEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1025,6 +1026,7 @@
             this.MinimumSize = new System.Drawing.Size(616, 758);
             this.Name = "EditDatabaseEntryForm";
             this.Text = "Edit Database Entry";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditDatabaseEntryForm_FormClosing);
             this.tabControlGeneral.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
@@ -1036,9 +1038,9 @@
             this.tabPageAdditionalInfo.ResumeLayout(false);
             this.tabPageAdditionalInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRelatedEntries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

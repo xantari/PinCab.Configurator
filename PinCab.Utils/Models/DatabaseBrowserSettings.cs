@@ -23,6 +23,7 @@ namespace PinCab.Utils.Models
             TagFilter = new List<string>();
             DatabaseGridColumnWidths = new List<int>();
             RelatedGridColumnWidths = new List<int>();
+            AddRelatedDatabaseEntryColumnWidths = new List<int>();
         }
 
         public string SearchTerm { get; set; }
@@ -31,10 +32,16 @@ namespace PinCab.Utils.Models
         public string TypeFilter { get; set; }
         public int WindowHeight { get; set; }
         public int WindowWidth { get; set; }
+        public int AddRelatedWindowHeight { get; set; }
+        public int AddRelatedWindowWidth { get; set; }
+        public int AddEditWindowHeight { get; set; }
+        public int AddEditWindowWidth { get; set; }
         public List<string> TagFilter { get; set; }
         public string DatabaseFilter { get; set; }
         public List<int> DatabaseGridColumnWidths { get; set; }
         public List<int> RelatedGridColumnWidths { get; set; }
+
+        public List<int> AddRelatedDatabaseEntryColumnWidths { get; set; }
     }
 }
 

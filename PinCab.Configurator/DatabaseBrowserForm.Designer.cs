@@ -56,7 +56,6 @@
             this.lblRomSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.dataGridViewEntryList = new System.Windows.Forms.DataGridView();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatabaseTagsString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IpdbId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,12 +69,10 @@
             this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.txtLog = new System.Windows.Forms.TextBox();
             this.splitContainerGridAndLog = new System.Windows.Forms.SplitContainer();
             this.splitContainerTopAndBottomGrids = new System.Windows.Forms.SplitContainer();
             this.dataGridViewChildEntries = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,17 +83,20 @@
             this.contextMenuStripChildEntries = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemChildIpdb = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemChildUrl = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSourceChildEntries = new System.Windows.Forms.BindingSource(this.components);
             this.backgroundWorkerProgressBar = new System.ComponentModel.BackgroundWorker();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripBottom = new System.Windows.Forms.StatusStrip();
+            this.databaseInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vpinDatabaseSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSourceChildEntries = new System.Windows.Forms.BindingSource(this.components);
             this.menuStripMain.SuspendLayout();
             this.panelFilterCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).BeginInit();
             this.contextMenuStripGridActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerGridAndLog)).BeginInit();
             this.splitContainerGridAndLog.Panel1.SuspendLayout();
             this.splitContainerGridAndLog.Panel2.SuspendLayout();
@@ -107,8 +107,9 @@
             this.splitContainerTopAndBottomGrids.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).BeginInit();
             this.contextMenuStripChildEntries.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).BeginInit();
             this.statusStripBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -143,7 +144,8 @@
             // 
             this.utilieisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshDatabaseToolStripMenuItem,
-            this.addDatabaseToolStripMenuItem});
+            this.addDatabaseToolStripMenuItem,
+            this.databaseInfoToolStripMenuItem});
             this.utilieisToolStripMenuItem.Name = "utilieisToolStripMenuItem";
             this.utilieisToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.utilieisToolStripMenuItem.Text = "Utilities";
@@ -364,15 +366,6 @@
             this.dataGridViewEntryList.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewEntryList_RowContextMenuStripNeeded);
             this.dataGridViewEntryList.SelectionChanged += new System.EventHandler(this.dataGridViewEntryList_SelectionChanged);
             // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.titleDataGridViewTextBoxColumn.Width = 52;
-            // 
             // DatabaseTagsString
             // 
             this.DatabaseTagsString.DataPropertyName = "DatabaseTagsString";
@@ -441,19 +434,19 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStripGridActions.Name = "contextMenuStripGridActions";
-            this.contextMenuStripGridActions.Size = new System.Drawing.Size(181, 136);
+            this.contextMenuStripGridActions.Size = new System.Drawing.Size(143, 114);
             // 
             // IpdbInfoToolStripMenuItem
             // 
             this.IpdbInfoToolStripMenuItem.Name = "IpdbInfoToolStripMenuItem";
-            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.IpdbInfoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.IpdbInfoToolStripMenuItem.Text = "IPDB Info";
             this.IpdbInfoToolStripMenuItem.Click += new System.EventHandler(this.IpdbInfoToolStripMenuItem_Click);
             // 
             // goToUrlToolStripMenuItem
             // 
             this.goToUrlToolStripMenuItem.Name = "goToUrlToolStripMenuItem";
-            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.goToUrlToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.goToUrlToolStripMenuItem.Text = "Go to URL";
             this.goToUrlToolStripMenuItem.Click += new System.EventHandler(this.goToUrlToolStripMenuItem_Click);
             // 
@@ -461,7 +454,7 @@
             // 
             this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
             this.addNewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.addNewToolStripMenuItem.Text = "Add New";
             this.addNewToolStripMenuItem.Click += new System.EventHandler(this.addNewToolStripMenuItem_Click);
             // 
@@ -469,7 +462,7 @@
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -477,13 +470,9 @@
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // vpinDatabaseSettingBindingSource
-            // 
-            this.vpinDatabaseSettingBindingSource.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
             // 
             // txtLog
             // 
@@ -558,15 +547,6 @@
             this.dataGridViewChildEntries.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewChildEntries_CellDoubleClick);
             this.dataGridViewChildEntries.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewChildEntries_DataBindingComplete);
             this.dataGridViewChildEntries.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.dataGridViewChildEntries_RowContextMenuStripNeeded);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn1.Width = 52;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -649,10 +629,6 @@
             this.toolStripMenuItemChildUrl.Text = "Go to URL";
             this.toolStripMenuItemChildUrl.Click += new System.EventHandler(this.toolStripMenuItemChildUrl_Click);
             // 
-            // bindingSourceChildEntries
-            // 
-            this.bindingSourceChildEntries.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
-            // 
             // backgroundWorkerProgressBar
             // 
             this.backgroundWorkerProgressBar.WorkerReportsProgress = true;
@@ -690,6 +666,39 @@
             this.statusStripBottom.TabIndex = 6;
             this.statusStripBottom.Text = "statusStrip1";
             // 
+            // databaseInfoToolStripMenuItem
+            // 
+            this.databaseInfoToolStripMenuItem.Name = "databaseInfoToolStripMenuItem";
+            this.databaseInfoToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
+            this.databaseInfoToolStripMenuItem.Text = "Database Info";
+            this.databaseInfoToolStripMenuItem.Click += new System.EventHandler(this.databaseInfoToolStripMenuItem_Click);
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.titleDataGridViewTextBoxColumn.Width = 52;
+            // 
+            // vpinDatabaseSettingBindingSource
+            // 
+            this.vpinDatabaseSettingBindingSource.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn1.Width = 52;
+            // 
+            // bindingSourceChildEntries
+            // 
+            this.bindingSourceChildEntries.DataSource = typeof(PinCab.Utils.Models.DatabaseBrowserEntry);
+            // 
             // DatabaseBrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -710,7 +719,6 @@
             this.panelFilterCriteria.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEntryList)).EndInit();
             this.contextMenuStripGridActions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).EndInit();
             this.splitContainerGridAndLog.Panel1.ResumeLayout(false);
             this.splitContainerGridAndLog.Panel2.ResumeLayout(false);
             this.splitContainerGridAndLog.Panel2.PerformLayout();
@@ -722,9 +730,10 @@
             this.splitContainerTopAndBottomGrids.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChildEntries)).EndInit();
             this.contextMenuStripChildEntries.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).EndInit();
             this.statusStripBottom.ResumeLayout(false);
             this.statusStripBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vpinDatabaseSettingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceChildEntries)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -793,5 +802,6 @@
         private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDatabasesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem databaseInfoToolStripMenuItem;
     }
 }

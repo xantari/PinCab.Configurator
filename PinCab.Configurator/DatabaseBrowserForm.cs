@@ -979,5 +979,24 @@ namespace PinCab.Configurator
             //Now bind the child grid
             bindingSourceChildEntries.DataSource = entry?.RelatedEntries.ToSortableBindingList();
         }
+
+        private void databaseInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = GetActiveRow();
+            if (row != null)
+            {
+                var contentDatabase = _settings.Databases.First(c => c.Name == row.DatabaseName);
+                var databaseToSave = _dbManager.Databases[row.DatabaseName];
+                var entryForm = new EditDatabaseForm(databaseToSave);
+                var result = entryForm.ShowDialog(this);
+                //Save database command is run when we hit the Save Database button
+                //if (result == DialogResult.OK)
+                //{
+                //    var databasePath = _dbManager.GetFilesystemWorkPath(contentDatabase);
+                //    //databaseToSave.LastUpdateDateUtc = DateTime.UtcNow; //Only update this when the Save Database command is run
+                //    _dbManager.SaveDatabaseCache<PinballDatabase>(databaseToSave, databasePath); //Save the actual database .json file
+                //}
+            }
+        }
     }
 }

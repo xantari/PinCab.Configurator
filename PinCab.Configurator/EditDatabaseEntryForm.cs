@@ -140,6 +140,14 @@ namespace PinCab.Configurator
                 }
             }
 
+            if (_dbEntry.DirectDownloadUrls != null)
+            {
+                foreach (var url in _dbEntry.DirectDownloadUrls)
+                {
+                    dataGridViewDirectDownloadUrls.Rows.Add(url);
+                }
+            }
+
             RefreashRelatedDatabaseEntries();
         }
 
@@ -194,6 +202,7 @@ namespace PinCab.Configurator
             _dbEntry.AdditionalInfoUrls = GetAllAdditionalUrls();
             _dbEntry.ScreenshotUrls = GetAllScreenshotUrls();
             _dbEntry.RelatedEntries = GetAllRelatedFileIds();
+            _dbEntry.DirectDownloadUrls = GetAllDirectDownloadUrls();
 
             return _dbEntry;
         }
@@ -227,6 +236,19 @@ namespace PinCab.Configurator
         {
             var list = new List<string>();
             foreach (DataGridViewRow row in dataGridViewScreenshotUrls.Rows)
+            {
+                if (!string.IsNullOrEmpty(row.Cells[0].Value?.ToString()))
+                    list.Add(row.Cells[0].Value.ToString());
+            }
+            if (list.Count == 0)
+                return null;
+            return list;
+        }
+
+        private List<string> GetAllDirectDownloadUrls()
+        {
+            var list = new List<string>();
+            foreach (DataGridViewRow row in dataGridViewDirectDownloadUrls.Rows)
             {
                 if (!string.IsNullOrEmpty(row.Cells[0].Value?.ToString()))
                     list.Add(row.Cells[0].Value.ToString());
@@ -279,6 +301,17 @@ namespace PinCab.Configurator
                     successUri = Uri.TryCreate(url, UriKind.Absolute, out uriResult);
                     if (!successUri)
                         issues.Add("Screenshot url entered is not a valid url. Url: " + url);
+                }
+            }
+
+            var directDownloadUrls = GetAllDirectDownloadUrls();
+            if (directDownloadUrls != null)
+            {
+                foreach (var url in directDownloadUrls)
+                {
+                    successUri = Uri.TryCreate(url, UriKind.Absolute, out uriResult);
+                    if (!successUri)
+                        issues.Add("Direct Download url entered is not a valid url. Url: " + url);
                 }
             }
 
@@ -410,6 +443,15 @@ namespace PinCab.Configurator
             _settings.DatabaseBrowserSettings.AddEditWindowWidth = this.Width;
 
             _settingsManager.SaveSettings(_settings);
+        }
+
+        private void dataGridViewDirectDownloadUrls_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridViewDirectDownloadUrls.SelectedRows.Count > 0)
+            {
+                var row = dataGridViewDirectDownloadUrls.SelectedRows[0];
+                System.Diagnostics.Process.Start(row.Cells[0].Value.ToString());
+            }
         }
     }
 }

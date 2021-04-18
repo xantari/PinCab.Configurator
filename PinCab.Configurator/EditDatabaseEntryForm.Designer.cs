@@ -116,6 +116,9 @@
             this.label19 = new System.Windows.Forms.Label();
             this.dataGridViewAdditionalUrls = new System.Windows.Forms.DataGridView();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewDirectDownloadUrls = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label25 = new System.Windows.Forms.Label();
             this.tabControlGeneral.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRating)).BeginInit();
@@ -128,6 +131,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDirectDownloadUrls)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -702,6 +706,8 @@
             // 
             // tabPageAdditionalInfo
             // 
+            this.tabPageAdditionalInfo.Controls.Add(this.dataGridViewDirectDownloadUrls);
+            this.tabPageAdditionalInfo.Controls.Add(this.label25);
             this.tabPageAdditionalInfo.Controls.Add(this.label24);
             this.tabPageAdditionalInfo.Controls.Add(this.btnAddRelatedEntry);
             this.tabPageAdditionalInfo.Controls.Add(this.dataGridViewRelatedEntries);
@@ -730,7 +736,7 @@
             // 
             // btnAddRelatedEntry
             // 
-            this.btnAddRelatedEntry.Location = new System.Drawing.Point(6, 526);
+            this.btnAddRelatedEntry.Location = new System.Drawing.Point(6, 622);
             this.btnAddRelatedEntry.Name = "btnAddRelatedEntry";
             this.btnAddRelatedEntry.Size = new System.Drawing.Size(131, 23);
             this.btnAddRelatedEntry.TabIndex = 137;
@@ -767,7 +773,7 @@
             this.ratingDataGridViewTextBoxColumn,
             this.lastModifiedDateUtcDataGridViewTextBoxColumn});
             this.dataGridViewRelatedEntries.DataSource = this.databaseEntryBindingSource;
-            this.dataGridViewRelatedEntries.Location = new System.Drawing.Point(9, 282);
+            this.dataGridViewRelatedEntries.Location = new System.Drawing.Point(9, 378);
             this.dataGridViewRelatedEntries.Name = "dataGridViewRelatedEntries";
             this.dataGridViewRelatedEntries.ReadOnly = true;
             this.dataGridViewRelatedEntries.Size = new System.Drawing.Size(576, 238);
@@ -948,7 +954,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 266);
+            this.label21.Location = new System.Drawing.Point(11, 362);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(79, 13);
             this.label21.TabIndex = 135;
@@ -1015,6 +1021,37 @@
             this.Url.Name = "Url";
             this.Url.Width = 45;
             // 
+            // dataGridViewDirectDownloadUrls
+            // 
+            this.dataGridViewDirectDownloadUrls.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewDirectDownloadUrls.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewDirectDownloadUrls.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dataGridViewDirectDownloadUrls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDirectDownloadUrls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2});
+            this.dataGridViewDirectDownloadUrls.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewDirectDownloadUrls.Location = new System.Drawing.Point(8, 272);
+            this.dataGridViewDirectDownloadUrls.Name = "dataGridViewDirectDownloadUrls";
+            this.dataGridViewDirectDownloadUrls.Size = new System.Drawing.Size(575, 87);
+            this.dataGridViewDirectDownloadUrls.TabIndex = 140;
+            this.dataGridViewDirectDownloadUrls.DoubleClick += new System.EventHandler(this.dataGridViewDirectDownloadUrls_DoubleClick);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Url";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 45;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(7, 256);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(107, 13);
+            this.label25.TabIndex = 139;
+            this.label25.Text = "Direct Download Urls";
+            // 
             // EditDatabaseEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1041,6 +1078,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.databaseEntryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScreenshotUrls)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdditionalUrls)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDirectDownloadUrls)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1133,5 +1171,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastModifiedDateUtcDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label lblReadableFileSize;
+        private System.Windows.Forms.DataGridView dataGridViewDirectDownloadUrls;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Label label25;
     }
 }

@@ -108,7 +108,7 @@ namespace PinCab.Configurator
             txtIpdbNumber.Text = _dbEntry.IpdbNumber.HasValue ? _dbEntry.IpdbNumber.Value.ToString() : "";
             numericFileBytes.Value = _dbEntry.FileSizeBytes.HasValue ? _dbEntry.FileSizeBytes.Value : 0;
             numericDownloadCount.Value = _dbEntry.DownloadCount.HasValue ? _dbEntry.DownloadCount.Value : 0;
-            numericRating.Value = _dbEntry.Rating.HasValue ? _dbEntry.Rating.Value : 0;
+            numericRating.Value = _dbEntry.Rating.HasValue ? (_dbEntry.Rating.Value > 10 ? 10 : _dbEntry.Rating.Value) : 0;
             dateTimeModified.Value = _dbEntry.LastModifiedDateUtc.HasValue ? _dbEntry.LastModifiedDateUtc.Value : DateTime.UtcNow;
 
             lblReadableFileSize.Text = Convert.ToInt64(numericFileBytes.Value).FileSizeHumanReadable();
